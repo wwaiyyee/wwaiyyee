@@ -88,9 +88,10 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             {/* --- ABOUT SECTION (FIELD NOTES FORMAT) --- */}
             <section id="about" className="py-32 px-6 relative overflow-hidden bg-[#F2F2ED]">
                 <div className="max-w-4xl mx-auto relative z-10">
-                    <div className="flex items-center justify-center gap-4 mb-16">
-                        <Aperture className="text-[#111]" size={24} />
-                        <h2 className="text-xs tracking-[0.4em] uppercase text-[#111]">The Darkroom</h2>
+                    <div className="flex flex-col items-center justify-center gap-6 mb-16 text-center">
+                        <h3 className="text-xl md:text-2xl font-serif text-[#111] max-w-2xl px-6">
+                            "Coding with a cinematic lens."
+                        </h3>
                     </div>
 
                     {/* Field Notes Paper Container */}
