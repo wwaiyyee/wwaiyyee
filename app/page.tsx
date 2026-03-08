@@ -54,7 +54,8 @@ const Marquee = ({ text }: { text: string }) => {
         <span className="text-xl md:text-2xl font-medium tracking-tight uppercase px-4">{text}</span>
         <span className="text-xl md:text-2xl font-medium tracking-tight uppercase px-4">{text}</span>
       </div>
-      <style dangerouslySetInnerHTML={{__html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @keyframes marquee {
           0% { transform: translateX(0%); }
           100% { transform: translateX(-50%); }
@@ -75,21 +76,25 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#F2F2ED] text-[#111111] font-sans selection:bg-[#111] selection:text-[#F2F2ED] overflow-x-hidden">
-      
+
       {/* Mobile Work in Progress Warning (Vibe matched) */}
       <div className="md:hidden bg-[#111] text-[#F2F2ED] p-4 text-sm font-medium">
         Hi! Thanks for visiting. This is still quite a work in progress, especially for mobile! I don't want to simply resize it, so please visit on desktop for the full chaotic experience :)
       </div>
 
       {/* Navigation */}
-      <nav className="p-6 md:p-12 flex justify-between items-start">
-        <div className="font-bold text-xl md:text-2xl tracking-tighter hover:italic cursor-pointer transition-all">
-          Lee Wai Yee
+      <nav className="fixed top-6 w-full px-6 md:px-12 flex justify-between items-center z-50 mix-blend-difference">
+        <div className="font-bold text-xl md:text-2xl tracking-tighter hover:italic cursor-pointer transition-all text-white">
+          Portfolio
         </div>
-        <div className="flex flex-col md:flex-row gap-2 md:gap-12 text-sm md:text-base font-medium">
+        <div className="flex flex-col md:flex-row gap-2 md:gap-12 text-sm md:text-base font-medium text-white">
           <a href="#about" className="hover:line-through">about</a>
           <a href="#work" className="hover:line-through">Work</a>
           <a href="#connect" className="hover:line-through">Connect</a>
+        </div>
+        <div className="flex gap-2">
+          <div className="px-4 py-2 rounded-full bg-white text-black text-sm font-medium">Load v</div>
+          <div className="px-4 py-2 rounded-full bg-transparent border border-white text-white text-sm font-medium">Save</div>
         </div>
       </nav>
 
@@ -112,141 +117,124 @@ function HomeView({ onSelectProject }: { onSelectProject: (p: any) => void }) {
 
   return (
     <div className="animate-in fade-in duration-700">
-      
+
       {/* 1. HERO SECTION (Spatial UI inspired by reference image) */}
-      <section className="relative w-full h-[90vh] min-h-[750px] flex items-center justify-center overflow-hidden bg-[#F2F2ED] border-b border-black px-4">
-        
-        {/* Decorative Top Navbar (Mimicking the UI in image) */}
-        <div className="absolute top-6 w-full px-8 flex justify-between items-center z-0 hidden md:flex opacity-60">
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-full bg-black/10 flex items-center justify-center">
-              <ArrowLeft className="w-4 h-4 text-black" />
-            </div>
-            <span className="text-sm font-medium">Homebase</span>
-          </div>
-          <div className="flex gap-2">
-            <div className="px-4 py-2 rounded-full bg-black/5 text-sm font-medium">Project</div>
-            <div className="px-4 py-2 rounded-full bg-black/5 text-sm font-medium">Create Framework +</div>
-          </div>
-          <div className="flex gap-2">
-            <div className="px-4 py-2 rounded-full bg-black text-white text-sm font-medium">Load v</div>
-            <div className="px-4 py-2 rounded-full bg-transparent border border-black text-black text-sm font-medium">Save</div>
-          </div>
-        </div>
+      <section className="relative w-full h-[90vh] min-h-[750px] flex items-center justify-center overflow-hidden bg-[#F2F2ED] border-b border-black px-6 md:px-12">
+
 
         {/* --- Floating UI Elements (Background layer) --- */}
         {/* Left side thumbnails */}
         <div className="absolute left-[2%] lg:left-[5%] top-[25%] flex-col gap-4 hidden md:flex z-0">
-           <div className="w-32 lg:w-40 h-28 rounded-2xl bg-gray-300 overflow-hidden shadow-sm relative">
-             <div className="absolute inset-0 bg-blue-500/20 mix-blend-overlay"></div>
-             <img src={PROJECTS[0].image} className="w-full h-full object-cover opacity-90" alt="thumbnail" />
-           </div>
-           <div className="w-32 lg:w-40 h-32 rounded-2xl bg-[#D1D5DB] overflow-hidden shadow-sm relative group">
-             <div className="absolute inset-0 bg-green-500/30 mix-blend-overlay"></div>
-             <img src={PROJECTS[2].image} className="w-full h-full object-cover opacity-80 filter grayscale group-hover:grayscale-0 transition-all" alt="thumbnail" />
-           </div>
+          <div className="w-32 lg:w-40 h-28 rounded-2xl bg-gray-300 overflow-hidden shadow-sm relative">
+            <div className="absolute inset-0 bg-blue-500/20 mix-blend-overlay"></div>
+            <img src={PROJECTS[0].image} className="w-full h-full object-cover opacity-90" alt="thumbnail" />
+          </div>
+          <div className="w-32 lg:w-40 h-32 rounded-2xl bg-[#D1D5DB] overflow-hidden shadow-sm relative group">
+            <div className="absolute inset-0 bg-green-500/30 mix-blend-overlay"></div>
+            <img src={PROJECTS[2].image} className="w-full h-full object-cover opacity-80 filter grayscale group-hover:grayscale-0 transition-all" alt="thumbnail" />
+          </div>
         </div>
 
         {/* Right side thumbnails */}
         <div className="absolute right-[2%] lg:right-[5%] top-[30%] flex-col gap-4 hidden md:flex z-0">
-           <div className="w-36 lg:w-48 h-32 rounded-2xl bg-gray-300 overflow-hidden shadow-sm relative">
-             <img src={PROJECTS[1].image} className="w-full h-full object-cover opacity-90" alt="thumbnail" />
-           </div>
-           <div className="w-24 h-24 rounded-2xl bg-[#E5E7EB] shadow-sm flex items-center justify-center">
-              <span className="text-4xl font-light text-gray-400">+</span>
-           </div>
+          <div className="w-36 lg:w-48 h-32 rounded-2xl bg-gray-300 overflow-hidden shadow-sm relative">
+            <img src={PROJECTS[1].image} className="w-full h-full object-cover opacity-90" alt="thumbnail" />
+          </div>
+          <div className="w-24 h-24 rounded-2xl bg-[#E5E7EB] shadow-sm flex items-center justify-center">
+            <span className="text-4xl font-light text-gray-400">+</span>
+          </div>
         </div>
 
         {/* Bottom Left Panel (AI Agent style) */}
         <div className="absolute left-[2%] lg:left-[5%] bottom-[8%] w-64 p-4 rounded-3xl bg-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)] hidden lg:block z-0">
-           <p className="text-xs font-mono uppercase tracking-widest mb-3 ml-2 text-gray-500">Toolkit</p>
-           <div className="grid grid-cols-2 gap-2">
-              <div className="h-10 rounded-xl bg-blue-500/80 text-white flex items-center justify-center text-xs font-medium">Figma</div>
-              <div className="h-10 rounded-xl bg-teal-500/80 text-white flex items-center justify-center text-xs font-medium">React</div>
-              <div className="h-10 rounded-xl bg-gray-300/80 text-gray-700 flex items-center justify-center text-xs font-medium">Next.js</div>
-              <div className="h-10 rounded-xl bg-[#e6c100]/80 text-gray-900 flex items-center justify-center text-xs font-medium">JS/TS</div>
-           </div>
+          <p className="text-xs font-mono uppercase tracking-widest mb-3 ml-2 text-gray-500">Toolkit</p>
+          <div className="grid grid-cols-2 gap-2">
+            <div className="h-10 rounded-xl bg-blue-500/80 text-white flex items-center justify-center text-xs font-medium">Figma</div>
+            <div className="h-10 rounded-xl bg-teal-500/80 text-white flex items-center justify-center text-xs font-medium">React</div>
+            <div className="h-10 rounded-xl bg-gray-300/80 text-gray-700 flex items-center justify-center text-xs font-medium">Next.js</div>
+            <div className="h-10 rounded-xl bg-[#e6c100]/80 text-gray-900 flex items-center justify-center text-xs font-medium">JS/TS</div>
+          </div>
         </div>
 
         {/* Bottom Right Panel (Files style) */}
         <div className="absolute right-[2%] lg:right-[5%] bottom-[8%] p-4 rounded-3xl bg-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)] hidden lg:flex gap-4 z-0">
-           <div>
-              <p className="text-xs font-mono uppercase tracking-widest mb-3 ml-1 text-gray-500">Files</p>
-              <div className="flex gap-2">
-                <div className="w-20 h-24 rounded-xl bg-white/60 flex flex-col items-center justify-center shadow-sm border border-white">
-                   <div className="w-8 h-10 border-2 border-gray-300 rounded-sm mb-2 relative"></div>
-                   <span className="text-[10px] text-gray-500 font-mono mt-1">Resume</span>
-                </div>
-                <div className="w-24 h-24 rounded-xl overflow-hidden shadow-sm relative border border-white/20">
-                  <img src={PROJECTS[0].image} className="w-full h-full object-cover filter blur-[2px]" alt="project" />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[1px]">
-                     <span className="text-[10px] text-white font-mono uppercase tracking-wider">Recent</span>
-                  </div>
+          <div>
+            <p className="text-xs font-mono uppercase tracking-widest mb-3 ml-1 text-gray-500">Files</p>
+            <div className="flex gap-2">
+              <div className="w-20 h-24 rounded-xl bg-white/60 flex flex-col items-center justify-center shadow-sm border border-white">
+                <div className="w-8 h-10 border-2 border-gray-300 rounded-sm mb-2 relative"></div>
+                <span className="text-[10px] text-gray-500 font-mono mt-1">Resume</span>
+              </div>
+              <div className="w-24 h-24 rounded-xl overflow-hidden shadow-sm relative border border-white/20">
+                <img src={PROJECTS[0].image} className="w-full h-full object-cover filter blur-[2px]" alt="project" />
+                <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[1px]">
+                  <span className="text-[10px] text-white font-mono uppercase tracking-wider">Recent</span>
                 </div>
               </div>
-           </div>
+            </div>
+          </div>
         </div>
 
         {/* --- Main Central Canvas --- */}
         <div className="relative z-10 w-full max-w-[850px] aspect-square md:aspect-video lg:aspect-[16/9] rounded-[2rem] bg-[#111111] shadow-2xl flex flex-col items-center justify-center overflow-hidden border border-gray-800">
-          
+
           {/* Subtle glowing orbs in the background of the dark canvas */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none"></div>
           <div className="absolute bottom-0 right-0 w-[40%] h-[40%] bg-orange-500/10 rounded-full blur-[80px] pointer-events-none"></div>
 
           {/* Inner Floating Toolbars */}
           <div className="absolute top-6 flex gap-2 z-20">
-             <div className="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-xs font-medium text-gray-300 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-green-400"></span>
-                UI/UX
-             </div>
-             <div className="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-xs font-medium text-gray-300">
-                Frontend
-             </div>
+            <div className="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-xs font-medium text-gray-300 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-green-400"></span>
+              UI/UX
+            </div>
+            <div className="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-xs font-medium text-gray-300">
+              Frontend
+            </div>
           </div>
 
           {/* Central Content (Name, Tagline, Line Drawing) */}
-          <div className="relative z-20 flex flex-col items-center text-center px-4 mt-8">
-             <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-[#F2F2ED] mb-4 tracking-tight">Lee Wai Yee</h1>
-             <p className="text-xs md:text-sm font-mono text-gray-400 uppercase tracking-[0.2em] mb-12 max-w-lg leading-relaxed">
-               Designing data-driven digital products
-             </p>
-             
-             {/* Abstract Line Drawing SVG */}
-             <svg className="w-64 md:w-[400px] h-24 stroke-[#F2F2ED]/60 fill-none" viewBox="0 0 400 100" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M 0 50 C 100 -20, 150 120, 250 50 S 350 -20, 400 50" />
-                <path d="M 50 50 C 120 10, 180 90, 280 50" className="stroke-[#F2F2ED]/20" strokeDasharray="4 4" />
-                <path d="M 100 50 C 150 30, 200 70, 250 50" className="stroke-[#F2F2ED]/40" />
-                <circle cx="250" cy="50" r="3" className="fill-[#F2F2ED]/60" />
-                <circle cx="400" cy="50" r="2" className="fill-[#F2F2ED]/60" />
-             </svg>
+          <div className="relative z-20 flex flex-col items-center text-center px-6 md:px-12 mt-8">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-[#F2F2ED] mb-4 tracking-tight">Lee Wai Yee</h1>
+            <p className="text-xs md:text-sm font-mono text-gray-400 uppercase tracking-[0.2em] mb-12 max-w-lg leading-relaxed">
+              Designing data-driven digital products
+            </p>
+
+            {/* Abstract Line Drawing SVG */}
+            <svg className="w-64 md:w-[400px] h-24 stroke-[#F2F2ED]/60 fill-none" viewBox="0 0 400 100" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M 0 50 C 100 -20, 150 120, 250 50 S 350 -20, 400 50" />
+              <path d="M 50 50 C 120 10, 180 90, 280 50" className="stroke-[#F2F2ED]/20" strokeDasharray="4 4" />
+              <path d="M 100 50 C 150 30, 200 70, 250 50" className="stroke-[#F2F2ED]/40" />
+              <circle cx="250" cy="50" r="3" className="fill-[#F2F2ED]/60" />
+              <circle cx="400" cy="50" r="2" className="fill-[#F2F2ED]/60" />
+            </svg>
           </div>
         </div>
 
         {/* --- Bottom Center Floating Prompt Bar --- */}
         <div className="absolute bottom-[2%] md:bottom-[6%] z-30 w-[95%] md:w-[600px] p-4 rounded-[2rem] bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_20px_40px_rgba(0,0,0,0.1)] flex flex-col gap-3">
-           <p className="px-2 text-sm md:text-base font-serif text-gray-700 leading-relaxed italic">
-              "Build elegant, expressive, and visually striking software experiences that empower users through clarity."
-           </p>
-           <div className="flex items-center justify-between mt-2 gap-2">
-              <div className="flex gap-2">
-                 <button className="w-10 h-10 rounded-full bg-white/60 flex items-center justify-center border border-white text-gray-500 font-bold hover:bg-white transition-colors">+</button>
-                 <button className="px-4 h-10 rounded-full bg-white/60 flex items-center justify-center border border-white text-gray-600 text-sm font-medium gap-2 hover:bg-white transition-colors">
-                    <span className="w-4 h-4 rounded-sm bg-gray-300"></span> Projects
-                 </button>
-              </div>
-              <button 
-                 onClick={() => {
-                   const workElement = document.getElementById('work');
-                   if (workElement) {
-                     workElement.scrollIntoView({ behavior: 'smooth' });
-                   }
-                 }}
-                 className="w-10 h-10 rounded-full bg-[#111] flex items-center justify-center hover:bg-gray-800 transition-all shadow-md group"
-              >
-                 <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform" />
+          <p className="px-2 text-sm md:text-base font-serif text-gray-700 leading-relaxed italic">
+            "Build elegant, expressive, and visually striking software experiences that empower users through clarity."
+          </p>
+          <div className="flex items-center justify-between mt-2 gap-2">
+            <div className="flex gap-2">
+              <button className="w-10 h-10 rounded-full bg-white/60 flex items-center justify-center border border-white text-gray-500 font-bold hover:bg-white transition-colors">+</button>
+              <button className="px-4 h-10 rounded-full bg-white/60 flex items-center justify-center border border-white text-gray-600 text-sm font-medium gap-2 hover:bg-white transition-colors">
+                <span className="w-4 h-4 rounded-sm bg-gray-300"></span> Projects
               </button>
-           </div>
+            </div>
+            <button
+              onClick={() => {
+                const workElement = document.getElementById('work');
+                if (workElement) {
+                  workElement.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="w-10 h-10 rounded-full bg-[#111] flex items-center justify-center hover:bg-gray-800 transition-all shadow-md group"
+            >
+              <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform" />
+            </button>
+          </div>
         </div>
 
       </section>
@@ -268,10 +256,10 @@ function HomeView({ onSelectProject }: { onSelectProject: (p: any) => void }) {
         <div className="p-6 md:p-12 border-b border-black">
           <h2 className="text-sm font-mono uppercase tracking-widest">Selected Works (3)</h2>
         </div>
-        
+
         <div className="relative">
           {PROJECTS.map((project) => (
-            <div 
+            <div
               key={project.id}
               onClick={() => onSelectProject(project)}
               onMouseEnter={() => setHoveredProject(project.image)}
@@ -292,9 +280,9 @@ function HomeView({ onSelectProject }: { onSelectProject: (p: any) => void }) {
           {/* Floating Image Reveal on Hover (Desktop only) */}
           {hoveredProject && (
             <div className="hidden md:block pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] aspect-video z-0 overflow-hidden mix-blend-difference">
-              <img 
-                src={hoveredProject} 
-                alt="Project Preview" 
+              <img
+                src={hoveredProject}
+                alt="Project Preview"
                 className="w-full h-full object-cover filter grayscale opacity-80"
               />
             </div>
@@ -338,7 +326,7 @@ function HomeView({ onSelectProject }: { onSelectProject: (p: any) => void }) {
           <h2 className="text-4xl font-bold mb-6">Everything you do, do it with care.</h2>
           <p className="text-gray-400">If you're feeling like life needs a bit more chaos, then feel free to scroll back to the top!</p>
         </div>
-        
+
         <div className="flex gap-8 text-lg font-medium">
           <a href="#" className="hover:italic hover:text-red-400">Email</a>
           <a href="#" className="hover:italic hover:text-red-400">LinkedIn</a>
@@ -352,10 +340,10 @@ function HomeView({ onSelectProject }: { onSelectProject: (p: any) => void }) {
 function CaseStudyView({ project, onBack }: { project: any, onBack: () => void }) {
   return (
     <div className="animate-in slide-in-from-bottom-12 duration-700 bg-[#111] text-[#F2F2ED] min-h-screen">
-      
+
       {/* Brutalist Sticky Header */}
       <div className="sticky top-0 z-50 flex justify-between items-center p-6 border-b border-[#333] bg-[#111] font-mono text-sm uppercase tracking-widest">
-        <button 
+        <button
           onClick={onBack}
           className="flex items-center gap-2 hover:text-red-400 transition-colors"
         >
@@ -381,7 +369,7 @@ function CaseStudyView({ project, onBack }: { project: any, onBack: () => void }
               Product Design & Engineering
             </div>
           </div>
-          
+
           <div className="lg:col-span-8">
             <h2 className="text-3xl md:text-5xl font-medium leading-tight mb-8">
               {project.tagline}
@@ -394,9 +382,9 @@ function CaseStudyView({ project, onBack }: { project: any, onBack: () => void }
 
         {/* Huge Image Reveal */}
         <div className="w-full aspect-video border border-[#333] mb-24 overflow-hidden group">
-          <img 
-            src={project.image} 
-            alt={project.title} 
+          <img
+            src={project.image}
+            alt={project.title}
             className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
           />
         </div>
