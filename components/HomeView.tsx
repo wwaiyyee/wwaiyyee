@@ -196,7 +196,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             <section id="projects" ref={projectsRef} className="relative bg-[#F2F2ED]" style={{ height: sectionHeight }}>
 
                 {/* Sticky Container */}
-                <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
+                <div className="sticky top-0 h-screen flex flex-col justify-start pt-28 overflow-hidden">
                     <div className="relative w-full mt-12 md:mt-0">
                         {/* Moving Film Strip Container */}
                         <div ref={filmStripRef} className="w-max flex relative pt-8 pb-16 will-change-transform pl-6 md:pl-12">
@@ -258,7 +258,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                                                 <div className="flex flex-col items-center gap-0">
                                                     {/* Top Numbers & Barcode elements */}
                                                     <div className="flex items-center gap-10 text-gray-500 font-mono tracking-[0.4em] text-[8px] md:text-[10px] mb-2 opacity-80">
-                                                        <span>1 1 8 1 1</span>
+                                                        <span>0 4 - 2 6</span>
                                                         <span className="tracking-[0.1em] opacity-60">||||||||||||||||</span>
                                                     </div>
 
