@@ -49,24 +49,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                     </div>
                 </div>
 
-                {/* Bottom Right Panel (Files style) */}
-                <div className="absolute right-[2%] lg:right-[5%] bottom-[8%] p-4 rounded-3xl bg-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)] hidden lg:flex gap-4 z-0">
-                    <div>
-                        <p className="text-xs font-mono uppercase tracking-widest mb-3 ml-1 text-gray-500">Files</p>
-                        <div className="flex gap-2">
-                            <div className="w-20 h-24 rounded-xl bg-white/60 flex flex-col items-center justify-center shadow-sm border border-white">
-                                <div className="w-8 h-10 border-2 border-gray-300 rounded-sm mb-2 relative"></div>
-                                <span className="text-[10px] text-gray-500 font-mono mt-1">Resume</span>
-                            </div>
-                            <div className="w-24 h-24 rounded-xl overflow-hidden shadow-sm relative border border-white/20">
-                                <img src={PROJECTS[0].image} className="w-full h-full object-cover filter blur-[2px]" alt="project" />
-                                <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[1px]">
-                                    <span className="text-[10px] text-white font-mono uppercase tracking-wider">Recent</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
 
                 {/* --- Main Central Canvas --- */}
                 <div className="relative z-10 w-full max-w-[850px] aspect-square md:aspect-video lg:aspect-[16/9] rounded-[2rem] bg-[#111111] shadow-2xl flex flex-col items-center justify-center overflow-hidden border border-gray-800">
