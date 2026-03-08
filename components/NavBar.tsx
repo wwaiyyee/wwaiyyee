@@ -11,8 +11,16 @@ export const NavBar = () => {
                 <a href="#work" className="hover:line-through">Work</a>
                 <a href="#connect" className="hover:line-through">Case Studies</a>
             </div>
-            <div className="flex gap-2">
-                <div className="px-4 py-2 rounded-full bg-white text-black text-sm font-medium">Connect</div>
+            <div className="relative group">
+                <div className="px-4 py-2 rounded-full bg-white text-black text-sm font-medium cursor-pointer">Connect</div>
+                <div className="absolute right-0 top-full pt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto flex flex-row gap-2 min-w-max">
+                    <a href="https://github.com/wwaiyyee" target="_blank" rel="noopener noreferrer" className="px-4 py-2 rounded-full bg-transparent border border-white text-white text-sm font-medium hover:bg-white hover:text-black transition-colors">
+                        GitHub
+                    </a>
+                    <a href="https://www.linkedin.com/in/lee-wai-yee/" target="_blank" rel="noopener noreferrer" className="px-4 py-2 rounded-full bg-transparent border border-white text-white text-sm font-medium hover:bg-white hover:text-black transition-colors">
+                        LinkedIn
+                    </a>
+                </div>
             </div>
         </nav>
     );
