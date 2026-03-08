@@ -23,15 +23,53 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
     const [scrolled, setScrolled] = useState(false);
     const [scrollY, setScrollY] = useState(0);
 
-    // Handle scroll for scattered items
+    const projectsRef = React.useRef<HTMLElement>(null);
+    const filmStripRef = React.useRef<HTMLDivElement>(null);
+    const [sectionHeight, setSectionHeight] = useState("100vh");
+
+    // Handle scroll for scattered items and sticky project strip
     React.useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
             setScrollY(window.scrollY);
+
+            if (projectsRef.current && filmStripRef.current) {
+                const top = projectsRef.current.getBoundingClientRect().top;
+                if (top <= 0) {
+                    const scrollWidth = filmStripRef.current.scrollWidth;
+                    const maxTranslate = scrollWidth - window.innerWidth;
+
+                    const scrollOffset = Math.abs(top);
+                    const translateVal = Math.min(scrollOffset, maxTranslate);
+
+                    filmStripRef.current.style.transform = `translateX(-${translateVal}px)`;
+                } else {
+                    filmStripRef.current.style.transform = `translateX(0px)`;
+                }
+            }
         };
+
+        const updateHeight = () => {
+            if (filmStripRef.current) {
+                const scrollWidth = filmStripRef.current.scrollWidth;
+                const additionalScrollHeight = scrollWidth - window.innerWidth;
+                setSectionHeight(`calc(100vh + ${additionalScrollHeight}px)`);
+            }
+        };
+
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        window.addEventListener('resize', updateHeight);
+
+        // Initial Calculation
+        setTimeout(updateHeight, 100);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', updateHeight);
+        };
     }, []);
+
+    const perfSVG = `url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='8' y='8' width='16' height='16' rx='2' fill='%23F2F2ED'/%3E%3C/svg%3E")`;
 
     return (
         <div className="animate-in fade-in duration-700">
@@ -154,42 +192,163 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
 
 
 
-            {/* 4. WORK SECTION (Brutalist List) */}
-            <section id="work" className="border-t border-black">
-                <div className="p-6 md:p-12 border-b border-black">
-                    <h2 className="text-sm font-mono uppercase tracking-widest">Selected Works (3)</h2>
-                </div>
+            {/* --- CASE STUDY PROJECTS (Sticky Horizontal Scroll) --- */}
+            <section id="projects" ref={projectsRef} className="relative bg-[#F2F2ED]" style={{ height: sectionHeight }}>
 
-                <div className="relative">
-                    {PROJECTS.map((project) => (
-                        <div
-                            key={project.id}
-                            onClick={() => onSelectProject(project)}
-                            onMouseEnter={() => setHoveredProject(project.image)}
-                            onMouseLeave={() => setHoveredProject(null)}
-                            className="group border-b border-black p-6 md:p-12 flex flex-col md:flex-row md:items-center justify-between cursor-pointer hover:bg-[#111] hover:text-[#F2F2ED] transition-colors duration-300"
-                        >
-                            <div className="flex items-baseline gap-6 md:gap-12 mb-4 md:mb-0 relative z-10">
-                                <span className="text-2xl md:text-4xl font-serif text-gray-400 group-hover:text-gray-500 transition-colors">{project.number}</span>
-                                <h3 className="text-4xl md:text-7xl font-bold tracking-tighter">{project.title}</h3>
+                {/* Sticky Container */}
+                <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden border-y border-black">
+                    <div className="relative w-full mt-12 md:mt-0">
+                        {/* Moving Film Strip Container */}
+                        <div ref={filmStripRef} className="w-max flex relative pt-8 pb-16 will-change-transform pl-6 md:pl-12">
+
+                            {/* The Continuous Black Film Background — plain fill, leader is in foreground */}
+                            <div className="absolute top-8 left-6 md:left-12 right-0 h-[480px] bg-black pointer-events-none z-0">
+                                <div
+                                    className="absolute top-4 left-0 right-0 h-8"
+                                    style={{ backgroundImage: perfSVG, backgroundRepeat: 'repeat-x', backgroundSize: '32px 32px' }}
+                                ></div>
+                                <div
+                                    className="absolute bottom-4 left-0 right-0 h-8"
+                                    style={{ backgroundImage: perfSVG, backgroundRepeat: 'repeat-x', backgroundSize: '32px 32px' }}
+                                ></div>
                             </div>
-                            <div className="flex flex-col md:items-end z-10">
-                                <p className="text-lg md:text-2xl italic">{project.tagline}</p>
-                                <p className="text-sm font-mono uppercase tracking-widest mt-2 opacity-50">{project.roles}</p>
+
+                            {/* Film Strip Foreground Content */}
+                            <div className="flex gap-12 md:gap-16 relative z-10">
+
+                                {/* Photorealistic 3D Film Canister */}
+                                <div className="relative shrink-0 flex items-start justify-center z-20 h-[480px]">
+                                    {/* Canister Body */}
+                                    <div className="w-[200px] md:w-[320px] h-[520px] relative rounded-sm flex items-center justify-center -mt-5 mr-2 overflow-hidden bg-[#0A0A0A]">
+
+                                        {/* Core Metallic Base Gradient */}
+                                        <div className="absolute inset-0 bg-gradient-to-r from-[#111] via-[#2A2A2A] to-[#050505]"></div>
+
+                                        {/* Curved Lighting Highlights (Glossy finish) */}
+                                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-10 w-[20%] left-[10%] blur-sm"></div>
+                                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-[0.15] w-[5%] left-[15%]"></div>
+                                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#FFF] to-transparent opacity-[0.05] w-[40%] right-[10%] blur-md"></div>
+
+                                        {/* Edge Shadows for 3D depth */}
+                                        <div className="absolute inset-y-0 left-0 w-[10%] bg-gradient-to-r from-black to-transparent opacity-90"></div>
+                                        <div className="absolute inset-y-0 right-0 w-[20%] bg-gradient-to-l from-black to-transparent opacity-90"></div>
+
+                                        {/* Top/Bottom Metal Rims */}
+                                        <div className="absolute top-0 w-full h-3 bg-gradient-to-r from-gray-600 via-gray-300 to-gray-800 opacity-50"></div>
+                                        <div className="absolute bottom-0 w-full h-3 bg-gradient-to-r from-gray-600 via-gray-300 to-gray-800 opacity-50"></div>
+
+                                        {/* Typography & Graphics Container */}
+                                        <div className="relative z-10 w-full h-full flex items-center justify-center">
+
+                                            {/* Graphic Overlay Lines */}
+                                            <div className="absolute left-6 top-1/2 -translate-y-1/2 flex flex-col gap-1 items-center z-30 opacity-80">
+                                                <Aperture className="text-gray-400 w-4 h-4 mb-2" />
+                                                <div className="w-[3px] h-8 bg-[#2A65D6]"></div>
+                                                <div className="w-[3px] h-8 bg-[#22C55E]"></div>
+                                                <div className="w-[3px] h-8 bg-[#E11D48]"></div>
+                                                <Aperture className="text-gray-400 w-4 h-4 mt-2" />
+                                            </div>
+
+                                            {/* Main Rotated Typography */}
+                                            <div className="flex flex-col items-center justify-center -rotate-90 origin-center absolute w-[460px]">
+                                                <div className="flex flex-col items-center gap-0">
+
+                                                    {/* Top Numbers */}
+                                                    <div className="flex items-center gap-12 text-gray-400 font-mono tracking-[0.3em] text-[10px] md:text-xs mb-4 opacity-70">
+                                                        <span>04</span>
+                                                        <span className="tracking-tighter">—————</span>
+                                                        <span>26</span>
+                                                    </div>
+
+                                                    {/* Primary Brand Text */}
+                                                    <h2 className="text-[5rem] md:text-[6.5rem] font-black text-[#E8E8E6] tracking-tighter leading-[0.85]">
+                                                        WAI YEE
+                                                    </h2>
+
+                                                    {/* Subtitle with dashes */}
+                                                    <div className="flex items-center gap-4 mt-3 text-gray-300 tracking-[0.5em] font-mono text-[10px] md:text-xs uppercase opacity-80">
+                                                        <div className="w-16 h-[2px] bg-gray-500 hidden md:block"></div>
+                                                        <span>SELECTED</span>
+                                                        <span>WORK</span>
+                                                        <div className="w-16 h-[2px] bg-gray-500 hidden md:block"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        {/* Subtle film strip shadow entering canister */}
+                                        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-12 h-[440px] bg-gradient-to-l from-black to-transparent opacity-90 mix-blend-multiply pointer-events-none z-20"></div>
+                                    </div>
+
+                                    {/* Physical Canister Caps (Outside the main body) */}
+                                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-[65%] h-5 bg-gradient-to-r from-gray-900 via-gray-700 to-black rounded-t-[10px] border-t border-gray-600 z-10"></div>
+                                    <div className="absolute -top-7 left-1/2 -translate-x-1/2 w-[30%] h-4 bg-gradient-to-r from-gray-800 via-gray-600 to-gray-900 rounded-t-[4px] border-t border-gray-500 z-0"></div>
+
+                                    <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[65%] h-5 bg-gradient-to-r from-gray-900 via-gray-700 to-black rounded-b-[10px] border-b border-gray-600 z-10"></div>
+                                    <div className="absolute -bottom-7 left-1/2 -translate-x-1/2 w-[30%] h-4 bg-gradient-to-r from-gray-800 via-gray-600 to-gray-900 rounded-b-[4px] border-b border-gray-500 z-0"></div>
+                                </div>
+
+                                {PROJECTS.map((project, idx) => (
+                                    <div key={project.id} className="w-[280px] md:w-[450px] flex flex-col shrink-0 group">
+
+                                        {/* Content inside the 480px black film area */}
+                                        <div className="h-[480px] flex flex-col justify-between py-14">
+                                            <h3 className="text-white text-center font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase mb-4">
+                                                {project.title}
+                                            </h3>
+                                            <div className="flex-grow overflow-hidden border border-gray-800 relative bg-black cursor-pointer">
+                                                <img
+                                                    src={project.image}
+                                                    alt={project.title}
+                                                    className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
+                                                />
+                                            </div>
+                                            <p className="text-gray-400 text-center text-[10px] md:text-xs uppercase tracking-[0.1em] mt-4 font-mono truncate px-4">
+                                                {project.tagline}
+                                            </p>
+                                        </div>
+
+                                        {/* External Link Section (Below the film) */}
+                                        <a href="#" className="mt-8 flex items-center justify-between text-[#111] font-bold tracking-widest uppercase text-[10px] md:text-xs hover:text-gray-600 transition-colors border-b border-transparent hover:border-[#111] pb-1 w-max">
+                                            Check out project <ArrowUpRight size={16} className="ml-2" />
+                                        </a>
+                                    </div>
+                                ))}
+                                {/* Blank film end section (empty frame before leader) */}
+                                <div className="w-[60px] md:w-[100px] shrink-0 h-[480px]" />
+
+                                {/* Film End Leader + CTA wrapped together — no gap between them */}
+                                <div className="flex shrink-0 h-[480px]">
+                                    {/* Film End Leader */}
+                                    <div className="w-40 md:w-56 h-full shrink-0 relative z-10 overflow-hidden rounded-tr-[4rem] md:rounded-tr-[6rem] rounded-br-[4rem] md:rounded-br-[6rem] bg-black">
+                                        <div
+                                            className="absolute top-4 left-0 right-0 h-8"
+                                            style={{ backgroundImage: perfSVG, backgroundRepeat: 'repeat-x', backgroundSize: '32px 32px' }}
+                                        ></div>
+                                        <div
+                                            className="absolute bottom-4 left-0 w-[40%] h-8"
+                                            style={{ backgroundImage: perfSVG, backgroundRepeat: 'repeat-x', backgroundSize: '32px 32px' }}
+                                        ></div>
+                                        {/* Curved cutout */}
+                                        <div className="absolute bottom-0 right-0 w-full h-[58%] bg-[#F2F2ED] rounded-tl-[4rem] md:rounded-tl-[6rem]"></div>
+                                    </div>
+
+                                    {/* CTA — immediately after leader, no gap */}
+                                    <div className="flex flex-col items-start justify-center shrink-0 w-[320px] md:w-[420px] h-full pl-12 pr-8 bg-[#F2F2ED]">
+                                        <h3 className="text-[#111] font-black tracking-tighter text-2xl md:text-4xl leading-[0.9] text-center">
+                                            WANT TO KNOW MORE?<br />
+                                            <a href="/work" className="underline-offset-4 decoration-[3px] hover:underline transition-all cursor-pointer">
+                                                VISIT PROJECTS
+                                            </a>
+                                        </h3>
+                                    </div>
+                                </div>
+
+
                             </div>
                         </div>
-                    ))}
-
-                    {/* Floating Image Reveal on Hover (Desktop only) */}
-                    {hoveredProject && (
-                        <div className="hidden md:block pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] aspect-video z-0 overflow-hidden mix-blend-difference">
-                            <img
-                                src={hoveredProject}
-                                alt="Project Preview"
-                                className="w-full h-full object-cover filter grayscale opacity-80"
-                            />
-                        </div>
-                    )}
+                    </div>
                 </div>
             </section>
 
@@ -221,10 +380,10 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                     <br /><br />
                     <span className="text-black">🎶</span>
                 </div>
-            </section>
+            </section >
 
             {/* 6. FOOTER */}
-            <footer id="connect" className="border-t border-black bg-[#111] text-[#F2F2ED] p-6 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-12 md:gap-0">
+            < footer id="connect" className="border-t border-black bg-[#111] text-[#F2F2ED] p-6 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-12 md:gap-0" >
                 <div className="max-w-md">
                     <h2 className="text-4xl font-bold mb-6">Everything you do, do it with care.</h2>
                     <p className="text-gray-400">If you're feeling like life needs a bit more chaos, then feel free to scroll back to the top!</p>
@@ -235,7 +394,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                     <a href="#" className="hover:italic hover:text-red-400">LinkedIn</a>
                     <a href="#" className="hover:italic hover:text-red-400">GitHub</a>
                 </div>
-            </footer>
-        </div>
+            </footer >
+        </div >
     );
 }

@@ -34,5 +34,17 @@ export const PROJECTS = [
             overview: 'A verification tool for media organizations to analyze video content and determine the probability of AI manipulation.',
             impact: 'Adopted by 3 major newsrooms for their standard fact-checking pipeline.'
         }
+    },
+    {
+        id: 'twinkle',
+        number: '04',
+        title: 'Twinkle',
+        tagline: 'Interactive Particle Experience',
+        roles: 'Creative Tech • WebGL',
+        image: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&q=80&w=1200',
+        caseStudy: {
+            overview: 'An interactive generative art piece exploring the relationship between sound frequencies and visual particles.',
+            impact: 'Featured in digital art galleries and used as a relaxing visualizer by users worldwide.'
+        }
     }
 ];

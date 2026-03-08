@@ -16,7 +16,7 @@ export default function App() {
   }, [activeProject]);
 
   return (
-    <div className="min-h-screen bg-[#F2F2ED] text-[#111111] font-sans selection:bg-[#111] selection:text-[#F2F2ED] overflow-x-hidden">
+    <div className="min-h-screen bg-[#F2F2ED] text-[#111111] font-sans selection:bg-[#111] selection:text-[#F2F2ED] overflow-x-clip">
 
       {/* Mobile Work in Progress Warning (Vibe matched) */}
       <div className="md:hidden bg-[#111] text-[#F2F2ED] p-4 text-sm font-medium">
