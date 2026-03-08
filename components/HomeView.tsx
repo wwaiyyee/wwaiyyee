@@ -347,9 +347,11 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                                         </div>
 
                                         {/* External Link Section (Below the film) */}
-                                        <a href="#" className="mt-8 flex items-center justify-between text-[#111] font-bold tracking-widest uppercase text-[10px] md:text-xs hover:text-gray-600 transition-colors border-b border-transparent hover:border-[#111] pb-1 w-max">
-                                            Check out project <ArrowUpRight size={16} className="ml-2" />
-                                        </a>
+                                        <div className="mt-8 flex justify-center">
+                                            <a href="#" className="flex items-center text-[#111] font-bold tracking-widest uppercase text-[10px] md:text-xs hover:text-gray-600 transition-colors border-b border-transparent hover:border-[#111] pb-1">
+                                                Check out project <ArrowUpRight size={16} className="ml-2" />
+                                            </a>
+                                        </div>
                                     </div>
                                 ))}
                                 {/* Blank film end section (empty frame before leader) */}
