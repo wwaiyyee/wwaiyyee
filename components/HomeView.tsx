@@ -321,11 +321,13 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                                 {/* Film End Leader + CTA wrapped together — no gap between them */}
                                 <div className="flex shrink-0 h-[480px]">
                                     {/* Film End Leader */}
-                                    <div className="w-40 md:w-56 h-full shrink-0 relative z-10 overflow-hidden rounded-tr-[4rem] md:rounded-tr-[6rem] rounded-br-[4rem] md:rounded-br-[6rem] bg-black">
+                                    <div className="w-40 md:w-56 h-full shrink-0 relative z-10 overflow-hidden rounded-tr-[4rem] md:rounded-tr-[6rem] bg-black">
                                         <div
-                                            className="absolute top-4 left-0 right-0 h-8"
+                                            className="absolute top-4 left-0 right-0 w-[100%] h-8"
                                             style={{ backgroundImage: perfSVG, backgroundRepeat: 'repeat-x', backgroundSize: '32px 32px' }}
                                         ></div>
+                                        {/* Cover div to hide the rightmost perforation notch on the curved corner */}
+                                        <div className="absolute top-0 right-0 w-12 h-16 bg-black z-10"></div>
                                         <div
                                             className="absolute bottom-4 left-0 w-[40%] h-8"
                                             style={{ backgroundImage: perfSVG, backgroundRepeat: 'repeat-x', backgroundSize: '32px 32px' }}
