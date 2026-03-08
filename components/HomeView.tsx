@@ -88,14 +88,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             {/* 2. MARQUEE SECTION */}
             <Marquee text="— Lee Wai Yee — Grew up in a restaurant — Digital world — Nasi Lemak — Night owl — More coffee — Even more coffee — The Black Axe! " />
 
-            {/* 3. CHAOTIC NUMBERS GRID */}
-            <section className="py-24 px-6 md:px-12 flex flex-wrap gap-4 md:gap-8 justify-center opacity-30">
-                {[...Array(18)].map((_, i) => (
-                    <span key={i} className="text-4xl md:text-7xl font-bold font-serif hover:text-red-500 transition-colors cursor-crosshair">
-                        {i + 1}
-                    </span>
-                ))}
-            </section>
+
 
             {/* 4. WORK SECTION (Brutalist List) */}
             <section id="work" className="border-t border-black">
