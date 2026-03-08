@@ -196,7 +196,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             <section id="projects" ref={projectsRef} className="relative bg-[#F2F2ED]" style={{ height: sectionHeight }}>
 
                 {/* Sticky Container */}
-                <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden border-y border-black">
+                <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
                     <div className="relative w-full mt-12 md:mt-0">
                         {/* Moving Film Strip Container */}
                         <div ref={filmStripRef} className="w-max flex relative pt-8 pb-16 will-change-transform pl-6 md:pl-12">
@@ -217,76 +217,113 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                             <div className="flex gap-12 md:gap-16 relative z-10">
 
                                 {/* Photorealistic 3D Film Canister */}
-                                <div className="relative shrink-0 flex items-start justify-center z-20 h-[480px]">
-                                    {/* Canister Body */}
-                                    <div className="w-[200px] md:w-[320px] h-[520px] relative rounded-sm flex items-center justify-center -mt-5 mr-2 overflow-hidden bg-[#0A0A0A]">
+                                <div className="relative shrink-0 flex items-center justify-center z-20 h-[480px]">
 
-                                        {/* Core Metallic Base Gradient */}
-                                        <div className="absolute inset-0 bg-gradient-to-r from-[#111] via-[#2A2A2A] to-[#050505]"></div>
+                                    {/* Main Canister Body */}
+                                    <div className="w-[190px] md:w-[280px] h-[510px] relative rounded-[2px] flex items-center justify-center bg-[#0a0a0a] overflow-hidden drop-shadow-2xl border-y border-black z-10">
 
-                                        {/* Curved Lighting Highlights (Glossy finish) */}
-                                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-10 w-[20%] left-[10%] blur-sm"></div>
-                                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-[0.15] w-[5%] left-[15%]"></div>
-                                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#FFF] to-transparent opacity-[0.05] w-[40%] right-[10%] blur-md"></div>
+                                        {/* Core Metallic Base Gradient (Cylindrical lighting) */}
+                                        <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#202020] to-[#020202]"></div>
 
-                                        {/* Edge Shadows for 3D depth */}
-                                        <div className="absolute inset-y-0 left-0 w-[10%] bg-gradient-to-r from-black to-transparent opacity-90"></div>
-                                        <div className="absolute inset-y-0 right-0 w-[20%] bg-gradient-to-l from-black to-transparent opacity-90"></div>
+                                        {/* Specular Highlights for Cylindrical Volume */}
+                                        {/* Soft large left bounce */}
+                                        <div className="absolute inset-y-0 left-[6%] w-[15%] bg-gradient-to-r from-transparent via-[#ffffff] to-transparent opacity-10 blur-md"></div>
+                                        {/* Sharp left edge rim light */}
+                                        <div className="absolute inset-y-0 left-[10%] w-[3%] bg-gradient-to-r from-transparent via-[#ffffff] to-transparent opacity-[0.25] blur-[1px]"></div>
+                                        {/* Broad smooth center-right reflection */}
+                                        <div className="absolute inset-y-0 left-[25%] w-[35%] bg-gradient-to-r from-transparent via-[#ffffff] to-transparent opacity-[0.04] blur-xl"></div>
 
-                                        {/* Top/Bottom Metal Rims */}
-                                        <div className="absolute top-0 w-full h-3 bg-gradient-to-r from-gray-600 via-gray-300 to-gray-800 opacity-50"></div>
-                                        <div className="absolute bottom-0 w-full h-3 bg-gradient-to-r from-gray-600 via-gray-300 to-gray-800 opacity-50"></div>
+                                        {/* Extreme Edge Shadows for true cylinder falloff */}
+                                        <div className="absolute inset-y-0 left-0 w-[10%] bg-gradient-to-r from-black via-black/90 to-transparent"></div>
+                                        <div className="absolute inset-y-0 right-0 w-[20%] bg-gradient-to-l from-black via-black/90 to-transparent"></div>
 
-                                        {/* Typography & Graphics Container */}
+                                        {/* Top and Bottom Crimp Shadows */}
+                                        <div className="absolute top-0 left-0 right-0 h-[6px] bg-gradient-to-b from-black/80 to-transparent z-20"></div>
+                                        <div className="absolute bottom-0 left-0 right-0 h-[6px] bg-gradient-to-t from-black/80 to-transparent z-20"></div>
+
+                                        {/* Branding & Typography Container */}
                                         <div className="relative z-10 w-full h-full flex items-center justify-center">
 
-                                            {/* Graphic Overlay Lines */}
-                                            <div className="absolute left-6 top-1/2 -translate-y-1/2 flex flex-col gap-1 items-center z-30 opacity-80">
-                                                <Aperture className="text-gray-400 w-4 h-4 mb-2" />
-                                                <div className="w-[3px] h-8 bg-[#2A65D6]"></div>
-                                                <div className="w-[3px] h-8 bg-[#22C55E]"></div>
-                                                <div className="w-[3px] h-8 bg-[#E11D48]"></div>
-                                                <Aperture className="text-gray-400 w-4 h-4 mt-2" />
+                                            {/* Graphic Overlay Lines (Left edge vertical markers) */}
+                                            <div className="absolute left-3 top-1/2 -translate-y-1/2 flex flex-col gap-1 items-center opacity-60 z-30 hidden md:flex">
+                                                <Aperture className="text-gray-400 w-3 h-3 mb-4" />
+                                                <div className="w-[2px] h-6 bg-[#E11D48] rounded-full"></div>
+                                                <div className="w-[2px] h-6 bg-[#22C55E] rounded-full"></div>
+                                                <div className="w-[2px] h-6 bg-[#2A65D6] rounded-full"></div>
+                                                <Aperture className="text-gray-400 w-3 h-3 mt-4" />
                                             </div>
 
                                             {/* Main Rotated Typography */}
-                                            <div className="flex flex-col items-center justify-center -rotate-90 origin-center absolute w-[460px]">
+                                            <div className="flex flex-col items-center justify-center -rotate-90 origin-center absolute w-[500px]">
                                                 <div className="flex flex-col items-center gap-0">
-
-                                                    {/* Top Numbers */}
-                                                    <div className="flex items-center gap-12 text-gray-400 font-mono tracking-[0.3em] text-[10px] md:text-xs mb-4 opacity-70">
-                                                        <span>04</span>
-                                                        <span className="tracking-tighter">—————</span>
-                                                        <span>26</span>
+                                                    {/* Top Numbers & Barcode elements */}
+                                                    <div className="flex items-center gap-10 text-gray-500 font-mono tracking-[0.4em] text-[8px] md:text-[10px] mb-2 opacity-80">
+                                                        <span>1 1 8 1 1</span>
+                                                        <span className="tracking-[0.1em] opacity-60">||||||||||||||||</span>
                                                     </div>
 
                                                     {/* Primary Brand Text */}
-                                                    <h2 className="text-[5rem] md:text-[6.5rem] font-black text-[#E8E8E6] tracking-tighter leading-[0.85]">
+                                                    <h2 className="text-[4.5rem] md:text-[6.5rem] font-black text-[#F8F8F8] tracking-[-0.03em] leading-[0.85] drop-shadow-lg">
                                                         WAI YEE
                                                     </h2>
 
-                                                    {/* Subtitle with dashes */}
-                                                    <div className="flex items-center gap-4 mt-3 text-gray-300 tracking-[0.5em] font-mono text-[10px] md:text-xs uppercase opacity-80">
-                                                        <div className="w-16 h-[2px] bg-gray-500 hidden md:block"></div>
-                                                        <span>SELECTED</span>
-                                                        <span>WORK</span>
-                                                        <div className="w-16 h-[2px] bg-gray-500 hidden md:block"></div>
+                                                    {/* Subtitle with side lines */}
+                                                    <div className="flex items-center gap-4 mt-3 text-gray-300 tracking-[0.4em] font-mono text-[8px] md:text-[10px] uppercase opacity-80">
+                                                        <div className="w-12 h-[1px] bg-gray-400 hidden md:block opacity-50"></div>
+                                                        <span>SELECTED WORK</span>
+                                                        <div className="flex gap-1.5 hidden md:flex opacity-50">
+                                                            <div className="w-1.5 h-[3px] bg-gray-400"></div>
+                                                            <div className="w-1.5 h-[3px] bg-gray-400"></div>
+                                                            <div className="w-1.5 h-[3px] bg-gray-400"></div>
+                                                            <div className="w-1.5 h-[3px] bg-gray-400"></div>
+                                                            <div className="w-1.5 h-[3px] bg-gray-400"></div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
-
-                                        {/* Subtle film strip shadow entering canister */}
-                                        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-12 h-[440px] bg-gradient-to-l from-black to-transparent opacity-90 mix-blend-multiply pointer-events-none z-20"></div>
                                     </div>
 
-                                    {/* Physical Canister Caps (Outside the main body) */}
-                                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-[65%] h-5 bg-gradient-to-r from-gray-900 via-gray-700 to-black rounded-t-[10px] border-t border-gray-600 z-10"></div>
-                                    <div className="absolute -top-7 left-1/2 -translate-x-1/2 w-[30%] h-4 bg-gradient-to-r from-gray-800 via-gray-600 to-gray-900 rounded-t-[4px] border-t border-gray-500 z-0"></div>
+                                    {/* The Film Exit Lip (Right edge of canister where film comes out) */}
+                                    <div className="absolute right-[-14px] md:right-[-20px] top-1/2 -translate-y-1/2 w-[14px] md:w-[20px] h-[486px] bg-gradient-to-r from-[#000] via-[#111] to-[#050505] border-y border-[#333] z-10 rounded-r shadow-2xl flex justify-end pr-0.5">
+                                        <div className="h-full w-[2px] bg-black"></div>
+                                    </div>
 
-                                    <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[65%] h-5 bg-gradient-to-r from-gray-900 via-gray-700 to-black rounded-b-[10px] border-b border-gray-600 z-10"></div>
-                                    <div className="absolute -bottom-7 left-1/2 -translate-x-1/2 w-[30%] h-4 bg-gradient-to-r from-gray-800 via-gray-600 to-gray-900 rounded-b-[4px] border-b border-gray-500 z-0"></div>
+                                    {/* Film Shadow coming out of lip onto the film */}
+                                    <div className="absolute right-[-20px] top-1/2 -translate-y-1/2 w-20 h-[440px] bg-gradient-to-l from-black via-black/80 to-transparent opacity-95 pointer-events-none z-20"></div>
+
+                                    {/* --- Top Cap Assembly --- */}
+                                    <div className="absolute -top-[12px] left-1/2 -translate-x-1/2 w-[218px] md:w-[320px] h-[24px] bg-gradient-to-b from-[#333] via-[#777] to-[#111] rounded-[3px] shadow-[0_5px_15px_rgba(0,0,0,0.9)] z-30 border-t border-[#888]">
+                                        {/* Rim Highlights */}
+                                        <div className="absolute inset-y-0 left-[10%] w-[5%] bg-gradient-to-r from-transparent via-[#ffffff] to-transparent opacity-50"></div>
+                                        <div className="absolute inset-x-0 bottom-0 h-[2px] bg-black/90"></div>
+                                    </div>
+                                    {/* Spool Peg Base */}
+                                    <div className="absolute -top-[20px] left-1/2 -translate-x-1/2 w-[120px] md:w-[160px] h-[8px] bg-gradient-to-r from-[#050505] via-[#444] to-[#050505] rounded-t-sm z-20 border-t border-[#666]">
+                                        <div className="absolute inset-y-0 left-[12%] w-[6%] bg-gradient-to-r from-transparent via-[#ffffff] to-transparent opacity-40"></div>
+                                    </div>
+                                    {/* Spool Peg Top */}
+                                    <div className="absolute -top-[28px] left-1/2 -translate-x-1/2 w-[50px] md:w-[70px] h-[8px] bg-gradient-to-r from-[#111] via-[#666] to-[#111] rounded-t-[2px] border-t border-[#999] z-10">
+                                        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[60%] h-[3px] bg-black/90 rounded-t-full"></div>
+                                        <div className="absolute inset-y-0 left-[15%] w-[10%] bg-gradient-to-r from-transparent via-[#ffffff] to-transparent opacity-50"></div>
+                                    </div>
+
+                                    {/* --- Bottom Cap Assembly --- */}
+                                    <div className="absolute -bottom-[12px] left-1/2 -translate-x-1/2 w-[218px] md:w-[320px] h-[24px] bg-gradient-to-t from-[#333] via-[#777] to-[#111] rounded-[3px] shadow-[0_-5px_15px_rgba(0,0,0,0.9)] z-30 border-b border-[#888]">
+                                        {/* Rim Highlights */}
+                                        <div className="absolute inset-y-0 left-[10%] w-[5%] bg-gradient-to-r from-transparent via-[#ffffff] to-transparent opacity-50"></div>
+                                        <div className="absolute inset-x-0 top-0 h-[2px] bg-black/90"></div>
+                                    </div>
+                                    {/* Bottom Spool Peg Base */}
+                                    <div className="absolute -bottom-[20px] left-1/2 -translate-x-1/2 w-[120px] md:w-[160px] h-[8px] bg-gradient-to-r from-[#050505] via-[#444] to-[#050505] rounded-b-sm z-20 border-b border-[#666]">
+                                        <div className="absolute inset-y-0 left-[12%] w-[6%] bg-gradient-to-r from-transparent via-[#ffffff] to-transparent opacity-40"></div>
+                                    </div>
+                                    {/* Bottom Spool Peg Point */}
+                                    <div className="absolute -bottom-[28px] left-1/2 -translate-x-1/2 w-[50px] md:w-[70px] h-[8px] bg-gradient-to-r from-[#111] via-[#666] to-[#111] rounded-b-[2px] border-b border-[#999] z-10">
+                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[3px] bg-black/90 rounded-b-full"></div>
+                                        <div className="absolute inset-y-0 left-[15%] w-[10%] bg-gradient-to-r from-transparent via-[#ffffff] to-transparent opacity-50"></div>
+                                    </div>
+
                                 </div>
 
                                 {PROJECTS.map((project, idx) => (
@@ -352,6 +389,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                         </div>
                     </div>
                 </div>
+
             </section>
 
             {/* 5. CHAOS / ABOUT SECTION */}
