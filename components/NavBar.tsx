@@ -7,13 +7,12 @@ export const NavBar = () => {
                 Portfolio
             </div>
             <div className="flex flex-col md:flex-row gap-2 md:gap-12 text-sm md:text-base font-medium text-white">
-                <a href="#about" className="hover:line-through">about</a>
+                <a href="#about" className="hover:line-through">About</a>
                 <a href="#work" className="hover:line-through">Work</a>
-                <a href="#connect" className="hover:line-through">Connect</a>
+                <a href="#connect" className="hover:line-through">Case Studies</a>
             </div>
             <div className="flex gap-2">
-                <div className="px-4 py-2 rounded-full bg-white text-black text-sm font-medium">Load v</div>
-                <div className="px-4 py-2 rounded-full bg-transparent border border-white text-white text-sm font-medium">Save</div>
+                <div className="px-4 py-2 rounded-full bg-white text-black text-sm font-medium">Connect</div>
             </div>
         </nav>
     );
