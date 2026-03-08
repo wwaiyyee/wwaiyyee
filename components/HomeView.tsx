@@ -5,113 +5,89 @@ import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { PROJECTS } from './projects';
 import { Marquee } from './Marquee';
 
+const SCATTERED_ITEMS = [
+    { id: 1, src: "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&q=80&w=400", type: "image", top: "5%", left: "5%", rotate: "-15deg", speed: 0.15, label: "01" },
+    { id: 2, src: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=400", type: "image", top: "10%", right: "8%", rotate: "8deg", speed: -0.1, label: "02" },
+    { id: 3, src: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&q=80&w=400", type: "image", top: "45%", left: "-5%", rotate: "12deg", speed: 0.25, label: "03" },
+    { id: 4, src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=400", type: "image", top: "35%", right: "-2%", rotate: "-6deg", speed: -0.2, label: "04" },
+    { id: 5, src: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=400", type: "image", bottom: "10%", left: "15%", rotate: "-8deg", speed: 0.1, label: "05" },
+    { id: 6, src: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&q=80&w=400", type: "image", bottom: "15%", right: "15%", rotate: "15deg", speed: 0.3, label: "06" },
+    { id: 7, type: "text", text: `"Code is reality."`, top: "25%", left: "25%", rotate: "-5deg", speed: 0.2 },
+    { id: 8, type: "text", text: "SCENE 1", bottom: "35%", right: "25%", rotate: "10deg", speed: -0.15 },
+    { id: 9, type: "scrap", top: "70%", left: "30%", rotate: "-12deg", speed: 0.35 },
+    { id: 10, type: "image", src: "https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&q=80&w=400", top: "60%", right: "35%", rotate: "5deg", speed: -0.05, label: "07" },
+];
+
 export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => void }) {
     const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+    const [scrolled, setScrolled] = useState(false);
+    const [scrollY, setScrollY] = useState(0);
+
+    // Handle scroll for scattered items
+    React.useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 50);
+            setScrollY(window.scrollY);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     return (
         <div className="animate-in fade-in duration-700">
 
-            {/* 1. HERO SECTION (Spatial UI inspired by reference image) */}
-            <section className="relative w-full h-[90vh] min-h-[750px] flex items-center justify-center overflow-hidden bg-[#F2F2ED] border-b border-black px-6 md:px-12">
+            {/* --- FILM GRAIN & VIGNETTE OVERLAY --- */}
+            <div className="fixed inset-0 pointer-events-none z-50 mix-blend-multiply opacity-20">
+                <svg width="100%" height="100%" xmlns='http://www.w3.org/2000/svg' className="w-full h-full" preserveAspectRatio="none">
+                    <filter id='noiseFilter'>
+                        <feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch' />
+                    </filter>
+                    <rect width='100%' height='100%' filter='url(#noiseFilter)' />
+                </svg>
+            </div>
 
+            {/* --- HERO SECTION --- */}
+            <section id="top" className="relative min-h-[120vh] bg-[#F2F2ED] overflow-hidden flex flex-col items-center justify-center border-b border-black">
 
-                {/* --- Floating UI Elements (Background layer) --- */}
-                {/* Left side thumbnails */}
-                <div className="absolute left-[2%] lg:left-[5%] top-[25%] flex-col gap-4 hidden md:flex z-0">
-                    <div className="w-32 lg:w-40 h-28 rounded-2xl bg-gray-300 overflow-hidden shadow-sm relative">
-                        <div className="absolute inset-0 bg-blue-500/20 mix-blend-overlay"></div>
-                        <img src={PROJECTS[0].image} className="w-full h-full object-cover opacity-90" alt="thumbnail" />
-                    </div>
-                    <div className="w-32 lg:w-40 h-32 rounded-2xl bg-[#D1D5DB] overflow-hidden shadow-sm relative group">
-                        <div className="absolute inset-0 bg-green-500/30 mix-blend-overlay"></div>
-                        <img src={PROJECTS[2].image} className="w-full h-full object-cover opacity-80 filter grayscale group-hover:grayscale-0 transition-all" alt="thumbnail" />
-                    </div>
-                </div>
-
-                {/* Right side thumbnails */}
-                <div className="absolute right-[2%] lg:right-[5%] top-[30%] flex-col gap-4 hidden md:flex z-0">
-                    <div className="w-36 lg:w-48 h-32 rounded-2xl bg-gray-300 overflow-hidden shadow-sm relative">
-                        <img src={PROJECTS[1].image} className="w-full h-full object-cover opacity-90" alt="thumbnail" />
-                    </div>
-                    <div className="w-24 h-24 rounded-2xl bg-[#E5E7EB] shadow-sm flex items-center justify-center">
-                        <span className="text-4xl font-light text-gray-400">+</span>
-                    </div>
-                </div>
-
-                {/* Bottom Left Panel (AI Agent style) */}
-                <div className="absolute left-[2%] lg:left-[5%] bottom-[8%] w-64 p-4 rounded-3xl bg-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)] hidden lg:block z-0">
-                    <p className="text-xs font-mono uppercase tracking-widest mb-3 ml-2 text-gray-500">Toolkit</p>
-                    <div className="grid grid-cols-2 gap-2">
-                        <div className="h-10 rounded-xl bg-blue-500/80 text-white flex items-center justify-center text-xs font-medium">Figma</div>
-                        <div className="h-10 rounded-xl bg-teal-500/80 text-white flex items-center justify-center text-xs font-medium">React</div>
-                        <div className="h-10 rounded-xl bg-gray-300/80 text-gray-700 flex items-center justify-center text-xs font-medium">Next.js</div>
-                        <div className="h-10 rounded-xl bg-[#e6c100]/80 text-gray-900 flex items-center justify-center text-xs font-medium">JS/TS</div>
-                    </div>
-                </div>
-
-
-
-                {/* --- Main Central Canvas --- */}
-                <div className="relative z-10 w-full max-w-[850px] aspect-square md:aspect-video lg:aspect-[16/9] rounded-[2rem] bg-[#111111] shadow-2xl flex flex-col items-center justify-center overflow-hidden border border-gray-800">
-
-                    {/* Subtle glowing orbs in the background of the dark canvas */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none"></div>
-                    <div className="absolute bottom-0 right-0 w-[40%] h-[40%] bg-orange-500/10 rounded-full blur-[80px] pointer-events-none"></div>
-
-                    {/* Inner Floating Toolbars */}
-                    <div className="absolute top-6 flex gap-2 z-20">
-                        <div className="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-xs font-medium text-gray-300 flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-green-400"></span>
-                            UI/UX
-                        </div>
-                        <div className="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-xs font-medium text-gray-300">
-                            Frontend
-                        </div>
-                    </div>
-
-                    {/* Central Content (Name, Tagline, Line Drawing) */}
-                    <div className="relative z-20 flex flex-col items-center text-center px-6 md:px-12 mt-8">
-                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-[#F2F2ED] mb-4 tracking-tight">Lee Wai Yee</h1>
-                        <p className="text-xs md:text-sm font-mono text-gray-400 uppercase tracking-[0.2em] mb-12 max-w-lg leading-relaxed">
-                            Designing data-driven digital products
-                        </p>
-
-                        {/* Abstract Line Drawing SVG */}
-                        <svg className="w-64 md:w-[400px] h-24 stroke-[#F2F2ED]/60 fill-none" viewBox="0 0 400 100" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M 0 50 C 100 -20, 150 120, 250 50 S 350 -20, 400 50" />
-                            <path d="M 50 50 C 120 10, 180 90, 280 50" className="stroke-[#F2F2ED]/20" strokeDasharray="4 4" />
-                            <path d="M 100 50 C 150 30, 200 70, 250 50" className="stroke-[#F2F2ED]/40" />
-                            <circle cx="250" cy="50" r="3" className="fill-[#F2F2ED]/60" />
-                            <circle cx="400" cy="50" r="2" className="fill-[#F2F2ED]/60" />
-                        </svg>
-                    </div>
-                </div>
-
-                {/* --- Bottom Center Floating Prompt Bar --- */}
-                <div className="absolute bottom-[2%] md:bottom-[6%] z-30 w-[95%] md:w-[600px] p-4 rounded-[2rem] bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_20px_40px_rgba(0,0,0,0.1)] flex flex-col gap-3">
-                    <p className="px-2 text-sm md:text-base font-serif text-gray-700 leading-relaxed italic">
-                        "Build elegant, expressive, and visually striking software experiences that empower users through clarity."
+                {/* Massive Center Text */}
+                <div className="relative z-30 w-full flex flex-col items-center justify-center pointer-events-none select-none my-64">
+                    <h1 className="text-[18vw] md:text-[14vw] font-serif text-[#111111] leading-[0.8] tracking-tighter opacity-10">
+                        DIRECTOR
+                    </h1>
+                    <p className="text-[#111111] tracking-[0.5em] uppercase text-xs md:text-sm mt-8 font-mono z-30 opacity-80">
+                        Creative Portfolio
                     </p>
-                    <div className="flex items-center justify-between mt-2 gap-2">
-                        <div className="flex gap-2">
-                            <button className="w-10 h-10 rounded-full bg-white/60 flex items-center justify-center border border-white text-gray-500 font-bold hover:bg-white transition-colors">+</button>
-                            <button className="px-4 h-10 rounded-full bg-white/60 flex items-center justify-center border border-white text-gray-600 text-sm font-medium gap-2 hover:bg-white transition-colors">
-                                <span className="w-4 h-4 rounded-sm bg-gray-300"></span> Projects
-                            </button>
-                        </div>
-                        <button
-                            onClick={() => {
-                                const workElement = document.getElementById('work');
-                                if (workElement) {
-                                    workElement.scrollIntoView({ behavior: 'smooth' });
-                                }
-                            }}
-                            className="w-10 h-10 rounded-full bg-[#111] flex items-center justify-center hover:bg-gray-800 transition-all shadow-md group"
-                        >
-                            <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform" />
-                        </button>
-                    </div>
                 </div>
+
+                {/* --- SCATTERED COLLAGE ELEMENTS --- */}
+                <div className="absolute inset-0 z-20 pointer-events-none overflow-hidden">
+                    {SCATTERED_ITEMS.map((item) => (
+                        <div
+                            key={item.id}
+                            className="absolute pointer-events-auto transition-transform duration-75 hover:z-50 group hover:scale-110 cursor-pointer"
+                            style={{
+                                top: item.top,
+                                left: item.left,
+                                right: item.right,
+                                bottom: item.bottom,
+                                transform: `rotate(${item.rotate}) translateY(${scrollY * item.speed}px)`,
+                            }}
+                        >
+                            {item.type === 'image' && (
+                                <div className="relative shadow-[10px_10px_20px_rgba(0,0,0,0.15)] bg-white p-2 md:p-3 border border-black">
+                                    <img src={item.src} alt="scattered" className="w-28 md:w-56 h-auto grayscale group-hover:grayscale-0 transition-all duration-700" />
+                                    {item.label && <div className="absolute -bottom-3 -right-3 bg-[#111] text-white text-[10px] font-bold font-mono px-2 py-1 shadow-md">{item.label}</div>}
+                                </div>
+                            )}
+                            {item.type === 'text' && (
+                                <div className="bg-white p-3 md:p-5 shadow-xl border border-black flex items-center justify-center">
+                                    <p className="font-mono text-[10px] md:text-xs text-[#111] font-bold uppercase tracking-wider">{item.text}</p>
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                </div>
+
 
             </section>
 
