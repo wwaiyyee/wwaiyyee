@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { ArrowRight, ArrowUpRight, Film } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Aperture } from 'lucide-react';
 import { PROJECTS } from './projects';
 import { Marquee } from './Marquee';
 
@@ -47,7 +47,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             </div>
 
             {/* --- HERO SECTION --- */}
-            <section id="top" className="relative min-h-[100vh] bg-[#F2F2ED] overflow-hidden flex flex-col items-center justify-center border-b border-black">
+            <section id="top" className="relative min-h-[100vh] bg-[#F2F2ED] overflow-hidden flex flex-col items-center justify-center">
 
                 {/* Massive Center Text */}
                 <div className="relative z-30 w-full flex flex-col items-center justify-center pointer-events-none select-none mt-30 mb-64">
@@ -85,92 +85,66 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
 
             </section>
 
-            {/* --- ABOUT SECTION (SCREENPLAY FORMAT) --- */}
-            <section id="about" className="py-32 px-6 border-t border-black relative overflow-hidden bg-[#F2F2ED]">
+            {/* --- ABOUT SECTION (FIELD NOTES FORMAT) --- */}
+            <section id="about" className="py-32 px-6 relative overflow-hidden bg-[#F2F2ED]">
                 <div className="max-w-4xl mx-auto relative z-10">
                     <div className="flex items-center justify-center gap-4 mb-16">
-                        <Film className="text-[#111]" size={24} />
-                        <h2 className="text-xs tracking-[0.4em] uppercase text-[#111]">Act I: The Origin</h2>
+                        <Aperture className="text-[#111]" size={24} />
+                        <h2 className="text-xs tracking-[0.4em] uppercase text-[#111]">The Darkroom</h2>
                     </div>
 
-                    {/* Screenplay Paper Container */}
+                    {/* Field Notes Paper Container */}
                     <div
-                        className="bg-white text-black p-8 md:p-16 shadow-[20px_20px_60px_rgba(0,0,0,0.1)] mx-auto max-w-3xl transform rotate-1 hover:rotate-0 transition-transform duration-700 relative border border-black"
+                        className="bg-white text-black p-8 md:p-16 shadow-[20px_20px_60px_rgba(0,0,0,0.1)] mx-auto max-w-3xl relative rounded-sm border-l-8 border-[#d73a3a] border-y border-r border-black"
                         style={{ fontFamily: '"Courier New", Courier, monospace' }}
                     >
                         {/* Subtle paper texture */}
                         <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cream-paper.png')] pointer-events-none"></div>
 
-                        {/* Script Header */}
-                        <div className="flex justify-between items-start mb-12 text-[#111] text-xs border-b border-black pb-4 font-bold">
-                            <span>SCENE 1</span>
-                            <span>PAGE 1</span>
+                        {/* Log Header */}
+                        <div className="flex justify-between items-end mb-12 border-b-2 border-black pb-4">
+                            <div>
+                                <h3 className="text-2xl font-bold uppercase tracking-widest">Developer's Log</h3>
+                                <p className="text-gray-500 text-xs mt-1">BATCH NO. 2026-X</p>
+                            </div>
+                            <div className="text-right text-xs font-bold text-gray-500 space-y-1">
+                                <p>ISO: 400</p>
+                                <p>PROCESS: C-41</p>
+                            </div>
                         </div>
 
-                        <div className="space-y-6 text-sm md:text-base leading-relaxed">
+                        <div className="space-y-8 text-sm md:text-base leading-relaxed">
 
-                            {/* Scene Heading */}
-                            <p className="uppercase font-bold tracking-widest text-[#111]">
-                                INT. THE DIGITAL STUDIO - LATE NIGHT
-                            </p>
-
-                            {/* Action Line */}
-                            <p className="pl-0 md:pl-4 text-gray-800">
-                                The glow of dual monitors cuts through the darkness. Lines of code cascade down the screen like digital rain. A FIGURE sits at a mechanical keyboard, typing with the deliberate rhythm of a seasoned film editor.
-                            </p>
-
-                            {/* Character Name */}
-                            <div className="text-center mt-8">
-                                <p className="uppercase font-bold tracking-widest inline-block border-b-2 border-black mb-1">
-                                    The Director
+                            <div>
+                                <p className="uppercase font-bold tracking-widest text-xs text-gray-500 mb-2">[ 01. EXPOSURE ]</p>
+                                <p className="text-black font-medium">
+                                    I treat every project like a carefully composed photograph. From framing the architecture (wireframing) to the final exposure (deployment), I obsess over the lighting, the focus, and the user's perspective.
                                 </p>
                             </div>
 
-                            {/* Parenthetical & Dialogue */}
-                            <div className="max-w-lg mx-auto text-center px-4">
-                                <p className="italic text-gray-700 mb-2">(V.O., addressing the audience)</p>
-                                <p className="text-[#111]">
-                                    I treat every project like a feature film. From the initial storyboard wireframes to the final deployment cut, I obsess over the details, the pacing, and the user's emotional journey.
+                            <div>
+                                <p className="uppercase font-bold tracking-widest text-xs text-gray-500 mb-2">[ 02. DEVELOPMENT ]</p>
+                                <p className="text-black font-medium">
+                                    My tools aren't physical lenses and chemicals. They are React, TypeScript, and Node.js. With a background forged in late-night coding sessions and rigorous algorithms, I blend technical precision with analog aesthetics.
                                 </p>
                             </div>
 
-                            {/* Action Line */}
-                            <p className="pl-0 md:pl-4 text-gray-800 mt-8">
-                                They hit COMPUTE. The interface compiles seamlessly. A complex, visually striking application breathes to life on the screen.
-                            </p>
-
-                            {/* Character Name */}
-                            <div className="text-center mt-8">
-                                <p className="uppercase font-bold tracking-widest inline-block border-b-2 border-black mb-1">
-                                    The Director
-                                </p>
-                            </div>
-
-                            {/* Dialogue */}
-                            <div className="max-w-lg mx-auto text-center px-4">
-                                <p className="text-[#111]">
-                                    My tools aren't cameras and lights. They are React, TypeScript, and Node.js. With a background forged in late-night hackathons and rigorous university algorithms, I blend technical architecture with cinematic aesthetics.
-                                </p>
-                            </div>
-
-                            {/* Scene Heading for Skills */}
-                            <p className="uppercase font-bold tracking-widest text-[#111] mt-12">
-                                MONTAGE: THE TECH STACK
-                            </p>
-
-                            {/* Action Line & List */}
-                            <p className="pl-0 md:pl-4 text-gray-800">
-                                Quick cuts of the Director's arsenal in action:
-                            </p>
-                            <ul className="list-disc pl-12 md:pl-16 space-y-2 text-[#111] mt-4 font-bold">
-                                <li><span className="font-normal text-gray-700">Frontend:</span> REACT, NEXT.JS, TAILWIND CSS <span className="font-normal italic text-gray-700">weaving the visual narrative.</span></li>
-                                <li><span className="font-normal text-gray-700">Backend:</span> NODE.JS, EXPRESS <span className="font-normal italic text-gray-700">handling the complex plot mechanics.</span></li>
-                                <li><span className="font-normal text-gray-700">Database:</span> POSTGRESQL & MONGODB <span className="font-normal italic text-gray-700">keeping the lore organized.</span></li>
-                            </ul>
-
-                            {/* Transition */}
-                            <div className="text-right mt-16 text-[#111] uppercase font-bold tracking-widest">
-                                <p>CUT TO:</p>
+                            <div>
+                                <p className="uppercase font-bold tracking-widest text-xs text-gray-500 mb-4">[ 03. EQUIPMENT ]</p>
+                                <ul className="space-y-4 text-black font-medium">
+                                    <li className="flex flex-col md:flex-row md:gap-4">
+                                        <span className="font-bold min-w-[120px]">FRONTEND:</span>
+                                        <span className="text-gray-700">React, Next.js, Tailwind <span className="italic text-gray-500">...capturing the visual composition.</span></span>
+                                    </li>
+                                    <li className="flex flex-col md:flex-row md:gap-4">
+                                        <span className="font-bold min-w-[120px]">BACKEND:</span>
+                                        <span className="text-gray-700">Node.js, Express <span className="italic text-gray-500">...handling the raw data processing.</span></span>
+                                    </li>
+                                    <li className="flex flex-col md:flex-row md:gap-4">
+                                        <span className="font-bold min-w-[120px]">DATABASE:</span>
+                                        <span className="text-gray-700">PostgreSQL, MongoDB <span className="italic text-gray-500">...archiving the negatives.</span></span>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
