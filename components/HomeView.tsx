@@ -11,7 +11,7 @@ const SCATTERED_ITEMS = [
     { id: 3, src: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&q=80&w=400", type: "image", top: "45%", left: "-5%", rotate: "12deg", speed: 0.25, label: "03" },
     { id: 4, src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=400", type: "image", top: "35%", right: "-2%", rotate: "-6deg", speed: -0.2, label: "04" },
     { id: 5, src: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=400", type: "image", bottom: "10%", left: "15%", rotate: "-8deg", speed: 0.1, label: "05" },
-    { id: 6, src: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&q=80&w=400", type: "image", bottom: "15%", right: "15%", rotate: "15deg", speed: 0.3, label: "06" },
+    { id: 6, src: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&q=80&w=400", type: "image", bottom: "5%", right: "15%", rotate: "15deg", speed: 0.3, label: "06" },
     { id: 7, type: "text", text: `"Code is reality."`, top: "25%", left: "25%", rotate: "-5deg", speed: 0.2 },
     { id: 8, type: "text", text: "SCENE 1", bottom: "35%", right: "25%", rotate: "10deg", speed: -0.15 },
     { id: 9, type: "scrap", top: "70%", left: "30%", rotate: "-12deg", speed: 0.35 },
@@ -47,15 +47,15 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             </div>
 
             {/* --- HERO SECTION --- */}
-            <section id="top" className="relative min-h-[120vh] bg-[#F2F2ED] overflow-hidden flex flex-col items-center justify-center border-b border-black">
+            <section id="top" className="relative min-h-[100vh] bg-[#F2F2ED] overflow-hidden flex flex-col items-center justify-center border-b border-black">
 
                 {/* Massive Center Text */}
-                <div className="relative z-30 w-full flex flex-col items-center justify-center pointer-events-none select-none my-64">
+                <div className="relative z-30 w-full flex flex-col items-center justify-center pointer-events-none select-none mt-30 mb-64">
                     <h1 className="text-[18vw] md:text-[14vw] font-serif text-[#111111] leading-[0.8] tracking-tighter opacity-10">
-                        DIRECTOR
+                        Wai Yee
                     </h1>
                     <p className="text-[#111111] tracking-[0.5em] uppercase text-xs md:text-sm mt-8 font-mono z-30 opacity-80">
-                        Creative Portfolio
+                        SOFTWARE DEVELOPER / UI/UX DESIGNER
                     </p>
                 </div>
 
@@ -76,12 +76,6 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                             {item.type === 'image' && (
                                 <div className="relative shadow-[10px_10px_20px_rgba(0,0,0,0.15)] bg-white p-2 md:p-3 border border-black">
                                     <img src={item.src} alt="scattered" className="w-28 md:w-56 h-auto grayscale group-hover:grayscale-0 transition-all duration-700" />
-                                    {item.label && <div className="absolute -bottom-3 -right-3 bg-[#111] text-white text-[10px] font-bold font-mono px-2 py-1 shadow-md">{item.label}</div>}
-                                </div>
-                            )}
-                            {item.type === 'text' && (
-                                <div className="bg-white p-3 md:p-5 shadow-xl border border-black flex items-center justify-center">
-                                    <p className="font-mono text-[10px] md:text-xs text-[#111] font-bold uppercase tracking-wider">{item.text}</p>
                                 </div>
                             )}
                         </div>
