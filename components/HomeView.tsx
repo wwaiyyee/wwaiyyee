@@ -394,35 +394,79 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
 
             </section>
 
-            {/* 5. CHAOS / ABOUT SECTION */}
-            <section id="about" className="px-6 md:px-12 py-32 grid grid-cols-1 md:grid-cols-2 gap-24">
-                <div>
-                    <h2 className="text-5xl font-bold tracking-tighter mb-12 hover:italic">What's their deal?</h2>
-                    <div className="space-y-4 text-xl border-l-4 border-black pl-6">
-                        <p className="font-bold">About me</p>
-                        <p className="opacity-50 line-through">What I look for</p>
-                        <p className="italic">Impactful work</p>
-                        <p className="italic">Meaningful work</p>
-                        <p>Diversed team of talented folks</p>
-                        <p className="font-bold mt-8 flex items-center gap-2 cursor-pointer hover:underline">
-                            let's chat! <ArrowUpRight className="w-5 h-5" />
-                        </p>
+            {/* 5. ACHIEVEMENTS — Film-Themed */}
+            <section id="about" className="bg-[#F2F2ED] px-6 md:px-12 py-24 overflow-hidden">
+
+                {/* Section header — film slate style */}
+                <div className="flex items-center gap-6 mb-16">
+                    <div className="flex flex-col">
+                        <span className="font-mono text-[10px] tracking-[0.4em] text-gray-400 uppercase">PROD. WAI YEE</span>
+                        <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-[#111] leading-none">The Credits</h2>
+                        <span className="font-mono text-[10px] tracking-[0.4em] text-gray-400 uppercase mt-1">SCENE 01 — TAKE 01</span>
                     </div>
-                    <div className="mt-16 w-48 h-48 bg-gray-300 border border-black border-dashed flex items-center justify-center p-4 text-center text-sm font-mono text-gray-500">
-                        [Insert a "I need to chat with you" giphy here]
+                    <div className="ml-auto hidden md:flex flex-col items-end gap-1 font-mono text-[10px] text-gray-400 tracking-widest">
+                        <span>▶ ROLL</span>
+                        <span>35mm</span>
                     </div>
                 </div>
 
-                <div className="font-serif text-lg md:text-2xl leading-relaxed text-gray-600">
-                    <span className="text-black">🎶</span>
-                    <br /><br />
-                    Almost heaven, West Virginia. Blue Ridge Mountains Shenandoah River. Life is old there. Older than the trees. Younger than the mountains. Growin like a breeze...
-                    <br /><br />
-                    Country Roads, take me home. To the place I belong West Virginia, mountain momma. Take me home, country roads.
-                    <br /><br />
-                    <span className="text-black">🎶</span>
+                {/* Film strip stats row */}
+                <div className="relative">
+                    {/* Top perforations */}
+                    <div className="h-4 w-full bg-[#111]" style={{ maskImage: 'repeating-linear-gradient(to right, black 0px, black 6px, transparent 6px, transparent 12px, black 12px, black 20px, transparent 20px, transparent 32px)', WebkitMaskImage: 'repeating-linear-gradient(to right, black 0px, black 6px, transparent 6px, transparent 12px, black 12px, black 20px, transparent 20px, transparent 32px)' }}></div>
+
+                    {/* Stats row — black film frame */}
+                    <div className="bg-[#111] py-10 px-6 md:px-12 grid grid-cols-2 md:grid-cols-4 gap-0 divide-x divide-gray-800">
+                        {[
+                            { frame: '01', label: 'Projects Shipped', value: '10+', sub: 'across 3 countries' },
+                            { frame: '02', label: 'Years of Craft', value: '3+', sub: 'design × engineering' },
+                            { frame: '03', label: 'Industries', value: '5+', sub: 'fintech · health · gov' },
+                            { frame: '04', label: 'Cups of Coffee', value: '∞', sub: 'no plans to stop' },
+                        ].map(({ frame, label, value, sub }) => (
+                            <div key={frame} className="flex flex-col items-center justify-center py-6 px-4 gap-2 text-center">
+                                <span className="font-mono text-[9px] text-gray-600 tracking-[0.4em]">FRAME {frame}</span>
+                                <span className="text-4xl md:text-6xl font-black text-[#F2F2ED] tracking-tighter leading-none">{value}</span>
+                                <span className="font-mono text-[10px] text-gray-300 tracking-[0.15em] uppercase">{label}</span>
+                                <span className="font-mono text-[9px] text-gray-600 tracking-widest">{sub}</span>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Bottom perforations */}
+                    <div className="h-4 w-full bg-[#111]" style={{ maskImage: 'repeating-linear-gradient(to right, black 0px, black 6px, transparent 6px, transparent 12px, black 12px, black 20px, transparent 20px, transparent 32px)', WebkitMaskImage: 'repeating-linear-gradient(to right, black 0px, black 6px, transparent 6px, transparent 12px, black 12px, black 20px, transparent 20px, transparent 32px)' }}></div>
                 </div>
-            </section >
+
+                {/* Film credits roll — bio text */}
+                <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+                    <div>
+                        <p className="font-mono text-[10px] tracking-[0.4em] text-gray-400 uppercase mb-4">Director's Cut</p>
+                        <p className="text-xl md:text-2xl font-bold text-[#111] leading-snug tracking-tight">
+                            A product designer and full-stack developer crafting digital experiences that are fast, purposeful, and impossible to ignore.
+                        </p>
+                        <a href="#connect" className="mt-8 inline-flex items-center gap-2 font-mono text-xs tracking-[0.3em] uppercase text-[#111] border-b border-[#111] pb-1 hover:opacity-50 transition-opacity">
+                            Let's collaborate <ArrowUpRight size={14} />
+                        </a>
+                    </div>
+
+                    {/* Film credits list */}
+                    <div className="border-l-2 border-[#111] pl-8 space-y-5">
+                        <p className="font-mono text-[10px] tracking-[0.4em] text-gray-400 uppercase mb-4">Skills &amp; Roles</p>
+                        {[
+                            ['UI / UX Design', 'Figma · Prototyping · Systems'],
+                            ['Frontend', 'React · Next.js · TypeScript'],
+                            ['Backend', 'Node.js · Python · REST APIs'],
+                            ['Data & AI', 'ML Models · Visualisation'],
+                            ['Creative Direction', 'Branding · Motion · Editorial'],
+                        ].map(([role, tools]) => (
+                            <div key={role} className="flex items-baseline justify-between gap-4">
+                                <span className="font-bold text-sm text-[#111]">{role}</span>
+                                <span className="font-mono text-[10px] text-gray-400 text-right">{tools}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+            </section>
 
             {/* 6. FOOTER */}
             < footer id="connect" className="border-t border-black bg-[#111] text-[#F2F2ED] p-6 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-12 md:gap-0" >
