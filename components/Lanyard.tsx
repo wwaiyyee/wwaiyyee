@@ -110,12 +110,13 @@ function PhysicsLanyard({ userData, onClose }: any) {
             let pathStr = '';
             for (let i = 0; i < segmentCount; i++) {
                 const p = points.current[i];
-                const offsetX = Math.max(0, (segmentCount - 1 - i) * 14); // Spread at top
+                // Widen the loop significantly at the top so it looks like a neck strap
+                const offsetX = Math.max(0, (segmentCount - 1 - i) * 25);
                 pathStr += `${i === 0 ? 'M' : 'L'} ${p.x - offsetX} ${p.y} `;
             }
             for (let i = segmentCount - 1; i >= 0; i--) {
                 const p = points.current[i];
-                const offsetX = Math.max(0, (segmentCount - 1 - i) * 14);
+                const offsetX = Math.max(0, (segmentCount - 1 - i) * 25);
                 pathStr += `L ${p.x + offsetX} ${p.y} `;
             }
 
@@ -274,36 +275,33 @@ function PhysicsLanyard({ userData, onClose }: any) {
                     />
 
                     {/* Profile Photo */}
-                    <div className="flex-1 px-8 pt-16 pb-8 flex flex-col items-center relative z-20 w-full">
-                        <div className="relative w-40 h-40 rounded-full bg-slate-50 shadow-[0_8px_20px_rgba(0,0,0,0.15)] border-[6px] border-slate-200 mb-8 group-hover:scale-105 transition-transform duration-300">
+                    <div className="flex-1 px-8 pt-10 pb-6 flex flex-col items-center relative z-20 w-full">
+                        <div className="relative w-32 h-32 rounded-full bg-slate-50 shadow-[0_8px_20px_rgba(0,0,0,0.15)] border-[6px] border-slate-200 mb-6 group-hover:scale-105 transition-transform duration-300">
                             <img src={userData.photo} alt={userData.name} className="w-full h-full object-cover rounded-full pointer-events-none" draggable="false" />
                         </div>
 
                         {/* Profile Info */}
-                        <h2 className="text-4xl font-serif tracking-tight text-[#111] text-center mb-4">
+                        <h2 className="text-4xl font-serif tracking-tight text-[#111] text-center mb-6">
                             {userData.name}
                         </h2>
-                        <div className="flex items-center text-gray-500 mb-6 font-mono text-xs tracking-widest border-b border-gray-200 pb-6 w-full justify-center">
-                            <p className="font-medium text-center leading-tight">{userData.role}</p>
-                        </div>
 
                         {/* Action Links */}
-                        <div className="w-full space-y-4 relative z-30 mt-2">
+                        <div className="w-full space-y-3 relative z-30 mt-2">
                             <a
                                 href={userData.githubUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center w-full py-4 px-6 bg-[#111] text-white rounded-xl hover:bg-gray-800 transition-colors font-mono tracking-widest shadow-md active:scale-95 group/btn"
+                                className="flex items-center justify-center w-full py-3 px-6 bg-[#111] text-white rounded-xl hover:bg-gray-800 transition-colors font-mono tracking-widest shadow-md active:scale-95 group/btn"
                             >
-                                <Github className="w-6 h-6 mr-4 group-hover/btn:text-[#d73a3a] transition-colors" /> GH / wwaiyyee
+                                <Github className="w-5 h-5 mr-3 group-hover/btn:text-gray-400 transition-colors" /> GITHUB
                             </a>
                             <a
                                 href={userData.linkedinUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center w-full py-4 px-6 bg-[#0A66C2] text-white rounded-xl hover:bg-[#004182] transition-colors font-mono tracking-widest shadow-md active:scale-95 group/btn"
+                                className="flex items-center justify-center w-full py-3 px-6 bg-[#0A66C2] text-white rounded-xl hover:bg-[#004182] transition-colors font-mono tracking-widest shadow-md active:scale-95 group/btn"
                             >
-                                <Linkedin className="w-6 h-6 mr-4 group-hover/btn:text-blue-300 transition-colors" /> LI / lee-wai-yee
+                                <Linkedin className="w-5 h-5 mr-3 group-hover/btn:text-blue-300 transition-colors" /> LINKEDIN
                             </a>
                         </div>
                     </div>
@@ -311,9 +309,9 @@ function PhysicsLanyard({ userData, onClose }: any) {
                     {/* Close Button on Card */}
                     <button
                         onClick={onClose}
-                        className="absolute top-6 right-6 p-2 bg-gray-200 hover:bg-white text-gray-600 rounded-full transition-colors z-50 shadow-sm border border-gray-300 active:scale-95"
+                        className="absolute top-4 right-4 p-2 bg-gray-200 hover:bg-white text-gray-600 rounded-full transition-colors z-50 shadow-sm border border-gray-300 active:scale-95"
                     >
-                        <X className="w-6 h-6" />
+                        <X className="w-5 h-5" />
                     </button>
                 </div>
             </div>
