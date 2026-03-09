@@ -60,10 +60,28 @@ const WorkPage = () => {
 
   useEffect(() => {
     const handleScroll = (e: any) => {
-      const { scrollTop, clientHeight } = e.target;
-      const index = Math.round(scrollTop / clientHeight);
-      if (index !== activeSlideIndex && index < allSlides.length) {
-        setActiveSlideIndex(index);
+      const container = e.target;
+      const scrollCenter = container.scrollTop + container.clientHeight / 2;
+      
+      let closestIndex = activeSlideIndex;
+      let minDistance = Infinity;
+
+      // Ensure we only check the sections, subtracting the final spacer div if necessary
+      let sectionIndex = 0;
+      Array.from(container.children).forEach((child: any) => {
+        if (child.tagName.toLowerCase() === 'SECTION') {
+          const childCenter = child.offsetTop + child.offsetHeight / 2;
+          const distance = Math.abs(scrollCenter - childCenter);
+          if (distance < minDistance) {
+            minDistance = distance;
+            closestIndex = sectionIndex;
+          }
+          sectionIndex++;
+        }
+      });
+
+      if (closestIndex !== activeSlideIndex && closestIndex >= 0 && closestIndex < allSlides.length) {
+        setActiveSlideIndex(closestIndex);
       }
     };
 
@@ -75,29 +93,29 @@ const WorkPage = () => {
   }, [activeSlideIndex, allSlides.length]);
 
   return (
-    <div className="bg-[#FAF9F6] text-black min-h-screen font-sans overflow-hidden flex flex-col selection:bg-red-600 selection:text-white">
+    <div className="bg-[#F2F2ED] text-[#111111] min-h-screen font-sans overflow-hidden flex flex-col selection:bg-[#111111] selection:text-[#F2F2ED]">
       
       {/* --- TOP LEFT: MAIN TITLE --- */}
       <div className="fixed top-12 left-12 z-50 max-w-sm pointer-events-auto">
         <h1 className="text-7xl font-black italic tracking-tighter leading-[0.85] uppercase">
           Wai Yee's<br />Works
         </h1>
-        <button className="mt-8 border border-zinc-200 rounded-full px-6 py-2 text-[10px] uppercase tracking-widest hover:bg-black hover:text-white transition-all flex items-center gap-2">
+        <button className="mt-8 border border-zinc-300 rounded-full px-6 py-2 text-[10px] uppercase tracking-widest hover:bg-[#111111] hover:text-[#F2F2ED] transition-all flex items-center gap-2">
           Contact ↗
         </button>
       </div>
 
       {/* --- TOP RIGHT: NAV --- */}
       <nav className="fixed top-12 right-12 z-50 flex gap-6 pointer-events-auto">
-        <span className="text-[10px] uppercase tracking-widest font-bold border-b border-black">Projects</span>
-        <span className="text-[10px] uppercase tracking-widest text-zinc-400 hover:text-black cursor-pointer transition-colors" onClick={() => window.location.href='/about'}>About</span>
-        <div className="w-2.5 h-2.5 bg-black rounded-full ml-4"></div>
+        <span className="text-[10px] uppercase tracking-widest font-bold border-b border-[#111111]">Projects</span>
+        <span className="text-[10px] uppercase tracking-widest text-zinc-500 hover:text-[#111111] cursor-pointer transition-colors" onClick={() => window.location.href='/about'}>About</span>
+        <div className="w-2.5 h-2.5 bg-[#111111] rounded-full ml-4"></div>
       </nav>
 
       {/* --- BOTTOM LEFT: PROJECT TITLE --- */}
       <div className="fixed bottom-12 left-12 z-50 pointer-events-none">
         <div key={activeProject.id} className="animate-fade-in-up">
-           <p className="text-red-600 font-mono text-[10px] mb-1 tracking-widest uppercase">Project {activeProject.id}</p>
+           <p className="text-[#111111] font-mono text-[10px] mb-1 tracking-widest uppercase">Project {activeProject.id}</p>
            <h2 className="text-5xl font-bold uppercase tracking-tighter leading-none italic pointer-events-auto">
              {activeProject.title}
            </h2>
@@ -107,12 +125,12 @@ const WorkPage = () => {
       {/* --- CENTER SCROLLABLE CONTENT --- */}
       <main 
         ref={scrollContainerRef}
-        className="flex-grow h-screen overflow-y-scroll snap-y snap-mandatory scrollbar-hide px-4 md:px-0"
+        className="flex-grow h-screen overflow-y-scroll snap-y snap-mandatory scrollbar-hide px-4 md:px-0 py-[35vh] flex flex-col gap-12 md:gap-24 relative"
       >
         {allSlides.map((slide, index) => (
           <section 
             key={`${slide.id}-${index}`}
-            className="h-screen flex items-center justify-center snap-start"
+            className="flex items-center justify-center snap-center shrink-0 w-full"
           >
             <div className="relative w-full max-w-md lg:max-w-lg aspect-[4/5] md:aspect-video rounded-3xl overflow-hidden shadow-2xl bg-white group transition-all duration-700">
               <img 
@@ -120,15 +138,9 @@ const WorkPage = () => {
                 alt={slide.title}
                 className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-1000"
               />
-              
-              {/* Image Counter Overlay (e.g. 1 / 5) */}
-              <div className="absolute top-6 right-6 bg-black/10 backdrop-blur-md px-3 py-1 rounded-full text-[9px] font-mono text-white tracking-widest">
-                {slide.imageNumber} / {slide.totalImages}
-              </div>
             </div>
           </section>
         ))}
-        <div className="h-[10vh]" />
       </main>
 
       {/* --- RIGHT SIDEBAR: DESCRIPTIONS --- */}
@@ -169,7 +181,7 @@ const WorkPage = () => {
           </div>
 
           {/* CTA */}
-          <button className="group flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] text-red-600 hover:text-black transition-colors">
+          <button className="group flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] text-[#111111] hover:opacity-70 transition-opacity">
             View Case Study
             <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
           </button>
