@@ -552,7 +552,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                         />
 
                         {/* Transparent Shutter Boundary & Hint */}
-                        <div className="absolute top-[22%] left-[21%] md:top-[22%] md:left-[21%] z-20 flex flex-col items-center gap-2">
+                        <div className="absolute top-[20%] left-[18%] md:top-[20%] md:left-[19%] z-20 flex flex-col items-center gap-2">
                             <button
                                 onClick={handleSnapPhoto}
                                 disabled={photoPrinted || isSnapping}
