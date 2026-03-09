@@ -105,14 +105,19 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             <section id="top" className="relative min-h-[100vh] bg-[#F2F2ED] overflow-hidden flex flex-col items-center justify-center">
 
                 {/* Massive Center Text */}
-                <div className="relative z-30 w-full flex flex-col items-center justify-center pointer-events-none select-none mt-30 mb-64">
+                <motion.div
+                    className="relative z-30 w-full flex flex-col items-center justify-center pointer-events-none select-none mt-30 mb-64"
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
+                >
                     <h1 className="text-[18vw] md:text-[14vw] font-serif text-[#111111] leading-[0.8] tracking-tighter opacity-10">
                         Wai Yee
                     </h1>
                     <p className="text-[#111111] tracking-[0.5em] uppercase text-xs md:text-sm mt-8 font-mono z-30 opacity-80">
                         SOFTWARE DEVELOPER / UI/UX DESIGNER
                     </p>
-                </div>
+                </motion.div>
 
                 {/* --- SCATTERED COLLAGE ELEMENTS --- */}
                 <div className="absolute inset-0 z-20 pointer-events-none overflow-hidden">
@@ -444,12 +449,18 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
 
             {/* --- ACHIEVEMENTS (Full Width Table with Hover Image Effect) --- */}
             <section id="achievements" className="py-32 bg-[#F2F2ED] relative cursor-default">
-                <div className="px-6 md:px-12 mb-20 flex flex-col md:flex-row justify-between items-end">
+                <motion.div
+                    className="px-6 md:px-12 mb-20 flex flex-col md:flex-row justify-between items-end"
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ duration: 0.8, ease: 'easeOut' }}
+                >
                     <div>
                         <h2 className="text-4xl md:text-6xl font-serif text-[#111] mb-4">Exposure Log</h2>
                         <p className="text-gray-500 tracking-[0.3em] uppercase text-xs font-mono">Archive Index & Milestones</p>
                     </div>
-                </div>
+                </motion.div>
 
                 {/* Full Width Table Container */}
                 <div
@@ -466,11 +477,15 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
 
                     {/* Table Rows */}
                     {ACHIEVEMENTS.map((achieve: any, idx) => (
-                        <div
+                        <motion.div
                             key={idx}
                             onMouseEnter={() => setHoveredAchieve(idx)}
                             onMouseLeave={() => setHoveredAchieve(null)}
                             className="w-full px-6 md:px-12 py-8 border-b border-black hover:bg-[#111] transition-colors group flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-0 relative z-10"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.1 }}
+                            transition={{ duration: 0.5, ease: 'easeOut', delay: idx * 0.07 }}
                         >
 
                             {/* FRAME & YEAR */}
@@ -503,7 +518,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                                 <ArrowUpRight size={16} className="text-[#111] group-hover:text-gray-400 transition-colors duration-300 hidden md:block" />
                             </div>
 
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
 
@@ -551,10 +566,16 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
 
             {/* 6. THE FINAL EXPOSURE (Footer) */}
             <footer id="connect" className={`bg-[#F2F2ED] text-[#111] pt-8 md:pt-12 flex flex-col items-center justify-center relative overflow-hidden transition-all duration-[1200ms] ease-in-out ${photoPrinted ? 'pb-4 md:pb-8' : 'pb-2 md:pb-4'}`}>
-                <div className="text-center mb-8 md:mb-12 px-6 relative z-20">
+                <motion.div
+                    className="text-center mb-8 md:mb-12 px-6 relative z-20"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ duration: 0.8, ease: 'easeOut' }}
+                >
                     <h2 className="text-4xl md:text-6xl font-serif mb-2 md:mb-4 text-[#111]">The Final Exposure</h2>
                     <p className="text-gray-400 font-mono text-sm tracking-widest uppercase">Capture the moment • Print Resume</p>
-                </div>
+                </motion.div>
 
                 {/* Interactive Camera */}
                 <div className="relative w-[500px] h-[350px] md:w-[600px] md:h-[400px] max-w-[95vw] md:max-w-[90vw] mt-4 mb-4 z-20">
