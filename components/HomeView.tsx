@@ -518,9 +518,9 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             <div className={`fixed inset-0 bg-white z-[999] pointer-events-none transition-opacity duration-500 ease-out ${isSnapping ? 'opacity-100' : 'opacity-0'}`}></div>
 
             {/* 6. THE FINAL EXPOSURE (Footer) */}
-            <footer id="connect" className="border-t border-black bg-[#050505] text-[#F2F2ED] py-32 flex flex-col items-center justify-center relative overflow-hidden">
+            <footer id="connect" className="border-t border-black bg-[#F2F2ED] text-[#111] py-32 flex flex-col items-center justify-center relative overflow-hidden">
                 <div className="text-center mb-16 px-6 relative z-20">
-                    <h2 className="text-4xl md:text-6xl font-serif mb-6 text-white">The Final Exposure</h2>
+                    <h2 className="text-4xl md:text-6xl font-serif mb-6 text-[#111]">The Final Exposure</h2>
                     <p className="text-gray-400 font-mono text-sm tracking-widest uppercase">Capture the moment • Print Resume</p>
                 </div>
 
@@ -536,7 +536,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                             drag={photoPrinted}
                             dragMomentum={false}
                             whileDrag={{ scale: 1.05, cursor: 'grabbing', zIndex: 50, rotate: 0 }}
-                            className="w-full bg-[#050505] p-3 shadow-2xl flex flex-col items-center origin-center rounded-sm border border-white/10"
+                            className="w-full bg-[#F2F2ED] p-3 shadow-2xl flex flex-col items-center origin-center rounded-sm border border-black/10"
                             style={{ rotate: '-2deg', cursor: photoPrinted ? 'grab' : 'default' }}
                         >
                             {/* Polaroid Image Area (Resume Preview) */}
@@ -549,8 +549,8 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                             </div>
                             {/* Action Buttons */}
                             <div className="flex gap-2 md:gap-4 w-full">
-                                <button onPointerDown={(e) => e.stopPropagation()} onClick={() => setIsResumeModalOpen(true)} className="flex-1 text-center bg-[#F2F2ED] text-[#050505] text-[10px] md:text-xs py-3 font-mono font-bold tracking-widest hover:bg-white transition-colors">REVIEW</button>
-                                <a onPointerDown={(e) => e.stopPropagation()} href="/Resume.pdf" download className="flex-1 text-center border-2 border-[#F2F2ED] text-[#F2F2ED] text-[10px] md:text-xs py-3 font-mono font-bold tracking-widest hover:bg-[#111] transition-colors">DOWNLOAD</a>
+                                <button onPointerDown={(e) => e.stopPropagation()} onClick={() => setIsResumeModalOpen(true)} className="flex-1 text-center bg-[#111] text-white text-[10px] md:text-xs py-3 font-mono font-bold tracking-widest hover:bg-gray-800 transition-colors">REVIEW</button>
+                                <a onPointerDown={(e) => e.stopPropagation()} href="/Resume.pdf" download className="flex-1 text-center border-2 border-[#111] text-[#111] text-[10px] md:text-xs py-3 font-mono font-bold tracking-widest hover:bg-[#e0e0e0] transition-colors">DOWNLOAD</a>
                             </div>
                         </motion.div>
                     </div>
@@ -573,10 +573,10 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                             ></button>
 
                             {!photoPrinted && (
-                                <div className="flex flex-col items-center text-white/90 pointer-events-none drop-shadow-md absolute -top-24 md:-top-28 -left-20 md:-left-24 -translate-y-2">
+                                <div className="flex flex-col items-center text-[#111]/90 pointer-events-none drop-shadow-md absolute -top-24 md:-top-28 -left-20 md:-left-24 -translate-y-2">
                                     <span className="font-mono text-sm tracking-[0.2em] font-bold uppercase whitespace-nowrap px-2 py-1.5 mb-2 origin-bottom rotate-[-2deg]">Expose to Reveal!</span>
                                     {/* Hand-drawn style arrow pointing down towards the button */}
-                                    <svg className="w-8 h-12 text-white/80 -translate-x-2" viewBox="0 0 40 60" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <svg className="w-8 h-12 text-[#111]/80 -translate-x-2" viewBox="0 0 40 60" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                         <path d="M20 5 C15 30, 25 45, 18 55 M10 40 L18 55 L30 46" />
                                     </svg>
                                 </div>
