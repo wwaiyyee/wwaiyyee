@@ -106,7 +106,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
 
                 {/* Massive Center Text */}
                 <motion.div
-                    className="relative z-30 w-full flex flex-col items-center justify-center pointer-events-none select-none mt-30 mb-64"
+                    className="relative z-30 w-full flex flex-col items-center justify-center pointer-events-none select-none mt-30 mb-32 md:mb-48"
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
@@ -146,10 +146,10 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             </section>
 
             {/* --- ABOUT SECTION (FIELD NOTES FORMAT) --- */}
-            <section id="about" className="py-32 px-6 relative overflow-hidden bg-[#F2F2ED]">
+            <section id="about" className="py-16 md:py-24 px-6 relative overflow-hidden bg-[#F2F2ED]">
                 <div className="max-w-4xl mx-auto relative z-10">
                     <motion.div
-                        className="flex flex-col items-center justify-center gap-6 mb-16 text-center"
+                        className="flex flex-col items-center justify-center gap-6 mb-8 text-center"
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.5 }}
@@ -448,9 +448,9 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             </section>
 
             {/* --- ACHIEVEMENTS (Full Width Table with Hover Image Effect) --- */}
-            <section id="achievements" className="py-32 bg-[#F2F2ED] relative cursor-default">
+            <section id="achievements" className="py-16 md:py-24 bg-[#F2F2ED] relative cursor-default">
                 <motion.div
-                    className="px-6 md:px-12 mb-20 flex flex-col md:flex-row justify-between items-end"
+                    className="px-6 md:px-12 mb-12 flex flex-col md:flex-row justify-between items-end"
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.5 }}
