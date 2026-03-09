@@ -524,22 +524,22 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                 </div>
 
                 {/* Interactive Camera */}
-                <div className="relative w-[280px] h-[200px] md:w-[320px] md:h-[220px] mt-8 mb-32 z-20">
+                <div className="relative w-[1120px] h-[800px] md:w-[1280px] md:h-[880px] max-w-[95vw] md:max-w-[90vw] mt-8 mb-64 z-20">
 
                     {/* The Printed Polaroid (Resume) */}
                     <div
-                        className={`absolute left-1/2 w-[220px] md:w-[240px] bg-[#F2F2ED] p-3 shadow-2xl flex flex-col items-center transition-all duration-[1200ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] z-0 pointer-events-auto ${photoPrinted ? 'translate-y-[150px] md:translate-y-[170px] -translate-x-1/2 opacity-100 rotate-[-2deg]' : 'translate-y-0 -translate-x-1/2 opacity-0'}`}
-                        style={{ bottom: '20px' }}
+                        className={`absolute left-1/2 w-[300px] md:w-[400px] bg-[#F2F2ED] p-4 shadow-2xl flex flex-col items-center transition-all duration-[1200ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] z-0 pointer-events-auto ${photoPrinted ? 'translate-y-[350px] md:translate-y-[450px] -translate-x-1/2 opacity-100 rotate-[-2deg]' : 'translate-y-0 -translate-x-1/2 opacity-0'}`}
+                        style={{ bottom: '15%' }}
                     >
                         {/* Polaroid Image Area (Resume Preview) */}
-                        <div className="w-full h-[180px] bg-[#ddd] border border-black/10 flex flex-col items-center justify-center mb-4 relative overflow-hidden">
-                            <span className="font-serif text-black text-2xl font-bold italic mb-2">Resume</span>
-                            <span className="font-mono text-gray-500 text-[10px] tracking-widest uppercase border-t border-gray-400 pt-2">Chloe Lee</span>
+                        <div className="w-full h-[250px] md:h-[300px] bg-[#ddd] border border-black/10 flex flex-col items-center justify-center mb-6 relative overflow-hidden">
+                            <span className="font-serif text-black text-3xl font-bold italic mb-3">Resume</span>
+                            <span className="font-mono text-gray-500 text-xs tracking-widest uppercase border-t border-gray-400 pt-3">Chloe Lee</span>
                         </div>
                         {/* Action Buttons */}
-                        <div className="flex gap-2 w-full">
-                            <button onClick={() => setIsResumeModalOpen(true)} className="flex-1 text-center bg-[#111] text-white text-[10px] py-3 font-mono font-bold tracking-widest hover:bg-gray-800 transition-colors">REVIEW</button>
-                            <a href="/Resume.pdf" download className="flex-1 text-center border-2 border-[#111] text-[#111] text-[10px] py-3 font-mono font-bold tracking-widest hover:bg-[#e0e0e0] transition-colors">DOWNLOAD</a>
+                        <div className="flex gap-4 w-full">
+                            <button onClick={() => setIsResumeModalOpen(true)} className="flex-1 text-center bg-[#111] text-white text-xs py-4 font-mono font-bold tracking-widest hover:bg-gray-800 transition-colors">REVIEW</button>
+                            <a href="/Resume.pdf" download className="flex-1 text-center border-2 border-[#111] text-[#111] text-xs py-4 font-mono font-bold tracking-widest hover:bg-[#e0e0e0] transition-colors">DOWNLOAD</a>
                         </div>
                     </div>
 
@@ -551,15 +551,25 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                             className="w-full h-full object-contain pointer-events-none"
                         />
 
-                        {/* Floating Shutter Button Overlay */}
-                        <button
-                            onClick={handleSnapPhoto}
-                            disabled={photoPrinted || isSnapping}
-                            className={`absolute top-4 right-8 md:top-6 md:right-10 w-10 h-10 md:w-12 md:h-12 rounded-full transition-all duration-150 ${isSnapping || photoPrinted ? 'bg-red-900/80 translate-y-2 scale-95' : 'bg-[#d73a3a] hover:bg-red-500 hover:scale-105 shadow-xl cursor-pointer ring-4 ring-black/20'} z-20 flex items-center justify-center group`}
-                            aria-label="Snap Photo"
-                        >
-                            <div className={`w-3 h-3 md:w-4 md:h-4 rounded-full transition-colors ${isSnapping || photoPrinted ? 'bg-white/30' : 'bg-white/80 group-hover:bg-white'} `}></div>
-                        </button>
+                        {/* Transparent Shutter Boundary & Hint */}
+                        <div className="absolute top-[20%] left-[10%] md:top-[25%] md:left-[15%] z-20 flex flex-col items-center gap-4">
+                            <button
+                                onClick={handleSnapPhoto}
+                                disabled={photoPrinted || isSnapping}
+                                className={`w-16 h-16 md:w-24 md:h-24 rounded-full transition-all duration-300 ${isSnapping || photoPrinted ? 'scale-95 border-emerald-400' : 'hover:scale-110 cursor-pointer border-white/60 hover:border-white'} border-4 border-dashed bg-white/5 backdrop-blur-sm flex items-center justify-center`}
+                                aria-label="Snap Photo"
+                            ></button>
+
+                            {!photoPrinted && (
+                                <div className="flex flex-col items-center text-white/90 animate-bounce pointer-events-none drop-shadow-md">
+                                    {/* Arrow pointing up towards the button */}
+                                    <svg className="w-8 h-8 mb-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                    </svg>
+                                    <span className="font-mono text-xs tracking-[0.2em] font-bold uppercase whitespace-nowrap bg-black/40 px-3 py-1.5 rounded backdrop-blur-md border border-white/10">Snap to Print</span>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </footer>
