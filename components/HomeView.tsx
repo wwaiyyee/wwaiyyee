@@ -24,6 +24,19 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
     const [scrollY, setScrollY] = useState(0);
     const [hoveredAchieve, setHoveredAchieve] = useState<number | null>(null);
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+    // Camera State
+    const [isSnapping, setIsSnapping] = useState(false);
+    const [photoPrinted, setPhotoPrinted] = useState(false);
+
+    const handleSnapPhoto = () => {
+        if (photoPrinted) return;
+        setIsSnapping(true);
+        setTimeout(() => {
+            setIsSnapping(false);
+            setPhotoPrinted(true);
+        }, 150); // fast crisp flash duration
+    };
     const projectsRef = React.useRef<HTMLElement>(null);
     const filmStripRef = React.useRef<HTMLDivElement>(null);
     const [sectionHeight, setSectionHeight] = useState("100vh");
@@ -499,19 +512,76 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                 </div>
             </section>
 
-            {/* 6. FOOTER */}
-            < footer id="connect" className="border-t border-black bg-[#111] text-[#F2F2ED] p-6 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-12 md:gap-0" >
-                <div className="max-w-md">
-                    <h2 className="text-4xl font-bold mb-6">Everything you do, do it with care.</h2>
-                    <p className="text-gray-400">If you're feeling like life needs a bit more chaos, then feel free to scroll back to the top!</p>
+            {/* Flash Effect */}
+            <div className={`fixed inset-0 bg-white z-[999] pointer-events-none transition-opacity duration-500 ease-out ${isSnapping ? 'opacity-100' : 'opacity-0'}`}></div>
+
+            {/* 6. THE FINAL EXPOSURE (Footer) */}
+            <footer id="connect" className="border-t border-black bg-[#111] text-[#F2F2ED] py-32 flex flex-col items-center justify-center relative overflow-hidden">
+                <div className="text-center mb-16 px-6 relative z-20">
+                    <h2 className="text-4xl md:text-6xl font-serif mb-6 text-white">The Final Exposure</h2>
+                    <p className="text-gray-400 font-mono text-sm tracking-widest uppercase">Capture the moment • Print Resume</p>
                 </div>
 
-                <div className="flex gap-8 text-lg font-medium">
-                    <a href="#" className="hover:italic hover:text-red-400">Email</a>
-                    <a href="#" className="hover:italic hover:text-red-400">LinkedIn</a>
-                    <a href="#" className="hover:italic hover:text-red-400">GitHub</a>
+                {/* Interactive Camera */}
+                <div className="relative w-[280px] h-[200px] md:w-[320px] md:h-[220px] mt-8 mb-32 z-20">
+
+                    {/* The Printed Polaroid (Resume) */}
+                    <div
+                        className={`absolute left-1/2 w-[220px] md:w-[240px] bg-[#F2F2ED] p-3 shadow-2xl flex flex-col items-center transition-all duration-[1200ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] z-0 pointer-events-auto ${photoPrinted ? 'translate-y-[150px] md:translate-y-[170px] -translate-x-1/2 opacity-100 rotate-[-2deg]' : 'translate-y-0 -translate-x-1/2 opacity-0'}`}
+                        style={{ bottom: '20px' }}
+                    >
+                        {/* Polaroid Image Area (Resume Preview) */}
+                        <div className="w-full h-[180px] bg-[#ddd] border border-black/10 flex flex-col items-center justify-center mb-4 relative overflow-hidden">
+                            <span className="font-serif text-black text-2xl font-bold italic mb-2">Resume</span>
+                            <span className="font-mono text-gray-500 text-[10px] tracking-widest uppercase border-t border-gray-400 pt-2">Chloe Lee</span>
+                        </div>
+                        {/* Action Buttons */}
+                        <div className="flex gap-2 w-full">
+                            <a href="/Resume.pdf" target="_blank" rel="noopener noreferrer" className="flex-1 text-center bg-[#111] text-white text-[10px] py-3 font-mono font-bold tracking-widest hover:bg-gray-800 transition-colors">REVIEW</a>
+                            <a href="/Resume.pdf" download className="flex-1 text-center border-2 border-[#111] text-[#111] text-[10px] py-3 font-mono font-bold tracking-widest hover:bg-[#e0e0e0] transition-colors">DOWNLOAD</a>
+                        </div>
+                    </div>
+
+                    {/* The Camera Body */}
+                    <div className="absolute inset-0 bg-[#222] border-t-4 border-[#333] rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-10 flex flex-col items-center justify-center">
+                        {/* Top Viewfinder bump */}
+                        <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-32 h-6 bg-[#2a2a2a] rounded-t-lg border-t-2 border-[#333]"></div>
+
+                        {/* Shutter Button */}
+                        <button
+                            onClick={handleSnapPhoto}
+                            disabled={photoPrinted || isSnapping}
+                            className={`absolute -top-4 right-8 md:right-10 w-12 h-6 rounded-t-full transition-all duration-150 ${isSnapping || photoPrinted ? 'bg-red-900 translate-y-2' : 'bg-[#d73a3a] hover:bg-red-500 hover:-translate-y-1 cursor-pointer'} border-b-4 border-red-950`}
+                            aria-label="Snap Photo"
+                        ></button>
+
+                        {/* Flash Component */}
+                        <div className="absolute top-6 left-6 w-12 h-6 bg-gradient-to-br from-gray-300 to-gray-500 rounded-sm border border-gray-600 flex items-center justify-center">
+                            <div className="w-10 h-4 bg-yellow-100/40 rounded-sm"></div>
+                        </div>
+
+                        {/* Branding / Details */}
+                        <div className="absolute top-6 right-6 text-[8px] font-mono text-gray-500 tracking-widest uppercase">
+                            TYPE-01
+                        </div>
+
+                        {/* Main Lens */}
+                        <div className="w-32 h-32 md:w-36 md:h-36 rounded-full border-[10px] border-[#111] bg-gradient-to-br from-gray-700 to-black shadow-[inset_0_10px_20px_rgba(0,0,0,0.8)] flex items-center justify-center relative mt-4">
+                            {/* Inner Lens Rings */}
+                            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-gray-600/30 bg-black flex items-center justify-center relative overflow-hidden">
+                                {/* Aperture Blades Simulation */}
+                                <Aperture className="w-10 h-10 text-gray-800 opacity-50 absolute" />
+                                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#0a0a0a] z-10"></div>
+                                {/* Glass Reflection */}
+                                <div className="absolute top-2 right-4 w-8 h-8 bg-white/10 rounded-full blur-[2px] z-20"></div>
+                            </div>
+                        </div>
+
+                        {/* Bottom Output Slot */}
+                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-48 h-3 bg-black rounded-full shadow-[inset_0_4px_8px_rgba(0,0,0,0.8)] border-b border-gray-700/30"></div>
+                    </div>
                 </div>
-            </footer >
+            </footer>
         </div >
     );
 }
