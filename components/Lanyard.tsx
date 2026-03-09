@@ -1,8 +1,8 @@
 /* eslint-disable react/no-unknown-property */
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import { Canvas, extend, useFrame } from '@react-three/fiber';
-import { useGLTF, useTexture, Environment, Lightformer } from '@react-three/drei';
+import { useGLTF, Environment, Lightformer } from '@react-three/drei';
 import {
     BallCollider,
     CuboidCollider,
@@ -23,7 +23,6 @@ interface LanyardModalProps {
 }
 
 export function LanyardModal({ open, onClose }: LanyardModalProps) {
-    // prevent body scroll when open
     useEffect(() => {
         if (open) document.body.style.overflow = 'hidden';
         else document.body.style.overflow = '';
@@ -35,7 +34,8 @@ export function LanyardModal({ open, onClose }: LanyardModalProps) {
     return (
         <div
             className="fixed inset-0 z-[500] flex flex-col items-center justify-center"
-            style={{ background: 'rgba(10,10,10,0.75)', backdropFilter: 'blur(8px)' }}
+            style={{ background: 'rgba(10,10,10,0.80)', backdropFilter: 'blur(10px)' }}
+            onClick={onClose}
         >
             {/* Close */}
             <button
@@ -51,8 +51,8 @@ export function LanyardModal({ open, onClose }: LanyardModalProps) {
                 drag the card
             </p>
 
-            {/* 3D Canvas */}
-            <div className="w-full h-full">
+            {/* 3D Canvas — stop click propagation so dragging doesn't close */}
+            <div className="w-full h-full" onClick={e => e.stopPropagation()}>
                 <Lanyard />
             </div>
         </div>
@@ -60,19 +60,7 @@ export function LanyardModal({ open, onClose }: LanyardModalProps) {
 }
 
 // ── Lanyard Scene ─────────────────────────────────────────────────────────────
-interface LanyardProps {
-    position?: [number, number, number];
-    gravity?: [number, number, number];
-    fov?: number;
-    transparent?: boolean;
-}
-
-function Lanyard({
-    position = [0, 0, 30],
-    gravity = [0, -40, 0],
-    fov = 20,
-    transparent = true,
-}: LanyardProps) {
+function Lanyard() {
     const [isMobile, setIsMobile] = useState<boolean>(
         () => typeof window !== 'undefined' && window.innerWidth < 768
     );
@@ -85,15 +73,13 @@ function Lanyard({
 
     return (
         <Canvas
-            camera={{ position, fov }}
+            camera={{ position: [0, 0, 26], fov: 22 }}
             dpr={[1, isMobile ? 1.5 : 2]}
-            gl={{ alpha: transparent }}
-            onCreated={({ gl }) =>
-                gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)
-            }
+            gl={{ alpha: true }}
+            onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), 0)}
         >
             <ambientLight intensity={Math.PI} />
-            <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
+            <Physics gravity={[0, -40, 0]} timeStep={isMobile ? 1 / 30 : 1 / 60}>
                 <Band isMobile={isMobile} />
             </Physics>
             <Environment blur={0.75}>
@@ -104,6 +90,130 @@ function Lanyard({
             </Environment>
         </Canvas>
     );
+}
+
+// ── Card Canvas Texture ───────────────────────────────────────────────────────
+function useCardTexture() {
+    const [texture, setTexture] = useState<THREE.CanvasTexture | null>(null);
+
+    useEffect(() => {
+        const W = 512, H = 720;
+        const canvas = document.createElement('canvas');
+        canvas.width = W; canvas.height = H;
+        const ctx = canvas.getContext('2d')!;
+
+        const draw = (img?: HTMLImageElement) => {
+            // Background
+            ctx.fillStyle = '#F2F2ED';
+            ctx.fillRect(0, 0, W, H);
+
+            // Top color bar (beige-dark accent)
+            ctx.fillStyle = '#111111';
+            ctx.fillRect(0, 0, W, 12);
+
+            // Red left stripe (like the developer log)
+            ctx.fillStyle = '#d73a3a';
+            ctx.fillRect(0, 0, 12, H);
+
+            // Bottom bar
+            ctx.fillStyle = '#111111';
+            ctx.fillRect(0, H - 12, W, 12);
+
+            // Clip hole at top center
+            ctx.beginPath();
+            ctx.arc(W / 2, 36, 16, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+            ctx.strokeStyle = '#c0c0c0';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Photo circle
+            const photoX = W / 2, photoY = 180, photoR = 90;
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(photoX, photoY, photoR, 0, Math.PI * 2);
+            ctx.clip();
+            if (img) {
+                ctx.drawImage(img, photoX - photoR, photoY - photoR, photoR * 2, photoR * 2);
+            } else {
+                // placeholder silhouette
+                ctx.fillStyle = '#c4c4c4';
+                ctx.fillRect(photoX - photoR, photoY - photoR, photoR * 2, photoR * 2);
+            }
+            ctx.restore();
+            // Photo border
+            ctx.beginPath();
+            ctx.arc(photoX, photoY, photoR + 2, 0, Math.PI * 2);
+            ctx.strokeStyle = '#d73a3a';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            // Name
+            ctx.fillStyle = '#111111';
+            ctx.font = 'bold 36px Georgia, serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('Chloe Lee', W / 2, 300);
+
+            // Role
+            ctx.font = '15px "Courier New", monospace';
+            ctx.fillStyle = '#555';
+            ctx.fillText('SOFTWARE DEVELOPER  /  UI/UX DESIGNER', W / 2, 330);
+
+            // Separator line
+            ctx.strokeStyle = '#d73a3a';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(60, 355); ctx.lineTo(W - 60, 355);
+            ctx.stroke();
+
+            // Batch label
+            ctx.font = '11px "Courier New", monospace';
+            ctx.fillStyle = '#999';
+            ctx.textAlign = 'center';
+            ctx.fillText('BATCH NO. 2026-X  ·  ISO: 400', W / 2, 380);
+
+            // GitHub label
+            ctx.font = 'bold 14px "Courier New", monospace';
+            ctx.fillStyle = '#111';
+            ctx.textAlign = 'left';
+            ctx.fillText('GH ', 80, 440);
+            ctx.font = '14px "Courier New", monospace';
+            ctx.fillStyle = '#d73a3a';
+            ctx.fillText('github.com/wwaiyyee', 122, 440);
+
+            // LinkedIn label
+            ctx.font = 'bold 14px "Courier New", monospace';
+            ctx.fillStyle = '#111';
+            ctx.fillText('LI ', 80, 475);
+            ctx.font = '14px "Courier New", monospace';
+            ctx.fillStyle = '#d73a3a';
+            ctx.fillText('linkedin.com/in/lee-wai-yee', 122, 475);
+
+            // Bottom watermark
+            ctx.font = '10px "Courier New", monospace';
+            ctx.fillStyle = '#bbb';
+            ctx.textAlign = 'center';
+            ctx.fillText('PROCESS: C-41  ·  ANALOG PORTFOLIO', W / 2, 560);
+
+            // ID number
+            ctx.font = '9px "Courier New", monospace';
+            ctx.fillStyle = '#ccc';
+            ctx.fillText('ID-2026-WY-001', W / 2, 580);
+
+            const tex = new THREE.CanvasTexture(canvas);
+            tex.needsUpdate = true;
+            setTexture(tex);
+        };
+
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => draw(img);
+        img.onerror = () => draw();
+        img.src = '/resume.jpeg';
+    }, []);
+
+    return texture;
 }
 
 // ── Band (physics rope + card) ────────────────────────────────────────────────
@@ -134,17 +244,28 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
         linearDamping: 4,
     };
 
-    const { nodes, materials } = useGLTF('/card.glb') as any;
-    const texture = useTexture('/lanyard.png');
+    const { nodes } = useGLTF('/card.glb') as any;
+    const cardTexture = useCardTexture();
+
+    // Lanyard stripe texture
+    const lanyardTexture = useMemo(() => {
+        const c = document.createElement('canvas');
+        c.width = 64; c.height = 256;
+        const ctx = c.getContext('2d')!;
+        for (let y = 0; y < 256; y += 16) {
+            ctx.fillStyle = y % 32 === 0 ? '#d73a3a' : '#111111';
+            ctx.fillRect(0, y, 64, 16);
+        }
+        const t = new THREE.CanvasTexture(c);
+        t.wrapS = t.wrapT = THREE.RepeatWrapping;
+        return t;
+    }, []);
 
     const [curve] = useState(
-        () =>
-            new THREE.CatmullRomCurve3([
-                new THREE.Vector3(),
-                new THREE.Vector3(),
-                new THREE.Vector3(),
-                new THREE.Vector3(),
-            ])
+        () => new THREE.CatmullRomCurve3([
+            new THREE.Vector3(), new THREE.Vector3(),
+            new THREE.Vector3(), new THREE.Vector3(),
+        ])
     );
     const [dragged, drag] = useState<false | THREE.Vector3>(false);
     const [hovered, hover] = useState(false);
@@ -178,8 +299,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
                 if (!ref.current.lerped)
                     ref.current.lerped = new THREE.Vector3().copy(ref.current.translation());
                 const clampedDistance = Math.max(
-                    0.1,
-                    Math.min(1, ref.current.lerped.distanceTo(ref.current.translation()))
+                    0.1, Math.min(1, ref.current.lerped.distanceTo(ref.current.translation()))
                 );
                 ref.current.lerped.lerp(
                     ref.current.translation(),
@@ -198,7 +318,6 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
     });
 
     curve.curveType = 'chordal';
-    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 
     return (
         <>
@@ -221,7 +340,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
                 >
                     <CuboidCollider args={[0.8, 1.125, 0.01]} />
                     <group
-                        scale={2.25}
+                        scale={3.0}
                         position={[0, -1.2, -0.05]}
                         onPointerOver={() => hover(true)}
                         onPointerOut={() => hover(false)}
@@ -236,15 +355,20 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
                     >
                         <mesh geometry={nodes.card.geometry}>
                             <meshPhysicalMaterial
-                                color="#e8e8e8"
-                                clearcoat={isMobile ? 0 : 1}
-                                clearcoatRoughness={0.15}
-                                roughness={0.9}
-                                metalness={0.8}
+                                map={cardTexture ?? undefined}
+                                color={cardTexture ? '#ffffff' : '#f0f0ea'}
+                                clearcoat={isMobile ? 0 : 0.8}
+                                clearcoatRoughness={0.2}
+                                roughness={0.8}
+                                metalness={0.1}
                             />
                         </mesh>
-                        <mesh geometry={nodes.clip.geometry}><meshStandardMaterial color="#aaa" metalness={1} roughness={0.2} /></mesh>
-                        <mesh geometry={nodes.clamp.geometry}><meshStandardMaterial color="#aaa" metalness={1} roughness={0.2} /></mesh>
+                        <mesh geometry={nodes.clip.geometry}>
+                            <meshStandardMaterial color="#aaaaaa" metalness={1} roughness={0.2} />
+                        </mesh>
+                        <mesh geometry={nodes.clamp.geometry}>
+                            <meshStandardMaterial color="#aaaaaa" metalness={1} roughness={0.2} />
+                        </mesh>
                     </group>
                 </RigidBody>
             </group>
@@ -257,9 +381,9 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
                     depthTest={false}
                     resolution={isMobile ? [1000, 2000] : [1000, 1000]}
                     useMap
-                    map={texture}
+                    map={lanyardTexture}
                     repeat={[-4, 1]}
-                    lineWidth={1}
+                    lineWidth={1.2}
                 />
             </mesh>
         </>
