@@ -556,16 +556,16 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                             <button
                                 onClick={handleSnapPhoto}
                                 disabled={photoPrinted || isSnapping}
-                                className={`w-12 h-12 md:w-16 md:h-16 rounded-full transition-all duration-300 ${isSnapping || photoPrinted ? 'scale-95 border-emerald-400' : 'hover:scale-110 cursor-pointer border-white/60 hover:border-white'} border-2 border-dashed bg-white/5 backdrop-blur-sm flex items-center justify-center`}
+                                className={`w-12 h-12 md:w-16 md:h-16 rounded-full transition-all duration-300 ${isSnapping || photoPrinted ? 'scale-95' : 'hover:scale-110 cursor-pointer'} bg-transparent flex items-center justify-center`}
                                 aria-label="Snap Photo"
                             ></button>
 
                             {!photoPrinted && (
-                                <div className="flex flex-col items-center text-white/90 animate-bounce pointer-events-none drop-shadow-md absolute -top-16 md:-top-20">
-                                    <span className="font-mono text-[10px] tracking-[0.2em] font-bold uppercase whitespace-nowrap bg-black/40 px-2 py-1.5 rounded backdrop-blur-md border border-white/10 mb-2">Snap to Print</span>
-                                    {/* Arrow pointing down towards the button */}
-                                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                                <div className="flex flex-col items-center text-white/90 pointer-events-none drop-shadow-md absolute -top-20 md:-top-24 -translate-y-4">
+                                    <span className="font-mono text-sm tracking-[0.2em] font-bold uppercase whitespace-nowrap px-2 py-1.5 mb-2 origin-bottom rotate-[-2deg]">Expose to Reveal!</span>
+                                    {/* Hand-drawn style arrow pointing down towards the button */}
+                                    <svg className="w-8 h-12 text-white/80 -translate-x-2" viewBox="0 0 40 60" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M20 5 C15 30, 25 45, 18 55 M10 40 L18 55 L30 46" />
                                     </svg>
                                 </div>
                             )}
