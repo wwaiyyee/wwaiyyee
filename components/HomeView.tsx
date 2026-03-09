@@ -517,7 +517,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             <div className={`fixed inset-0 bg-white z-[999] pointer-events-none transition-opacity duration-500 ease-out ${isSnapping ? 'opacity-100' : 'opacity-0'}`}></div>
 
             {/* 6. THE FINAL EXPOSURE (Footer) */}
-            <footer id="connect" className="border-t border-black bg-[#111] text-[#F2F2ED] py-32 flex flex-col items-center justify-center relative overflow-hidden">
+            <footer id="connect" className="border-t border-black bg-[#050505] text-[#F2F2ED] py-32 flex flex-col items-center justify-center relative overflow-hidden">
                 <div className="text-center mb-16 px-6 relative z-20">
                     <h2 className="text-4xl md:text-6xl font-serif mb-6 text-white">The Final Exposure</h2>
                     <p className="text-gray-400 font-mono text-sm tracking-widest uppercase">Capture the moment • Print Resume</p>
@@ -552,16 +552,16 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                         />
 
                         {/* Transparent Shutter Boundary & Hint */}
-                        <div className="absolute top-[20%] left-[18%] md:top-[20%] md:left-[19%] z-20 flex flex-col items-center gap-2">
+                        <div className="absolute top-[32%] left-[29%] md:top-[32%] md:left-[29.5%] z-20 flex flex-col items-center gap-2">
                             <button
                                 onClick={handleSnapPhoto}
                                 disabled={photoPrinted || isSnapping}
-                                className={`w-12 h-12 md:w-16 md:h-16 rounded-full transition-all duration-300 ${isSnapping || photoPrinted ? 'scale-95' : 'hover:scale-110 cursor-pointer'} bg-transparent flex items-center justify-center`}
+                                className={`w-8 h-8 md:w-12 md:h-12 rounded-full transition-all duration-300 ${isSnapping || photoPrinted ? 'scale-95' : 'hover:scale-110 cursor-pointer'} bg-transparent flex items-center justify-center`}
                                 aria-label="Snap Photo"
                             ></button>
 
                             {!photoPrinted && (
-                                <div className="flex flex-col items-center text-white/90 pointer-events-none drop-shadow-md absolute -top-20 md:-top-24 -translate-y-4">
+                                <div className="flex flex-col items-center text-white/90 pointer-events-none drop-shadow-md absolute -top-20 md:-top-24 -translate-y-2">
                                     <span className="font-mono text-sm tracking-[0.2em] font-bold uppercase whitespace-nowrap px-2 py-1.5 mb-2 origin-bottom rotate-[-2deg]">Expose to Reveal!</span>
                                     {/* Hand-drawn style arrow pointing down towards the button */}
                                     <svg className="w-8 h-12 text-white/80 -translate-x-2" viewBox="0 0 40 60" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
