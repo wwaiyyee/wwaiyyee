@@ -34,7 +34,7 @@ function PhysicsLanyard({ userData, onClose }: any) {
     const segmentCount = 10;
     const segmentLength = 18; // 10 * 18 = 180px drop
     const points = useRef(Array.from({ length: segmentCount }, () => ({ x: 0, y: 0, ox: 0, oy: 0 })));
-    const mousePos = useRef({ x: typeof window !== 'undefined' ? window.innerWidth / 2 : 500, y: 0 });
+    const mousePos = useRef({ x: typeof window !== 'undefined' ? document.documentElement.clientWidth / 2 : 500, y: 0 });
     const isDragging = useRef(false);
     const dragOffset = useRef({ x: 0, y: 0 });
     const cardVel = useRef({ spin: 0 });
@@ -42,18 +42,19 @@ function PhysicsLanyard({ userData, onClose }: any) {
 
     useEffect(() => {
         let animationFrameId: number;
-        const originX = window.innerWidth / 2;
         const originY = -20;
 
         // Init rope high up so it realistically drops in
         points.current.forEach((p, i) => {
-            p.x = originX;
+            p.x = document.documentElement.clientWidth / 2;
             p.y = -400 + i * segmentLength;
             p.ox = p.x;
             p.oy = p.y;
         });
 
         const updatePhysics = () => {
+            const currentOriginX = document.documentElement.clientWidth / 2;
+
             // 1. Verlet Integration (Gravity & Inertia)
             for (let i = 1; i < segmentCount; i++) {
                 const p = points.current[i];
@@ -70,7 +71,7 @@ function PhysicsLanyard({ userData, onClose }: any) {
             // 2. Constraints Solver (Rigidity & Dragging)
             for (let iter = 0; iter < 12; iter++) {
                 // Pin Top (gentle sway towards global mouse x)
-                points.current[0].x += ((originX + (mousePos.current.x - originX) * 0.1) - points.current[0].x) * 0.1;
+                points.current[0].x += ((currentOriginX + (mousePos.current.x - currentOriginX) * 0.1) - points.current[0].x) * 0.1;
                 points.current[0].y = originY;
 
                 // Pin Bottom if dragging
