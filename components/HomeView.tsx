@@ -593,7 +593,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                         aria-label="Close modal background"
                     ></div>
 
-                    <div className="relative z-10 w-full h-full max-w-6xl max-h-[90vh] bg-[#F2F2ED] rounded-xl shadow-2xl flex flex-col overflow-hidden border border-gray-700">
+                    <div className="relative z-10 w-full max-w-[800px] h-full max-h-[90vh] md:max-h-[1130px] bg-[#F2F2ED] rounded-xl shadow-2xl flex flex-col overflow-hidden border border-gray-700 aspect-[1/1.414] mx-auto">
                         {/* Modal Header */}
                         <div className="flex justify-between items-center px-6 py-4 border-b border-gray-300 bg-[#E8E8E2]">
                             <div className="font-mono text-sm tracking-widest uppercase font-bold text-[#111]">
