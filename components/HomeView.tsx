@@ -395,82 +395,75 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             </section>
 
             {/* --- ACHIEVEMENTS (The Exposure Logbook) --- */}
-            <section id="achievements" className="py-32 px-6 bg-[#F2F2ED] relative border-t border-black">
-                <div className="max-w-5xl mx-auto">
-                    <div className="text-center mb-24">
+            <section id="achievements" className="py-32 bg-[#F2F2ED] relative border-t border-black">
+                <div className="w-full">
+                    <div className="text-center mb-24 px-6 md:px-12">
                         <h2 className="text-4xl md:text-6xl font-serif text-[#111] mb-4">Exposure Log</h2>
                         <p className="text-gray-500 tracking-[0.3em] uppercase text-xs font-mono">Archive Index & Milestones</p>
                     </div>
 
                     {/* The Logbook Container */}
-                    <div className="bg-[#111] shadow-2xl relative rounded-b-md">
-
-                        {/* Binder Ring / Spiral Edge Detail */}
-                        <div className="absolute top-0 left-0 w-full h-6 bg-black border-b border-gray-900 flex justify-evenly items-center px-4">
-                            {[...Array(24)].map((_, i) => (
-                                <div key={i} className="w-4 md:w-8 h-2 bg-[#111] rounded-full border border-gray-900 shadow-inner"></div>
-                            ))}
-                        </div>
-
-                        <div className="p-6 md:p-12 pt-16">
-
+                    <div className="w-full relative">
+                        
+                        <div className="px-6 md:px-12 pt-16">
+                            
                             {/* Table Header (Hidden on Mobile) */}
-                            <div className="hidden md:grid grid-cols-12 gap-6 border-b-2 border-gray-700 pb-4 mb-8 text-[10px] text-gray-500 uppercase tracking-[0.2em] font-mono font-bold">
+                            <div className="hidden md:grid grid-cols-12 gap-6 border-b-2 border-black pb-4 mb-4 text-[10px] text-gray-400 uppercase tracking-[0.2em] font-mono font-bold">
                                 <div className="col-span-2">Frame / Date</div>
                                 <div className="col-span-4">Subject / Event</div>
                                 <div className="col-span-6">Developer Notes</div>
                             </div>
 
                             {/* Log Entries */}
-                            <div className="space-y-8 md:space-y-0">
+                            <div className="space-y-0">
                                 {ACHIEVEMENTS.map((achieve: any, idx) => (
-                                    <div
-                                        key={idx}
-                                        className="relative grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 md:py-8 border-b border-gray-800/50 md:border-dashed last:border-0 group hover:bg-[#111] transition-colors p-4 md:p-0 -mx-4 md:mx-0 rounded-md md:rounded-none"
+                                    <div 
+                                        key={idx} 
+                                        className="relative grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 md:py-10 border-b border-black md:border-dashed last:border-0 group hover:bg-[#111] hover:text-[#F2F2ED] transition-colors duration-300 p-6 md:px-4 cursor-default"
                                     >
-
+                                        
                                         {/* FRAME & YEAR */}
                                         <div className="col-span-2 flex flex-row md:flex-col justify-between md:justify-start items-center md:items-start font-mono">
                                             <div className="relative inline-block">
                                                 {/* Red Grease Pencil Circle Highlight */}
                                                 {achieve.highlight && (
-                                                    <svg className="absolute -inset-4 w-[calc(100%+32px)] h-[calc(100%+32px)] pointer-events-none z-20" viewBox="0 0 100 100" preserveAspectRatio="none">
-                                                        <path
-                                                            d="M 50,15 C 80,10 90,40 85,75 C 80,100 30,95 15,75 C 5,50 20,20 50,15"
-                                                            fill="none"
-                                                            stroke="#d73a3a"
-                                                            strokeWidth="2.5"
+                                                    <svg className="absolute -inset-4 w-[calc(100%+32px)] h-[calc(100%+32px)] pointer-events-none z-20 transition-opacity duration-300 group-hover:opacity-100" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                                        <path 
+                                                            d="M 50,15 C 80,10 90,40 85,75 C 80,100 30,95 15,75 C 5,50 20,20 50,15" 
+                                                            fill="none" 
+                                                            stroke="#d73a3a" 
+                                                            strokeWidth="2.5" 
                                                             strokeLinecap="round"
                                                             className="opacity-90 drop-shadow-[0_0_8px_rgba(215,58,58,0.4)]"
                                                         />
                                                     </svg>
                                                 )}
-                                                <span className={`text-2xl md:text-3xl font-bold tracking-tighter ${achieve.highlight ? 'text-white' : 'text-gray-600'}`}>
+                                                <span className={`text-2xl md:text-3xl font-bold tracking-tighter transition-colors duration-300 ${achieve.highlight ? 'text-[#111] group-hover:text-white' : 'text-gray-400 group-hover:text-gray-600'}`}>
                                                     {achieve.frame}
                                                 </span>
                                             </div>
-                                            <span className="text-xs text-gray-500 tracking-widest mt-0 md:mt-2">{achieve.year}</span>
+                                            <span className="text-xs text-gray-500 tracking-widest mt-0 md:mt-2 group-hover:text-gray-400 transition-colors duration-300">{achieve.year}</span>
                                         </div>
 
                                         {/* SUBJECT & EVENT */}
                                         <div className="col-span-4 flex flex-col justify-center">
-                                            <h3 className={`text-xl font-serif mb-1 ${achieve.highlight ? 'text-white' : 'text-gray-300'}`}>
+                                            <h3 className={`text-xl font-serif mb-1 transition-colors duration-300 ${achieve.highlight ? 'text-[#111] group-hover:text-white' : 'text-[#333] group-hover:text-[#ccc]'}`}>
                                                 {achieve.title}
                                             </h3>
-                                            <h4 className="text-[10px] md:text-xs text-gray-500 font-mono tracking-[0.15em] uppercase">
+                                            <h4 className="text-[10px] md:text-xs text-gray-500 font-mono tracking-[0.15em] uppercase group-hover:text-gray-400 transition-colors duration-300">
                                                 {achieve.event}
                                             </h4>
                                         </div>
 
                                         {/* NOTES & STAMP */}
                                         <div className="col-span-6 flex flex-col justify-center relative">
-                                            <p className="text-sm text-gray-400 leading-relaxed font-sans pr-0 md:pr-12">
+                                            <p className="text-sm text-gray-600 leading-relaxed font-sans pr-0 md:pr-12 group-hover:text-gray-300 transition-colors duration-300">
                                                 {achieve.desc}
                                             </p>
-
+                                            
                                             {/* Red "SELECT" Stamp on Hover for Highlighted items */}
                                             {achieve.highlight && (
-                                                <div className="absolute right-0 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden lg:block">
+                                                <div className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden lg:block">
                                                     <span className="text-[#d73a3a] border-2 border-[#d73a3a] px-3 py-1 text-[10px] tracking-[0.4em] font-black font-mono uppercase rotate-[-15deg] inline-block shadow-[0_0_10px_rgba(215,58,58,0.2)]">
                                                         Selected
                                                     </span>
