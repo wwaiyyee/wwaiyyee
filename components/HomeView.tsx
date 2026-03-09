@@ -587,21 +587,24 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                 </div>
 
                 {/* Back to Top */}
-                <button
-                    onClick={() => {
-                        if (isRewinding) return;
-                        setIsRewinding(true);
-                        setTimeout(() => {
-                            window.scrollTo({ top: 0, behavior: 'smooth' });
-                            setIsRewinding(false);
-                        }, 900);
-                    }}
-                    className="relative z-20 mt-6 mb-2 font-mono tracking-[0.25em] uppercase text-[#111]/40 hover:text-[#111]/70 transition-all duration-300 cursor-pointer"
-                >
-                    <span className={`transition-all duration-500 ${isRewinding ? 'opacity-0 text-xs pointer-events-none absolute inset-0 flex items-center justify-center' : 'opacity-100 text-xs flex items-center justify-center'}`}>watching the film rewind</span>
-                    <span className={`transition-all duration-500 ${isRewinding ? 'opacity-100 text-base md:text-lg font-semibold text-[#111]/70 flex items-center justify-center whitespace-nowrap' : 'opacity-0 text-base pointer-events-none absolute inset-0 flex items-center justify-center'}`}>let&apos;s go back to the first frame!</span>
-                </button>
+                <div className={`w-full flex justify-center z-20 transition-all duration-[1200ms] ${photoPrinted ? 'mt-52 md:mt-64' : 'mt-6'}`}>
+                    <button
+                        onClick={() => {
+                            if (isRewinding) return;
+                            setIsRewinding(true);
+                            setTimeout(() => {
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                                setIsRewinding(false);
+                            }, 900);
+                        }}
+                        className="relative z-20 mb-4 font-serif italic text-[#111]/40 hover:text-[#111]/70 transition-all duration-300 cursor-pointer"
+                    >
+                        <span className={`transition-all duration-500 ${isRewinding ? 'opacity-0 text-sm pointer-events-none absolute inset-0 flex items-center justify-center' : 'opacity-100 text-sm flex items-center justify-center'}`}>watching the film rewind</span>
+                        <span className={`transition-all duration-500 ${isRewinding ? 'opacity-100 text-xl md:text-2xl text-[#111]/70 flex items-center justify-center whitespace-nowrap' : 'opacity-0 text-xl pointer-events-none absolute inset-0 flex items-center justify-center'}`}>let&apos;s go back to the first frame!</span>
+                    </button>
+                </div>
             </footer>
+
 
             {/* Resume Modal Overlay */}
             {isResumeModalOpen && (
