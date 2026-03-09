@@ -30,6 +30,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
     const [isSnapping, setIsSnapping] = useState(false);
     const [photoPrinted, setPhotoPrinted] = useState(false);
     const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
+    const [isRewinding, setIsRewinding] = useState(false);
 
     const handleSnapPhoto = () => {
         if (photoPrinted) return;
@@ -587,11 +588,18 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
 
                 {/* Back to Top */}
                 <button
-                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                    className="group relative z-20 mt-6 mb-2 font-mono text-xs tracking-[0.25em] uppercase text-[#111]/40 hover:text-[#111]/80 transition-colors duration-300 cursor-pointer"
+                    onClick={() => {
+                        if (isRewinding) return;
+                        setIsRewinding(true);
+                        setTimeout(() => {
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                            setIsRewinding(false);
+                        }, 900);
+                    }}
+                    className="relative z-20 mt-6 mb-2 font-mono tracking-[0.25em] uppercase text-[#111]/40 hover:text-[#111]/70 transition-all duration-300 cursor-pointer"
                 >
-                    <span className="group-hover:opacity-0 group-hover:scale-95 transition-all duration-200 absolute inset-0 flex items-center justify-center whitespace-nowrap">watching a film ...</span>
-                    <span className="opacity-0 group-hover:opacity-100 group-hover:scale-100 scale-95 transition-all duration-200 flex items-center justify-center whitespace-nowrap">film unfold!</span>
+                    <span className={`transition-all duration-500 ${isRewinding ? 'opacity-0 text-xs pointer-events-none absolute inset-0 flex items-center justify-center' : 'opacity-100 text-xs flex items-center justify-center'}`}>watching the film rewind</span>
+                    <span className={`transition-all duration-500 ${isRewinding ? 'opacity-100 text-base md:text-lg font-semibold text-[#111]/70 flex items-center justify-center whitespace-nowrap' : 'opacity-0 text-base pointer-events-none absolute inset-0 flex items-center justify-center'}`}>let&apos;s go back to the first frame!</span>
                 </button>
             </footer>
 
