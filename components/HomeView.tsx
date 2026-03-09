@@ -518,7 +518,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             <div className={`fixed inset-0 bg-white z-[999] pointer-events-none transition-opacity duration-500 ease-out ${isSnapping ? 'opacity-100' : 'opacity-0'}`}></div>
 
             {/* 6. THE FINAL EXPOSURE (Footer) */}
-            <footer id="connect" className="border-t border-black bg-[#F2F2ED] text-[#111] py-32 flex flex-col items-center justify-center relative overflow-hidden">
+            <footer id="connect" className="bg-[#F2F2ED] text-[#111] py-32 flex flex-col items-center justify-center relative overflow-hidden">
                 <div className="text-center mb-16 px-6 relative z-20">
                     <h2 className="text-4xl md:text-6xl font-serif mb-6 text-[#111]">The Final Exposure</h2>
                     <p className="text-gray-400 font-mono text-sm tracking-widest uppercase">Capture the moment • Print Resume</p>
