@@ -236,16 +236,15 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
                     >
                         <mesh geometry={nodes.card.geometry}>
                             <meshPhysicalMaterial
-                                map={materials.base.map}
-                                map-anisotropy={16}
+                                color="#e8e8e8"
                                 clearcoat={isMobile ? 0 : 1}
                                 clearcoatRoughness={0.15}
                                 roughness={0.9}
                                 metalness={0.8}
                             />
                         </mesh>
-                        <mesh geometry={nodes.clip.geometry} material={materials.metal} material-roughness={0.3} />
-                        <mesh geometry={nodes.clamp.geometry} material={materials.metal} />
+                        <mesh geometry={nodes.clip.geometry}><meshStandardMaterial color="#aaa" metalness={1} roughness={0.2} /></mesh>
+                        <mesh geometry={nodes.clamp.geometry}><meshStandardMaterial color="#aaa" metalness={1} roughness={0.2} /></mesh>
                     </group>
                 </RigidBody>
             </group>
