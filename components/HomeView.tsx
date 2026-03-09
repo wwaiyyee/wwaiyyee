@@ -584,6 +584,15 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                         </div>
                     </div>
                 </div>
+
+                {/* Back to Top */}
+                <button
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                    className="group relative z-20 mt-6 mb-2 font-mono text-xs tracking-[0.25em] uppercase text-[#111]/40 hover:text-[#111]/80 transition-colors duration-300 cursor-pointer"
+                >
+                    <span className="group-hover:opacity-0 group-hover:scale-95 transition-all duration-200 absolute inset-0 flex items-center justify-center whitespace-nowrap">watching a film ...</span>
+                    <span className="opacity-0 group-hover:opacity-100 group-hover:scale-100 scale-95 transition-all duration-200 flex items-center justify-center whitespace-nowrap">film unfold!</span>
+                </button>
             </footer>
 
             {/* Resume Modal Overlay */}
