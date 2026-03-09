@@ -561,7 +561,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                             ></button>
 
                             {!photoPrinted && (
-                                <div className="flex flex-col items-center text-white/90 pointer-events-none drop-shadow-md absolute -top-20 md:-top-24 -translate-y-2">
+                                <div className="flex flex-col items-center text-white/90 pointer-events-none drop-shadow-md absolute -top-28 md:-top-32 -translate-y-2">
                                     <span className="font-mono text-sm tracking-[0.2em] font-bold uppercase whitespace-nowrap px-2 py-1.5 mb-2 origin-bottom rotate-[-2deg]">Expose to Reveal!</span>
                                     {/* Hand-drawn style arrow pointing down towards the button */}
                                     <svg className="w-8 h-12 text-white/80 -translate-x-2" viewBox="0 0 40 60" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
