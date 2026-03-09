@@ -143,22 +143,38 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             {/* --- ABOUT SECTION (FIELD NOTES FORMAT) --- */}
             <section id="about" className="py-32 px-6 relative overflow-hidden bg-[#F2F2ED]">
                 <div className="max-w-4xl mx-auto relative z-10">
-                    <div className="flex flex-col items-center justify-center gap-6 mb-16 text-center">
+                    <motion.div
+                        className="flex flex-col items-center justify-center gap-6 mb-16 text-center"
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.5 }}
+                        transition={{ duration: 0.7, ease: 'easeOut' }}
+                    >
                         <h3 className="text-xl md:text-2xl font-serif text-[#111] max-w-2xl px-6">
                             "Coding with a cinematic lens."
                         </h3>
-                    </div>
+                    </motion.div>
 
                     {/* Field Notes Paper Container */}
-                    <div
+                    <motion.div
                         className="bg-white text-black p-8 md:p-16 shadow-[20px_20px_60px_rgba(0,0,0,0.1)] mx-auto max-w-3xl relative rounded-sm border-l-8 border-[#d73a3a] border-y border-r border-black"
                         style={{ fontFamily: '"Courier New", Courier, monospace' }}
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
                     >
                         {/* Subtle paper texture */}
                         <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cream-paper.png')] pointer-events-none"></div>
 
                         {/* Log Header */}
-                        <div className="flex justify-between items-end mb-12 border-b-2 border-black pb-4">
+                        <motion.div
+                            className="flex justify-between items-end mb-12 border-b-2 border-black pb-4"
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: 0.3 }}
+                        >
                             <div>
                                 <h3 className="text-2xl font-bold uppercase tracking-widest">Developer's Log</h3>
                                 <p className="text-gray-500 text-xs mt-1">BATCH NO. 2026-X</p>
@@ -167,25 +183,40 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                                 <p>ISO: 400</p>
                                 <p>PROCESS: C-41</p>
                             </div>
-                        </div>
+                        </motion.div>
 
                         <div className="space-y-8 text-sm md:text-base leading-relaxed">
 
-                            <div>
+                            <motion.div
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: 0.4 }}
+                            >
                                 <p className="uppercase font-bold tracking-widest text-xs text-gray-500 mb-2">[ 01. EXPOSURE ]</p>
                                 <p className="text-black font-medium">
                                     I treat every project like a carefully composed photograph. From framing the architecture (wireframing) to the final exposure (deployment), I obsess over the lighting, the focus, and the user's perspective.
                                 </p>
-                            </div>
+                            </motion.div>
 
-                            <div>
+                            <motion.div
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: 0.55 }}
+                            >
                                 <p className="uppercase font-bold tracking-widest text-xs text-gray-500 mb-2">[ 02. DEVELOPMENT ]</p>
                                 <p className="text-black font-medium">
                                     My tools aren't physical lenses and chemicals. They are React, TypeScript, and Node.js. With a background forged in late-night coding sessions and rigorous algorithms, I blend technical precision with analog aesthetics.
                                 </p>
-                            </div>
+                            </motion.div>
 
-                            <div>
+                            <motion.div
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: 0.7 }}
+                            >
                                 <p className="uppercase font-bold tracking-widest text-xs text-gray-500 mb-4">[ 03. EQUIPMENT ]</p>
                                 <ul className="space-y-4 text-black font-medium">
                                     <li className="flex flex-col md:flex-row md:gap-4">
@@ -201,9 +232,9 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                                         <span className="text-gray-700">PostgreSQL, MongoDB <span className="italic text-gray-500">...archiving the negatives.</span></span>
                                     </li>
                                 </ul>
-                            </div>
+                            </motion.div>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </section>
 
