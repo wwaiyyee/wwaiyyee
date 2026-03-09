@@ -1,391 +1,323 @@
-/* eslint-disable react/no-unknown-property */
-'use client';
-import { useEffect, useRef, useState, useMemo } from 'react';
-import { Canvas, extend, useFrame } from '@react-three/fiber';
-import { useGLTF, Environment, Lightformer } from '@react-three/drei';
-import {
-    BallCollider,
-    CuboidCollider,
-    Physics,
-    RigidBody,
-    useRopeJoint,
-    useSphericalJoint,
-} from '@react-three/rapier';
-import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
-import * as THREE from 'three';
+import React, { useState, useEffect, useRef } from 'react';
+import { Github, Linkedin, X, Briefcase } from 'lucide-react';
 
-extend({ MeshLineGeometry, MeshLineMaterial });
+export function LanyardModal({ open, onClose }: { open: boolean, onClose: () => void }) {
+    const userData = {
+        name: "Chloe Lee",
+        role: "SOFTWARE DEVELOPER  /  UI/UX DESIGNER",
+        company: "Portfolio",
+        photo: "/profile pic.jpeg",
+        githubUrl: "https://github.com/wwaiyyee",
+        linkedinUrl: "https://linkedin.com/in/lee-wai-yee",
+        idNumber: "ID-2026-WY-001"
+    };
 
-// ── Modal Wrapper ─────────────────────────────────────────────────────────────
-interface LanyardModalProps {
-    open: boolean;
-    onClose: () => void;
-}
-
-export function LanyardModal({ open, onClose }: LanyardModalProps) {
     useEffect(() => {
-        if (open) document.body.style.overflow = 'hidden';
-        else document.body.style.overflow = '';
-        return () => { document.body.style.overflow = ''; };
+        document.body.style.overflow = open ? 'hidden' : 'unset';
+        return () => { document.body.style.overflow = 'unset'; };
     }, [open]);
 
     if (!open) return null;
 
-    return (
-        <div
-            className="fixed inset-0 z-[500] flex flex-col items-center justify-center"
-            style={{ background: 'rgba(10,10,10,0.80)', backdropFilter: 'blur(10px)' }}
-            onClick={onClose}
-        >
-            {/* Close */}
-            <button
-                onClick={onClose}
-                className="absolute top-6 right-8 text-white/60 hover:text-white text-3xl font-light transition-colors z-10"
-                aria-label="Close"
-            >
-                ×
-            </button>
-
-            {/* Hint */}
-            <p className="absolute top-8 left-1/2 -translate-x-1/2 font-mono text-[10px] tracking-[0.25em] uppercase text-white/30 pointer-events-none">
-                drag the card
-            </p>
-
-            {/* 3D Canvas — stop click propagation so dragging doesn't close */}
-            <div className="w-full h-full" onClick={e => e.stopPropagation()}>
-                <Lanyard />
-            </div>
-        </div>
-    );
+    return <PhysicsLanyard userData={userData} onClose={onClose} />;
 }
 
-// ── Lanyard Scene ─────────────────────────────────────────────────────────────
-function Lanyard() {
-    const [isMobile, setIsMobile] = useState<boolean>(
-        () => typeof window !== 'undefined' && window.innerWidth < 768
-    );
+
+/* ==============================================================
+ * ULTRA-FAST DOM VERLET PHYSICS SIMULATION
+ * ============================================================== */
+
+function PhysicsLanyard({ userData, onClose }: any) {
+    const pathRef = useRef<SVGPathElement>(null);
+    const shadowRef = useRef<SVGPathElement>(null);
+    const highlightRef = useRef<SVGPathElement>(null);
+    const cardRef = useRef<HTMLDivElement>(null);
+
+    // Physics Simulation State
+    const segmentCount = 14;
+    const segmentLength = 25; // 14 * 25 = 350px drop
+    const points = useRef(Array.from({ length: segmentCount }, () => ({ x: 0, y: 0, ox: 0, oy: 0 })));
+    const mousePos = useRef({ x: typeof window !== 'undefined' ? window.innerWidth / 2 : 500, y: 0 });
+    const isDragging = useRef(false);
+    const dragOffset = useRef({ x: 0, y: 0 });
+    const cardVel = useRef({ spin: 0 });
+    const [glare, setGlare] = useState({ x: 50, y: 50, opacity: 0 });
 
     useEffect(() => {
-        const handleResize = () => setIsMobile(window.innerWidth < 768);
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
+        let animationFrameId: number;
+        const originX = window.innerWidth / 2;
+        const originY = -50;
 
-    return (
-        <Canvas
-            camera={{ position: [0, 0, 26], fov: 22 }}
-            dpr={[1, isMobile ? 1.5 : 2]}
-            gl={{ alpha: true }}
-            onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), 0)}
-        >
-            <ambientLight intensity={Math.PI} />
-            <Physics gravity={[0, -40, 0]} timeStep={isMobile ? 1 / 30 : 1 / 60}>
-                <Band isMobile={isMobile} />
-            </Physics>
-            <Environment blur={0.75}>
-                <Lightformer intensity={2} color="white" position={[0, -1, 5]} rotation={[0, 0, Math.PI / 3]} scale={[100, 0.1, 1]} />
-                <Lightformer intensity={3} color="white" position={[-1, -1, 1]} rotation={[0, 0, Math.PI / 3]} scale={[100, 0.1, 1]} />
-                <Lightformer intensity={3} color="white" position={[1, 1, 1]} rotation={[0, 0, Math.PI / 3]} scale={[100, 0.1, 1]} />
-                <Lightformer intensity={10} color="white" position={[-10, 0, 14]} rotation={[0, Math.PI / 2, Math.PI / 3]} scale={[100, 10, 1]} />
-            </Environment>
-        </Canvas>
-    );
-}
+        // Init rope high up so it realistically drops in
+        points.current.forEach((p, i) => {
+            p.x = originX;
+            p.y = -800 + i * segmentLength;
+            p.ox = p.x;
+            p.oy = p.y;
+        });
 
-// ── Card Canvas Texture ───────────────────────────────────────────────────────
-function useCardTexture() {
-    const [texture, setTexture] = useState<THREE.CanvasTexture | null>(null);
+        const updatePhysics = () => {
+            // 1. Verlet Integration (Gravity & Inertia)
+            for (let i = 1; i < segmentCount; i++) {
+                const p = points.current[i];
+                const vx = (p.x - p.ox) * 0.92; // Friction
+                const vy = (p.y - p.oy) * 0.92;
 
-    useEffect(() => {
-        const W = 512, H = 720;
-        const canvas = document.createElement('canvas');
-        canvas.width = W; canvas.height = H;
-        const ctx = canvas.getContext('2d')!;
+                p.ox = p.x;
+                p.oy = p.y;
 
-        const draw = (img?: HTMLImageElement) => {
-            // Background
-            ctx.fillStyle = '#F2F2ED';
-            ctx.fillRect(0, 0, W, H);
-
-            // Top color bar (beige-dark accent)
-            ctx.fillStyle = '#111111';
-            ctx.fillRect(0, 0, W, 12);
-
-            // Red left stripe (like the developer log)
-            ctx.fillStyle = '#d73a3a';
-            ctx.fillRect(0, 0, 12, H);
-
-            // Bottom bar
-            ctx.fillStyle = '#111111';
-            ctx.fillRect(0, H - 12, W, 12);
-
-            // Clip hole at top center
-            ctx.beginPath();
-            ctx.arc(W / 2, 36, 16, 0, Math.PI * 2);
-            ctx.fillStyle = '#ffffff';
-            ctx.fill();
-            ctx.strokeStyle = '#c0c0c0';
-            ctx.lineWidth = 2;
-            ctx.stroke();
-
-            // Photo circle
-            const photoX = W / 2, photoY = 180, photoR = 90;
-            ctx.save();
-            ctx.beginPath();
-            ctx.arc(photoX, photoY, photoR, 0, Math.PI * 2);
-            ctx.clip();
-            if (img) {
-                ctx.drawImage(img, photoX - photoR, photoY - photoR, photoR * 2, photoR * 2);
-            } else {
-                // placeholder silhouette
-                ctx.fillStyle = '#c4c4c4';
-                ctx.fillRect(photoX - photoR, photoY - photoR, photoR * 2, photoR * 2);
+                p.x += vx;
+                p.y += vy + 1.5; // Gravity
             }
-            ctx.restore();
-            // Photo border
-            ctx.beginPath();
-            ctx.arc(photoX, photoY, photoR + 2, 0, Math.PI * 2);
-            ctx.strokeStyle = '#d73a3a';
-            ctx.lineWidth = 3;
-            ctx.stroke();
 
-            // Name
-            ctx.fillStyle = '#111111';
-            ctx.font = 'bold 36px Georgia, serif';
-            ctx.textAlign = 'center';
-            ctx.fillText('Chloe Lee', W / 2, 300);
+            // 2. Constraints Solver (Rigidity & Dragging)
+            for (let iter = 0; iter < 12; iter++) {
+                // Pin Top (gentle sway towards global mouse x)
+                points.current[0].x += ((originX + (mousePos.current.x - originX) * 0.1) - points.current[0].x) * 0.1;
+                points.current[0].y = originY;
 
-            // Role
-            ctx.font = '15px "Courier New", monospace';
-            ctx.fillStyle = '#555';
-            ctx.fillText('SOFTWARE DEVELOPER  /  UI/UX DESIGNER', W / 2, 330);
+                // Pin Bottom if dragging
+                if (isDragging.current) {
+                    const last = points.current[segmentCount - 1];
+                    last.x = mousePos.current.x - dragOffset.current.x;
+                    last.y = mousePos.current.y - dragOffset.current.y;
+                }
 
-            // Separator line
-            ctx.strokeStyle = '#d73a3a';
-            ctx.lineWidth = 1.5;
-            ctx.beginPath();
-            ctx.moveTo(60, 355); ctx.lineTo(W - 60, 355);
-            ctx.stroke();
+                // Maintain Rope Segment Distances
+                for (let i = 0; i < segmentCount - 1; i++) {
+                    const p1 = points.current[i];
+                    const p2 = points.current[i + 1];
+                    const dx = p2.x - p1.x;
+                    const dy = p2.y - p1.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist === 0) continue;
 
-            // Batch label
-            ctx.font = '11px "Courier New", monospace';
-            ctx.fillStyle = '#999';
-            ctx.textAlign = 'center';
-            ctx.fillText('BATCH NO. 2026-X  ·  ISO: 400', W / 2, 380);
+                    const diff = segmentLength - dist;
+                    const percent = diff / dist / 2;
+                    const offsetX = dx * percent;
+                    const offsetY = dy * percent;
 
-            // GitHub label
-            ctx.font = 'bold 14px "Courier New", monospace';
-            ctx.fillStyle = '#111';
-            ctx.textAlign = 'left';
-            ctx.fillText('GH ', 80, 440);
-            ctx.font = '14px "Courier New", monospace';
-            ctx.fillStyle = '#d73a3a';
-            ctx.fillText('github.com/wwaiyyee', 122, 440);
+                    if (i !== 0) {
+                        p1.x -= offsetX;
+                        p1.y -= offsetY;
+                    }
+                    if (i + 1 !== segmentCount - 1 || !isDragging.current) {
+                        p2.x += offsetX;
+                        p2.y += offsetY;
+                    }
+                }
+            }
 
-            // LinkedIn label
-            ctx.font = 'bold 14px "Courier New", monospace';
-            ctx.fillStyle = '#111';
-            ctx.fillText('LI ', 80, 475);
-            ctx.font = '14px "Courier New", monospace';
-            ctx.fillStyle = '#d73a3a';
-            ctx.fillText('linkedin.com/in/lee-wai-yee', 122, 475);
+            // 3. Render Visuals (Direct DOM manipulation for 60fps)
+            const pathStr = points.current.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
+            if (pathRef.current) pathRef.current.setAttribute('d', pathStr);
+            if (shadowRef.current) shadowRef.current.setAttribute('d', pathStr);
+            if (highlightRef.current) highlightRef.current.setAttribute('d', pathStr);
 
-            // Bottom watermark
-            ctx.font = '10px "Courier New", monospace';
-            ctx.fillStyle = '#bbb';
-            ctx.textAlign = 'center';
-            ctx.fillText('PROCESS: C-41  ·  ANALOG PORTFOLIO', W / 2, 560);
+            if (cardRef.current) {
+                const last = points.current[segmentCount - 1];
+                const prev = points.current[segmentCount - 2];
 
-            // ID number
-            ctx.font = '9px "Courier New", monospace';
-            ctx.fillStyle = '#ccc';
-            ctx.fillText('ID-2026-WY-001', W / 2, 580);
+                // Z-Rotation (Swing angle)
+                let angle = Math.atan2(last.y - prev.y, last.x - prev.x) - Math.PI / 2;
+                const maxSwing = Math.PI / 3;
+                angle = Math.max(-maxSwing, Math.min(maxSwing, angle));
+                const rotZ = angle * (180 / Math.PI);
 
-            const tex = new THREE.CanvasTexture(canvas);
-            tex.needsUpdate = true;
-            setTexture(tex);
+                // Y-Rotation (Spin momentum)
+                const vx = last.x - last.ox;
+                if (!isDragging.current) {
+                    cardVel.current.spin += vx * 0.08;
+                } else {
+                    cardVel.current.spin *= 0.8; // Dampen spin while holding
+                }
+                cardVel.current.spin *= 0.94; // Spin friction
+                const rotY = cardVel.current.spin;
+
+                // Apply 3D Transform
+                cardRef.current.style.transform = `translate(${last.x}px, ${last.y - 10}px) rotateZ(${rotZ}deg) rotateY(${rotY}deg)`;
+            }
+
+            animationFrameId = requestAnimationFrame(updatePhysics);
         };
 
-        const img = new Image();
-        img.crossOrigin = 'anonymous';
-        img.onload = () => draw(img);
-        img.onerror = () => draw();
-        img.src = '/resume.jpeg';
+        updatePhysics();
+
+        // Global mouse tracking for gentle sway when not dragging
+        const handleGlobalMove = (e: MouseEvent) => {
+            if (!isDragging.current) {
+                mousePos.current = { x: e.clientX, y: e.clientY };
+            }
+        };
+        window.addEventListener('mousemove', handleGlobalMove);
+
+        return () => {
+            cancelAnimationFrame(animationFrameId);
+            window.removeEventListener('mousemove', handleGlobalMove);
+        };
     }, []);
 
-    return texture;
-}
+    // --- Interaction Handlers ---
+    const handlePointerDown = (e: React.PointerEvent) => {
+        // Don't drag if clicking a button or link
+        if ((e.target as HTMLElement).closest('a') || (e.target as HTMLElement).closest('button')) return;
 
-// ── Band (physics rope + card) ────────────────────────────────────────────────
-interface BandProps {
-    maxSpeed?: number;
-    minSpeed?: number;
-    isMobile?: boolean;
-}
-
-function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
-    const band = useRef<any>(null);
-    const fixed = useRef<any>(null);
-    const j1 = useRef<any>(null);
-    const j2 = useRef<any>(null);
-    const j3 = useRef<any>(null);
-    const card = useRef<any>(null);
-
-    const vec = new THREE.Vector3();
-    const ang = new THREE.Vector3();
-    const rot = new THREE.Vector3();
-    const dir = new THREE.Vector3();
-
-    const segmentProps: any = {
-        type: 'dynamic',
-        canSleep: true,
-        colliders: false,
-        angularDamping: 4,
-        linearDamping: 4,
+        isDragging.current = true;
+        const last = points.current[segmentCount - 1];
+        dragOffset.current = {
+            x: e.clientX - last.x,
+            y: e.clientY - last.y
+        };
+        e.currentTarget.setPointerCapture(e.pointerId);
+        e.preventDefault(); // Stop text selection
     };
 
-    const { nodes } = useGLTF('/card.glb') as any;
-    const cardTexture = useCardTexture();
-
-    // Lanyard stripe texture
-    const lanyardTexture = useMemo(() => {
-        const c = document.createElement('canvas');
-        c.width = 64; c.height = 256;
-        const ctx = c.getContext('2d')!;
-        for (let y = 0; y < 256; y += 16) {
-            ctx.fillStyle = y % 32 === 0 ? '#d73a3a' : '#111111';
-            ctx.fillRect(0, y, 64, 16);
+    const handlePointerMove = (e: React.PointerEvent) => {
+        if (isDragging.current) {
+            mousePos.current = { x: e.clientX, y: e.clientY };
         }
-        const t = new THREE.CanvasTexture(c);
-        t.wrapS = t.wrapT = THREE.RepeatWrapping;
-        return t;
-    }, []);
+    };
 
-    const [curve] = useState(
-        () => new THREE.CatmullRomCurve3([
-            new THREE.Vector3(), new THREE.Vector3(),
-            new THREE.Vector3(), new THREE.Vector3(),
-        ])
-    );
-    const [dragged, drag] = useState<false | THREE.Vector3>(false);
-    const [hovered, hover] = useState(false);
-
-    useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1]);
-    useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1]);
-    useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1]);
-    useSphericalJoint(j3, card, [[0, 0, 0], [0, 1.45, 0]]);
-
-    useEffect(() => {
-        if (hovered) {
-            document.body.style.cursor = dragged ? 'grabbing' : 'grab';
-            return () => { document.body.style.cursor = 'auto'; };
+    const handlePointerUp = (e: React.PointerEvent) => {
+        if (isDragging.current) {
+            isDragging.current = false;
+            e.currentTarget.releasePointerCapture(e.pointerId);
         }
-    }, [hovered, dragged]);
+    };
 
-    useFrame((state, delta) => {
-        if (dragged && typeof dragged !== 'boolean') {
-            vec.set(state.pointer.x, state.pointer.y, 0.5).unproject(state.camera);
-            dir.copy(vec).sub(state.camera.position).normalize();
-            vec.add(dir.multiplyScalar(state.camera.position.length()));
-            [card, j1, j2, j3, fixed].forEach(ref => ref.current?.wakeUp());
-            card.current?.setNextKinematicTranslation({
-                x: vec.x - dragged.x,
-                y: vec.y - dragged.y,
-                z: vec.z - dragged.z,
-            });
-        }
-        if (fixed.current) {
-            [j1, j2].forEach(ref => {
-                if (!ref.current.lerped)
-                    ref.current.lerped = new THREE.Vector3().copy(ref.current.translation());
-                const clampedDistance = Math.max(
-                    0.1, Math.min(1, ref.current.lerped.distanceTo(ref.current.translation()))
-                );
-                ref.current.lerped.lerp(
-                    ref.current.translation(),
-                    delta * (minSpeed + clampedDistance * (maxSpeed - minSpeed))
-                );
-            });
-            curve.points[0].copy(j3.current.translation());
-            curve.points[1].copy(j2.current.lerped);
-            curve.points[2].copy(j1.current.lerped);
-            curve.points[3].copy(fixed.current.translation());
-            band.current.geometry.setPoints(curve.getPoints(isMobile ? 16 : 32));
-            ang.copy(card.current.angvel());
-            rot.copy(card.current.rotation());
-            card.current.setAngvel({ x: ang.x, y: ang.y - rot.y * 0.25, z: ang.z });
-        }
-    });
-
-    curve.curveType = 'chordal';
+    const handleCardMouseMove = (e: React.MouseEvent) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        setGlare({ x, y, opacity: 0.6 });
+    };
 
     return (
-        <>
-            <group position={[0, 4, 0]}>
-                <RigidBody ref={fixed} {...segmentProps} type="fixed" />
-                <RigidBody position={[0.5, 0, 0]} ref={j1} {...segmentProps} type="dynamic">
-                    <BallCollider args={[0.1]} />
-                </RigidBody>
-                <RigidBody position={[1, 0, 0]} ref={j2} {...segmentProps} type="dynamic">
-                    <BallCollider args={[0.1]} />
-                </RigidBody>
-                <RigidBody position={[1.5, 0, 0]} ref={j3} {...segmentProps} type="dynamic">
-                    <BallCollider args={[0.1]} />
-                </RigidBody>
-                <RigidBody
-                    position={[2, 0, 0]}
-                    ref={card}
-                    {...segmentProps}
-                    type={dragged ? 'kinematicPosition' : 'dynamic'}
+        <div className="fixed inset-0 z-[500] flex items-start justify-center" style={{ perspective: '1200px' }}>
+            {/* Dimmed Background */}
+            <div
+                className="absolute inset-0 transition-opacity animate-in fade-in duration-500"
+                style={{ background: 'rgba(10,10,10,0.85)', backdropFilter: 'blur(10px)' }}
+                onClick={onClose}
+            ></div>
+
+            {/* Dynamic 3D SVG Rope (Black Lanyard Style) */}
+            <svg className="absolute inset-0 w-full h-full z-10 overflow-visible pointer-events-none">
+                {/* Shadow */}
+                <path ref={shadowRef} fill="none" stroke="rgba(0,0,0,0.5)" strokeWidth="32" className="blur-md" transform="translate(0, 15)" />
+                {/* Main Base  - dark grey/black for lanyard */}
+                <path ref={pathRef} fill="none" stroke="#18181b" strokeWidth="26" strokeLinecap="round" strokeLinejoin="round" />
+                {/* Highlight Layer - slight sheen */}
+                <path ref={highlightRef} fill="none" stroke="#27272a" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+
+            {/* Draggable Card Assembly */}
+            <div
+                ref={cardRef}
+                className="absolute top-0 left-0 z-20 pointer-events-auto origin-[50%_10px]"
+                style={{
+                    marginLeft: '-190px', // Half of width
+                    width: '380px',
+                    transformStyle: 'preserve-3d',
+                    willChange: 'transform'
+                }}
+                onPointerDown={handlePointerDown}
+                onPointerMove={handlePointerMove}
+                onPointerUp={handlePointerUp}
+            >
+                {/* Clip connector */}
+                <div className="relative mx-auto w-14 h-20 flex flex-col items-center drop-shadow-xl z-20 -mb-6 pointer-events-none">
+                    {/* D-Ring Top */}
+                    <div className="w-8 h-8 rounded-full border-[5px] border-zinc-700 shadow-inner"></div>
+                    {/* Neck */}
+                    <div className="w-4 h-6 bg-gradient-to-b from-zinc-600 to-zinc-800 -mt-2 z-10"></div>
+                    {/* Clamp Base */}
+                    <div className="w-14 h-8 bg-gradient-to-b from-zinc-300 to-zinc-400 rounded-lg border border-zinc-500 shadow-[0_5px_15px_rgba(0,0,0,0.4)] relative flex items-center justify-center -mt-1">
+                        <div className="w-10 h-2 bg-zinc-200 rounded-full shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)]"></div>
+                        {/* Pin going through the card hole */}
+                        <div className="absolute -bottom-6 w-3 h-8 bg-zinc-700 rounded-b-xl shadow-md"></div>
+                    </div>
+                </div>
+
+                {/* The ID Badge Container */}
+                <div
+                    onMouseMove={handleCardMouseMove}
+                    onMouseLeave={() => setGlare(prev => ({ ...prev, opacity: 0 }))}
+                    className="relative w-full bg-[#FAFAFA] rounded-[1.5rem] overflow-hidden flex flex-col shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border border-slate-200 cursor-grab active:cursor-grabbing group select-none min-h-[580px]"
+                    style={{ transformStyle: 'preserve-3d' }}
                 >
-                    <CuboidCollider args={[0.8, 1.125, 0.01]} />
-                    <group
-                        scale={3.0}
-                        position={[0, -1.2, -0.05]}
-                        onPointerOver={() => hover(true)}
-                        onPointerOut={() => hover(false)}
-                        onPointerUp={(e: any) => {
-                            e.target.releasePointerCapture(e.pointerId);
-                            drag(false);
+                    {/* Card Hole Punch */}
+                    <div className="absolute top-4 left-1/2 -translate-x-1/2 w-8 h-3 bg-zinc-900 rounded-full shadow-[inset_0_4px_4px_rgba(0,0,0,0.8)] z-30"></div>
+
+                    {/* Interactive Plastic Glare Overlay */}
+                    <div
+                        className="absolute inset-0 z-50 pointer-events-none transition-opacity duration-300 rounded-[1.5rem]"
+                        style={{
+                            background: `radial-gradient(circle at ${glare.x}% ${glare.y}%, rgba(255,255,255,${glare.opacity}) 0%, rgba(255,255,255,0) 60%)`,
+                            mixBlendMode: 'hard-light'
                         }}
-                        onPointerDown={(e: any) => {
-                            e.target.setPointerCapture(e.pointerId);
-                            drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())));
-                        }}
+                    />
+
+                    {/* Red Accent Stripe matching Developer Log */}
+                    <div className="absolute left-0 top-0 bottom-0 w-3 bg-[#d73a3a] z-10"></div>
+
+                    <div className="flex-1 px-10 pt-16 pb-8 flex flex-col items-center relative z-20">
+                        {/* Profile Photo */}
+                        <div className="relative w-48 h-48 rounded-full bg-slate-50 shadow-[0_8px_20px_rgba(0,0,0,0.15)] border-[6px] border-[#d73a3a] mb-8 group-hover:scale-105 transition-transform duration-300">
+                            <img src={userData.photo} alt={userData.name} className="w-full h-full object-cover rounded-full pointer-events-none" draggable="false" />
+                        </div>
+
+                        {/* Profile Info */}
+                        <h2 className="text-4xl font-serif text-[#111] text-center mb-4">
+                            {userData.name}
+                        </h2>
+                        <div className="flex items-center text-gray-500 mb-6 font-mono text-sm tracking-widest border-b border-gray-200 pb-6 w-full justify-center">
+                            <p className="font-medium text-center">{userData.role}</p>
+                        </div>
+
+                        {/* Action Links */}
+                        <div className="w-full space-y-4 relative z-30 mt-2">
+                            <a
+                                href={userData.githubUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center w-full py-4 px-6 bg-[#111] text-white rounded-xl hover:bg-gray-800 transition-colors font-mono tracking-widest shadow-md active:scale-95 group/btn"
+                            >
+                                <Github className="w-6 h-6 mr-4 group-hover/btn:text-[#d73a3a] transition-colors" /> GH / wwaiyyee
+                            </a>
+                            <a
+                                href={userData.linkedinUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center w-full py-4 px-6 bg-[#0A66C2] text-white rounded-xl hover:bg-[#004182] transition-colors font-mono tracking-widest shadow-md active:scale-95 group/btn"
+                            >
+                                <Linkedin className="w-6 h-6 mr-4 group-hover/btn:text-blue-300 transition-colors" /> LI / lee-wai-yee
+                            </a>
+                        </div>
+                    </div>
+
+                    {/* Barcode Footer */}
+                    <div className="bg-gray-100 px-8 py-6 flex flex-col items-center border-t border-gray-200 mt-auto relative z-30">
+                        <div className="flex gap-[2px] h-12 mb-3 w-full justify-center opacity-80 mix-blend-multiply pointer-events-none">
+                            {[...Array(32)].map((_, i) => (
+                                <div key={i} className="bg-[#111] h-full rounded-sm" style={{ width: `${Math.random() * 4 + 1}px` }}></div>
+                            ))}
+                        </div>
+                        <div className="flex justify-between w-full uppercase">
+                            <p className="text-[10px] text-gray-400 font-mono tracking-[0.2em] font-bold">BATCH NO. 2026-X</p>
+                            <p className="text-[10px] text-gray-400 font-mono tracking-[0.2em] font-bold">{userData.idNumber}</p>
+                        </div>
+                    </div>
+
+                    {/* Close Button on Card */}
+                    <button
+                        onClick={onClose}
+                        className="absolute top-6 right-6 p-2 bg-gray-200 hover:bg-white text-gray-600 rounded-full transition-colors z-50 shadow-sm border border-gray-300 active:scale-95"
                     >
-                        <mesh geometry={nodes.card.geometry}>
-                            <meshPhysicalMaterial
-                                map={cardTexture ?? undefined}
-                                color={cardTexture ? '#ffffff' : '#f0f0ea'}
-                                clearcoat={isMobile ? 0 : 0.8}
-                                clearcoatRoughness={0.2}
-                                roughness={0.8}
-                                metalness={0.1}
-                            />
-                        </mesh>
-                        <mesh geometry={nodes.clip.geometry}>
-                            <meshStandardMaterial color="#aaaaaa" metalness={1} roughness={0.2} />
-                        </mesh>
-                        <mesh geometry={nodes.clamp.geometry}>
-                            <meshStandardMaterial color="#aaaaaa" metalness={1} roughness={0.2} />
-                        </mesh>
-                    </group>
-                </RigidBody>
-            </group>
-            <mesh ref={band}>
-                {/* @ts-expect-error meshline */}
-                <meshLineGeometry />
-                {/* @ts-expect-error meshline */}
-                <meshLineMaterial
-                    color="white"
-                    depthTest={false}
-                    resolution={isMobile ? [1000, 2000] : [1000, 1000]}
-                    useMap
-                    map={lanyardTexture}
-                    repeat={[-4, 1]}
-                    lineWidth={1.2}
-                />
-            </mesh>
-        </>
+                        <X className="w-6 h-6" />
+                    </button>
+                </div>
+            </div>
+        </div>
     );
 }
