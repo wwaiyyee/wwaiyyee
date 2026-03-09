@@ -396,20 +396,16 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             </section>
 
             {/* --- ACHIEVEMENTS (Full Width Table with Hover Image Effect) --- */}
-            <section id="achievements" className="py-32 bg-[#F2F2ED] relative border-t border-black cursor-default">
+            <section id="achievements" className="py-32 bg-[#F2F2ED] relative cursor-default">
                 <div className="px-6 md:px-12 mb-20 flex flex-col md:flex-row justify-between items-end">
                     <div>
                         <h2 className="text-4xl md:text-6xl font-serif text-[#111] mb-4">Exposure Log</h2>
                         <p className="text-gray-500 tracking-[0.3em] uppercase text-xs font-mono">Archive Index & Milestones</p>
                     </div>
-                    <div className="hidden md:flex items-center gap-3 text-xs font-mono text-gray-500 uppercase tracking-widest">
-                        <div className="w-2 h-2 bg-[#d73a3a] rounded-full animate-pulse"></div>
-                        Hover rows to view negatives
-                    </div>
                 </div>
 
                 {/* Full Width Table Container */}
-                <div 
+                <div
                     className="w-full border-t border-black"
                     onMouseMove={(e) => setMousePos({ x: e.clientX, y: e.clientY })}
                 >
@@ -423,13 +419,13 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
 
                     {/* Table Rows */}
                     {ACHIEVEMENTS.map((achieve: any, idx) => (
-                        <div 
-                            key={idx} 
+                        <div
+                            key={idx}
                             onMouseEnter={() => setHoveredAchieve(idx)}
                             onMouseLeave={() => setHoveredAchieve(null)}
                             className="w-full px-6 md:px-12 py-8 border-b border-black hover:bg-[#111] transition-colors group flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-0 relative z-10"
                         >
-                            
+
                             {/* FRAME & YEAR */}
                             <div className="w-full md:w-2/12 font-mono flex md:block items-center gap-4">
                                 <span className={`text-2xl md:text-3xl font-bold tracking-tighter transition-colors duration-300 ${achieve.highlight ? 'text-[#111] group-hover:text-white' : 'text-gray-400 group-hover:text-gray-600'}`}>
@@ -457,13 +453,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
 
                             {/* STATUS/HIGHLIGHT */}
                             <div className="w-full md:w-1/12 flex justify-start md:justify-end items-center mt-4 md:mt-0">
-                                {achieve.highlight ? (
-                                    <span className="text-[#d73a3a] border border-[#d73a3a] px-2 py-1 text-[10px] tracking-[0.2em] font-black font-mono uppercase rounded-sm opacity-60 group-hover:opacity-100 transition-opacity">
-                                        Selected
-                                    </span>
-                                ) : (
-                                    <ArrowUpRight size={16} className="text-[#111] group-hover:text-gray-400 transition-colors duration-300 hidden md:block" />
-                                )}
+                                <ArrowUpRight size={16} className="text-[#111] group-hover:text-gray-400 transition-colors duration-300 hidden md:block" />
                             </div>
 
                         </div>
@@ -494,7 +484,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                                     {ACHIEVEMENTS[hoveredAchieve].year}
                                 </span>
                             </div>
-                            
+
                             {/* Inner Image Frame */}
                             <div className="flex-1 border border-black overflow-hidden relative grayscale contrast-125">
                                 <img
