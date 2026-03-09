@@ -541,8 +541,11 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                         >
                             {/* Polaroid Image Area (Resume Preview) */}
                             <div className="w-full h-[180px] md:h-[220px] bg-[#ddd] border border-black/10 flex flex-col items-center justify-center mb-4 relative overflow-hidden pointer-events-none">
-                                <span className="font-serif text-black text-2xl md:text-3xl font-bold italic mb-2">Resume</span>
-                                <span className="font-mono text-gray-500 text-[10px] md:text-xs tracking-widest uppercase border-t border-gray-400 pt-2">Chloe Lee</span>
+                                <img
+                                    src="/resume.jpeg"
+                                    alt="Resume Preview"
+                                    className="w-full h-full object-cover"
+                                />
                             </div>
                             {/* Action Buttons */}
                             <div className="flex gap-2 md:gap-4 w-full">
