@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { ArrowUpRight } from 'lucide-react';
+import { NavBar } from '../../components/NavBar';
 
 const PROJECTS = [
   {
@@ -95,6 +96,8 @@ const WorkPage = () => {
   return (
     <div className="bg-[#F2F2ED] text-[#111111] min-h-screen font-sans overflow-hidden flex flex-col selection:bg-[#111111] selection:text-[#F2F2ED]">
       
+      <NavBar />
+
       {/* --- TOP LEFT: MAIN TITLE --- */}
       <div className="fixed top-12 left-12 z-50 max-w-sm pointer-events-auto">
         <h1 className="text-7xl font-black italic tracking-tighter leading-[0.85] uppercase">
@@ -104,13 +107,6 @@ const WorkPage = () => {
           Contact ↗
         </button>
       </div>
-
-      {/* --- TOP RIGHT: NAV --- */}
-      <nav className="fixed top-12 right-12 z-50 flex gap-6 pointer-events-auto">
-        <span className="text-[10px] uppercase tracking-widest font-bold border-b border-[#111111]">Projects</span>
-        <span className="text-[10px] uppercase tracking-widest text-zinc-500 hover:text-[#111111] cursor-pointer transition-colors" onClick={() => window.location.href='/about'}>About</span>
-        <div className="w-2.5 h-2.5 bg-[#111111] rounded-full ml-4"></div>
-      </nav>
 
       {/* --- BOTTOM LEFT: PROJECT TITLE --- */}
       <div className="fixed bottom-12 left-12 z-50 pointer-events-none">
