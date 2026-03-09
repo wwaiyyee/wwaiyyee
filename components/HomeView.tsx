@@ -599,7 +599,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                         }}
                         className="relative z-20 mb-4 font-serif italic text-[#111]/40 hover:text-[#111]/70 transition-all duration-300 cursor-pointer"
                     >
-                        <span className={`transition-all duration-500 ${isRewinding ? 'opacity-0 text-sm pointer-events-none absolute inset-0 flex items-center justify-center' : 'opacity-100 text-sm flex items-center justify-center'}`}>watching the film rewind</span>
+                        <span className={`transition-all duration-500 ${isRewinding ? 'opacity-0 text-lg md:text-xl pointer-events-none absolute inset-0 flex items-center justify-center' : 'opacity-100 text-lg md:text-xl flex items-center justify-center'}`}>watching the film rewind</span>
                         <span className={`transition-all duration-500 ${isRewinding ? 'opacity-100 text-xl md:text-2xl text-[#111]/70 flex items-center justify-center whitespace-nowrap' : 'opacity-0 text-xl pointer-events-none absolute inset-0 flex items-center justify-center'}`}>let&apos;s go back to the first frame!</span>
                     </button>
                 </div>
