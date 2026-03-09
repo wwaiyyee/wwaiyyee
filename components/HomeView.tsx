@@ -22,7 +22,8 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
     const [hoveredProject, setHoveredProject] = useState<string | null>(null);
     const [scrolled, setScrolled] = useState(false);
     const [scrollY, setScrollY] = useState(0);
-
+    const [hoveredAchieve, setHoveredAchieve] = useState<number | null>(null);
+    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const projectsRef = React.useRef<HTMLElement>(null);
     const filmStripRef = React.useRef<HTMLDivElement>(null);
     const [sectionHeight, setSectionHeight] = useState("100vh");
@@ -394,88 +395,117 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
 
             </section>
 
-            {/* --- ACHIEVEMENTS (The Exposure Logbook) --- */}
-            <section id="achievements" className="py-32 bg-[#F2F2ED] relative border-t border-black">
-                <div className="w-full">
-                    <div className="text-center mb-24 px-6 md:px-12">
+            {/* --- ACHIEVEMENTS (Full Width Table with Hover Image Effect) --- */}
+            <section id="achievements" className="py-32 bg-[#F2F2ED] relative border-t border-black cursor-default">
+                <div className="px-6 md:px-12 mb-20 flex flex-col md:flex-row justify-between items-end">
+                    <div>
                         <h2 className="text-4xl md:text-6xl font-serif text-[#111] mb-4">Exposure Log</h2>
                         <p className="text-gray-500 tracking-[0.3em] uppercase text-xs font-mono">Archive Index & Milestones</p>
                     </div>
+                    <div className="hidden md:flex items-center gap-3 text-xs font-mono text-gray-500 uppercase tracking-widest">
+                        <div className="w-2 h-2 bg-[#d73a3a] rounded-full animate-pulse"></div>
+                        Hover rows to view negatives
+                    </div>
+                </div>
 
-                    {/* The Logbook Container */}
-                    <div className="w-full relative">
-                        
-                        <div className="px-6 md:px-12 pt-16">
+                {/* Full Width Table Container */}
+                <div 
+                    className="w-full border-t border-black"
+                    onMouseMove={(e) => setMousePos({ x: e.clientX, y: e.clientY })}
+                >
+                    {/* Table Header (Hidden on Mobile) */}
+                    <div className="hidden md:flex w-full px-12 py-4 border-b border-black text-[10px] text-gray-400 uppercase tracking-[0.2em] font-mono font-bold bg-[#E8E8E2]">
+                        <div className="w-2/12">Frame / Date</div>
+                        <div className="w-4/12">Subject / Event</div>
+                        <div className="w-5/12">Developer Notes</div>
+                        <div className="w-1/12 text-right">Status</div>
+                    </div>
+
+                    {/* Table Rows */}
+                    {ACHIEVEMENTS.map((achieve: any, idx) => (
+                        <div 
+                            key={idx} 
+                            onMouseEnter={() => setHoveredAchieve(idx)}
+                            onMouseLeave={() => setHoveredAchieve(null)}
+                            className="w-full px-6 md:px-12 py-8 border-b border-black hover:bg-[#111] transition-colors group flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-0 relative z-10"
+                        >
                             
-                            {/* Table Header (Hidden on Mobile) */}
-                            <div className="hidden md:grid grid-cols-12 gap-6 border-b-2 border-black pb-4 mb-4 text-[10px] text-gray-400 uppercase tracking-[0.2em] font-mono font-bold">
-                                <div className="col-span-2">Frame / Date</div>
-                                <div className="col-span-4">Subject / Event</div>
-                                <div className="col-span-6">Developer Notes</div>
+                            {/* FRAME & YEAR */}
+                            <div className="w-full md:w-2/12 font-mono flex md:block items-center gap-4">
+                                <span className={`text-2xl md:text-3xl font-bold tracking-tighter transition-colors duration-300 ${achieve.highlight ? 'text-[#111] group-hover:text-white' : 'text-gray-400 group-hover:text-gray-600'}`}>
+                                    {achieve.frame}
+                                </span>
+                                <span className="text-xs text-gray-500 tracking-widest block md:mt-1 group-hover:text-gray-400 transition-colors duration-300">{achieve.year}</span>
                             </div>
 
-                            {/* Log Entries */}
-                            <div className="space-y-0">
-                                {ACHIEVEMENTS.map((achieve: any, idx) => (
-                                    <div 
-                                        key={idx} 
-                                        className="relative grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 md:py-10 border-b border-black md:border-dashed last:border-0 group hover:bg-[#111] hover:text-[#F2F2ED] transition-colors duration-300 p-6 md:px-4 cursor-default"
-                                    >
-                                        
-                                        {/* FRAME & YEAR */}
-                                        <div className="col-span-2 flex flex-row md:flex-col justify-between md:justify-start items-center md:items-start font-mono">
-                                            <div className="relative inline-block">
-                                                {/* Red Grease Pencil Circle Highlight */}
-                                                {achieve.highlight && (
-                                                    <svg className="absolute -inset-4 w-[calc(100%+32px)] h-[calc(100%+32px)] pointer-events-none z-20 transition-opacity duration-300 group-hover:opacity-100" viewBox="0 0 100 100" preserveAspectRatio="none">
-                                                        <path 
-                                                            d="M 50,15 C 80,10 90,40 85,75 C 80,100 30,95 15,75 C 5,50 20,20 50,15" 
-                                                            fill="none" 
-                                                            stroke="#d73a3a" 
-                                                            strokeWidth="2.5" 
-                                                            strokeLinecap="round"
-                                                            className="opacity-90 drop-shadow-[0_0_8px_rgba(215,58,58,0.4)]"
-                                                        />
-                                                    </svg>
-                                                )}
-                                                <span className={`text-2xl md:text-3xl font-bold tracking-tighter transition-colors duration-300 ${achieve.highlight ? 'text-[#111] group-hover:text-white' : 'text-gray-400 group-hover:text-gray-600'}`}>
-                                                    {achieve.frame}
-                                                </span>
-                                            </div>
-                                            <span className="text-xs text-gray-500 tracking-widest mt-0 md:mt-2 group-hover:text-gray-400 transition-colors duration-300">{achieve.year}</span>
-                                        </div>
+                            {/* SUBJECT & EVENT */}
+                            <div className="w-full md:w-4/12 flex flex-col justify-center pr-4">
+                                <h3 className={`text-xl font-serif mb-1 transition-colors duration-300 ${achieve.highlight ? 'text-[#111] group-hover:text-white' : 'text-[#333] group-hover:text-gray-300'}`}>
+                                    {achieve.title}
+                                </h3>
+                                <h4 className="text-[10px] md:text-xs text-gray-500 font-mono tracking-[0.15em] uppercase group-hover:text-gray-400 transition-colors duration-300">
+                                    {achieve.event}
+                                </h4>
+                            </div>
 
-                                        {/* SUBJECT & EVENT */}
-                                        <div className="col-span-4 flex flex-col justify-center">
-                                            <h3 className={`text-xl font-serif mb-1 transition-colors duration-300 ${achieve.highlight ? 'text-[#111] group-hover:text-white' : 'text-[#333] group-hover:text-[#ccc]'}`}>
-                                                {achieve.title}
-                                            </h3>
-                                            <h4 className="text-[10px] md:text-xs text-gray-500 font-mono tracking-[0.15em] uppercase group-hover:text-gray-400 transition-colors duration-300">
-                                                {achieve.event}
-                                            </h4>
-                                        </div>
+                            {/* NOTES */}
+                            <div className="w-full md:w-5/12 pr-4">
+                                <p className="text-sm text-gray-600 leading-relaxed font-sans group-hover:text-gray-400 transition-colors duration-300">
+                                    {achieve.desc}
+                                </p>
+                            </div>
 
-                                        {/* NOTES & STAMP */}
-                                        <div className="col-span-6 flex flex-col justify-center relative">
-                                            <p className="text-sm text-gray-600 leading-relaxed font-sans pr-0 md:pr-12 group-hover:text-gray-300 transition-colors duration-300">
-                                                {achieve.desc}
-                                            </p>
-                                            
-                                            {/* Red "SELECT" Stamp on Hover for Highlighted items */}
-                                            {achieve.highlight && (
-                                                <div className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden lg:block">
-                                                    <span className="text-[#d73a3a] border-2 border-[#d73a3a] px-3 py-1 text-[10px] tracking-[0.4em] font-black font-mono uppercase rotate-[-15deg] inline-block shadow-[0_0_10px_rgba(215,58,58,0.2)]">
-                                                        Selected
-                                                    </span>
-                                                </div>
-                                            )}
-                                        </div>
+                            {/* STATUS/HIGHLIGHT */}
+                            <div className="w-full md:w-1/12 flex justify-start md:justify-end items-center mt-4 md:mt-0">
+                                {achieve.highlight ? (
+                                    <span className="text-[#d73a3a] border border-[#d73a3a] px-2 py-1 text-[10px] tracking-[0.2em] font-black font-mono uppercase rounded-sm opacity-60 group-hover:opacity-100 transition-opacity">
+                                        Selected
+                                    </span>
+                                ) : (
+                                    <ArrowUpRight size={16} className="text-[#111] group-hover:text-gray-400 transition-colors duration-300 hidden md:block" />
+                                )}
+                            </div>
 
-                                    </div>
-                                ))}
+                        </div>
+                    ))}
+                </div>
+
+                {/* Floating Cursor Image Effect */}
+                <div
+                    className="fixed pointer-events-none z-[100] overflow-hidden border border-black shadow-[0_20px_50px_rgba(0,0,0,0.3)] bg-[#F2F2ED]"
+                    style={{
+                        left: mousePos.x,
+                        top: mousePos.y,
+                        width: '320px',
+                        height: '220px',
+                        transform: `translate(-50%, -50%) scale(${hoveredAchieve !== null ? 1 : 0.8}) rotate(${hoveredAchieve !== null ? (hoveredAchieve % 2 === 0 ? '2deg' : '-2deg') : '0deg'})`,
+                        opacity: hoveredAchieve !== null ? 1 : 0,
+                        transition: 'opacity 0.3s ease-out, transform 0.3s ease-out',
+                    }}
+                >
+                    {hoveredAchieve !== null && ACHIEVEMENTS[hoveredAchieve] && (
+                        <div className="w-full h-full p-2 flex flex-col">
+                            {/* Image Header */}
+                            <div className="flex justify-between items-center mb-2 px-1">
+                                <span className="text-[8px] font-mono font-bold tracking-widest text-[#111]">
+                                    TAKE {ACHIEVEMENTS[hoveredAchieve].frame}
+                                </span>
+                                <span className="text-[8px] font-mono tracking-widest text-[#111]">
+                                    {ACHIEVEMENTS[hoveredAchieve].year}
+                                </span>
+                            </div>
+                            
+                            {/* Inner Image Frame */}
+                            <div className="flex-1 border border-black overflow-hidden relative grayscale contrast-125">
+                                <img
+                                    src={ACHIEVEMENTS[hoveredAchieve].img}
+                                    alt=""
+                                    className="w-full h-full object-cover"
+                                />
+                                <div className="absolute inset-0 bg-[#111] mix-blend-color opacity-20 pointer-events-none"></div>
                             </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             </section>
 

@@ -56,7 +56,8 @@ export const ACHIEVEMENTS = [
         title: 'Lead Frontend Engineer',
         event: 'Tech Innovations',
         desc: 'Spearheaded the development of a next-generation predictive dashboard, improving real-time data visualization performance by 40%.',
-        highlight: true
+        highlight: true,
+        img: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=400'
     },
     {
         frame: '09',
@@ -64,7 +65,8 @@ export const ACHIEVEMENTS = [
         title: 'UI/UX Designer',
         event: 'Fintech Solutions',
         desc: 'Redesigned the core trading terminal interface, resulting in a 98% positive usability score from institutional pilot users.',
-        highlight: false
+        highlight: false,
+        img: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=400'
     },
     {
         frame: '08',
@@ -72,7 +74,8 @@ export const ACHIEVEMENTS = [
         title: 'Full Stack Developer',
         event: 'Media Verification API',
         desc: 'Built a robust API and frontend platform for deepfake detection, adopted by major newsrooms for media fact-checking.',
-        highlight: true
+        highlight: true,
+        img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=400'
     },
     {
         frame: '07',
@@ -80,6 +83,7 @@ export const ACHIEVEMENTS = [
         title: 'Creative Technologist',
         event: 'Digital Art Exhibition',
         desc: 'Created an interactive WebGL particle experience that visualizes sound frequencies, featured in multiple digital art galleries worldwide.',
-        highlight: false
+        highlight: false,
+        img: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&q=80&w=400'
     }
 ];
