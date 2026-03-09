@@ -536,7 +536,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                             drag={photoPrinted}
                             dragMomentum={false}
                             whileDrag={{ scale: 1.05, cursor: 'grabbing', zIndex: 50, rotate: 0 }}
-                            className="w-full bg-[#F2F2ED] p-3 shadow-2xl flex flex-col items-center origin-center"
+                            className="w-full bg-[#050505] p-3 shadow-2xl flex flex-col items-center origin-center rounded-sm border border-white/10"
                             style={{ rotate: '-2deg', cursor: photoPrinted ? 'grab' : 'default' }}
                         >
                             {/* Polaroid Image Area (Resume Preview) */}
@@ -549,8 +549,8 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                             </div>
                             {/* Action Buttons */}
                             <div className="flex gap-2 md:gap-4 w-full">
-                                <button onPointerDown={(e) => e.stopPropagation()} onClick={() => setIsResumeModalOpen(true)} className="flex-1 text-center bg-[#050505] text-white text-[10px] md:text-xs py-3 font-mono font-bold tracking-widest hover:bg-gray-900 transition-colors">REVIEW</button>
-                                <a onPointerDown={(e) => e.stopPropagation()} href="/Resume.pdf" download className="flex-1 text-center border-2 border-[#050505] text-[#050505] text-[10px] md:text-xs py-3 font-mono font-bold tracking-widest hover:bg-[#e0e0e0] transition-colors">DOWNLOAD</a>
+                                <button onPointerDown={(e) => e.stopPropagation()} onClick={() => setIsResumeModalOpen(true)} className="flex-1 text-center bg-[#F2F2ED] text-[#050505] text-[10px] md:text-xs py-3 font-mono font-bold tracking-widest hover:bg-white transition-colors">REVIEW</button>
+                                <a onPointerDown={(e) => e.stopPropagation()} href="/Resume.pdf" download className="flex-1 text-center border-2 border-[#F2F2ED] text-[#F2F2ED] text-[10px] md:text-xs py-3 font-mono font-bold tracking-widest hover:bg-[#111] transition-colors">DOWNLOAD</a>
                             </div>
                         </motion.div>
                     </div>
