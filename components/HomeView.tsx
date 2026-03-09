@@ -536,18 +536,18 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                             drag={photoPrinted}
                             dragMomentum={false}
                             whileDrag={{ scale: 1.05, cursor: 'grabbing', zIndex: 50, rotate: 0 }}
-                            className="w-full bg-[#F2F2ED] p-3 shadow-2xl flex flex-col items-center origin-center"
+                            className="w-full bg-[#111] p-3 shadow-[0_20px_50px_rgba(0,0,0,0.8)] flex flex-col items-center origin-center border border-gray-800"
                             style={{ rotate: '-2deg', cursor: photoPrinted ? 'grab' : 'default' }}
                         >
                             {/* Polaroid Image Area (Resume Preview) */}
-                            <div className="w-full h-[180px] md:h-[220px] bg-[#ddd] border border-black/10 flex flex-col items-center justify-center mb-4 relative overflow-hidden pointer-events-none">
-                                <span className="font-serif text-black text-2xl md:text-3xl font-bold italic mb-2">Resume</span>
-                                <span className="font-mono text-gray-500 text-[10px] md:text-xs tracking-widest uppercase border-t border-gray-400 pt-2">Chloe Lee</span>
+                            <div className="w-full h-[180px] md:h-[220px] bg-[#222] border border-white/10 flex flex-col items-center justify-center mb-4 relative overflow-hidden pointer-events-none">
+                                <span className="font-serif text-white text-2xl md:text-3xl font-bold italic mb-2">Resume</span>
+                                <span className="font-mono text-gray-400 text-[10px] md:text-xs tracking-widest uppercase border-t border-gray-600 pt-2">Chloe Lee</span>
                             </div>
                             {/* Action Buttons */}
                             <div className="flex gap-2 md:gap-4 w-full">
-                                <button onPointerDown={(e) => e.stopPropagation()} onClick={() => setIsResumeModalOpen(true)} className="flex-1 text-center bg-[#111] text-white text-[10px] md:text-xs py-3 font-mono font-bold tracking-widest hover:bg-gray-800 transition-colors">REVIEW</button>
-                                <a onPointerDown={(e) => e.stopPropagation()} href="/Resume.pdf" download className="flex-1 text-center border-2 border-[#111] text-[#111] text-[10px] md:text-xs py-3 font-mono font-bold tracking-widest hover:bg-[#e0e0e0] transition-colors">DOWNLOAD</a>
+                                <button onPointerDown={(e) => e.stopPropagation()} onClick={() => setIsResumeModalOpen(true)} className="flex-1 text-center bg-white text-black text-[10px] md:text-xs py-3 font-mono font-bold tracking-widest hover:bg-gray-200 transition-colors">REVIEW</button>
+                                <a onPointerDown={(e) => e.stopPropagation()} href="/Resume.pdf" download className="flex-1 text-center border-2 border-white text-white text-[10px] md:text-xs py-3 font-mono font-bold tracking-widest hover:bg-white/10 transition-colors">DOWNLOAD</a>
                             </div>
                         </motion.div>
                     </div>
