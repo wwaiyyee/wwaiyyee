@@ -70,8 +70,8 @@ function PhysicsLanyard({ userData, onClose }: any) {
 
             // 2. Constraints Solver (Rigidity & Dragging)
             for (let iter = 0; iter < 12; iter++) {
-                // Pin Top (gentle sway towards global mouse x)
-                points.current[0].x += ((currentOriginX + (mousePos.current.x - currentOriginX) * 0.1) - points.current[0].x) * 0.1;
+                // Pin Top firmly to the center
+                points.current[0].x = currentOriginX;
                 points.current[0].y = originY;
 
                 // Pin Bottom if dragging
