@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { ArrowRight, ArrowUpRight, Aperture } from 'lucide-react';
-import { PROJECTS } from './projects';
+import { PROJECTS, ACHIEVEMENTS } from './projects';
 import { Marquee } from './Marquee';
 
 const SCATTERED_ITEMS = [
@@ -394,78 +394,96 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
 
             </section>
 
-            {/* 5. ACHIEVEMENTS — Film-Themed */}
-            <section id="about" className="bg-[#F2F2ED] px-6 md:px-12 py-24 overflow-hidden">
-
-                {/* Section header — film slate style */}
-                <div className="flex items-center gap-6 mb-16">
-                    <div className="flex flex-col">
-                        <span className="font-mono text-[10px] tracking-[0.4em] text-gray-400 uppercase">PROD. WAI YEE</span>
-                        <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-[#111] leading-none">The Credits</h2>
-                        <span className="font-mono text-[10px] tracking-[0.4em] text-gray-400 uppercase mt-1">SCENE 01 — TAKE 01</span>
+            {/* --- ACHIEVEMENTS (The Exposure Logbook) --- */}
+            <section id="achievements" className="py-32 px-6 bg-[#F2F2ED] relative border-t border-black">
+                <div className="max-w-5xl mx-auto">
+                    <div className="text-center mb-24">
+                        <h2 className="text-4xl md:text-6xl font-serif text-[#111] mb-4">Exposure Log</h2>
+                        <p className="text-gray-500 tracking-[0.3em] uppercase text-xs font-mono">Archive Index & Milestones</p>
                     </div>
-                    <div className="ml-auto hidden md:flex flex-col items-end gap-1 font-mono text-[10px] text-gray-400 tracking-widest">
-                        <span>▶ ROLL</span>
-                        <span>35mm</span>
-                    </div>
-                </div>
 
-                {/* Film strip stats row */}
-                <div className="relative">
-                    {/* Top perforations */}
-                    <div className="h-4 w-full bg-[#111]" style={{ maskImage: 'repeating-linear-gradient(to right, black 0px, black 6px, transparent 6px, transparent 12px, black 12px, black 20px, transparent 20px, transparent 32px)', WebkitMaskImage: 'repeating-linear-gradient(to right, black 0px, black 6px, transparent 6px, transparent 12px, black 12px, black 20px, transparent 20px, transparent 32px)' }}></div>
+                    {/* The Logbook Container */}
+                    <div className="bg-[#111] shadow-2xl relative rounded-b-md">
 
-                    {/* Stats row — black film frame */}
-                    <div className="bg-[#111] py-10 px-6 md:px-12 grid grid-cols-2 md:grid-cols-4 gap-0 divide-x divide-gray-800">
-                        {[
-                            { frame: '01', label: 'Projects Shipped', value: '10+', sub: 'across 3 countries' },
-                            { frame: '02', label: 'Years of Craft', value: '3+', sub: 'design × engineering' },
-                            { frame: '03', label: 'Industries', value: '5+', sub: 'fintech · health · gov' },
-                            { frame: '04', label: 'Cups of Coffee', value: '∞', sub: 'no plans to stop' },
-                        ].map(({ frame, label, value, sub }) => (
-                            <div key={frame} className="flex flex-col items-center justify-center py-6 px-4 gap-2 text-center">
-                                <span className="font-mono text-[9px] text-gray-600 tracking-[0.4em]">FRAME {frame}</span>
-                                <span className="text-4xl md:text-6xl font-black text-[#F2F2ED] tracking-tighter leading-none">{value}</span>
-                                <span className="font-mono text-[10px] text-gray-300 tracking-[0.15em] uppercase">{label}</span>
-                                <span className="font-mono text-[9px] text-gray-600 tracking-widest">{sub}</span>
+                        {/* Binder Ring / Spiral Edge Detail */}
+                        <div className="absolute top-0 left-0 w-full h-6 bg-black border-b border-gray-900 flex justify-evenly items-center px-4">
+                            {[...Array(24)].map((_, i) => (
+                                <div key={i} className="w-4 md:w-8 h-2 bg-[#111] rounded-full border border-gray-900 shadow-inner"></div>
+                            ))}
+                        </div>
+
+                        <div className="p-6 md:p-12 pt-16">
+
+                            {/* Table Header (Hidden on Mobile) */}
+                            <div className="hidden md:grid grid-cols-12 gap-6 border-b-2 border-gray-700 pb-4 mb-8 text-[10px] text-gray-500 uppercase tracking-[0.2em] font-mono font-bold">
+                                <div className="col-span-2">Frame / Date</div>
+                                <div className="col-span-4">Subject / Event</div>
+                                <div className="col-span-6">Developer Notes</div>
                             </div>
-                        ))}
-                    </div>
 
-                    {/* Bottom perforations */}
-                    <div className="h-4 w-full bg-[#111]" style={{ maskImage: 'repeating-linear-gradient(to right, black 0px, black 6px, transparent 6px, transparent 12px, black 12px, black 20px, transparent 20px, transparent 32px)', WebkitMaskImage: 'repeating-linear-gradient(to right, black 0px, black 6px, transparent 6px, transparent 12px, black 12px, black 20px, transparent 20px, transparent 32px)' }}></div>
-                </div>
+                            {/* Log Entries */}
+                            <div className="space-y-8 md:space-y-0">
+                                {ACHIEVEMENTS.map((achieve: any, idx) => (
+                                    <div
+                                        key={idx}
+                                        className="relative grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 md:py-8 border-b border-gray-800/50 md:border-dashed last:border-0 group hover:bg-[#111] transition-colors p-4 md:p-0 -mx-4 md:mx-0 rounded-md md:rounded-none"
+                                    >
 
-                {/* Film credits roll — bio text */}
-                <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-                    <div>
-                        <p className="font-mono text-[10px] tracking-[0.4em] text-gray-400 uppercase mb-4">Director's Cut</p>
-                        <p className="text-xl md:text-2xl font-bold text-[#111] leading-snug tracking-tight">
-                            A product designer and full-stack developer crafting digital experiences that are fast, purposeful, and impossible to ignore.
-                        </p>
-                        <a href="#connect" className="mt-8 inline-flex items-center gap-2 font-mono text-xs tracking-[0.3em] uppercase text-[#111] border-b border-[#111] pb-1 hover:opacity-50 transition-opacity">
-                            Let's collaborate <ArrowUpRight size={14} />
-                        </a>
-                    </div>
+                                        {/* FRAME & YEAR */}
+                                        <div className="col-span-2 flex flex-row md:flex-col justify-between md:justify-start items-center md:items-start font-mono">
+                                            <div className="relative inline-block">
+                                                {/* Red Grease Pencil Circle Highlight */}
+                                                {achieve.highlight && (
+                                                    <svg className="absolute -inset-4 w-[calc(100%+32px)] h-[calc(100%+32px)] pointer-events-none z-20" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                                        <path
+                                                            d="M 50,15 C 80,10 90,40 85,75 C 80,100 30,95 15,75 C 5,50 20,20 50,15"
+                                                            fill="none"
+                                                            stroke="#d73a3a"
+                                                            strokeWidth="2.5"
+                                                            strokeLinecap="round"
+                                                            className="opacity-90 drop-shadow-[0_0_8px_rgba(215,58,58,0.4)]"
+                                                        />
+                                                    </svg>
+                                                )}
+                                                <span className={`text-2xl md:text-3xl font-bold tracking-tighter ${achieve.highlight ? 'text-white' : 'text-gray-600'}`}>
+                                                    {achieve.frame}
+                                                </span>
+                                            </div>
+                                            <span className="text-xs text-gray-500 tracking-widest mt-0 md:mt-2">{achieve.year}</span>
+                                        </div>
 
-                    {/* Film credits list */}
-                    <div className="border-l-2 border-[#111] pl-8 space-y-5">
-                        <p className="font-mono text-[10px] tracking-[0.4em] text-gray-400 uppercase mb-4">Skills &amp; Roles</p>
-                        {[
-                            ['UI / UX Design', 'Figma · Prototyping · Systems'],
-                            ['Frontend', 'React · Next.js · TypeScript'],
-                            ['Backend', 'Node.js · Python · REST APIs'],
-                            ['Data & AI', 'ML Models · Visualisation'],
-                            ['Creative Direction', 'Branding · Motion · Editorial'],
-                        ].map(([role, tools]) => (
-                            <div key={role} className="flex items-baseline justify-between gap-4">
-                                <span className="font-bold text-sm text-[#111]">{role}</span>
-                                <span className="font-mono text-[10px] text-gray-400 text-right">{tools}</span>
+                                        {/* SUBJECT & EVENT */}
+                                        <div className="col-span-4 flex flex-col justify-center">
+                                            <h3 className={`text-xl font-serif mb-1 ${achieve.highlight ? 'text-white' : 'text-gray-300'}`}>
+                                                {achieve.title}
+                                            </h3>
+                                            <h4 className="text-[10px] md:text-xs text-gray-500 font-mono tracking-[0.15em] uppercase">
+                                                {achieve.event}
+                                            </h4>
+                                        </div>
+
+                                        {/* NOTES & STAMP */}
+                                        <div className="col-span-6 flex flex-col justify-center relative">
+                                            <p className="text-sm text-gray-400 leading-relaxed font-sans pr-0 md:pr-12">
+                                                {achieve.desc}
+                                            </p>
+
+                                            {/* Red "SELECT" Stamp on Hover for Highlighted items */}
+                                            {achieve.highlight && (
+                                                <div className="absolute right-0 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden lg:block">
+                                                    <span className="text-[#d73a3a] border-2 border-[#d73a3a] px-3 py-1 text-[10px] tracking-[0.4em] font-black font-mono uppercase rotate-[-15deg] inline-block shadow-[0_0_10px_rgba(215,58,58,0.2)]">
+                                                        Selected
+                                                    </span>
+                                                </div>
+                                            )}
+                                        </div>
+
+                                    </div>
+                                ))}
                             </div>
-                        ))}
+                        </div>
                     </div>
                 </div>
-
             </section>
 
             {/* 6. FOOTER */}
