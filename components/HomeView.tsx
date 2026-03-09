@@ -556,12 +556,12 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                             <button
                                 onClick={handleSnapPhoto}
                                 disabled={photoPrinted || isSnapping}
-                                className={`w-8 h-8 md:w-12 md:h-12 rounded-full transition-all duration-300 ${isSnapping || photoPrinted ? 'scale-95' : 'hover:scale-110 cursor-pointer'} bg-transparent flex items-center justify-center`}
+                                className={`w-14 h-14 md:w-16 md:h-16 rounded-full transition-all duration-300 ${isSnapping || photoPrinted ? 'scale-95' : 'hover:scale-110 cursor-pointer'} bg-transparent flex items-center justify-center`}
                                 aria-label="Snap Photo"
                             ></button>
 
                             {!photoPrinted && (
-                                <div className="flex flex-col items-center text-white/90 pointer-events-none drop-shadow-md absolute -top-28 md:-top-32 -translate-y-2">
+                                <div className="flex flex-col items-center text-white/90 pointer-events-none drop-shadow-md absolute -top-28 md:-top-32 -left-8 md:-left-12 -translate-y-2">
                                     <span className="font-mono text-sm tracking-[0.2em] font-bold uppercase whitespace-nowrap px-2 py-1.5 mb-2 origin-bottom rotate-[-2deg]">Expose to Reveal!</span>
                                     {/* Hand-drawn style arrow pointing down towards the button */}
                                     <svg className="w-8 h-12 text-white/80 -translate-x-2" viewBox="0 0 40 60" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
