@@ -216,8 +216,8 @@ function PhysicsLanyard({ userData, onClose }: any) {
                 ref={cardRef}
                 className="absolute top-0 left-0 z-20 pointer-events-auto origin-[50%_10px]"
                 style={{
-                    marginLeft: '-190px', // Half of width
-                    width: '380px',
+                    marginLeft: '-160px', // Half of width
+                    width: '320px',
                     transformStyle: 'preserve-3d',
                     willChange: 'transform'
                 }}
@@ -243,7 +243,7 @@ function PhysicsLanyard({ userData, onClose }: any) {
                 <div
                     onMouseMove={handleCardMouseMove}
                     onMouseLeave={() => setGlare(prev => ({ ...prev, opacity: 0 }))}
-                    className="relative w-full bg-[#FAFAFA] rounded-[1.5rem] overflow-hidden flex flex-col shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border border-slate-200 cursor-grab active:cursor-grabbing group select-none min-h-[580px]"
+                    className="relative w-full bg-[#FAFAFA] rounded-[1.5rem] overflow-hidden flex flex-col shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border border-slate-200 cursor-grab active:cursor-grabbing group select-none pb-8"
                     style={{ transformStyle: 'preserve-3d' }}
                 >
                     {/* Card Hole Punch */}
@@ -258,12 +258,9 @@ function PhysicsLanyard({ userData, onClose }: any) {
                         }}
                     />
 
-                    {/* Red Accent Stripe matching Developer Log */}
-                    <div className="absolute left-0 top-0 bottom-0 w-3 bg-[#d73a3a] z-10"></div>
-
-                    <div className="flex-1 px-10 pt-16 pb-8 flex flex-col items-center relative z-20">
-                        {/* Profile Photo */}
-                        <div className="relative w-48 h-48 rounded-full bg-slate-50 shadow-[0_8px_20px_rgba(0,0,0,0.15)] border-[6px] border-[#d73a3a] mb-8 group-hover:scale-105 transition-transform duration-300">
+                    {/* Profile Photo */}
+                    <div className="flex-1 px-8 pt-16 pb-8 flex flex-col items-center relative z-20 w-full">
+                        <div className="relative w-40 h-40 rounded-full bg-slate-50 shadow-[0_8px_20px_rgba(0,0,0,0.15)] border-[6px] border-slate-200 mb-8 group-hover:scale-105 transition-transform duration-300">
                             <img src={userData.photo} alt={userData.name} className="w-full h-full object-cover rounded-full pointer-events-none" draggable="false" />
                         </div>
 
@@ -293,19 +290,6 @@ function PhysicsLanyard({ userData, onClose }: any) {
                             >
                                 <Linkedin className="w-6 h-6 mr-4 group-hover/btn:text-blue-300 transition-colors" /> LI / lee-wai-yee
                             </a>
-                        </div>
-                    </div>
-
-                    {/* Barcode Footer */}
-                    <div className="bg-gray-100 px-8 py-6 flex flex-col items-center border-t border-gray-200 mt-auto relative z-30">
-                        <div className="flex gap-[2px] h-12 mb-3 w-full justify-center opacity-80 mix-blend-multiply pointer-events-none">
-                            {[...Array(32)].map((_, i) => (
-                                <div key={i} className="bg-[#111] h-full rounded-sm" style={{ width: `${Math.random() * 4 + 1}px` }}></div>
-                            ))}
-                        </div>
-                        <div className="flex justify-between w-full uppercase">
-                            <p className="text-[10px] text-gray-400 font-mono tracking-[0.2em] font-bold">BATCH NO. 2026-X</p>
-                            <p className="text-[10px] text-gray-400 font-mono tracking-[0.2em] font-bold">{userData.idNumber}</p>
                         </div>
                     </div>
 
