@@ -1,6 +1,10 @@
 import React from 'react';
 
-export const NavBar = () => {
+interface NavBarProps {
+    onConnectClick?: () => void;
+}
+
+export const NavBar = ({ onConnectClick }: NavBarProps) => {
     return (
         <nav className="fixed top-6 w-full px-6 md:px-12 flex justify-between items-center z-50 mix-blend-difference">
             <div className="font-bold text-xl md:text-2xl tracking-tighter hover:italic cursor-pointer transition-all text-white">
@@ -11,16 +15,13 @@ export const NavBar = () => {
                 <a href="#work" className="hover:line-through">Work</a>
                 <a href="#connect" className="hover:line-through">Case Studies</a>
             </div>
-            <div className="relative group">
-                <div className="px-4 py-2 rounded-full bg-white text-black text-sm font-medium cursor-pointer">Connect</div>
-                <div className="absolute right-0 top-full pt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto flex flex-row gap-2 min-w-max">
-                    <a href="https://github.com/wwaiyyee" target="_blank" rel="noopener noreferrer" className="px-4 py-2 rounded-full bg-transparent border border-white text-white text-sm font-medium hover:bg-white hover:text-black transition-colors">
-                        GitHub
-                    </a>
-                    <a href="https://www.linkedin.com/in/lee-wai-yee/" target="_blank" rel="noopener noreferrer" className="px-4 py-2 rounded-full bg-transparent border border-white text-white text-sm font-medium hover:bg-white hover:text-black transition-colors">
-                        LinkedIn
-                    </a>
-                </div>
+            <div>
+                <button
+                    onClick={onConnectClick}
+                    className="px-4 py-2 rounded-full bg-white text-black text-sm font-medium cursor-pointer hover:scale-105 active:scale-95 transition-transform"
+                >
+                    Connect
+                </button>
             </div>
         </nav>
     );
