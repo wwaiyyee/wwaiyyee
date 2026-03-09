@@ -3,13 +3,10 @@ import { Github, Linkedin, X, Briefcase } from 'lucide-react';
 
 export function LanyardModal({ open, onClose }: { open: boolean, onClose: () => void }) {
     const userData = {
-        name: "Chloe Lee",
-        role: "SOFTWARE DEVELOPER  /  UI/UX DESIGNER",
-        company: "Portfolio",
+        name: "Lee Wai Yee",
         photo: "/profile pic.jpeg",
         githubUrl: "https://github.com/wwaiyyee",
         linkedinUrl: "https://linkedin.com/in/lee-wai-yee",
-        idNumber: "ID-2026-WY-001"
     };
 
     useEffect(() => {
@@ -34,8 +31,8 @@ function PhysicsLanyard({ userData, onClose }: any) {
     const cardRef = useRef<HTMLDivElement>(null);
 
     // Physics Simulation State
-    const segmentCount = 14;
-    const segmentLength = 25; // 14 * 25 = 350px drop
+    const segmentCount = 10;
+    const segmentLength = 18; // 10 * 18 = 180px drop
     const points = useRef(Array.from({ length: segmentCount }, () => ({ x: 0, y: 0, ox: 0, oy: 0 })));
     const mousePos = useRef({ x: typeof window !== 'undefined' ? window.innerWidth / 2 : 500, y: 0 });
     const isDragging = useRef(false);
@@ -46,12 +43,12 @@ function PhysicsLanyard({ userData, onClose }: any) {
     useEffect(() => {
         let animationFrameId: number;
         const originX = window.innerWidth / 2;
-        const originY = -50;
+        const originY = -20;
 
         // Init rope high up so it realistically drops in
         points.current.forEach((p, i) => {
             p.x = originX;
-            p.y = -800 + i * segmentLength;
+            p.y = -400 + i * segmentLength;
             p.ox = p.x;
             p.oy = p.y;
         });
@@ -109,7 +106,19 @@ function PhysicsLanyard({ userData, onClose }: any) {
             }
 
             // 3. Render Visuals (Direct DOM manipulation for 60fps)
-            const pathStr = points.current.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
+            // Draw a realistic lanyard loop (down the left side, up the right side)
+            let pathStr = '';
+            for (let i = 0; i < segmentCount; i++) {
+                const p = points.current[i];
+                const offsetX = Math.max(0, (segmentCount - 1 - i) * 14); // Spread at top
+                pathStr += `${i === 0 ? 'M' : 'L'} ${p.x - offsetX} ${p.y} `;
+            }
+            for (let i = segmentCount - 1; i >= 0; i--) {
+                const p = points.current[i];
+                const offsetX = Math.max(0, (segmentCount - 1 - i) * 14);
+                pathStr += `L ${p.x + offsetX} ${p.y} `;
+            }
+
             if (pathRef.current) pathRef.current.setAttribute('d', pathStr);
             if (shadowRef.current) shadowRef.current.setAttribute('d', pathStr);
             if (highlightRef.current) highlightRef.current.setAttribute('d', pathStr);
@@ -206,9 +215,15 @@ function PhysicsLanyard({ userData, onClose }: any) {
                 {/* Shadow */}
                 <path ref={shadowRef} fill="none" stroke="rgba(0,0,0,0.5)" strokeWidth="32" className="blur-md" transform="translate(0, 15)" />
                 {/* Main Base  - dark grey/black for lanyard */}
-                <path ref={pathRef} fill="none" stroke="#18181b" strokeWidth="26" strokeLinecap="round" strokeLinejoin="round" />
+                <path id="lanyardPath" ref={pathRef} fill="none" stroke="#18181b" strokeWidth="26" strokeLinecap="round" strokeLinejoin="round" />
                 {/* Highlight Layer - slight sheen */}
                 <path ref={highlightRef} fill="none" stroke="#27272a" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" />
+                {/* Fabric Text Loop */}
+                <text fill="#a1a1aa" fontSize="10" fontWeight="bold" fontFamily="monospace" letterSpacing="0.3em">
+                    <textPath href="#lanyardPath" startOffset="50%" textAnchor="middle">
+                        {" CHLOE LEE  •  PORTFOLIO  •  SOFTWARE DEVELOPER  •  UI/UX DESIGNER  • ".repeat(6)}
+                    </textPath>
+                </text>
             </svg>
 
             {/* Draggable Card Assembly */}
