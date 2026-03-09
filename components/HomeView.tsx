@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { ArrowRight, ArrowUpRight, Aperture } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Aperture, X } from 'lucide-react';
 import { PROJECTS, ACHIEVEMENTS } from './projects';
 import { Marquee } from './Marquee';
 
@@ -28,6 +28,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
     // Camera State
     const [isSnapping, setIsSnapping] = useState(false);
     const [photoPrinted, setPhotoPrinted] = useState(false);
+    const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
 
     const handleSnapPhoto = () => {
         if (photoPrinted) return;
@@ -537,7 +538,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                         </div>
                         {/* Action Buttons */}
                         <div className="flex gap-2 w-full">
-                            <a href="/Resume.pdf" target="_blank" rel="noopener noreferrer" className="flex-1 text-center bg-[#111] text-white text-[10px] py-3 font-mono font-bold tracking-widest hover:bg-gray-800 transition-colors">REVIEW</a>
+                            <button onClick={() => setIsResumeModalOpen(true)} className="flex-1 text-center bg-[#111] text-white text-[10px] py-3 font-mono font-bold tracking-widest hover:bg-gray-800 transition-colors">REVIEW</button>
                             <a href="/Resume.pdf" download className="flex-1 text-center border-2 border-[#111] text-[#111] text-[10px] py-3 font-mono font-bold tracking-widest hover:bg-[#e0e0e0] transition-colors">DOWNLOAD</a>
                         </div>
                     </div>
@@ -582,6 +583,42 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                     </div>
                 </div>
             </footer>
+
+            {/* Resume Modal Overlay */}
+            {isResumeModalOpen && (
+                <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-md p-4 md:p-12">
+                    <div
+                        className="absolute inset-0 z-0 cursor-pointer"
+                        onClick={() => setIsResumeModalOpen(false)}
+                        aria-label="Close modal background"
+                    ></div>
+
+                    <div className="relative z-10 w-full h-full max-w-6xl max-h-[90vh] bg-[#F2F2ED] rounded-xl shadow-2xl flex flex-col overflow-hidden border border-gray-700">
+                        {/* Modal Header */}
+                        <div className="flex justify-between items-center px-6 py-4 border-b border-gray-300 bg-[#E8E8E2]">
+                            <div className="font-mono text-sm tracking-widest uppercase font-bold text-[#111]">
+                                DOCUMENT / RESUME.PDF
+                            </div>
+                            <button
+                                onClick={() => setIsResumeModalOpen(false)}
+                                className="p-2 hover:bg-gray-300 rounded-full transition-colors text-[#111]"
+                                aria-label="Close modal"
+                            >
+                                <X size={20} />
+                            </button>
+                        </div>
+
+                        {/* PDF Viewer */}
+                        <div className="flex-1 w-full bg-gray-200">
+                            <iframe
+                                src="/Resume.pdf"
+                                className="w-full h-full border-none"
+                                title="Resume PDF"
+                            />
+                        </div>
+                    </div>
+                </div>
+            )}
         </div >
     );
 }
