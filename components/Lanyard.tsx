@@ -193,10 +193,10 @@ function PhysicsLanyard({ userData, onClose }: any) {
     };
 
     return (
-        <div className="fixed inset-0 z-[500] flex items-start justify-center" style={{ perspective: '1200px' }}>
+        <div className="fixed inset-0 z-[500] flex items-start justify-center h-[100dvh] w-full" style={{ perspective: '1200px' }}>
             {/* Dimmed Background */}
             <div
-                className="absolute inset-0 transition-opacity animate-in fade-in duration-500"
+                className="absolute inset-0 w-full h-full transition-opacity animate-in fade-in duration-500"
                 style={{ background: 'rgba(10,10,10,0.85)', backdropFilter: 'blur(10px)' }}
                 onClick={onClose}
             ></div>
@@ -268,11 +268,11 @@ function PhysicsLanyard({ userData, onClose }: any) {
                         </div>
 
                         {/* Profile Info */}
-                        <h2 className="text-4xl font-serif text-[#111] text-center mb-4">
+                        <h2 className="text-4xl font-serif tracking-tight text-[#111] text-center mb-4">
                             {userData.name}
                         </h2>
-                        <div className="flex items-center text-gray-500 mb-6 font-mono text-sm tracking-widest border-b border-gray-200 pb-6 w-full justify-center">
-                            <p className="font-medium text-center">{userData.role}</p>
+                        <div className="flex items-center text-gray-500 mb-6 font-mono text-xs tracking-widest border-b border-gray-200 pb-6 w-full justify-center">
+                            <p className="font-medium text-center leading-tight">{userData.role}</p>
                         </div>
 
                         {/* Action Links */}
