@@ -544,42 +544,22 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                     </div>
 
                     {/* The Camera Body */}
-                    <div className="absolute inset-0 bg-[#222] border-t-4 border-[#333] rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-10 flex flex-col items-center justify-center">
-                        {/* Top Viewfinder bump */}
-                        <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-32 h-6 bg-[#2a2a2a] rounded-t-lg border-t-2 border-[#333]"></div>
+                    <div className="absolute inset-0 z-10 flex flex-col items-center justify-center drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                        <img
+                            src="/camera.png"
+                            alt="Film Camera"
+                            className="w-full h-full object-contain pointer-events-none"
+                        />
 
-                        {/* Shutter Button */}
+                        {/* Floating Shutter Button Overlay */}
                         <button
                             onClick={handleSnapPhoto}
                             disabled={photoPrinted || isSnapping}
-                            className={`absolute -top-4 right-8 md:right-10 w-12 h-6 rounded-t-full transition-all duration-150 ${isSnapping || photoPrinted ? 'bg-red-900 translate-y-2' : 'bg-[#d73a3a] hover:bg-red-500 hover:-translate-y-1 cursor-pointer'} border-b-4 border-red-950`}
+                            className={`absolute top-4 right-8 md:top-6 md:right-10 w-10 h-10 md:w-12 md:h-12 rounded-full transition-all duration-150 ${isSnapping || photoPrinted ? 'bg-red-900/80 translate-y-2 scale-95' : 'bg-[#d73a3a] hover:bg-red-500 hover:scale-105 shadow-xl cursor-pointer ring-4 ring-black/20'} z-20 flex items-center justify-center group`}
                             aria-label="Snap Photo"
-                        ></button>
-
-                        {/* Flash Component */}
-                        <div className="absolute top-6 left-6 w-12 h-6 bg-gradient-to-br from-gray-300 to-gray-500 rounded-sm border border-gray-600 flex items-center justify-center">
-                            <div className="w-10 h-4 bg-yellow-100/40 rounded-sm"></div>
-                        </div>
-
-                        {/* Branding / Details */}
-                        <div className="absolute top-6 right-6 text-[8px] font-mono text-gray-500 tracking-widest uppercase">
-                            TYPE-01
-                        </div>
-
-                        {/* Main Lens */}
-                        <div className="w-32 h-32 md:w-36 md:h-36 rounded-full border-[10px] border-[#111] bg-gradient-to-br from-gray-700 to-black shadow-[inset_0_10px_20px_rgba(0,0,0,0.8)] flex items-center justify-center relative mt-4">
-                            {/* Inner Lens Rings */}
-                            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-gray-600/30 bg-black flex items-center justify-center relative overflow-hidden">
-                                {/* Aperture Blades Simulation */}
-                                <Aperture className="w-10 h-10 text-gray-800 opacity-50 absolute" />
-                                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#0a0a0a] z-10"></div>
-                                {/* Glass Reflection */}
-                                <div className="absolute top-2 right-4 w-8 h-8 bg-white/10 rounded-full blur-[2px] z-20"></div>
-                            </div>
-                        </div>
-
-                        {/* Bottom Output Slot */}
-                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-48 h-3 bg-black rounded-full shadow-[inset_0_4px_8px_rgba(0,0,0,0.8)] border-b border-gray-700/30"></div>
+                        >
+                            <div className={`w-3 h-3 md:w-4 md:h-4 rounded-full transition-colors ${isSnapping || photoPrinted ? 'bg-white/30' : 'bg-white/80 group-hover:bg-white'} `}></div>
+                        </button>
                     </div>
                 </div>
             </footer>
