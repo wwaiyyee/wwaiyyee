@@ -611,7 +611,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                         {/* PDF Viewer */}
                         <div className="flex-1 w-full bg-gray-200">
                             <iframe
-                                src="/Resume.pdf"
+                                src="/Resume.pdf#toolbar=0&navpanes=0"
                                 className="w-full h-full border-none"
                                 title="Resume PDF"
                             />
