@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { ArrowRight, ArrowUpRight, Aperture, X } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { PROJECTS, ACHIEVEMENTS } from './projects';
 import { Marquee } from './Marquee';
 
@@ -528,19 +529,27 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
 
                     {/* The Printed Polaroid (Resume) */}
                     <div
-                        className={`absolute left-1/2 w-[220px] md:w-[280px] bg-[#F2F2ED] p-3 shadow-2xl flex flex-col items-center transition-all duration-[1200ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] z-0 pointer-events-auto ${photoPrinted ? 'translate-y-[180px] md:translate-y-[220px] -translate-x-1/2 opacity-100 rotate-[-2deg]' : 'translate-y-0 -translate-x-1/2 opacity-0'}`}
+                        className={`absolute left-1/2 w-[220px] md:w-[280px] flex flex-col items-center transition-all duration-[1200ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] z-0 pointer-events-auto ${photoPrinted ? 'translate-y-[180px] md:translate-y-[220px] -translate-x-1/2 opacity-100' : 'translate-y-0 -translate-x-1/2 opacity-0'}`}
                         style={{ bottom: '20px' }}
                     >
-                        {/* Polaroid Image Area (Resume Preview) */}
-                        <div className="w-full h-[180px] md:h-[220px] bg-[#ddd] border border-black/10 flex flex-col items-center justify-center mb-4 relative overflow-hidden">
-                            <span className="font-serif text-black text-2xl md:text-3xl font-bold italic mb-2">Resume</span>
-                            <span className="font-mono text-gray-500 text-[10px] md:text-xs tracking-widest uppercase border-t border-gray-400 pt-2">Chloe Lee</span>
-                        </div>
-                        {/* Action Buttons */}
-                        <div className="flex gap-2 md:gap-4 w-full">
-                            <button onClick={() => setIsResumeModalOpen(true)} className="flex-1 text-center bg-[#111] text-white text-[10px] md:text-xs py-3 font-mono font-bold tracking-widest hover:bg-gray-800 transition-colors">REVIEW</button>
-                            <a href="/Resume.pdf" download className="flex-1 text-center border-2 border-[#111] text-[#111] text-[10px] md:text-xs py-3 font-mono font-bold tracking-widest hover:bg-[#e0e0e0] transition-colors">DOWNLOAD</a>
-                        </div>
+                        <motion.div
+                            drag={photoPrinted}
+                            dragMomentum={false}
+                            whileDrag={{ scale: 1.05, cursor: 'grabbing', zIndex: 50, rotate: 0 }}
+                            className="w-full bg-[#F2F2ED] p-3 shadow-2xl flex flex-col items-center origin-center"
+                            style={{ rotate: '-2deg', cursor: photoPrinted ? 'grab' : 'default' }}
+                        >
+                            {/* Polaroid Image Area (Resume Preview) */}
+                            <div className="w-full h-[180px] md:h-[220px] bg-[#ddd] border border-black/10 flex flex-col items-center justify-center mb-4 relative overflow-hidden pointer-events-none">
+                                <span className="font-serif text-black text-2xl md:text-3xl font-bold italic mb-2">Resume</span>
+                                <span className="font-mono text-gray-500 text-[10px] md:text-xs tracking-widest uppercase border-t border-gray-400 pt-2">Chloe Lee</span>
+                            </div>
+                            {/* Action Buttons */}
+                            <div className="flex gap-2 md:gap-4 w-full">
+                                <button onPointerDown={(e) => e.stopPropagation()} onClick={() => setIsResumeModalOpen(true)} className="flex-1 text-center bg-[#111] text-white text-[10px] md:text-xs py-3 font-mono font-bold tracking-widest hover:bg-gray-800 transition-colors">REVIEW</button>
+                                <a onPointerDown={(e) => e.stopPropagation()} href="/Resume.pdf" download className="flex-1 text-center border-2 border-[#111] text-[#111] text-[10px] md:text-xs py-3 font-mono font-bold tracking-widest hover:bg-[#e0e0e0] transition-colors">DOWNLOAD</a>
+                            </div>
+                        </motion.div>
                     </div>
 
                     {/* The Camera Body */}
