@@ -33,21 +33,14 @@ export const NavBar = ({ onConnectClick }: NavBarProps) => {
             </Link>
             <Link href="/case-studies" className={getLinkClass('/case-studies')}>
                 Case Studies
-            </Link>            <div className="relative group flex items-center h-full">
-                <span 
+            </Link>            
+            <div className="relative group flex items-center h-full">             
+                <span
                     onClick={onConnectClick}
                     className="text-[10px] md:text-xs uppercase tracking-widest text-zinc-400 hover:text-white cursor-pointer transition-colors font-bold pb-1 border-b border-transparent hover:border-white inline-block"
                 >
                     Connect
                 </span>
-                <div className="absolute right-0 top-full pt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto flex flex-col gap-2 min-w-max items-end">
-                    <a href="https://github.com/wwaiyyee" target="_blank" rel="noopener noreferrer" className="text-[10px] uppercase tracking-widest text-zinc-400 hover:text-white transition-colors">
-                        GitHub ↗
-                    </a>
-                    <a href="https://www.linkedin.com/in/lee-wai-yee/" target="_blank" rel="noopener noreferrer" className="text-[10px] uppercase tracking-widest text-zinc-400 hover:text-white transition-colors">
-                        LinkedIn ↗
-                    </a>
-                </div>
             </div>
         </nav>
     );
