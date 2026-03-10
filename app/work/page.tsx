@@ -178,7 +178,7 @@ const WorkPage = () => {
 											<label className="text-[10px] uppercase tracking-[0.3em] text-zinc-400 font-bold block">
 												Summary
 											</label>
-											<p className="text-[11px] leading-relaxed text-zinc-500 font-light whitespace-pre-wrap">
+											<p className="text-[11px] leading-relaxed text-zinc-500 font-light whitespace-pre-wrap text-justify">
 												{activeProject.summary}
 											</p>
 										</div>
@@ -189,7 +189,7 @@ const WorkPage = () => {
 												<label className="text-[10px] uppercase tracking-[0.3em] text-zinc-400 font-bold block">
 													Description
 												</label>
-												<p className="text-[11px] leading-relaxed text-zinc-500 font-light whitespace-pre-wrap">
+												<p className="text-[11px] leading-relaxed text-zinc-500 font-light whitespace-pre-wrap text-justify">
 													{activeProject.descriptions[activeProject.imageNumber - 1]}
 												</p>
 											</div>

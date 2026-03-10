@@ -127,11 +127,11 @@ export default function CaseStudy() {
             <div className="flex flex-col gap-6 text-sm border-l border-[#111111]/10 pl-8 font-mono text-zinc-600 w-full md:max-w-[300px] lg:max-w-[400px] shrink-0">
               <div>
                 <p className="text-[#111111] mb-1 font-bold">ROLE</p>
-                <p className="leading-relaxed">{project.roles}</p>
+                <p className="leading-relaxed text-justify">{project.roles}</p>
               </div>
               <div>
                 <p className="text-[#111111] mb-1 font-bold">TOOLS</p>
-                <p className="leading-relaxed text-wrap break-words">
+                <p className="leading-relaxed text-wrap break-words text-justify">
                   {(project as any).tools || "Figma, Framer, React"}
                 </p>
               </div>
@@ -139,7 +139,7 @@ export default function CaseStudy() {
               {(project as any).achievements && (
                 <div className="mt-2 pt-4 border-t border-[#111111]/10">
                   <p className="text-[#111111] mb-1 font-bold">ACHIEVEMENTS</p>
-                  <p className="opacity-80 leading-relaxed font-sans text-sm">
+                  <p className="opacity-80 leading-relaxed font-sans text-sm text-justify">
                     {(project as any).achievements}
                   </p>
                 </div>
@@ -186,7 +186,7 @@ export default function CaseStudy() {
                   </h3>
                   <div className="flex flex-col lg:flex-row gap-8 items-start">
                     <div className="flex-1">
-                      <p className="text-stone-600 leading-relaxed font-sans font-medium text-base">
+                      <p className="text-stone-600 leading-relaxed font-sans font-medium text-base text-justify">
                         Dengue outbreaks in Malaysia are often detected only
                         after case numbers have already surged, leaving little
                         time for preventive action. Existing surveillance
@@ -251,7 +251,7 @@ export default function CaseStudy() {
                   </h3>
                   <div className="flex flex-col lg:flex-row gap-8 items-start">
                     <div className="flex-1">
-                      <p className="text-stone-600 leading-relaxed font-sans font-medium text-base">
+                      <p className="text-stone-600 leading-relaxed font-sans font-medium text-base text-justify">
                         Design an AI-driven early warning system capable of
                         forecasting dengue outbreak risks before case escalation
                         occurs.
@@ -353,7 +353,7 @@ export default function CaseStudy() {
           >
             {project.id === "dopews" ? (
               <div className="flex flex-col gap-12">
-                <p className="text-xl md:text-3xl font-medium leading-tight tracking-tight text-[#111111] max-w-4xl">
+                <p className="text-xl md:text-3xl font-medium leading-tight tracking-tight text-[#111111] max-w-4xl text-justify">
                   Current platforms only report{" "}
                   <span className="line-through decoration-[#111111]/30 opacity-60">
                     historical data
@@ -372,7 +372,7 @@ export default function CaseStudy() {
                       <h4 className="text-lg font-bold uppercase tracking-wider mb-2 text-[#111111] group-hover:text-[#f9f6f1] transition-colors">
                         Reactive vs Predictive
                       </h4>
-                      <p className="font-medium text-sm text-[#111111]/60 group-hover:text-[#f9f6f1]/60 transition-colors leading-relaxed">
+                      <p className="font-medium text-sm text-[#111111]/60 group-hover:text-[#f9f6f1]/60 transition-colors leading-relaxed text-justify">
                         Most dashboards focus on case reporting rather than
                         predictive forecasting.
                       </p>
@@ -386,7 +386,7 @@ export default function CaseStudy() {
                       <h4 className="text-lg font-bold uppercase tracking-wider mb-2 text-[#111111] group-hover:text-[#f9f6f1] transition-colors">
                         Fragmented Variables
                       </h4>
-                      <p className="font-medium text-sm text-[#111111]/60 group-hover:text-[#f9f6f1]/60 transition-colors leading-relaxed">
+                      <p className="font-medium text-sm text-[#111111]/60 group-hover:text-[#f9f6f1]/60 transition-colors leading-relaxed text-justify">
                         Rainfall patterns and urban density play massive roles
                         but lack integration.
                       </p>
@@ -400,7 +400,7 @@ export default function CaseStudy() {
                       <h4 className="text-lg font-bold uppercase tracking-wider mb-2 text-[#111111] group-hover:text-[#f9f6f1] transition-colors">
                         Vague Interventions
                       </h4>
-                      <p className="font-medium text-sm text-[#111111]/60 group-hover:text-[#f9f6f1]/60 transition-colors leading-relaxed">
+                      <p className="font-medium text-sm text-[#111111]/60 group-hover:text-[#f9f6f1]/60 transition-colors leading-relaxed text-justify">
                         Authorities require better geographic visualization to
                         make fast decisions.
                       </p>
@@ -422,7 +422,7 @@ export default function CaseStudy() {
               </div>
             ) : project.id === "twinkle" ? (
               <div className="flex flex-col gap-12">
-                <p className="text-xl md:text-3xl font-medium leading-tight tracking-tight text-[#111111] max-w-4xl">
+                <p className="text-xl md:text-3xl font-medium leading-tight tracking-tight text-[#111111] max-w-4xl text-justify">
                   Research focused on understanding how <span className="italic font-serif">neurodiverse children</span> engage with educational content and identifying the factors that influence their motivation.
                 </p>
 
@@ -501,7 +501,7 @@ export default function CaseStudy() {
                     <div className="bg-[#f9f6f1] border-2 border-[#111111] p-6 md:p-8 shadow-[8px_8px_0px_0px_rgba(17,17,17,1)] transition-transform duration-500 group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:shadow-[12px_12px_0px_0px_rgba(17,17,17,1)]">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                          <p className="text-[#111111]/80 font-bold text-sm leading-relaxed mb-6">
+                          <p className="text-[#111111]/80 font-bold text-sm leading-relaxed mb-6 text-justify">
                             Structuring the system for multi-stakeholder
                             support, mapping required data flows for public vs
                             authoritative access.
@@ -546,7 +546,7 @@ export default function CaseStudy() {
                     <div className="bg-[#f9f6f1] border-2 border-[#111111] p-6 md:p-8 shadow-[8px_8px_0px_0px_rgba(17,17,17,1)] transition-transform duration-500 group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:shadow-[12px_12px_0px_0px_rgba(17,17,17,1)]">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
                         <div>
-                          <p className="text-[#111111]/80 font-bold text-sm leading-relaxed mb-6">
+                          <p className="text-[#111111]/80 font-bold text-sm leading-relaxed mb-6 text-justify">
                             Designing data-driven layouts prioritizing
                             actionable insights, using Figma to organize layers
                             of complex outbreak metrics.
@@ -587,7 +587,7 @@ export default function CaseStudy() {
                     <div className="bg-[#f9f6f1] border-2 border-[#111111] p-6 md:p-8 shadow-[8px_8px_0px_0px_rgba(17,17,17,1)] transition-transform duration-500 group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:shadow-[12px_12px_0px_0px_rgba(17,17,17,1)]">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                          <p className="text-[#111111]/80 font-bold text-sm leading-relaxed mb-6">
+                          <p className="text-[#111111]/80 font-bold text-sm leading-relaxed mb-6 text-justify">
                             Translating high-fidelity prototypes into responsive
                             React components integrated with ML-backed backend
                             APIs.
@@ -639,7 +639,7 @@ export default function CaseStudy() {
                     <div className="bg-[#f9f6f1] border-2 border-[#111111] p-6 md:p-8 shadow-[8px_8px_0px_0px_rgba(17,17,17,1)] transition-transform duration-500 group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:shadow-[12px_12px_0px_0px_rgba(17,17,17,1)]">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                          <p className="text-[#111111]/80 font-bold text-sm leading-relaxed mb-6">
+                          <p className="text-[#111111]/80 font-bold text-sm leading-relaxed mb-6 text-justify">
                             Structuring the activities for immediate feedback and progressive disclosure, ensuring interactions sustain attention without cognitive overload.
                           </p>
                         </div>
@@ -682,7 +682,7 @@ export default function CaseStudy() {
                     <div className="bg-[#f9f6f1] border-2 border-[#111111] p-6 md:p-8 shadow-[8px_8px_0px_0px_rgba(17,17,17,1)] transition-transform duration-500 group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:shadow-[12px_12px_0px_0px_rgba(17,17,17,1)]">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
                         <div>
-                          <p className="text-[#111111]/80 font-bold text-sm leading-relaxed mb-6">
+                          <p className="text-[#111111]/80 font-bold text-sm leading-relaxed mb-6 text-justify">
                             Designing immersive 3D safe spaces. Using Figma to block out environments emphasizing cozy, consistent layouts with minimal visual noise.
                           </p>
                         </div>
@@ -721,7 +721,7 @@ export default function CaseStudy() {
                     <div className="bg-[#f9f6f1] border-2 border-[#111111] p-6 md:p-8 shadow-[8px_8px_0px_0px_rgba(17,17,17,1)] transition-transform duration-500 group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:shadow-[12px_12px_0px_0px_rgba(17,17,17,1)]">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                          <p className="text-[#111111]/80 font-bold text-sm leading-relaxed mb-6">
+                          <p className="text-[#111111]/80 font-bold text-sm leading-relaxed mb-6 text-justify">
                             Translating 3D environments into responsive React components seamlessly integrated with Three.js rendering loops for high performance.
                           </p>
                         </div>
@@ -757,7 +757,7 @@ export default function CaseStudy() {
                       <br />
                       the Interface
                     </h3>
-                    <p className="text-stone-600 font-medium leading-relaxed text-sm lg:text-base">
+                    <p className="text-stone-600 font-medium leading-relaxed text-sm lg:text-base text-justify">
                       Focusing on stripping away complex UI elements to reduce
                       cognitive overload and enforce purely data-driven
                       interaction models.
@@ -802,7 +802,7 @@ export default function CaseStudy() {
                         <h4 className="font-bold text-sm mb-2 uppercase tracking-widest text-[#111111]">
                           Progressive Disclosure
                         </h4>
-                        <p className="text-[#111111]/60 text-sm leading-relaxed font-medium">
+                        <p className="text-[#111111]/60 text-sm leading-relaxed font-medium text-justify">
                           Users are only shown tools as they become relevant,
                           drastically reducing UI noise and improving onboarding
                           success rates.
@@ -812,7 +812,7 @@ export default function CaseStudy() {
                         <h4 className="font-bold text-sm mb-2 uppercase tracking-widest text-[#111111]">
                           Component Library Scaling
                         </h4>
-                        <p className="text-[#111111]/60 text-sm leading-relaxed font-medium">
+                        <p className="text-[#111111]/60 text-sm leading-relaxed font-medium text-justify">
                           Mapped out a global design system strictly adhering to
                           our geometric aesthetic constraints for brutalist
                           efficiency.
@@ -854,7 +854,7 @@ export default function CaseStudy() {
                     <p className="font-mono text-sm mb-1 text-white/50">
                       FIG. 1
                     </p>
-                    <p className="text-lg font-bold">
+                    <p className="text-lg font-bold text-justify">
                       Core Application Interface
                     </p>
                   </div>
@@ -876,7 +876,7 @@ export default function CaseStudy() {
                       <h4 className="text-lg font-bold mb-2">
                         Minimalist Approach
                       </h4>
-                      <p className="opacity-70 text-sm leading-relaxed font-medium">
+                      <p className="opacity-70 text-sm leading-relaxed font-medium text-justify">
                         UI chrome was reduced by 80% compared to native apps,
                         putting full emphasis on functionality and data blocks.
                       </p>
@@ -1013,7 +1013,7 @@ export default function CaseStudy() {
             onClick={() => handleToggle("impact")}
           >
             <div className="space-y-8">
-              <p className="text-stone-700 leading-relaxed text-lg font-medium">
+              <p className="text-stone-700 leading-relaxed text-lg font-medium text-justify">
                 {project.id === "dopews" ? (
                   <>
                     The system successfully demonstrates the feasibility of
@@ -1045,7 +1045,7 @@ export default function CaseStudy() {
                       </div>
                     </div>
                     <div className="bg-[#f9f6f1] border-2 border-[#111111] p-6 shadow-[4px_4px_0px_0px_rgba(17,17,17,1)] md:col-span-2 flex items-center text-center md:text-left">
-                      <p className="text-base text-[#111111]/80 font-bold">
+                      <p className="text-base text-[#111111]/80 font-bold text-justify">
                         The prediction model achieved 82.04% tolerance accuracy,
                         indicating strong predictive reliability within
                         real-world outbreak prediction scenarios.
@@ -1084,7 +1084,7 @@ export default function CaseStudy() {
                       </div>
                     </div>
                     <div className="bg-[#f9f6f1] border-2 border-[#111111] p-6 shadow-[4px_4px_0px_0px_rgba(17,17,17,1)] flex items-center justify-center text-center">
-                      <p className="text-base text-[#111111]/80 font-bold">
+                      <p className="text-base text-[#111111]/80 font-bold text-justify">
                         Built entirely using 3D web technologies, demonstrating high performance and engagement.
                       </p>
                     </div>
@@ -1204,7 +1204,7 @@ function DecisionItem({ title, desc }: { title: string; desc: string }) {
       <h4 className="font-bold text-lg mb-1 uppercase tracking-wider text-stone-800">
         {title}
       </h4>
-      <p className="opacity-80 text-sm leading-relaxed font-medium">{desc}</p>
+      <p className="opacity-80 text-sm leading-relaxed font-medium text-justify">{desc}</p>
     </li>
   );
 }
@@ -1314,7 +1314,7 @@ function DopewsFinalInterface() {
                 <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
                   1. Dengue Risk Heatmap
                 </h4>
-                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
+                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto text-justify">
                   The Dengue Risk Heatmap uses a map-centered interface with color-coded risk levels to visualize predicted outbreak areas. Supporting analytics, forecast controls, and driver insights help users quickly understand spatial risk patterns and make informed public health decisions.
                 </p>
               </motion.div>
@@ -1326,7 +1326,7 @@ function DopewsFinalInterface() {
                 <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
                   2. Admin Dashboard
                 </h4>
-                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
+                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto text-justify">
                   The Admin Dashboard adopts a structured table-based layout to efficiently manage system users and roles. Features such as search, filtering, and role actions allow administrators to monitor activity, maintain security, and control platform access effectively.
                 </p>
               </motion.div>
@@ -1338,7 +1338,7 @@ function DopewsFinalInterface() {
                 <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
                   3. API Key Management / API Playground
                 </h4>
-                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
+                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto text-justify">
                   The API Playground provides developers with an interactive interface to test endpoints and access dengue data programmatically. Integrated documentation, authentication guidance, and JSON examples simplify integration and encourage external application development.
                 </p>
               </motion.div>
@@ -1350,7 +1350,7 @@ function DopewsFinalInterface() {
                 <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
                   4. Dengue Education Hub
                 </h4>
-                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
+                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto text-justify">
                   The Dengue Education Hub presents educational articles in a searchable, content-focused layout to improve public awareness. Filtering, sorting, and visual materials help users easily access reliable dengue prevention knowledge and health information.
                 </p>
               </motion.div>
@@ -1505,7 +1505,7 @@ function TwinkleFinalInterface() {
                 <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
                   1. Prompt Interface
                 </h4>
-                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
+                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto text-justify">
                   The initial prompt interface sets the stage for the customized educational experience, tailoring the interactions to each child's specific learning needs before they enter the game world.
                 </p>
               </motion.div>
@@ -1517,7 +1517,7 @@ function TwinkleFinalInterface() {
                 <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
                   2. Room Interface
                 </h4>
-                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
+                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto text-justify">
                   The room interface simulates a cozy learning environment with interactive objects and characters. This familiar setting helps children feel comfortable, promotes exploration, and visually organizes learning activities within a playful game-like space.
                 </p>
               </motion.div>
@@ -1529,7 +1529,7 @@ function TwinkleFinalInterface() {
                 <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
                   3. Vocal Book (Listening & Pronunciation)
                 </h4>
-                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
+                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto text-justify">
                   The vocal book focuses on auditory learning by allowing children to listen to words and repeat them. Large typography, audio playback, and simple interactions support pronunciation practice and early language development.
                 </p>
               </motion.div>
@@ -1541,7 +1541,7 @@ function TwinkleFinalInterface() {
                 <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
                   4. Math Game
                 </h4>
-                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
+                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto text-justify">
                   The math activity uses a running game mechanic where children select the correct answer while progressing through a 3D environment. This gamified approach improves engagement, motivation, and learning retention.
                 </p>
               </motion.div>
@@ -1553,7 +1553,7 @@ function TwinkleFinalInterface() {
                 <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
                   5. Dyslexia Book
                 </h4>
-                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
+                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto text-justify">
                   The dyslexia reading book incorporates specialized typography, color highlights, and structured sentence presentation to support children with reading difficulties. The design improves readability and helps learners process words more comfortably.
                 </p>
               </motion.div>
@@ -1565,7 +1565,7 @@ function TwinkleFinalInterface() {
                 <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
                   6. Talking to the Avatar
                 </h4>
-                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
+                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto text-justify">
                   The avatar interaction feature enables conversational learning through a friendly animated character. This design encourages engagement, builds emotional connection, and allows children to practice communication in a supportive environment.
                 </p>
               </motion.div>

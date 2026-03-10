@@ -195,7 +195,7 @@ export default function AboutPage() {
                 DESIGNING <br/> & BUILDING <br/> INTELLIGENT <br/> DIGITAL PRODUCTS.
               </h2>
            </div>
-           <div className="md:w-7/12 text-lg md:text-2xl font-medium leading-relaxed text-neutral-700">
+           <div className="md:w-7/12 text-lg md:text-2xl font-medium leading-relaxed text-neutral-700 text-justify">
               <p className="mb-8">
                 I'm a computer science student passionate about building products where technology and user experience work together. My work spans full-stack development, artificial intelligence, and interface design — transforming complex ideas into systems that are both technically robust and intuitive to use.
               </p>
