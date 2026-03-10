@@ -1,23 +1,13 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, ArrowUpRight, Aperture, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { PROJECTS, ACHIEVEMENTS } from './projects';
 import { Marquee } from './Marquee';
+import UnicornScene from "unicornstudio-react";
 
-const SCATTERED_ITEMS = [
-    { id: 1, src: "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&q=80&w=400", type: "image", top: "5%", left: "5%", rotate: "-15deg", speed: 0.15, label: "01" },
-    { id: 2, src: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=400", type: "image", top: "10%", right: "8%", rotate: "8deg", speed: -0.1, label: "02" },
-    { id: 3, src: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&q=80&w=400", type: "image", top: "45%", left: "-5%", rotate: "12deg", speed: 0.25, label: "03" },
-    { id: 4, src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=400", type: "image", top: "35%", right: "-2%", rotate: "-6deg", speed: -0.2, label: "04" },
-    { id: 5, src: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=400", type: "image", bottom: "10%", left: "15%", rotate: "-8deg", speed: 0.1, label: "05" },
-    { id: 6, src: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&q=80&w=400", type: "image", bottom: "5%", right: "15%", rotate: "15deg", speed: 0.3, label: "06" },
-    { id: 7, type: "text", text: `"Code is reality."`, top: "25%", left: "25%", rotate: "-5deg", speed: 0.2 },
-    { id: 8, type: "text", text: "SCENE 1", bottom: "35%", right: "25%", rotate: "10deg", speed: -0.15 },
-    { id: 9, type: "scrap", top: "70%", left: "30%", rotate: "-12deg", speed: 0.35 },
-    { id: 10, type: "image", src: "https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&q=80&w=400", top: "60%", right: "35%", rotate: "5deg", speed: -0.05, label: "07" },
-];
+const TRAIL_LENGTH = 25;
 
 export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => void }) {
     const [hoveredProject, setHoveredProject] = useState<string | null>(null);
@@ -43,6 +33,78 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
     const projectsRef = React.useRef<HTMLElement>(null);
     const filmStripRef = React.useRef<HTMLDivElement>(null);
     const [sectionHeight, setSectionHeight] = useState("100vh");
+
+    // --- HERO SECTION MAGIC TRAIL ---
+    const containerRef = useRef<HTMLDivElement>(null);
+    const circlesRef = useRef<(SVGCircleElement | null)[]>([]);
+
+    const getCenter = () => ({
+        x: typeof window !== 'undefined' ? window.innerWidth / 2 : 500,
+        y: typeof window !== 'undefined' ? window.innerHeight / 2 : 500
+    });
+
+    const mouseRef = useRef(getCenter());
+    const currentRef = useRef(getCenter());
+    const trailRef = useRef<{x: number, y: number}[]>(Array.from({ length: TRAIL_LENGTH }, () => getCenter()));
+
+    const [hasMoved, setHasMoved] = useState(false);
+
+    useEffect(() => {
+        const style = document.createElement('style');
+        style.innerHTML = `
+          @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@400;500&display=swap');
+          
+          .font-serif-custom { font-family: 'Playfair Display', serif; }
+          .font-sans-custom { font-family: 'Montserrat', sans-serif; }
+        `;
+        document.head.appendChild(style);
+
+        const handleMouseMove = (e: MouseEvent) => {
+            if (!hasMoved) setHasMoved(true);
+            mouseRef.current = { x: e.clientX, y: e.clientY };
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+
+        let animationFrameId: number;
+        const render = () => {
+            const ease = 0.5; 
+            
+            currentRef.current.x += (mouseRef.current.x - currentRef.current.x) * ease;
+            currentRef.current.y += (mouseRef.current.y - currentRef.current.y) * ease;
+
+            for (let i = TRAIL_LENGTH - 1; i > 0; i--) {
+                trailRef.current[i] = { ...trailRef.current[i - 1] };
+            }
+            trailRef.current[0] = { x: currentRef.current.x, y: currentRef.current.y };
+
+            for (let i = 0; i < TRAIL_LENGTH; i++) {
+                const circle = circlesRef.current[i];
+                if (circle) {
+                    const point = trailRef.current[i];
+                    const progress = i / TRAIL_LENGTH;
+                    
+                    const radius = Math.max(0, 150 * (1 - progress));
+                    const opacity = 1 - Math.pow(progress, 2);
+
+                    circle.setAttribute('cx', String(point.x));
+                    circle.setAttribute('cy', String(point.y));
+                    circle.setAttribute('r', String(radius));
+                    circle.setAttribute('fill-opacity', String(opacity));
+                }
+            }
+
+            animationFrameId = requestAnimationFrame(render);
+        };
+        
+        render();
+
+        return () => {
+            document.head.removeChild(style);
+            window.removeEventListener('mousemove', handleMouseMove);
+            cancelAnimationFrame(animationFrameId);
+        };
+    }, [hasMoved]);
 
     // Handle scroll for scattered items and sticky project strip
     React.useEffect(() => {
@@ -89,64 +151,87 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
     const perfSVG = `url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='8' y='8' width='16' height='16' rx='2' fill='%23F2F2ED'/%3E%3C/svg%3E")`;
 
     return (
-        <div className="animate-in fade-in duration-700">
+        <div className="animate-in fade-in duration-700 bg-[#FAFAFA]">
 
             {/* --- FILM GRAIN & VIGNETTE OVERLAY --- */}
-            <div className="fixed inset-0 pointer-events-none z-50 mix-blend-multiply opacity-20">
+            <div className="fixed inset-0 pointer-events-none z-50 mix-blend-multiply opacity-[0.08]">
                 <svg width="100%" height="100%" xmlns='http://www.w3.org/2000/svg' className="w-full h-full" preserveAspectRatio="none">
-                    <filter id='noiseFilter'>
+                    <filter id='globalNoiseFilter'>
                         <feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch' />
                     </filter>
-                    <rect width='100%' height='100%' filter='url(#noiseFilter)' />
+                    <rect width='100%' height='100%' filter='url(#globalNoiseFilter)' />
                 </svg>
             </div>
 
             {/* --- HERO SECTION --- */}
-            <section id="top" className="relative min-h-[100vh] bg-[#F2F2ED] overflow-hidden flex flex-col items-center justify-center">
+            <section 
+              id="top" 
+              ref={containerRef}
+              className="relative w-full h-screen overflow-hidden flex items-center justify-center cursor-default bg-[#FAFAFA]"
+            >
+              <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
+                <defs>
+                  <filter id="boiling-grunge" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB" x="0" y="0" width="100%" height="100%">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="blurred" />
+                    <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="5" result="noise" />
+                    <feDisplacementMap in="blurred" in2="noise" scale="70" xChannelSelector="R" yChannelSelector="G" result="displaced" />
+                    <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1 0 0 0 0" in="noise" result="noiseAlpha" />
+                    <feComposite operator="arithmetic" k1="0" k2="1.3" k3="1.2" k4="-0.7" in="displaced" in2="noiseAlpha" result="added" />
+                    <feComponentTransfer in="added">
+                      <feFuncA type="linear" slope="150" intercept="-70" />
+                    </feComponentTransfer>
+                  </filter>
 
-                {/* Massive Center Text */}
-                <motion.div
-                    className="relative z-30 w-full flex flex-col items-center justify-center pointer-events-none select-none mt-30 mb-32 md:mb-48"
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
-                >
-                    <h1 className="text-[18vw] md:text-[14vw] font-serif text-[#111111] leading-[0.8] tracking-tighter opacity-10">
-                        Wai Yee
-                    </h1>
-                    <p className="text-[#111111] tracking-[0.5em] uppercase text-xs md:text-sm mt-8 font-mono z-30 opacity-80">
-                        SOFTWARE DEVELOPER / UI/UX DESIGNER
-                    </p>
-                </motion.div>
+                  <mask id="reveal-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%">
+                    <rect width="100%" height="100%" fill="black" />
+                    <g filter="url(#boiling-grunge)">
+                      {Array.from({ length: TRAIL_LENGTH }).map((_, i) => (
+                        <circle 
+                          key={i} 
+                          ref={el => { circlesRef.current[i] = el; }} 
+                          fill="white" 
+                        />
+                      ))}
+                    </g>
+                  </mask>
+                </defs>
+              </svg>
 
-                {/* --- SCATTERED COLLAGE ELEMENTS --- */}
-                <div className="absolute inset-0 z-20 pointer-events-none overflow-hidden">
-                    {SCATTERED_ITEMS.map((item) => (
-                        <div
-                            key={item.id}
-                            className="absolute pointer-events-auto transition-transform duration-75 hover:z-50 group hover:scale-110 cursor-pointer"
-                            style={{
-                                top: item.top,
-                                left: item.left,
-                                right: item.right,
-                                bottom: item.bottom,
-                                transform: `rotate(${item.rotate}) translateY(${scrollY * item.speed}px)`,
-                            }}
-                        >
-                            {item.type === 'image' && (
-                                <div className="relative shadow-[10px_10px_20px_rgba(0,0,0,0.15)] bg-white p-2 md:p-3 border border-black">
-                                    <img src={item.src} alt="scattered" className="w-28 md:w-56 h-auto grayscale group-hover:grayscale-0 transition-all duration-700" />
-                                </div>
-                            )}
-                        </div>
-                    ))}
-                </div>
+              <div className="absolute inset-0 bg-[#FAFAFA]" />
 
+              <div 
+                className={`absolute inset-0 z-0 pointer-events-none transition-opacity duration-500 ${hasMoved ? 'opacity-100' : 'opacity-0'}`}
+                style={{
+                  mask: 'url(#reveal-mask)',
+                  WebkitMask: 'url(#reveal-mask)'
+                }}
+              >
+                <img 
+                  src="/bg.jpeg" 
+                  alt="Deep background layer"
+                  className="absolute top-1/2 left-1/2 min-w-full min-h-[120%] object-cover grayscale opacity-90 pointer-events-none"
+                  style={{
+                    transform: 'translate(-50%, -50%) scale(1.15)' 
+                  }}
+                />
+                <div className="absolute inset-0 bg-[#e8e8e8]/5 mix-blend-overlay pointer-events-none" />
+              </div>
 
+              <div className="relative z-10 text-center pointer-events-none select-none flex flex-col items-center">
+                <h1 className="text-[5rem] md:text-[9rem] lg:text-[11rem] font-serif-custom text-[#111111] tracking-tight leading-none mb-6 md:mb-8 drop-shadow-sm">
+                  Lee Wai Yee
+                </h1>
+                <p className="text-[0.85rem] md:text-base lg:text-lg tracking-[0.35em] md:tracking-[0.45em] font-sans-custom text-gray-700 uppercase font-medium">
+                  Software Developer <span className="mx-3 font-light text-gray-400">/</span> UI/UX Designer
+                </p>
+              </div>
             </section>
 
+            {/* --- MARQUEE TRANSITION --- */}
+            <Marquee text="ROLL CAMERA • NEXT FRAME • " />
+
             {/* --- ABOUT SECTION (FIELD NOTES FORMAT) --- */}
-            <section id="about" className="py-16 md:py-24 px-6 relative overflow-hidden bg-[#F2F2ED]">
+            <section id="about" className="py-16 md:py-24 px-6 relative overflow-hidden bg-[#FAFAFA]">
                 <div className="max-w-4xl mx-auto relative z-10">
                     <motion.div
                         className="flex flex-col items-center justify-center gap-6 mb-8 text-center"
@@ -155,8 +240,8 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                         viewport={{ once: true, amount: 0.5 }}
                         transition={{ duration: 0.7, ease: 'easeOut' }}
                     >
-                        <h3 className="text-xl md:text-2xl font-serif text-[#111] max-w-2xl px-6">
-                            "Coding with a cinematic lens."
+                        <h3 className="text-xl md:text-2xl font-mono text-[#111] max-w-2xl px-6">
+                            [FRAME 02: THE DEVELOPER'S LOG]
                         </h3>
                     </motion.div>
 
@@ -246,11 +331,18 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
 
 
             {/* --- CASE STUDY PROJECTS (Sticky Horizontal Scroll) --- */}
-            <section id="projects" ref={projectsRef} className="relative bg-[#F2F2ED]" style={{ height: sectionHeight }}>
+            <section id="projects" ref={projectsRef} className="relative bg-[#FAFAFA]" style={{ height: sectionHeight }}>
+
+                {/* Section Title */}
+                <div className="absolute top-12 md:top-16 w-full flex justify-center z-30 pointer-events-none">
+                    <h3 className="text-xl md:text-2xl font-mono text-[#111] px-6">
+                        [FRAME 03: SELECTED WORK]
+                    </h3>
+                </div>
 
                 {/* Sticky Container */}
-                <div className="sticky top-0 h-screen flex flex-col justify-start pt-28 overflow-hidden">
-                    <div className="relative w-full mt-12 md:mt-0">
+                <div className="sticky top-0 h-screen flex flex-col justify-center pt-20 overflow-hidden">
+                    <div className="relative w-full mt-4 md:mt-0">
                         {/* Moving Film Strip Container */}
                         <div ref={filmStripRef} className="w-max flex relative pt-8 pb-16 will-change-transform pl-6 md:pl-12">
 
@@ -425,11 +517,11 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                                             style={{ backgroundImage: perfSVG, backgroundRepeat: 'repeat-x', backgroundSize: '32px 32px' }}
                                         ></div>
                                         {/* Curved cutout */}
-                                        <div className="absolute bottom-0 right-0 w-full h-[58%] bg-[#F2F2ED] rounded-tl-[4rem] md:rounded-tl-[6rem]"></div>
+                                        <div className="absolute bottom-0 right-0 w-full h-[58%] bg-[#FAFAFA] rounded-tl-[4rem] md:rounded-tl-[6rem]"></div>
                                     </div>
 
                                     {/* CTA — immediately after leader, no gap */}
-                                    <div className="flex flex-col items-start justify-center shrink-0 w-[320px] md:w-[420px] h-full pl-12 pr-8 bg-[#F2F2ED]">
+                                    <div className="flex flex-col items-start justify-center shrink-0 w-[320px] md:w-[420px] h-full pl-12 pr-8 bg-[#FAFAFA]">
                                         <h3 className="text-[#111] font-black tracking-tighter text-2xl md:text-4xl leading-[0.9] text-center">
                                             WANT TO KNOW MORE?<br />
                                             <a href="/work" className="underline-offset-4 decoration-[3px] hover:underline transition-all cursor-pointer">
@@ -448,18 +540,17 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             </section>
 
             {/* --- ACHIEVEMENTS (Full Width Table with Hover Image Effect) --- */}
-            <section id="achievements" className="py-16 md:py-24 bg-[#F2F2ED] relative cursor-default">
+            <section id="achievements" className="py-16 md:py-24 bg-[#FAFAFA] relative cursor-default">
                 <motion.div
-                    className="px-6 md:px-12 mb-12 flex flex-col md:flex-row justify-between items-end"
-                    initial={{ opacity: 0, y: 40 }}
+                    className="flex flex-col items-center justify-center gap-6 mb-12 text-center"
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.5 }}
-                    transition={{ duration: 0.8, ease: 'easeOut' }}
+                    transition={{ duration: 0.7, ease: 'easeOut' }}
                 >
-                    <div>
-                        <h2 className="text-4xl md:text-6xl font-serif text-[#111] mb-4">Exposure Log</h2>
-                        <p className="text-gray-500 tracking-[0.3em] uppercase text-xs font-mono">Archive Index & Milestones</p>
-                    </div>
+                    <h3 className="text-xl md:text-2xl font-mono text-[#111] max-w-2xl px-6">
+                        [FRAME 04: ARCHIVE INDEX]
+                    </h3>
                 </motion.div>
 
                 {/* Full Width Table Container */}
@@ -524,7 +615,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
 
                 {/* Floating Cursor Image Effect */}
                 <div
-                    className="fixed pointer-events-none z-[100] overflow-hidden border border-black shadow-[0_20px_50px_rgba(0,0,0,0.3)] bg-[#F2F2ED]"
+                    className="fixed pointer-events-none z-[100] overflow-hidden border border-black shadow-[0_20px_50px_rgba(0,0,0,0.3)] bg-[#FAFAFA]"
                     style={{
                         left: mousePos.x,
                         top: mousePos.y,
@@ -565,16 +656,21 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             <div className={`fixed inset-0 bg-white z-[999] pointer-events-none transition-opacity duration-500 ease-out ${isSnapping ? 'opacity-100' : 'opacity-0'}`}></div>
 
             {/* 6. THE FINAL EXPOSURE (Footer) */}
-            <footer id="connect" className={`bg-[#F2F2ED] text-[#111] pt-8 md:pt-12 flex flex-col items-center justify-center relative overflow-hidden transition-all duration-[1200ms] ease-in-out ${photoPrinted ? 'pb-4 md:pb-8' : 'pb-2 md:pb-4'}`}>
+            <footer id="connect" className={`bg-[#FAFAFA] text-[#111] pt-8 md:pt-12 flex flex-col items-center justify-center relative overflow-hidden transition-all duration-[1200ms] ease-in-out ${photoPrinted ? 'pb-4 md:pb-8' : 'pb-2 md:pb-4'}`}>
                 <motion.div
-                    className="text-center mb-8 md:mb-12 px-6 relative z-20"
+                    className="flex flex-col items-center justify-center gap-6 mb-8 md:mb-12 text-center relative z-20"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.5 }}
-                    transition={{ duration: 0.8, ease: 'easeOut' }}
+                    transition={{ duration: 0.7, ease: 'easeOut' }}
                 >
-                    <h2 className="text-4xl md:text-6xl font-serif mb-2 md:mb-4 text-[#111]">The Final Exposure</h2>
-                    <p className="text-gray-400 font-mono text-sm tracking-widest uppercase">Capture the moment • Print Resume</p>
+                    <h3 className="text-xl md:text-2xl font-mono text-[#111] max-w-2xl px-6">
+                        [FRAME 05: THE FINAL EXPOSURE]
+                    </h3>
+                    <div className="flex flex-col items-center justify-center gap-1 font-serif text-[#111]/80 text-lg md:text-xl italic">
+                        <p>One click. One frame.</p>
+                        <p>Watch the résumé develop.</p>
+                    </div>
                 </motion.div>
 
                 {/* Interactive Camera */}
@@ -589,7 +685,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                             drag={photoPrinted}
                             dragMomentum={false}
                             whileDrag={{ scale: 1.05, cursor: 'grabbing', zIndex: 50, rotate: 0 }}
-                            className="w-full bg-[#F2F2ED] p-3 shadow-2xl flex flex-col items-center origin-center rounded-sm border border-black/10"
+                            className="w-full bg-[#FAFAFA] p-3 shadow-2xl flex flex-col items-center origin-center rounded-sm border border-black/10"
                             style={{ rotate: '-2deg', cursor: photoPrinted ? 'grab' : 'default' }}
                         >
                             {/* Polaroid Image Area (Resume Preview) */}
@@ -647,12 +743,12 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                             setTimeout(() => {
                                 window.scrollTo({ top: 0, behavior: 'smooth' });
                                 setIsRewinding(false);
-                            }, 900);
+                            }, 300);
                         }}
-                        className="relative z-20 mb-4 font-serif italic text-[#111]/40 hover:text-[#111]/70 transition-all duration-300 cursor-pointer"
+                        className="relative z-20 mb-4 font-mono font-bold uppercase tracking-widest text-[#111]/40 hover:text-[#111]/70 transition-all duration-300 cursor-pointer"
                     >
-                        <span className={`transition-all duration-500 ${isRewinding ? 'opacity-0 text-lg md:text-xl pointer-events-none absolute inset-0 flex items-center justify-center' : 'opacity-100 text-lg md:text-xl flex items-center justify-center'}`}>watching the film rewind</span>
-                        <span className={`transition-all duration-500 ${isRewinding ? 'opacity-100 text-xl md:text-2xl text-[#111]/70 flex items-center justify-center whitespace-nowrap' : 'opacity-0 text-xl pointer-events-none absolute inset-0 flex items-center justify-center'}`}>let&apos;s go back to the first frame!</span>
+                        <span className={`transition-all duration-300 ${isRewinding ? 'opacity-0 text-xs md:text-sm pointer-events-none absolute inset-0 flex items-center justify-center' : 'opacity-100 text-xs md:text-sm flex items-center justify-center'}`}>watching the film rewind</span>
+                        <span className={`transition-all duration-300 ${isRewinding ? 'opacity-100 text-xs md:text-sm text-[#111]/70 flex items-center justify-center whitespace-nowrap' : 'opacity-0 text-xs md:text-sm pointer-events-none absolute inset-0 flex items-center justify-center'}`}>let&apos;s go back to the first frame!</span>
                     </button>
                 </div>
             </footer>
@@ -667,7 +763,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                         aria-label="Close modal background"
                     ></div>
 
-                    <div className="relative z-10 w-full max-w-[800px] h-full max-h-[90vh] md:max-h-[1130px] bg-[#F2F2ED] rounded-xl shadow-2xl flex flex-col overflow-hidden border border-gray-700 aspect-[1/1.414] mx-auto">
+                    <div className="relative z-10 w-full max-w-[800px] h-full max-h-[90vh] md:max-h-[1130px] bg-[#FAFAFA] rounded-xl shadow-2xl flex flex-col overflow-hidden border border-gray-700 aspect-[1/1.414] mx-auto">
                         {/* Modal Header */}
                         <div className="flex justify-between items-center px-6 py-4 border-b border-gray-300 bg-[#E8E8E2]">
                             <div className="font-mono text-sm tracking-widest uppercase font-bold text-[#111]">
