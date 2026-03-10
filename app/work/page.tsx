@@ -74,21 +74,21 @@ const WorkPage = () => {
         return (
                 <div className={`min-h-screen font-sans overflow-hidden flex flex-col transition-colors duration-700 ${isDark ? "bg-[#111111] text-[#f9f6f1] selection:bg-[#f9f6f1] selection:text-[#111]" : "bg-gradient-to-b from-[#f9f6f1] to-[#dce4f0] text-[#111111] selection:bg-[#111111] selection:text-[#F2F2ED]"}`}>
                         <NavBar />			{/* --- TOP LEFT: MAIN TITLE --- */}
-			<div className="fixed top-12 left-12 z-50 max-w-sm pointer-events-auto">
-				<h1 className="text-7xl font-black italic tracking-tighter leading-[0.85] uppercase">
+			<div className="fixed top-24 left-6 md:top-12 md:left-12 z-50 max-w-[200px] md:max-w-sm pointer-events-auto">
+				<h1 className="text-5xl md:text-7xl font-black italic tracking-tighter leading-[0.85] uppercase">
 					Wai Yee's
 					<br />
 					Works
 				</h1>
 				{activeProject.links && activeProject.links.length > 0 && (
-					<div className="mt-8 flex flex-col gap-3">
+					<div className="mt-4 md:mt-8 flex flex-col gap-2 md:gap-3">
 						{activeProject.links.map((link: { label: string; url: string }, i: number) => (
 							<a
 								key={i}
 								href={link.url}
 								target="_blank"
 								rel="noopener noreferrer"
-								className={`border rounded-full px-6 py-2 text-[10px] uppercase tracking-widest transition-all flex items-center justify-between gap-2 w-fit ${isDark ? "border-zinc-700 hover:bg-[#f9f6f1] hover:text-[#111]" : "border-zinc-300 hover:bg-[#111111] hover:text-[#F2F2ED]"}`}
+								className={`border rounded-full px-4 py-2 md:px-6 md:py-2 text-[8px] md:text-[10px] uppercase tracking-widest transition-all flex items-center justify-between gap-2 w-fit ${isDark ? "border-zinc-700 hover:bg-[#f9f6f1] hover:text-[#111]" : "border-zinc-300 hover:bg-[#111111] hover:text-[#F2F2ED]"}`}
 							>
 								{link.label} ↗
 							</a>
@@ -98,40 +98,72 @@ const WorkPage = () => {
 			</div>
 
 			{/* --- BOTTOM LEFT: PROJECT TITLE --- */}
-			<div className="fixed bottom-12 left-12 z-50 pointer-events-none">
+			<div className="fixed bottom-6 left-6 md:bottom-12 md:left-12 z-50 pointer-events-none">
 				<div key={activeProject.id} className="animate-fade-in-up">
-					<p className={`font-mono text-[10px] mb-1 tracking-widest uppercase transition-colors duration-700 ${isDark ? "text-zinc-400" : "text-[#111111]"}`}>
+					<p className={`font-mono text-[8px] md:text-[10px] mb-1 tracking-widest uppercase transition-colors duration-700 ${isDark ? "text-zinc-400" : "text-[#111111]"}`}>
 						Project {activeProject.id}
 					</p>
-					                                     <h2 className="text-5xl font-bold uppercase tracking-tighter leading-none not-italic pointer-events-auto">
+					                                     <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tighter leading-none not-italic pointer-events-auto">
 						{activeProject.title}
 					</h2>
 				</div>
 			</div>
 
-			{/* --- CENTER SCROLLABLE CONTENT --- */}
-			<main
-				ref={scrollContainerRef}
-				className="flex-grow h-screen overflow-y-scroll snap-y snap-mandatory scrollbar-hide px-4 md:px-0 py-[35vh] flex flex-col gap-12 md:gap-24 relative"
-			>
-				{allSlides.map((slide, index) => (
-					<section
-						key={`${slide.id}-${index}`}
-						className="flex items-center justify-center snap-center shrink-0 w-full"
-					>
-						<div className="relative w-full max-w-md lg:max-w-lg aspect-[4/5] md:aspect-video rounded-3xl overflow-hidden shadow-2xl bg-white group transition-all duration-700">
-							<img
-								src={slide.currentImage}
-								alt={slide.title}
-								className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-1000"
-							/>
-						</div>
-					</section>
-				))}
-			</main>
+                        {/* --- CENTER SCROLLABLE CONTENT --- */}
+                        <main
+                                ref={scrollContainerRef}
+                                className="flex-grow h-screen overflow-y-scroll snap-y snap-mandatory scrollbar-hide px-4 md:px-0 py-[20vh] md:py-[35vh] flex flex-col gap-16 md:gap-24 relative z-40"
+                        >
+                                {allSlides.map((slide, index) => (
+                                        <section
+                                                key={`${slide.id}-${index}`}
+                                                className="flex flex-col items-center justify-center snap-center shrink-0 w-full"
+                                        >
+                                                <div className="relative w-full max-w-[320px] sm:max-w-[380px] md:max-w-md lg:max-w-lg aspect-video rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl bg-white group transition-all duration-700">
+                                                        <img
+                                                                src={slide.currentImage}
+                                                                alt={slide.title}
+                                                                className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-1000"
+                                                        />
+                                                </div>
 
-			{/* --- RIGHT SIDEBAR: DESCRIPTIONS --- */}
-			<aside className="fixed right-12 top-1/2 -translate-y-1/2 w-64 z-40 pointer-events-none">
+                                                {/* Mobile Description */}
+                                                <div className="md:hidden mt-6 w-full max-w-[320px] sm:max-w-[380px] pointer-events-auto">
+                                                    <div className="flex items-center justify-between mb-3">
+                                                        <span className={`text-xl font-light ${isDark ? "text-zinc-300" : "text-zinc-600"}`}>{String(slide.projectIndex + 1).padStart(2, '0')}<span className="text-zinc-400 mx-1">/</span><span className="text-zinc-500 text-sm">{String(PROJECTS.length).padStart(2, '0')}</span></span>
+                                                    </div>
+                                                    
+                                                    {slide.imageNumber === 1 ? (
+                                                        <p className="text-[11px] leading-relaxed font-light whitespace-pre-wrap text-justify text-zinc-500">
+                                                            {slide.summary}
+                                                        </p>
+                                                    ) : (
+                                                        slide.descriptions && slide.descriptions[slide.imageNumber - 1] && (
+                                                            <p className="text-[11px] leading-relaxed font-light whitespace-pre-wrap text-justify text-zinc-500">
+                                                                {slide.descriptions[slide.imageNumber - 1]}
+                                                            </p>
+                                                        )
+                                                    )}
+                                                    
+                                                    {slide.imageNumber === 1 && (
+                                                        <div className="mt-4 flex flex-wrap gap-1.5">
+                                                            {slide.tags.map((tag: string) => (
+                                                                <span key={tag} className="text-[8px] border px-2 py-0.5 rounded-full uppercase tracking-widest border-zinc-400/30 text-zinc-500">{tag}</span>
+                                                            ))}
+                                                        </div>
+                                                    )}
+                                                    
+                                                    {slide.imageNumber === 1 && ['01', '02'].includes(slide.id) && (
+                                                        <Link href={`/case-studies/${slide.id === '01' ? 'dopews' : 'twinkle'}`} className={`mt-4 group flex w-fit items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] hover:opacity-70 transition-opacity ${isDark ? "text-[#f9f6f1]" : "text-[#111111]"}`}>
+                                                                Case Study
+                                                                <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                                        </Link>
+                                                    )}
+                                                </div>
+                                        </section>
+                                ))}
+                        </main>			{/* --- RIGHT SIDEBAR: DESCRIPTIONS --- */}
+			<aside className="hidden md:block fixed right-12 top-1/2 -translate-y-1/2 w-64 z-40 pointer-events-none">
 				<div
 					className="space-y-12 transition-all duration-500 pointer-events-auto"
 					key={activeProject.id}
@@ -226,7 +258,7 @@ const WorkPage = () => {
                                         )}
                                 </div>
                         </aside>							{/* Footer Decoration */}
-							<div className="fixed bottom-12 right-12 z-50 text-[8px] uppercase tracking-[0.4em] text-zinc-300 flex items-center gap-4 pointer-events-none">
+							<div className="fixed bottom-6 right-6 md:bottom-12 md:right-12 z-50 text-[8px] uppercase tracking-[0.4em] text-zinc-400 md:text-zinc-300 flex items-center gap-2 md:gap-4 pointer-events-none">
 				<span>Y. 2025</span>
 				<div className="w-1 h-1 bg-zinc-200 rounded-full"></div>
 				<span>N. 0{activeProject.projectIndex + 1}</span>

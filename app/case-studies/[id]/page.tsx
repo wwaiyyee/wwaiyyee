@@ -82,6 +82,33 @@ export default function CaseStudy() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  if (id === "intellitrade" || id === "intellibox") {
+    return (
+      <div className="min-h-screen bg-[#f9f6f1] text-[#111111] font-sans selection:bg-[#111111] selection:text-[#F2F2ED] flex flex-col items-center justify-center relative overflow-hidden">
+        <NavBar />
+        <div className="absolute inset-0 opacity-[0.03] z-0 pointer-events-none" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23111111' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")" }}></div>
+        <div className="z-10 flex flex-col items-center text-center px-4 max-w-2xl mt-12">
+          <span className="text-zinc-400 text-2xl md:text-3xl font-light tracking-tighter mb-4 block font-mono">
+            /{project.number || id.toUpperCase()}
+          </span>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black italic tracking-tighter leading-[0.9] mb-6 uppercase drop-shadow-sm">
+            {project.title || id}
+          </h1>
+          <div className="w-16 h-1 bg-[#111111] mb-8"></div>
+          <h2 className="text-2xl md:text-4xl font-serif font-bold mb-4 uppercase tracking-widest text-[#d73a3a]">
+            [ Coming Soon ]
+          </h2>
+          <p className="text-lg md:text-xl text-[#111111]/70 font-medium leading-relaxed">
+            The case study for this project is currently in the darkroom being developed. Check back later!
+          </p>
+          <Link href="/work" className="mt-12 group flex items-center justify-center gap-3 text-xs font-bold uppercase tracking-[0.3em] bg-[#111111] text-[#f9f6f1] px-8 py-4 rounded-full hover:bg-[#d73a3a] transition-colors shadow-lg hover:shadow-xl">
+            <ArrowRight size={16} className="group-hover:-translate-x-1 transition-transform" /> Back to works 
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#f9f6f1] text-[#111111] font-sans selection:bg-[#111111] selection:text-[#F2F2ED]">
       <style
