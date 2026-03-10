@@ -119,7 +119,7 @@ const WorkPage = () => {
                                                 key={`${slide.id}-${index}`}
                                                 className="flex flex-col items-center justify-center snap-center shrink-0 w-full"
                                         >
-                                                <div className="relative w-full max-w-[320px] sm:max-w-[380px] md:max-w-md lg:max-w-lg aspect-video rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl bg-white group transition-all duration-700">
+                                                <div className="relative w-full max-w-[300px] md:max-w-md lg:max-w-lg aspect-[4/5] md:aspect-video rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl bg-white group transition-all duration-700">
                                                         <img
                                                                 src={slide.currentImage}
                                                                 alt={slide.title}
@@ -128,7 +128,7 @@ const WorkPage = () => {
                                                 </div>
 
                                                 {/* Mobile Description */}
-                                                <div className="md:hidden mt-6 w-full max-w-[320px] sm:max-w-[380px] pointer-events-auto">
+                                                <div className="md:hidden mt-8 w-full max-w-[300px] pointer-events-auto">
                                                     <div className="flex items-center justify-between mb-3">
                                                         <span className={`text-xl font-light ${isDark ? "text-zinc-300" : "text-zinc-600"}`}>{String(slide.projectIndex + 1).padStart(2, '0')}<span className="text-zinc-400 mx-1">/</span><span className="text-zinc-500 text-sm">{String(PROJECTS.length).padStart(2, '0')}</span></span>
                                                     </div>
