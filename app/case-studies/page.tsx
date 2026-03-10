@@ -28,10 +28,6 @@ const ARTICLES_RAW = PROJECTS.map((project, index) => {
         dateStr = 'Dec 2025';
         sortDate = '2025-12-01';
         projectTags = ['EdTech', 'Game-Based Learning', 'Neurodiversity'];
-    } else if (titleLower.includes('intellitrade')) {
-        dateStr = 'Nov 2025';
-        sortDate = '2025-11-01';
-        projectTags = ['AI Agents', 'Web3', 'UI/UX Design'];
     } else {
         dateStr = 'Oct 2025';
         sortDate = '2025-10-01';

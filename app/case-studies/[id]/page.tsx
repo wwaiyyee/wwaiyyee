@@ -336,30 +336,7 @@ export default function CaseStudy() {
                   </p>
                 </div>
               </div>
-            ) : (
-              <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-start w-full">
-                <div className="md:w-[250px] shrink-0">
-                  <h3 className="text-2xl md:text-4xl font-serif font-black italic tracking-tighter leading-[1.1] text-[#111111]">
-                    Identifying
-                    <br />
-                    the Opportunity
-                  </h3>
-                </div>
-                <div className="md:flex-1 flex flex-col gap-6 text-stone-600 font-medium text-base md:text-lg leading-relaxed">
-                  <p>
-                    Every great project starts with a clear understanding of the
-                    problem. In this phase, we set out to understand why current
-                    solutions were falling short for our target demographic.
-                  </p>
-                  <p>
-                    We noticed a significant gap in the market for a tool that
-                    bridged the gap between complex enterprise software and
-                    overly simplistic consumer apps. The premise was simple:
-                    build something powerful, yet intuitively accessible.
-                  </p>
-                </div>
-              </div>
-            )}
+            ) : null}
           </FoldableSection>
 
           {/* Foldable Section 2: Research */}
@@ -486,54 +463,7 @@ export default function CaseStudy() {
                   </p>
                 </div>
               </div>
-            ) : (
-              <div className="flex flex-col gap-12">
-                <p className="text-xl md:text-3xl font-medium leading-tight tracking-tight text-[#111111] max-w-4xl">
-                  Qualitative interviews revealed significant friction across
-                  different operational fields, pinpointing the primary pain
-                  points.
-                </p>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-0 border-t border-l border-[#111111]/10">
-                  <div className="border-r border-b border-[#111111]/10 p-6 md:p-8 flex flex-col items-center justify-center text-center group hover:bg-[#111111] transition-colors h-48">
-                    <div className="text-5xl font-serif font-black text-[#111111] group-hover:text-[#f9f6f1] transition-colors mb-2">
-                      82%
-                    </div>
-                    <div className="text-xs uppercase tracking-widest font-bold text-[#111111]/50 group-hover:text-[#f9f6f1]/50 transition-colors">
-                      Reported Friction
-                    </div>
-                  </div>
-                  <div className="border-r border-b border-[#111111]/10 p-6 md:p-8 flex flex-col items-center justify-center text-center group hover:bg-[#111111] transition-colors h-48">
-                    <div className="text-5xl font-serif font-black text-[#111111] group-hover:text-[#f9f6f1] transition-colors mb-2">
-                      65%
-                    </div>
-                    <div className="text-xs uppercase tracking-widest font-bold text-[#111111]/50 group-hover:text-[#f9f6f1]/50 transition-colors">
-                      Felt Overwhelmed
-                    </div>
-                  </div>
-                  <div className="border-r border-b border-[#111111]/10 p-6 md:p-8 flex flex-col items-center justify-center text-center group hover:bg-[#111111] transition-colors h-48">
-                    <div className="text-5xl font-serif font-black text-[#111111] group-hover:text-[#f9f6f1] transition-colors mb-2">
-                      90%
-                    </div>
-                    <div className="text-xs uppercase tracking-widest font-bold text-[#111111]/50 group-hover:text-[#f9f6f1]/50 transition-colors">
-                      Preferred Simplicity
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-8 md:p-12 bg-[#111111] text-[#f9f6f1] relative shadow-xl">
-                  <div className="absolute top-0 left-0 w-2 h-full bg-[#f9f6f1]/20" />
-                  <p className="font-bold mb-6 uppercase tracking-widest text-[#f9f6f1]/50 text-xs font-mono">
-                    Recorded Insight_
-                  </p>
-                  <p className="text-2xl md:text-3xl font-serif italic leading-relaxed text-[#f9f6f1]/90">
-                    "It's not just about speed. It's about clarity of
-                    information when taking crucial decisions. The current
-                    setups are just too noisy." — Stakeholder #14
-                  </p>
-                </div>
-              </div>
-            )}
+            ) : null}
           </FoldableSection>
 
           {/* Foldable Section 3: Design Process */}
@@ -1160,34 +1090,7 @@ export default function CaseStudy() {
                     </div>
                   </div>
                 </>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pb-2">
-                  <div className="bg-white border border-stone-200 p-4 shadow-sm rounded text-center">
-                    <div className="text-3xl font-bold text-teal-700 mb-1">
-                      40%
-                    </div>
-                    <div className="text-xs text-stone-500 uppercase tracking-wider font-bold">
-                      Time Saved
-                    </div>
-                  </div>
-                  <div className="bg-white border border-stone-200 p-4 shadow-sm rounded text-center">
-                    <div className="text-3xl font-bold text-teal-700 mb-1">
-                      98%
-                    </div>
-                    <div className="text-xs text-stone-500 uppercase tracking-wider font-bold">
-                      Usability Score
-                    </div>
-                  </div>
-                  <div className="bg-teal-50 border border-teal-200 p-4 rounded text-center flex flex-col justify-center relative overflow-hidden group">
-                    <div className="text-teal-700 font-bold text-xl mb-1 uppercase italic tracking-tighter">
-                      Standard
-                    </div>
-                    <div className="text-xs text-teal-600 uppercase tracking-wider font-bold">
-                      Adopted Industry-wide
-                    </div>
-                  </div>
-                </div>
-              )}
+              ) : null}
             </div>
           </FoldableSection>
         </div>

@@ -13,21 +13,8 @@ export const PROJECTS = [
         }
     },
     {
-        id: 'intellitrade',
-        number: '02',
-        title: 'IntelliTrade',
-        tagline: 'AI agent marketplace',
-        roles: 'Fintech • Frontend',
-        image: '/intellitrade/intellitrade-landing.jpeg',
-        achievements: 'Lighthouse - Best Data Agent Created',
-        caseStudy: {
-            overview: 'An institutional-grade trading terminal that uses machine learning models to suggest optimal entry and exit points.',
-            impact: 'Achieved a 98% positive usability score from pilot users.'
-        }
-    },
-    {
         id: 'twinkle',
-        number: '03',
+        number: '02',
         title: 'Twinkle',
         tagline: '3D educational game',
         roles: 'Creative Tech • WebGL • Frontend',
