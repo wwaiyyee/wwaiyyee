@@ -15,8 +15,8 @@ export const WORK_PROJECTS = [
         images: [
             '/dopews-my/DOPEWS-landing.png',
             '/dopews-my/DOPEWS-heatmap.png',
-            'https://images.unsplash.com/photo-1522542550221-31fd19255a7a?auto=format&fit=crop&q=80&w=1600',
-            'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1600',
+            '/dopews-my/dopews-admin%20dashaboard.png',
+            '/dopews-my/dopews-api.png',
             '/dopews-my/DOPEWS-education.png',
         ],
         links: [
