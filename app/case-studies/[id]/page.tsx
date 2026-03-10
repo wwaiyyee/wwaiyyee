@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -29,6 +30,32 @@ export default function CaseStudy() {
   // Find the selected project or fallback to the first one
   const project = PROJECTS.find((p) => p.id === id) || PROJECTS[0];
 
+  const containerRef = useRef(null);
+
+  // Setup scroll tracking for the hero section
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  // Calculate transforms for the images
+  const img1Y = useTransform(scrollYProgress, [0.05, 0.30], ["0vh", "-200vh"]);
+  const img2Y = useTransform(scrollYProgress, [0.38, 0.63], ["0vh", "-200vh"]);
+  const img3Y = useTransform(scrollYProgress, [0.70, 0.95], ["0vh", "-200vh"]);
+
+  // Calculate opacities for the descriptions
+  const text1Opacity = useTransform(scrollYProgress, [0.05, 0.25], [1, 0]);
+  const text2Opacity = useTransform(scrollYProgress, [0.10, 0.30, 0.38, 0.58], [0, 1, 1, 0]);
+  const text3Opacity = useTransform(scrollYProgress, [0.43, 0.63, 0.70, 0.90], [0, 1, 1, 0]);
+  const text4Opacity = useTransform(scrollYProgress, [0.75, 0.95, 1], [0, 1, 1]);
+
+  const images = [
+    "/dopews-my/DOPEWS-heatmap.png",
+    "/dopews-my/dopews-admin%20dashaboard.png",
+    "/dopews-my/dopews-api.png",
+    "/dopews-my/DOPEWS-education.png",
+  ];
+
   // Find next project for the footer link
   const currentIndex = PROJECTS.findIndex((p) => p.id === project.id);
   const nextProject = PROJECTS[(currentIndex + 1) % PROJECTS.length];
@@ -50,6 +77,18 @@ export default function CaseStudy() {
         : [...prev, sectionId],
     );
   };
+
+  // Inject Google Font for the elegant Serif look
+  useEffect(() => {
+    const link = document.createElement("link");
+    link.href =
+      "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@300;400&display=swap";
+    link.rel = "stylesheet";
+    document.head.appendChild(link);
+    return () => {
+      document.head.removeChild(link);
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -688,79 +727,136 @@ export default function CaseStudy() {
             id="interface"
             title="Final Interface"
             icon={Layout}
-            iconColor="text-indigo-600"
-            bgColor="bg-indigo-50"
-            imageBorder="border-indigo-200"
-            summary="High Fidelity Output"
+            iconColor="text-stone-800"
+            bgColor="bg-stone-50"
+            imageBorder="border-stone-200"
+            summary=""
             isOpen={openSections.includes("interface")}
             onClick={() => handleToggle("interface")}
+            isFullWidth={true}
           >
             {project.id === "dopews" ? (
-              <div className="space-y-8">
-                <p className="text-lg leading-relaxed text-stone-700 font-medium">
-                  The final system consists of four main application modules
-                  designed for different user roles.
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="bg-white border border-stone-200 rounded-xl p-8 shadow-sm">
-                    <h3 className="text-lg font-bold mb-4 text-indigo-900">
-                      Dengue Heatmap Dashboard
-                    </h3>
-                    <p className="text-stone-500 font-medium mb-4 text-sm">
-                      Interactive visualization showing predicted dengue
-                      outbreak risks across geographic areas.
-                    </p>
-                    <ul className="list-disc pl-5 text-stone-600 font-medium space-y-2 text-sm">
-                      <li>Historical dengue case trends</li>
-                      <li>Predicted outbreak risk levels</li>
-                      <li>Geographic hotspot maps</li>
-                      <li>Time-series outbreak forecasts</li>
-                    </ul>
-                  </div>
-                  <div className="bg-white border border-stone-200 rounded-xl p-8 shadow-sm">
-                    <h3 className="text-lg font-bold mb-4 text-indigo-900">
-                      API Key Management
-                    </h3>
-                    <p className="text-stone-500 font-medium mb-4 text-sm">
-                      Allows developers and organizations to securely access
-                      dengue forecast data.
-                    </p>
-                    <ul className="list-disc pl-5 text-stone-600 font-medium space-y-2 text-sm">
-                      <li>API key generation and management</li>
-                      <li>Usage tracking</li>
-                      <li>Secure API authentication</li>
-                    </ul>
-                  </div>
-                  <div className="bg-white border border-stone-200 rounded-xl p-8 shadow-sm">
-                    <h3 className="text-lg font-bold mb-4 text-indigo-900">
-                      Admin Dashboard
-                    </h3>
-                    <p className="text-stone-500 mb-4 font-medium text-sm">
-                      Administrative panel used to manage the platform and
-                      system configurations.
-                    </p>
-                    <ul className="list-disc pl-5 text-stone-600 font-medium space-y-2 text-sm">
-                      <li>User management</li>
-                      <li>Risk threshold configuration</li>
-                      <li>Alert rule management</li>
-                      <li>System monitoring</li>
-                    </ul>
-                  </div>
-                  <div className="bg-white border border-stone-200 rounded-xl p-8 shadow-sm">
-                    <h3 className="text-lg font-bold mb-4 text-indigo-900">
-                      Education Hub
-                    </h3>
-                    <p className="text-stone-500 mb-4 font-medium text-sm">
-                      Public information portal designed to improve awareness
-                      and prevention.
-                    </p>
-                    <ul className="list-disc pl-5 text-stone-600 font-medium space-y-2 text-sm">
-                      <li>Dengue prevention guidelines</li>
-                      <li>Educational articles</li>
-                      <li>Awareness resources</li>
-                      <li>Public health information</li>
-                    </ul>
-                  </div>
+              <div className="flex flex-col relative w-full pt-0">
+                <style>{`
+                  .font-serif-custom {
+                    font-family: 'Cormorant Garamond', serif;
+                  }
+                `}</style>
+                <div className="relative w-full text-[#111111] bg-transparent">
+                  <section ref={containerRef} className="relative h-[250vh] w-full max-w-7xl mx-auto flex justify-center">
+                    <div className="sticky top-[5vh] h-[95vh] w-full overflow-hidden flex flex-col items-center justify-start pt-2 px-[5vw] md:px-[8vw]">
+                      {/* Image Stack */}
+                      <div className="relative w-[90vw] md:w-[80vw] xl:w-[70vw] z-10 flex flex-col items-center">
+                        {/* Base image - dictates size of the stack */}
+                        <div className="relative w-full rounded-2xl bg-[#f9f6f1] p-2 md:p-3 border border-[#111111]/20 shadow-sm">
+                          <div className="relative w-full overflow-hidden rounded-xl border border-[#111111]/10 bg-white aspect-[2880/1554]">
+                            <img
+                              src={images[3]}
+                              alt="DOPEWS App 4"
+                              className="w-full h-full object-cover object-top"
+                            />
+                          </div>
+                        </div>
+
+                        <motion.div
+                          style={{ y: img3Y }}
+                          className="absolute top-0 left-0 w-full"
+                        >
+                          <div className="w-full rounded-2xl bg-[#f9f6f1] p-2 md:p-3 border border-[#111111]/20 shadow-sm">
+                            <div className="w-full overflow-hidden rounded-xl border border-[#111111]/10 bg-white aspect-[2880/1554]">
+                              <img
+                                src={images[2]}
+                                alt="DOPEWS App 3"
+                                className="w-full h-full object-cover object-top"
+                              />
+                            </div>
+                          </div>
+                        </motion.div>
+
+                        <motion.div
+                          style={{ y: img2Y }}
+                          className="absolute top-0 left-0 w-full"
+                        >
+                          <div className="w-full rounded-2xl bg-[#f9f6f1] p-2 md:p-3 border border-[#111111]/20 shadow-sm">
+                            <div className="w-full overflow-hidden rounded-xl border border-[#111111]/10 bg-white aspect-[2880/1554]">
+                              <img
+                                src={images[1]}
+                                alt="DOPEWS App 2"
+                                className="w-full h-full object-cover object-top"
+                              />
+                            </div>
+                          </div>
+                        </motion.div>
+
+                        <motion.div
+                          style={{ y: img1Y }}
+                          className="absolute top-0 left-0 w-full"
+                        >
+                          <div className="w-full rounded-2xl bg-[#f9f6f1] p-2 md:p-3 border border-[#111111]/20 shadow-sm">
+                            <div className="w-full overflow-hidden rounded-xl border border-[#111111]/10 bg-white aspect-[2880/1554]">
+                              <img
+                                src={images[0]}
+                                alt="DOPEWS App 1"
+                                className="w-full h-full object-cover object-top"
+                              />
+                            </div>
+                          </div>
+                        </motion.div>
+                      </div>
+
+                      {/* Image Descriptions (Crossfading) */}
+                      <div className="relative w-[90vw] md:w-[80vw] xl:w-[70vw] mt-6 md:mt-8 h-[20vh] max-h-[160px] flex justify-center items-start text-center z-10 font-sans">
+                        <motion.div
+                          style={{ opacity: text1Opacity }}
+                          className="absolute top-0 left-0 w-full"
+                        >
+                          <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
+                            1. Dengue Risk Heatmap
+                          </h4>
+                          <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
+                            The Dengue Risk Heatmap uses a map-centered interface with color-coded risk levels to visualize predicted outbreak areas. Supporting analytics, forecast controls, and driver insights help users quickly understand spatial risk patterns and make informed public health decisions.
+                          </p>
+                        </motion.div>
+
+                        <motion.div
+                          style={{ opacity: text2Opacity }}
+                          className="absolute top-0 left-0 w-full pointer-events-none"
+                        >
+                          <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
+                            2. Admin Dashboard
+                          </h4>
+                          <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
+                            The Admin Dashboard adopts a structured table-based layout to efficiently manage system users and roles. Features such as search, filtering, and role actions allow administrators to monitor activity, maintain security, and control platform access effectively.
+                          </p>
+                        </motion.div>
+
+                        <motion.div
+                          style={{ opacity: text3Opacity }}
+                          className="absolute top-0 left-0 w-full pointer-events-none"
+                        >
+                          <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
+                            3. API Key Management / API Playground
+                          </h4>
+                          <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
+                            The API Playground provides developers with an interactive interface to test endpoints and access dengue data programmatically. Integrated documentation, authentication guidance, and JSON examples simplify integration and encourage external application development.
+                          </p>
+                        </motion.div>
+
+                        <motion.div
+                          style={{ opacity: text4Opacity }}
+                          className="absolute top-0 left-0 w-full pointer-events-none"
+                        >
+                          <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
+                            4. Dengue Education Hub
+                          </h4>
+                          <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
+                            The Dengue Education Hub presents educational articles in a searchable, content-focused layout to improve public awareness. Filtering, sorting, and visual materials help users easily access reliable dengue prevention knowledge and health information.
+                          </p>
+                        </motion.div>
+                      </div>
+
+                    </div>
+                  </section>
                 </div>
               </div>
             ) : (
@@ -1010,6 +1106,7 @@ function FoldableSection({
   isOpen,
   onClick,
   children,
+  isFullWidth,
 }: any) {
   return (
     <div className="w-full flex flex-col">
@@ -1033,26 +1130,36 @@ function FoldableSection({
           isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
         }`}
       >
-        <div className="overflow-hidden min-h-0">
+        <div className="overflow-clip min-h-0">
           {/* Spacing is handled exclusively inside the expandable area using padding to avoid outer margin collapsing issues */}
-          <div className="flex flex-col md:flex-row gap-8 pt-6 pb-2 px-1">
-            {/* Visual/Icon Side */}
-            <div className="md:w-1/3 flex-shrink-0">
+          {isFullWidth ? (
+            <div className="w-full pt-6 pb-0 px-1">
               <div
-                className={`transition-transform duration-500 ${isOpen ? "translate-y-0" : "translate-y-4"}`}
+                className={`w-full transition-opacity duration-700 delay-100 ${isOpen ? "opacity-100" : "opacity-0"}`}
               >
-                <span className="font-sans text-stone-800 text-2xl md:text-4xl font-bold">
-                  {summary}
-                </span>
+                {children}
               </div>
             </div>
-            {/* Text Content Side */}
-            <div
-              className={`md:w-2/3 text-stone-700 leading-relaxed text-lg transition-opacity duration-700 delay-100 ${isOpen ? "opacity-100" : "opacity-0"}`}
-            >
-              {children}
+          ) : (
+            <div className="flex flex-col md:flex-row gap-8 pt-6 pb-2 px-1">
+              {/* Visual/Icon Side */}
+              <div className="md:w-1/3 flex-shrink-0">
+                <div
+                  className={`transition-transform duration-500 ${isOpen ? "translate-y-0" : "translate-y-4"}`}
+                >
+                  <span className="font-sans text-stone-800 text-2xl md:text-4xl font-bold">
+                    {summary}
+                  </span>
+                </div>
+              </div>
+              {/* Text Content Side */}
+              <div
+                className={`md:w-2/3 text-stone-700 leading-relaxed text-lg transition-opacity duration-700 delay-100 ${isOpen ? "opacity-100" : "opacity-0"}`}
+              >
+                {children}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
