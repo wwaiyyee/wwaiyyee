@@ -3,40 +3,9 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { NavBar } from '../../components/NavBar';
+import { WORK_PROJECTS as PROJECTS } from '../../data/work-projects';
 
-const PROJECTS = [
-	{
-		id: '01',
-		title: 'INTELLIBOX AI',
-		summary:
-			'An award-winning hardware-software integration that utilizes machine learning to optimize home energy consumption. Winner of TechTrove 2.0.',
-		year: '2025',
-		tags: ['Product Design', 'AI / ML'],
-		// Supporting 5+ images per project
-		images: [
-			'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1600',
-			'https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=1600',
-			'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1600',
-			'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1600',
-			'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&q=80&w=1600',
-		],
-	},
-	{
-		id: '02',
-		title: 'DOPEWS-MY',
-		summary:
-			'A localized digital workspace platform tailored for the Malaysian creative industry, focusing on community collaboration and resource sharing.',
-		year: '2024',
-		tags: ['UI/UX', 'Web3'],
-		images: [
-			'https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=1600',
-			'https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&q=80&w=1600',
-			'https://images.unsplash.com/photo-1522542550221-31fd19255a7a?auto=format&fit=crop&q=80&w=1600',
-			'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1600',
-			'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=1600',
-		],
-	},
-];
+
 
 const WorkPage = () => {
 	const [activeSlideIndex, setActiveSlideIndex] = useState(0);
@@ -121,7 +90,7 @@ const WorkPage = () => {
 					<p className={`font-mono text-[10px] mb-1 tracking-widest uppercase transition-colors duration-700 ${isDark ? "text-zinc-400" : "text-[#111111]"}`}>
 						Project {activeProject.id}
 					</p>
-					<h2 className="text-5xl font-bold uppercase tracking-tighter leading-none italic pointer-events-auto">
+					                                     <h2 className="text-5xl font-bold uppercase tracking-tighter leading-none not-italic pointer-events-auto">
 						{activeProject.title}
 					</h2>
 				</div>
