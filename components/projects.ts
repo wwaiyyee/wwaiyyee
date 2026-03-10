@@ -87,7 +87,7 @@ export const ACHIEVEMENTS = [
         title: 'ETHclbet',
         desc: 'A privacy-preserving prediction market optimizer that aggregates markets across platforms and computes optimal betting allocations.',
         highlight: true,
-        img: 'https://images.unsplash.com/photo-1639762681485-074b7f4d2315?auto=format&fit=crop&q=80&w=400',
+        img: '/ethclbet/ethclbet-landing.png',
         prize: '2nd Place & Best Tooling'
     }
 ];

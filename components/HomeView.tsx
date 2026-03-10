@@ -314,26 +314,26 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                                 transition={{ duration: 0.6, delay: 0.7 }}
                             >
                                 <p className="uppercase font-bold tracking-widest text-xs text-gray-500 mb-4">[ 03. EQUIPMENT ]</p>
-                                <div className="grid grid-cols-[100px_auto_1fr] md:grid-cols-[max-content_auto_1fr] gap-x-2 md:gap-x-6 gap-y-4 md:gap-y-5 text-black font-medium items-center md:items-baseline">
-                                    <div className="font-bold uppercase leading-tight">Languages</div>
-                                    <div className="font-bold">:</div>
-                                    <div className="text-gray-700 leading-snug">Python · Java · JavaScript</div>
+                                                                <div className="grid grid-cols-[100px_auto_1fr] md:grid-cols-[max-content_auto_1fr] gap-x-4 gap-y-6 text-xs md:text-sm text-black font-medium">
+                                    <div className="uppercase leading-tight">Languages</div>
+                                    <div className="font-mono">:</div>
+                                    <div className="">Python · Java · JavaScript</div>
 
-                                    <div className="font-bold uppercase leading-tight">Web</div>
-                                    <div className="font-bold">:</div>
-                                    <div className="text-gray-700 leading-snug">React · Next.js · HTML · CSS</div>
+                                    <div className="uppercase leading-tight">Web</div>
+                                    <div className="font-mono">:</div>
+                                    <div className="">React · Next.js · HTML · CSS</div>
 
-                                    <div className="font-bold uppercase leading-tight">Data & AI</div>
-                                    <div className="font-bold">:</div>
-                                    <div className="text-gray-700 leading-snug">TensorFlow · Random Forest · KNN</div>
+                                    <div className="uppercase leading-tight">Data & AI</div>
+                                    <div className="font-mono">:</div>
+                                    <div className="">TensorFlow · Random Forest · KNN</div>
 
-                                    <div className="font-bold uppercase leading-tight">Database</div>
-                                    <div className="font-bold">:</div>
-                                    <div className="text-gray-700 leading-snug">MongoDB · MySQL</div>
+                                    <div className="uppercase leading-tight">Database</div>
+                                    <div className="font-mono">:</div>
+                                    <div className="">MongoDB · MySQL</div>
 
-                                    <div className="font-bold uppercase leading-tight">Design &<br className="md:hidden" /> Creative Tools</div>
-                                    <div className="font-bold">:</div>
-                                    <div className="text-gray-700 leading-snug">Figma · Canva · Spline</div>
+                                    <div className="uppercase leading-tight">Design &<br className="md:hidden" /> Creative Tools</div>
+                                    <div className="font-mono">:</div>
+                                    <div className="">Figma · Canva · Spline</div>
                                 </div>
                             </motion.div>
                         </div>
