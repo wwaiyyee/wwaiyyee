@@ -123,12 +123,40 @@ const WorkPage = () => {
 					className="space-y-12 transition-all duration-500 pointer-events-auto"
 					key={activeProject.id}
 				>
-					{/* Project Counter */}
-					<div className="text-6xl font-light tracking-tighter flex items-baseline">
-						<span className="font-medium">0{activeProject.projectIndex + 1}</span>
+					{/* Project Counter with Interactive Select Jump */}
+					<div className="text-6xl font-light tracking-tighter flex items-baseline relative group cursor-pointer" title="Jump to project">
+						<div className="relative inline-block">
+							<span className="font-medium hover:opacity-70 transition-opacity">
+										{String(activeProject.projectIndex + 1).padStart(2, '0')}
+									</span>
+									<select
+										className="absolute inset-x-0 w-[40px] left-1/2 -translate-x-1/2 opacity-0 cursor-pointer text-black text-[30px] aspect-square"
+										value={activeProject.projectIndex}
+										onChange={(e) => {
+											const targetProjectIndex = parseInt(e.target.value);
+											const targetSlideIndex = allSlides.findIndex(s => s.projectIndex === targetProjectIndex);
+											if (targetSlideIndex !== -1 && scrollContainerRef.current) {
+												const sections = Array.from(scrollContainerRef.current.children).filter(child => (child as HTMLElement).tagName.toLowerCase() === 'section') as HTMLElement[];
+												const targetSection = sections[targetSlideIndex];
+												if (targetSection) {
+													scrollContainerRef.current.scrollTo({
+														top: targetSection.offsetTop - (scrollContainerRef.current.clientHeight / 2) + (targetSection.clientHeight / 2),
+														behavior: 'smooth'
+													});
+												}
+											}
+										}}
+									>
+										{PROJECTS.map((p, idx) => (
+											<option className="text-[10px] text-center" key={p.id} value={idx}>
+												{String(idx + 1).padStart(2, '0')}
+											</option>
+										))}
+									</select>
+						</div>
 						<span className="text-zinc-200 mx-2 text-4xl italic">/</span>
 						<span className="text-zinc-300 text-4xl font-medium">
-							0{PROJECTS.length}
+							{String(PROJECTS.length).padStart(2, '0')}
 						</span>
 					</div>
 
