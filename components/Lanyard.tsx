@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Github, Linkedin, X, Briefcase } from 'lucide-react';
+import { Github, Linkedin, Mail, X, Briefcase } from 'lucide-react';
 
 export function LanyardModal({ open, onClose }: { open: boolean, onClose: () => void }) {
     const userData = {
@@ -7,6 +7,7 @@ export function LanyardModal({ open, onClose }: { open: boolean, onClose: () => 
         photo: "/profile pic.jpeg",
         githubUrl: "https://github.com/wwaiyyee",
         linkedinUrl: "https://linkedin.com/in/lee-wai-yee",
+        emailUrl: "mailto:wwaiyyee@gmail.com",
     };
 
     useEffect(() => {
@@ -44,10 +45,11 @@ function PhysicsLanyard({ userData, onClose }: any) {
         let animationFrameId: number;
         const originY = -20;
 
-        // Init rope high up so it realistically drops in
+        // Init rope hanging perfectly stable in the center
+        const startX = document.documentElement.clientWidth / 2;
         points.current.forEach((p, i) => {
-            p.x = document.documentElement.clientWidth / 2;
-            p.y = -400 + i * segmentLength;
+            p.x = startX;
+            p.y = originY + i * segmentLength;
             p.ox = p.x;
             p.oy = p.y;
         });
@@ -288,6 +290,12 @@ function PhysicsLanyard({ userData, onClose }: any) {
 
                         {/* Action Links */}
                         <div className="w-full space-y-3 relative z-30 mt-2">
+                            <a
+                                href={userData.emailUrl}
+                                className="flex items-center justify-center w-full py-3 px-6 bg-[#EA4335] text-white rounded-xl hover:bg-[#d93025] transition-colors font-mono tracking-widest shadow-md active:scale-95 group/btn"
+                            >
+                                <Mail className="w-5 h-5 mr-3 group-hover/btn:text-red-200 transition-colors" /> EMAIL
+                            </a>
                             <a
                                 href={userData.githubUrl}
                                 target="_blank"

@@ -4,13 +4,11 @@ import React, { useState, useEffect } from 'react';
 import { HomeView } from '../components/HomeView';
 import { CaseStudyView } from '../components/CaseStudyView';
 import { NavBar } from '../components/NavBar';
-import { LanyardModal } from '../components/Lanyard';
 
 // --- MAIN APP COMPONENT ---
 
 export default function App() {
   const [activeProject, setActiveProject] = useState<any>(null);
-  const [isLanyardOpen, setIsLanyardOpen] = useState(false);
 
   useEffect(() => {
     if (activeProject) window.scrollTo({ top: 0, behavior: 'instant' });
@@ -25,10 +23,7 @@ export default function App() {
       </div>
 
       {/* Navigation */}
-      <NavBar onConnectClick={() => setIsLanyardOpen(true)} />
-
-      {/* Lanyard Modal */}
-      <LanyardModal open={isLanyardOpen} onClose={() => setIsLanyardOpen(false)} />
+      <NavBar />
 
       {/* Main Container */}
       <main>
