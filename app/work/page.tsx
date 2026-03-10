@@ -161,17 +161,17 @@ const WorkPage = () => {
 					</div>
 
 					{/* Summary */}
-					<div className="space-y-4">
-						<label className="text-[10px] uppercase tracking-[0.3em] text-zinc-400 font-bold block">
-							Summary
-						</label>
-						<p className="text-[11px] leading-relaxed text-zinc-500 font-light">
-							{activeProject.summary}
-						</p>
-					</div>
+										<div className="space-y-4">
+											<label className="text-[10px] uppercase tracking-[0.3em] text-zinc-400 font-bold block">
+												Summary
+											</label>
+											<p className="text-[11px] leading-relaxed text-zinc-500 font-light whitespace-pre-wrap">
+												{activeProject.summary}
+											</p>
+										</div>
 
-					{/* Description */}
-					{activeProject.imageNumber > 1 && activeProject.descriptions && activeProject.descriptions[activeProject.imageNumber - 1] && (
+										{/* Description */}
+										{activeProject.imageNumber > 1 && activeProject.descriptions && activeProject.descriptions[activeProject.imageNumber - 1] && (
 											<div className="space-y-4 animate-fade-in-up">
 												<label className="text-[10px] uppercase tracking-[0.3em] text-zinc-400 font-bold block">
 													Description
@@ -205,15 +205,17 @@ const WorkPage = () => {
 					</div>
 
 					{/* CTA */}
-					<button className={`group flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] hover:opacity-70 transition-opacity ${isDark ? "text-[#f9f6f1]" : "text-[#111111]"}`}>
-						View Case Study
-						<ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-					</button>
-				</div>
-			</aside>
+					{['01', '02', '03'].includes(activeProject.id) && (
+										<button className={`group flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] hover:opacity-70 transition-opacity ${isDark ? "text-[#f9f6f1]" : "text-[#111111]"}`}>
+											View Case Study
+											<ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+										</button>
+									)}
+								</div>
+							</aside>
 
-			{/* Footer Decoration */}
-			<div className="fixed bottom-12 right-12 z-50 text-[8px] uppercase tracking-[0.4em] text-zinc-300 flex items-center gap-4 pointer-events-none">
+							{/* Footer Decoration */}
+							<div className="fixed bottom-12 right-12 z-50 text-[8px] uppercase tracking-[0.4em] text-zinc-300 flex items-center gap-4 pointer-events-none">
 				<span>Y. 2025</span>
 				<div className="w-1 h-1 bg-zinc-200 rounded-full"></div>
 				<span>N. 0{activeProject.projectIndex + 1}</span>
