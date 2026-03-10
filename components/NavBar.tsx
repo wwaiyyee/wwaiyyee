@@ -31,15 +31,9 @@ export const NavBar = ({ onConnectClick }: NavBarProps) => {
             <Link href="/work" className={getLinkClass('/work')}>
                 Work
             </Link>
-            <Link href="/#connect" className={`text-[10px] md:text-xs uppercase tracking-widest cursor-pointer transition-colors font-bold pb-1 border-b ${
-                pathname === '/#connect' 
-                    ? 'text-[#F2F2ED] border-[#F2F2ED]' 
-                    : 'text-zinc-400 border-transparent hover:text-white hover:border-white'
-            }`}>
+            <Link href="/case-studies" className={getLinkClass('/case-studies')}>
                 Case Studies
-            </Link>
-            
-            <div className="relative group flex items-center h-full">
+            </Link>            <div className="relative group flex items-center h-full">
                 <span 
                     onClick={onConnectClick}
                     className="text-[10px] md:text-xs uppercase tracking-widest text-zinc-400 hover:text-white cursor-pointer transition-colors font-bold pb-1 border-b border-transparent hover:border-white inline-block"
