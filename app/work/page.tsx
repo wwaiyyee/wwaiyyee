@@ -96,11 +96,13 @@ const WorkPage = () => {
 		if (container) {
 			container.addEventListener('scroll', handleScroll, { passive: true });
 		}
-		return () => container?.removeEventListener('scroll', handleScroll);
-	}, [activeSlideIndex, allSlides.length]);
+             return () => container?.removeEventListener('scroll', handleScroll);
+    }, [activeSlideIndex, allSlides.length]);
+
+    const isDark = activeProject.projectIndex % 2 !== 0;
 
         return (
-                <div className="bg-gradient-to-b from-[#f9f6f1] to-[#dce4f0] text-[#111111] min-h-screen font-sans overflow-hidden flex flex-col selection:bg-[#111111] selection:text-[#F2F2ED]">
+                <div className={`min-h-screen font-sans overflow-hidden flex flex-col transition-colors duration-700 ${isDark ? "bg-[#111111] text-[#f9f6f1] selection:bg-[#f9f6f1] selection:text-[#111]" : "bg-gradient-to-b from-[#f9f6f1] to-[#dce4f0] text-[#111111] selection:bg-[#111111] selection:text-[#F2F2ED]"}`}>
                         <NavBar />			{/* --- TOP LEFT: MAIN TITLE --- */}
 			<div className="fixed top-12 left-12 z-50 max-w-sm pointer-events-auto">
 				<h1 className="text-7xl font-black italic tracking-tighter leading-[0.85] uppercase">
@@ -108,7 +110,7 @@ const WorkPage = () => {
 					<br />
 					Works
 				</h1>
-				<button className="mt-8 border border-zinc-300 rounded-full px-6 py-2 text-[10px] uppercase tracking-widest hover:bg-[#111111] hover:text-[#F2F2ED] transition-all flex items-center gap-2">
+				<button className={`mt-8 border rounded-full px-6 py-2 text-[10px] uppercase tracking-widest transition-all flex items-center gap-2 ${isDark ? "border-zinc-700 hover:bg-[#f9f6f1] hover:text-[#111]" : "border-zinc-300 hover:bg-[#111111] hover:text-[#F2F2ED]"}`}>
 					Contact ↗
 				</button>
 			</div>
@@ -116,7 +118,7 @@ const WorkPage = () => {
 			{/* --- BOTTOM LEFT: PROJECT TITLE --- */}
 			<div className="fixed bottom-12 left-12 z-50 pointer-events-none">
 				<div key={activeProject.id} className="animate-fade-in-up">
-					<p className="text-[#111111] font-mono text-[10px] mb-1 tracking-widest uppercase">
+					<p className={`font-mono text-[10px] mb-1 tracking-widest uppercase transition-colors duration-700 ${isDark ? "text-zinc-400" : "text-[#111111]"}`}>
 						Project {activeProject.id}
 					</p>
 					<h2 className="text-5xl font-bold uppercase tracking-tighter leading-none italic pointer-events-auto">
@@ -197,7 +199,7 @@ const WorkPage = () => {
 					</div>
 
 					{/* CTA */}
-					<button className="group flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] text-[#111111] hover:opacity-70 transition-opacity">
+					<button className={`group flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] hover:opacity-70 transition-opacity ${isDark ? "text-[#f9f6f1]" : "text-[#111111]"}`}>
 						View Case Study
 						<ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
 					</button>
