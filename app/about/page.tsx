@@ -4,6 +4,13 @@ import React, { useState, useEffect } from 'react';
 import { ArrowDownRight, ArrowUpRight, Cloud, Mountain, Snowflake, CircleDot, Sparkles } from 'lucide-react';
 import { NavBar } from '@/components/NavBar';
 import Link from 'next/link';
+import { 
+  SiPython, SiOpenjdk, SiJavascript, SiTypescript, SiReact, SiNextdotjs, 
+  SiTailwindcss, SiNodedotjs, SiFlutter, SiPhp, SiHtml5, SiAndroid, SiTensorflow, SiScikitlearn, 
+  SiPandas, SiNumpy, SiMongodb, SiMysql, SiEthereum, SiGit, SiGithub, 
+  SiVercel, SiFigma, SiCanva 
+} from 'react-icons/si';
+import { TbApi } from 'react-icons/tb';
 
 // --- Custom Hook for GSAP-like Smooth Scrubbing ---
 const useSmoothScroll = () => {
@@ -211,69 +218,81 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto flex items-center justify-center relative">
             
             <div className="grid grid-cols-2 md:grid-cols-5 gap-y-16 gap-x-12 w-full items-center justify-items-center text-neutral-800 mix-blend-multiply">
-              
-              {/* Row 1 */}
-              <div className="flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity cursor-pointer">
-                <Mountain size={28} className="fill-current" />
-                <span className="font-bold text-xl tracking-tight">Red Bull</span>
+              <div className="opacity-60 hover:opacity-100 transition-opacity font-bold text-lg tracking-tight flex items-center gap-2">
+                <SiPython className="text-xl" /> Python
               </div>
-              <div className="flex items-center gap-1 opacity-60 hover:opacity-100 transition-opacity cursor-pointer text-2xl font-black tracking-tighter lowercase">
-                <Cloud size={32} className="fill-current" />
-                salesforce
+              <div className="opacity-60 hover:opacity-100 transition-opacity font-bold text-lg tracking-tight flex items-center gap-2">
+                <SiOpenjdk className="text-xl" /> Java
               </div>
-              <div className="opacity-60 hover:opacity-100 transition-opacity cursor-pointer font-black text-3xl tracking-widest flex items-start">
-                AMD<div className="w-2 h-2 bg-current ml-1 mt-1"></div>
+              <div className="opacity-60 hover:opacity-100 transition-opacity font-bold text-lg tracking-tight flex items-center gap-2">
+                <SiJavascript className="text-xl" /> JavaScript
               </div>
-              <div className="opacity-60 hover:opacity-100 transition-opacity cursor-pointer font-bold text-2xl tracking-tight lowercase">
-                coinbase
+              <div className="opacity-60 hover:opacity-100 transition-opacity font-bold text-lg tracking-tight flex items-center gap-2">
+                <SiTypescript className="text-xl" /> TypeScript
               </div>
-              <div className="opacity-60 hover:opacity-100 transition-opacity cursor-pointer font-medium text-2xl tracking-widest lowercase">
-                cādence
+              <div className="opacity-60 hover:opacity-100 transition-opacity font-bold text-lg tracking-tight flex items-center gap-2">
+                <SiReact className="text-xl" /> React
               </div>
-
-              {/* Row 2 */}
-              <div className="opacity-60 hover:opacity-100 transition-opacity cursor-pointer font-bold text-lg tracking-tight flex items-center gap-2">
-                ai.io <span className="w-px h-4 bg-current opacity-30"></span> intel<div className="w-1.5 h-1.5 bg-current -ml-1 mt-2"></div>
+              <div className="opacity-60 hover:opacity-100 transition-opacity font-bold text-lg tracking-tight flex items-center gap-2">
+                <SiNextdotjs className="text-xl" /> Next.js
               </div>
-              <div className="opacity-60 hover:opacity-100 transition-opacity cursor-pointer font-black text-2xl tracking-widest uppercase">
-                SAMSUNG
+              <div className="opacity-60 hover:opacity-100 transition-opacity font-bold text-lg tracking-tight flex items-center gap-2">
+                <SiTailwindcss className="text-xl" /> Tailwind CSS
               </div>
-              <div className="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity cursor-pointer">
-                <div className="flex gap-0.5">
-                   <div className="w-1.5 h-6 bg-current transform skew-y-12"></div>
-                   <div className="w-1.5 h-8 bg-current transform skew-y-12 -mt-1"></div>
-                   <div className="w-1.5 h-10 bg-current transform skew-y-12 -mt-2"></div>
-                </div>
-                <div className="text-xs font-bold leading-tight">Yolo Federal<br/><span className="font-medium">Credit Union</span></div>
+              <div className="opacity-60 hover:opacity-100 transition-opacity font-bold text-lg tracking-tight flex items-center gap-2">
+                <SiNodedotjs className="text-xl" /> Node.js
               </div>
-              <div className="opacity-60 hover:opacity-100 transition-opacity cursor-pointer font-light tracking-widest uppercase text-sm flex items-center gap-2">
-                <div className="relative flex items-center justify-center w-5 h-5 rounded-full border border-current">
-                   <div className="w-1 h-3 bg-current"></div>
-                </div> 
-                Space Needle
+              <div className="opacity-60 hover:opacity-100 transition-opacity font-bold text-lg tracking-tight flex items-center gap-2">
+                <SiFlutter className="text-xl" /> Flutter
               </div>
-              <div className="opacity-60 hover:opacity-100 transition-opacity cursor-pointer font-serif text-sm text-center uppercase relative pt-4">
-                <Snowflake size={20} className="absolute top-0 left-1/2 -translate-x-1/2" />
-                The Art Of Living
+              <div className="opacity-60 hover:opacity-100 transition-opacity font-bold text-lg tracking-tight flex items-center gap-2">
+                <SiAndroid className="text-xl" /> Java Mobile
               </div>
-
-              {/* Row 3 */}
-              <div className="opacity-60 hover:opacity-100 transition-opacity cursor-pointer font-serif text-xl tracking-widest uppercase">
-                Life House
+              <div className="opacity-60 hover:opacity-100 transition-opacity font-bold text-lg tracking-tight flex items-center gap-2">
+                <SiPhp className="text-xl" /> PHP
               </div>
-              <div className="flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity cursor-pointer font-bold text-xl lowercase">
-                <Sparkles size={20} className="fill-current" /> percipio
+              <div className="opacity-60 hover:opacity-100 transition-opacity font-bold text-lg tracking-tight flex items-center gap-2">
+                <SiHtml5 className="text-xl" /> HTML
               </div>
-              <div className="opacity-60 hover:opacity-100 transition-opacity cursor-pointer font-bold text-xl lowercase tracking-tighter">
-                middle
+              <div className="opacity-60 hover:opacity-100 transition-opacity font-bold text-lg tracking-tight flex items-center gap-2">
+                <TbApi className="text-xl" /> REST APIs
               </div>
-              <div className="flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity cursor-pointer font-medium text-lg">
-                <CircleDot size={20} /> OneLine <span className="text-[10px] tracking-widest uppercase mt-1">Health</span>
+              <div className="opacity-60 hover:opacity-100 transition-opacity font-bold text-lg tracking-tight flex items-center gap-2">
+                <SiTensorflow className="text-xl" /> TensorFlow
               </div>
-              <div className="opacity-60 hover:opacity-100 transition-opacity cursor-pointer font-black text-2xl tracking-widest uppercase">
-                DressX
+              <div className="opacity-60 hover:opacity-100 transition-opacity font-bold text-lg tracking-tight flex items-center gap-2">
+                <SiScikitlearn className="text-xl" /> Scikit-learn
               </div>
-
+              <div className="opacity-60 hover:opacity-100 transition-opacity font-bold text-lg tracking-tight flex items-center gap-2">
+                <SiPandas className="text-xl" /> Pandas
+              </div>
+              <div className="opacity-60 hover:opacity-100 transition-opacity font-bold text-lg tracking-tight flex items-center gap-2">
+                <SiNumpy className="text-xl" /> NumPy
+              </div>
+              <div className="opacity-60 hover:opacity-100 transition-opacity font-bold text-lg tracking-tight flex items-center gap-2">
+                <SiMongodb className="text-xl" /> MongoDB
+              </div>
+              <div className="opacity-60 hover:opacity-100 transition-opacity font-bold text-lg tracking-tight flex items-center gap-2">
+                <SiMysql className="text-xl" /> MySQL
+              </div>
+              <div className="opacity-60 hover:opacity-100 transition-opacity font-bold text-lg tracking-tight flex items-center gap-2">
+                <SiEthereum className="text-xl" /> Ethereum
+              </div>
+              <div className="opacity-60 hover:opacity-100 transition-opacity font-bold text-lg tracking-tight flex items-center gap-2">
+                <SiGit className="text-xl" /> Git
+              </div>
+              <div className="opacity-60 hover:opacity-100 transition-opacity font-bold text-lg tracking-tight flex items-center gap-2">
+                <SiGithub className="text-xl" /> GitHub
+              </div>
+              <div className="opacity-60 hover:opacity-100 transition-opacity font-bold text-lg tracking-tight flex items-center gap-2">
+                <SiVercel className="text-xl" /> Vercel
+              </div>
+              <div className="opacity-60 hover:opacity-100 transition-opacity font-bold text-lg tracking-tight flex items-center gap-2">
+                <SiFigma className="text-xl" /> Figma
+              </div>
+              <div className="opacity-60 hover:opacity-100 transition-opacity font-bold text-lg tracking-tight flex items-center gap-2">
+                <SiCanva className="text-xl" /> Canva
+              </div>
             </div>
         </div>
       </div>

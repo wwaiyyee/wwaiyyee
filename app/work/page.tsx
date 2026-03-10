@@ -99,11 +99,9 @@ const WorkPage = () => {
 		return () => container?.removeEventListener('scroll', handleScroll);
 	}, [activeSlideIndex, allSlides.length]);
 
-	return (
-		<div className="bg-[#f9f6f1] text-[#111111] min-h-screen font-sans overflow-hidden flex flex-col selection:bg-[#111111] selection:text-[#F2F2ED]">
-			<NavBar />
-
-			{/* --- TOP LEFT: MAIN TITLE --- */}
+        return (
+                <div className="bg-gradient-to-b from-[#f9f6f1] to-[#dce4f0] text-[#111111] min-h-screen font-sans overflow-hidden flex flex-col selection:bg-[#111111] selection:text-[#F2F2ED]">
+                        <NavBar />			{/* --- TOP LEFT: MAIN TITLE --- */}
 			<div className="fixed top-12 left-12 z-50 max-w-sm pointer-events-auto">
 				<h1 className="text-7xl font-black italic tracking-tighter leading-[0.85] uppercase">
 					Wai Yee's
