@@ -217,14 +217,19 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                 <div className="absolute inset-0 bg-[#e8e8e8]/5 mix-blend-overlay pointer-events-none" />
               </div>
 
-              <div className="relative z-10 text-center pointer-events-none select-none flex flex-col items-center">
+              <motion.div 
+                className="relative z-10 text-center pointer-events-none select-none flex flex-col items-center"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
+              >
                 <h1 className="text-[5rem] md:text-[9rem] lg:text-[11rem] font-serif-custom text-[#111111] tracking-tight leading-none mb-6 md:mb-8 drop-shadow-sm">
                   Lee Wai Yee
                 </h1>
                 <p className="text-[0.85rem] md:text-base lg:text-lg tracking-[0.35em] md:tracking-[0.45em] font-sans-custom text-gray-700 uppercase font-medium">
                   Software Developer <span className="mx-3 font-light text-gray-400">/</span> UI/UX Designer
                 </p>
-              </div>
+              </motion.div>
             </section>
 
             {/* --- MARQUEE TRANSITION --- */}
@@ -240,7 +245,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                         viewport={{ once: true, amount: 0.5 }}
                         transition={{ duration: 0.7, ease: 'easeOut' }}
                     >
-                        <h3 className="text-xl md:text-2xl font-mono text-[#111] max-w-2xl px-6">
+                        <h3 className="text-xl md:text-2xl font-mono text-[#d73a3a] max-w-2xl px-6">
                             [FRAME 02: THE DEVELOPER'S LOG]
                         </h3>
                     </motion.div>
@@ -334,15 +339,27 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             <section id="projects" ref={projectsRef} className="relative bg-[#FAFAFA]" style={{ height: sectionHeight }}>
 
                 {/* Section Title */}
-                <div className="absolute top-12 md:top-16 w-full flex justify-center z-30 pointer-events-none">
-                    <h3 className="text-xl md:text-2xl font-mono text-[#111] px-6">
+                <motion.div 
+                    className="absolute top-12 md:top-16 w-full flex justify-center z-30 pointer-events-none"
+                    initial={{ opacity: 0, y: -20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ duration: 0.7, ease: 'easeOut' }}
+                >
+                    <h3 className="text-xl md:text-2xl font-mono text-[#d73a3a] px-6">
                         [FRAME 03: SELECTED WORK]
                     </h3>
-                </div>
+                </motion.div>
 
                 {/* Sticky Container */}
                 <div className="sticky top-0 h-screen flex flex-col justify-center pt-20 overflow-hidden">
-                    <div className="relative w-full mt-4 md:mt-0">
+                    <motion.div 
+                        className="relative w-full mt-4 md:mt-0"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true, amount: 0.1 }}
+                        transition={{ duration: 1, ease: 'easeOut' }}
+                    >
                         {/* Moving Film Strip Container */}
                         <div ref={filmStripRef} className="w-max flex relative pt-8 pb-16 will-change-transform pl-6 md:pl-12">
 
@@ -534,7 +551,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
 
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
 
             </section>
@@ -548,15 +565,19 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{ duration: 0.7, ease: 'easeOut' }}
                 >
-                    <h3 className="text-xl md:text-2xl font-mono text-[#111] max-w-2xl px-6">
+                    <h3 className="text-xl md:text-2xl font-mono text-[#d73a3a] max-w-2xl px-6">
                         [FRAME 04: ARCHIVE INDEX]
                     </h3>
                 </motion.div>
 
                 {/* Full Width Table Container */}
-                <div
+                <motion.div
                     className="w-full border-t border-black"
                     onMouseMove={(e) => setMousePos({ x: e.clientX, y: e.clientY })}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, amount: 0.1 }}
+                    transition={{ duration: 0.7 }}
                 >
                     {/* Table Header (Hidden on Mobile) */}
                     <div className="hidden md:flex w-full px-12 py-4 border-b border-black text-[10px] text-gray-400 uppercase tracking-[0.2em] font-mono font-bold bg-[#E8E8E2]">
@@ -611,7 +632,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
 
                         </motion.div>
                     ))}
-                </div>
+                </motion.div>
 
                 {/* Floating Cursor Image Effect */}
                 <div
@@ -664,7 +685,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{ duration: 0.7, ease: 'easeOut' }}
                 >
-                    <h3 className="text-xl md:text-2xl font-mono text-[#111] max-w-2xl px-6">
+                    <h3 className="text-xl md:text-2xl font-mono text-[#d73a3a] max-w-2xl px-6">
                         [FRAME 05: THE FINAL EXPOSURE]
                     </h3>
                     <div className="flex flex-col items-center justify-center gap-1 font-serif text-[#111]/80 text-lg md:text-xl italic">
@@ -674,7 +695,13 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                 </motion.div>
 
                 {/* Interactive Camera */}
-                <div className="relative w-[500px] h-[350px] md:w-[600px] md:h-[400px] max-w-[95vw] md:max-w-[90vw] mt-4 mb-4 z-20">
+                <motion.div 
+                    className="relative w-[500px] h-[350px] md:w-[600px] md:h-[400px] max-w-[95vw] md:max-w-[90vw] mt-4 mb-4 z-20"
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
+                >
 
                     {/* The Printed Polaroid (Resume) */}
                     <div
@@ -732,10 +759,16 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                             )}
                         </div>
                     </div>
-                </div>
+                </motion.div>
 
                 {/* Back to Top */}
-                <div className={`w-full flex justify-center z-20 transition-all duration-[1200ms] ${photoPrinted ? 'mt-52 md:mt-64' : 'mt-6'}`}>
+                <motion.div 
+                    className={`w-full flex justify-center z-20 transition-all duration-[1200ms] ${photoPrinted ? 'mt-52 md:mt-64' : 'mt-6'}`}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, amount: 1 }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                >
                     <button
                         onClick={() => {
                             if (isRewinding) return;
@@ -745,12 +778,12 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                                 setIsRewinding(false);
                             }, 300);
                         }}
-                        className="relative z-20 mb-4 font-mono font-bold uppercase tracking-widest text-[#111]/40 hover:text-[#111]/70 transition-all duration-300 cursor-pointer"
+                        className="relative z-20 mb-4 font-mono font-bold uppercase tracking-widest text-[#d73a3a]/80 hover:text-[#d73a3a] transition-all duration-300 cursor-pointer"
                     >
-                        <span className={`transition-all duration-300 ${isRewinding ? 'opacity-0 text-xs md:text-sm pointer-events-none absolute inset-0 flex items-center justify-center' : 'opacity-100 text-xs md:text-sm flex items-center justify-center'}`}>watching the film rewind</span>
-                        <span className={`transition-all duration-300 ${isRewinding ? 'opacity-100 text-xs md:text-sm text-[#111]/70 flex items-center justify-center whitespace-nowrap' : 'opacity-0 text-xs md:text-sm pointer-events-none absolute inset-0 flex items-center justify-center'}`}>let&apos;s go back to the first frame!</span>
+                        <span className={`transition-all duration-300 ${isRewinding ? 'opacity-0 text-xs md:text-sm pointer-events-none absolute inset-0 flex items-center justify-center' : 'opacity-100 text-xs md:text-sm flex items-center justify-center'}`}>press to watch the film rewind</span>
+                        <span className={`transition-all duration-300 ${isRewinding ? 'opacity-100 text-xs md:text-sm text-[#d73a3a] flex items-center justify-center whitespace-nowrap' : 'opacity-0 text-xs md:text-sm pointer-events-none absolute inset-0 flex items-center justify-center'}`}>let&apos;s go back to the first frame!</span>
                     </button>
-                </div>
+                </motion.div>
             </footer>
 
 
