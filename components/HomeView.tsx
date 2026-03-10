@@ -590,9 +590,9 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                     {/* Table Header (Hidden on Mobile) */}
                     <div className="hidden md:flex w-full px-12 py-4 border-b border-black text-[10px] text-gray-400 uppercase tracking-[0.2em] font-mono font-bold bg-[#E8E8E2]">
                         <div className="w-2/12">Frame / Date</div>
-                        <div className="w-4/12">Subject / Event</div>
-                        <div className="w-5/12">Developer Notes</div>
-                        <div className="w-1/12 text-right">Status</div>
+                        <div className="w-3/12">Project / Event</div>
+                        <div className="w-5/12">Description</div>
+                        <div className="w-2/12 text-right">Prize</div>
                     </div>
 
                     {/* Table Rows */}
@@ -617,7 +617,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                             </div>
 
                             {/* SUBJECT & EVENT */}
-                            <div className="w-full md:w-4/12 flex flex-col justify-center pr-4">
+                            <div className="w-full md:w-3/12 flex flex-col justify-center pr-4">
                                 <h3 className={`text-xl font-serif mb-1 transition-colors duration-300 ${achieve.highlight ? 'text-[#111] group-hover:text-white' : 'text-[#333] group-hover:text-gray-300'}`}>
                                     {achieve.title}
                                 </h3>
@@ -627,15 +627,17 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                             </div>
 
                             {/* NOTES */}
-                            <div className="w-full md:w-5/12 pr-4">
+                            <div className="w-full md:w-5/12 pr-4 mt-2 md:mt-0">
                                 <p className="text-sm text-gray-600 leading-relaxed font-sans group-hover:text-gray-400 transition-colors duration-300">
                                     {achieve.desc}
                                 </p>
                             </div>
 
-                            {/* STATUS/HIGHLIGHT */}
-                            <div className="w-full md:w-1/12 flex justify-start md:justify-end items-center mt-4 md:mt-0">
-                                <ArrowUpRight size={16} className="text-[#111] group-hover:text-gray-400 transition-colors duration-300 hidden md:block" />
+                            {/* STATUS/PRIZE */}
+                            <div className="w-full md:w-2/12 flex justify-start md:justify-end items-center mt-4 md:mt-0">
+                                <span className={`text-xs font-mono font-bold tracking-widest text-right ${achieve.highlight ? 'text-[#d73a3a] group-hover:text-[#ff5555]' : 'text-gray-500 group-hover:text-gray-300'} transition-colors duration-300`}>
+                                    {achieve.prize}
+                                </span>
                             </div>
 
                         </motion.div>

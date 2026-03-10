@@ -51,39 +51,43 @@ export const PROJECTS = [
 
 export const ACHIEVEMENTS = [
     {
-        frame: '10',
-        year: '2026',
-        title: 'Lead Frontend Engineer',
-        event: 'Tech Innovations',
-        desc: 'Spearheaded the development of a next-generation predictive dashboard, improving real-time data visualization performance by 40%.',
+        frame: '12',
+        year: '2025',
+        event: 'Cursor x Anthropic Hackathon',
+        title: 'Twinkle',
+        desc: 'A 3D educational game designed to improve attention and learning engagement for children with ADHD through task-based gameplay and visual feedback.',
         highlight: true,
-        img: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=400'
+        img: '/twinkle/twinkle-landing.png',
+        prize: 'Top 15 Finalist'
     },
     {
-        frame: '09',
+        frame: '11',
         year: '2025',
-        title: 'UI/UX Designer',
-        event: 'Fintech Solutions',
-        desc: 'Redesigned the core trading terminal interface, resulting in a 98% positive usability score from institutional pilot users.',
-        highlight: false,
-        img: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=400'
+        event: 'TechTrove 2.0',
+        title: 'IntelliBox',
+        desc: 'An AI agent marketplace where creators can publish and monetize agents, coordinated by AIBox to orchestrate multi-agent workflows through chat-based interaction.',
+        highlight: true,
+        img: '/intellibox/intellibox-landing.png',
+        prize: '1st Place Winner'
+    },
+    {
+        frame: '11',
+        year: '2025',
+        event: 'ETHOnline 2025',
+        title: 'IntelliTrade',
+        desc: 'A decentralized AI agent marketplace that encrypts agents on IPFS and verifies ownership on-chain, enabling secure distribution and cross-chain payments.',
+        highlight: true,
+        img: '/intellitrade/intellitrade-landing.jpeg',
+        prize: 'Lighthouse Best Data Agent'
     },
     {
         frame: '08',
-        year: '2024',
-        title: 'Full Stack Developer',
-        event: 'Media Verification API',
-        desc: 'Built a robust API and frontend platform for deepfake detection, adopted by major newsrooms for media fact-checking.',
+        year: '2025',
+        event: 'DevMatch 2025',
+        title: 'ETHclbet',
+        desc: 'A privacy-preserving prediction market optimizer that aggregates markets across platforms and computes optimal betting allocations.',
         highlight: true,
-        img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=400'
-    },
-    {
-        frame: '07',
-        year: '2023',
-        title: 'Creative Technologist',
-        event: 'Digital Art Exhibition',
-        desc: 'Created an interactive WebGL particle experience that visualizes sound frequencies, featured in multiple digital art galleries worldwide.',
-        highlight: false,
-        img: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&q=80&w=400'
+        img: 'https://images.unsplash.com/photo-1639762681485-074b7f4d2315?auto=format&fit=crop&q=80&w=400',
+        prize: '2nd Place & Best Tooling'
     }
 ];
