@@ -223,7 +223,7 @@ function PhysicsLanyard({ userData, onClose }: any) {
                 {/* Fabric Text Loop */}
                 <text fill="#a1a1aa" fontSize="10" fontWeight="bold" fontFamily="monospace" letterSpacing="0.3em">
                     <textPath href="#lanyardPath" startOffset="50%" textAnchor="middle">
-                        {" CHLOE LEE  •  PORTFOLIO  •  SOFTWARE DEVELOPER  •  UI/UX DESIGNER  • ".repeat(6)}
+                        {" LEE WAI YEE  •  PORTFOLIO  • ".repeat(6)}
                     </textPath>
                 </text>
             </svg>
