@@ -18,6 +18,7 @@ export const PROJECTS = [
         tagline: 'AI agent marketplace',
         roles: 'Fintech • Frontend',
         image: '/intellitrade/intellitrade-landing.jpeg',
+        achievements: 'Lighthouse - Best Data Agent Created',
         caseStudy: {
             overview: 'An institutional-grade trading terminal that uses machine learning models to suggest optimal entry and exit points.',
             impact: 'Achieved a 98% positive usability score from pilot users.'
@@ -30,6 +31,7 @@ export const PROJECTS = [
         tagline: '3D educational game',
         roles: 'Creative Tech • WebGL',
         image: '/twinkle/twinkle-landing.png',
+        achievements: 'Top 15 finalist of Cursor x Anthropic Hackathon',
         caseStudy: {
             overview: 'An interactive generative art piece exploring the relationship between sound frequencies and visual particles.',
             impact: 'Featured in digital art galleries and used as a relaxing visualizer by users worldwide.'
