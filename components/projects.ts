@@ -13,8 +13,21 @@ export const PROJECTS = [
         }
     },
     {
-        id: 'twinkle',
+        id: 'intellitrade',
         number: '02',
+        title: 'INTELLITRADE',
+        tagline: 'Web3 agent marketplace',
+        roles: 'UI/UX Designer',
+        tools: 'Web3 • AI Agents',
+        image: '/intellitrade/intellitrade-landing.jpeg',
+        caseStudy: {
+            overview: 'A decentralized AI agent marketplace that encrypts agents on IPFS and verifies ownership on-chain, enabling secure distribution and cross-chain payments.',
+            impact: 'Lighthouse Best Data Agent at ETHOnline 2025.'
+        }
+    },
+    {
+        id: 'twinkle',
+        number: '03',
         title: 'Twinkle',
         tagline: '3D educational game',
         roles: 'Creative Tech • WebGL • Frontend',
@@ -24,6 +37,19 @@ export const PROJECTS = [
         caseStudy: {
             overview: 'An interactive generative art piece exploring the relationship between sound frequencies and visual particles.',
             impact: 'Featured in digital art galleries and used as a relaxing visualizer by users worldwide.'
+        }
+    },
+    {
+        id: 'intellibox',
+        number: '04',
+        title: 'INTELLIBOX',
+        tagline: 'AI agent orchestration ecosystem',
+        roles: 'UI/UX Designer',
+        tools: 'AI Agents • Workflow Automation',
+        image: '/intellibox/intellibox-landing.png',
+        caseStudy: {
+            overview: 'An AI agent orchestration ecosystem to orchestrate multi-model workspaces. Automates complex workflows through intuitive prompts.',
+            impact: '1st Place Winner at TechTrove 2.0.'
         }
     }
 ];
