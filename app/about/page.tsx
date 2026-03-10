@@ -183,21 +183,24 @@ export default function AboutPage() {
       {/* --- BRIEF INTRODUCTION SECTION --- */}
       <div className="relative z-20 bg-[#f9f6f1] px-6 pb-16 md:pb-24 pt-10 md:pt-20" id="about">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-16 md:gap-24 items-start">
-           <div className="md:w-5/12">
+           <div className="md:w-5/12 sticky top-32">
               <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9]">
-                WE OFFER 360° <br/> DIGITAL STRATEGY <br/> & ENGINEERING.
+                DESIGNING <br/> & BUILDING <br/> INTELLIGENT <br/> DIGITAL PRODUCTS.
               </h2>
            </div>
            <div className="md:w-7/12 text-lg md:text-2xl font-medium leading-relaxed text-neutral-700">
               <p className="mb-8">
-                With a broad range of experience, I turn complex business challenges into clear, actionable strategies that drive growth. Every line of code and design decision is guided by insight, data, and creativity.
+                I'm a computer science student passionate about building products where technology and user experience work together. My work spans full-stack development, artificial intelligence, and interface design — transforming complex ideas into systems that are both technically robust and intuitive to use.
+              </p>
+              <p className="mb-8">
+                I enjoy designing and developing solutions that combine data, algorithms, and thoughtful interaction design, from AI-driven platforms and decentralized systems to interactive web applications and experimental prototypes built through research projects and hackathons.
               </p>
               <p className="mb-12">
-                Designed to build strong brands, reach the right audiences, and create measurable, lasting impact in the digital landscape.
+                Every project is an opportunity to explore how engineering and design can work together to create technology that is functional, meaningful, and impactful.
               </p>
 
               <Link href="/work" className="inline-flex items-center gap-2 font-bold uppercase tracking-widest text-sm border-b-2 border-[#111] pb-1 hover:text-neutral-500 hover:border-neutral-500 transition-colors">
-                Check out my previous work <ArrowUpRight size={18} strokeWidth={3} />
+                Browse the archive <ArrowUpRight size={18} strokeWidth={3} />
               </Link>
            </div>
         </div>
