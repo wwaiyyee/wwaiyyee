@@ -19,6 +19,9 @@ export const WORK_PROJECTS = [
 			'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1600',
 			'/dopews-my/DOPEWS-education.png',
 		],
+		links: [
+			{ label: 'GitHub', url: 'https://github.com/Cedctf/fyp' }
+		]
 	},
 	{
 		id: '02',
@@ -40,6 +43,10 @@ export const WORK_PROJECTS = [
 			'/intellitrade/intellitrade-chat.png',
 			'/intellitrade/intellitrade-wallet.png',
 		],
+		links: [
+			{ label: 'Prototype', url: 'https://intellitrade-theta.vercel.app/' },
+			{ label: 'Demo Video', url: 'https://ethglobal.com/showcase/intellitrade-a31dd' }
+		]
 	},
 	{
 		id: '03',
@@ -65,6 +72,10 @@ export const WORK_PROJECTS = [
 			'/twinkle/twinkle-dylexia.png',
 			'/twinkle/twinkle-talking.png',
 		],
+		links: [
+			{ label: 'Prototype', url: 'https://cursorhack-twinkle.vercel.app' },
+			{ label: 'Demo Video', url: 'https://www.youtube.com/watch?v=sECy8B561VM' }
+		]
 	},
 	{
 		id: '04',
@@ -82,6 +93,9 @@ export const WORK_PROJECTS = [
 			'/intellibox/intellibox-chat.png',
 			'/intellibox/intellibox-marketplace.png',
 		],
+		links: [
+			{ label: 'GitHub', url: 'https://github.com/Jay-366/techtrove2.0' }
+		]
 	},
 	{
 		id: '05',
@@ -97,5 +111,9 @@ export const WORK_PROJECTS = [
 			'/ethclbet/ethclbet-landing.png',
 			'/ethclbet/ethclbet-market.png',
 		],
+		links: [
+			{ label: 'GitHub', url: 'https://github.com/cedctf/ethclbet' },
+			{ label: 'Demo Video', url: 'https://share.google/bhK4v04W9ePFUdXnI' }
+		]
 	}
 ];

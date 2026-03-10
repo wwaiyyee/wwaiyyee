@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useMemo } from 'react';
+import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { NavBar } from '../../components/NavBar';
 import { WORK_PROJECTS as PROJECTS } from '../../data/work-projects';
@@ -79,9 +80,21 @@ const WorkPage = () => {
 					<br />
 					Works
 				</h1>
-				<button className={`mt-8 border rounded-full px-6 py-2 text-[10px] uppercase tracking-widest transition-all flex items-center gap-2 ${isDark ? "border-zinc-700 hover:bg-[#f9f6f1] hover:text-[#111]" : "border-zinc-300 hover:bg-[#111111] hover:text-[#F2F2ED]"}`}>
-					Contact ↗
-				</button>
+				{activeProject.links && activeProject.links.length > 0 && (
+					<div className="mt-8 flex flex-col gap-3">
+						{activeProject.links.map((link: { label: string; url: string }, i: number) => (
+							<a
+								key={i}
+								href={link.url}
+								target="_blank"
+								rel="noopener noreferrer"
+								className={`border rounded-full px-6 py-2 text-[10px] uppercase tracking-widest transition-all flex items-center justify-between gap-2 w-fit ${isDark ? "border-zinc-700 hover:bg-[#f9f6f1] hover:text-[#111]" : "border-zinc-300 hover:bg-[#111111] hover:text-[#F2F2ED]"}`}
+							>
+								{link.label} ↗
+							</a>
+						))}
+					</div>
+				)}
 			</div>
 
 			{/* --- BOTTOM LEFT: PROJECT TITLE --- */}
@@ -205,11 +218,11 @@ const WorkPage = () => {
 					</div>
 
 					{/* CTA */}
-					{['01', '02', '03'].includes(activeProject.id) && (
-										<button className={`group flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] hover:opacity-70 transition-opacity ${isDark ? "text-[#f9f6f1]" : "text-[#111111]"}`}>
+									{['01', '02', '03'].includes(activeProject.id) && (
+										<Link href={`/case-studies/${activeProject.id}`} className={`group flex w-fit items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] hover:opacity-70 transition-opacity ${isDark ? "text-[#f9f6f1]" : "text-[#111111]"}`}>
 											View Case Study
 											<ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-										</button>
+										</Link>
 									)}
 								</div>
 							</aside>
