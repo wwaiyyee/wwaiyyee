@@ -74,28 +74,22 @@ export default function CaseStudy() {
             </div>
             
             {/* Metadata / Specs (Film theme) */}
-            <div className="grid grid-cols-2 gap-x-8 gap-y-6 text-sm border-l border-[#111111]/10 pl-8 font-mono text-zinc-600 shrink-0">
-              <div className="col-span-2 md:col-span-1">
+            <div className="flex flex-col gap-6 text-sm border-l border-[#111111]/10 pl-8 font-mono text-zinc-600 w-full md:max-w-[300px] lg:max-w-[400px] shrink-0">
+              <div>
                 <p className="text-[#111111] mb-1 font-bold">ROLE</p>
-                <p>{project.roles}</p>
+                <p className="leading-relaxed">{project.roles}</p>
               </div>
-              <div className="col-span-2 md:col-span-1">
+              <div>
                 <p className="text-[#111111] mb-1 font-bold">TOOLS</p>
-                <p>{(project as any).tools || 'Figma, Framer, React'}</p>
+                <p className="leading-relaxed text-wrap break-words">{(project as any).tools || 'Figma, Framer, React'}</p>
               </div>
               
-              {/* Backwards compatibility for DOPEWS-MY custom fields if achievements aren't strictly specified */}
-              {project.id === 'dopews' && !(project as any).achievements ? (
-                <div className="col-span-2 mt-2 pt-4 border-t border-[#111111]/10">
-                  <p className="text-xs">FILE: ARCHIVE_LOG_01</p>
-                  <p className="text-xs">STATUS: <span className="font-bold">DECLASSIFIED</span></p>
-                </div>
-              ) : (project as any).achievements ? (
-                <div className="col-span-2 mt-2 pt-4 border-t border-[#111111]/10">
+              {(project as any).achievements && (
+                <div className="mt-2 pt-4 border-t border-[#111111]/10">
                   <p className="text-[#111111] mb-1 font-bold">ACHIEVEMENTS</p>
                   <p className="opacity-80 leading-relaxed font-sans text-sm">{(project as any).achievements}</p>
                 </div>
-              ) : null}
+              )}
             </div>
           </div>
 
