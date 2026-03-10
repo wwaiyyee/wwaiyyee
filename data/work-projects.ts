@@ -1,25 +1,25 @@
 export const WORK_PROJECTS = [
-        {
-                id: '01',
-                title: 'DOPEWS-MY',
-                summary: 'A localized digital workspace platform tailored for the Malaysian creative industry, focusing on community collaboration and resource sharing.',
-                year: '2024',
-                tags: ['UI/UX', 'Web3'],
-                descriptions: [
-                    '',
-                    'Project collaboration taking place in real-time.',
-                    'Resource sharing marketplace for local creatives.',
-                    'Web3 wallet integration for seamless crypto payments.',
-                    'The finalized asset library view.'
-                ],
-                images: [
-                        'https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=1600',
-                        'https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&q=80&w=1600',
-                        'https://images.unsplash.com/photo-1522542550221-31fd19255a7a?auto=format&fit=crop&q=80&w=1600',
-                        'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1600',
-                        'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=1600',
-                ],
-        },
+	{
+		id: '01',
+		title: 'DOPEWS-MY',
+		summary: 'AI-driven platform predicting dengue outbreak risks across Malaysia using environmental and historical data. Generates 7, 14, and 28-day forecasts with interactive dashboards and early warning alerts.',
+		year: '2026',
+		tags: ['AI / Machine Learning', 'Data Visualization'],
+		descriptions: [
+			'',
+			'Interactive risk heatmap visualizing dengue outbreak hotspots and forecast trends across Malaysia.',
+			'Secure API layer providing programmatic access to dengue forecasts and outbreak risk data.',
+			'Public knowledge portal delivering dengue prevention insights and simplified risk awareness tools.',
+			'Administrative control center for managing forecasts, alerts, user roles, and system governance.'
+		],
+		images: [
+			'/dopews-my/DOPEWS-landing.png',
+			'/dopews-my/DOPEWS-heatmap.png',
+			'https://images.unsplash.com/photo-1522542550221-31fd19255a7a?auto=format&fit=crop&q=80&w=1600',
+			'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1600',
+			'/dopews-my/DOPEWS-education.png',
+		],
+	},
         {
                 id: '02',
                 title: 'INTELLITRADE',

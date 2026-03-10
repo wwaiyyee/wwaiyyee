@@ -160,15 +160,27 @@ const WorkPage = () => {
 						</span>
 					</div>
 
-					{/* Description */}
+					{/* Summary */}
 					<div className="space-y-4">
 						<label className="text-[10px] uppercase tracking-[0.3em] text-zinc-400 font-bold block">
-							Role / Summary
+							Summary
 						</label>
 						<p className="text-[11px] leading-relaxed text-zinc-500 font-light">
 							{activeProject.summary}
 						</p>
 					</div>
+
+					{/* Description */}
+					{activeProject.imageNumber > 1 && activeProject.descriptions && activeProject.descriptions[activeProject.imageNumber - 1] && (
+											<div className="space-y-4 animate-fade-in-up">
+												<label className="text-[10px] uppercase tracking-[0.3em] text-zinc-400 font-bold block">
+													Description
+												</label>
+												<p className="text-[11px] leading-relaxed text-zinc-500 font-light whitespace-pre-wrap">
+													{activeProject.descriptions[activeProject.imageNumber - 1]}
+												</p>
+											</div>
+										)}
 
 					{/* Details */}
 					<div className="space-y-6">
@@ -179,9 +191,6 @@ const WorkPage = () => {
 							<p className="text-[10px] font-mono">{activeProject.year}</p>
 						</div>
 						<div>
-							<label className="text-[9px] uppercase tracking-[0.3em] text-zinc-400 block mb-2">
-								Expertise
-							</label>
 							<div className="flex flex-wrap gap-2">
 								{activeProject.tags.map((tag: string) => (
 									<span
