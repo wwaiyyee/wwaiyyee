@@ -30,9 +30,10 @@ export const PROJECTS = [
         number: '03',
         title: 'Twinkle',
         tagline: '3D educational game',
-        roles: 'Creative Tech • WebGL',
+        roles: 'Creative Tech • WebGL • Frontend',
+        tools: 'Figma • React • Three.js • WebGL',
         image: '/twinkle/twinkle-landing.png',
-        achievements: 'Top 15 finalist of Cursor x Anthropic Hackathon',
+        achievements: 'Top 15 Finalist — Cursor × Anthropic Hackathon',
         caseStudy: {
             overview: 'An interactive generative art piece exploring the relationship between sound frequencies and visual particles.',
             impact: 'Featured in digital art galleries and used as a relaxing visualizer by users worldwide.'

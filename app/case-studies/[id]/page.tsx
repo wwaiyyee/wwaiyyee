@@ -30,32 +30,6 @@ export default function CaseStudy() {
   // Find the selected project or fallback to the first one
   const project = PROJECTS.find((p) => p.id === id) || PROJECTS[0];
 
-  const containerRef = useRef(null);
-
-  // Setup scroll tracking for the hero section
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  // Calculate transforms for the images
-  const img1Y = useTransform(scrollYProgress, [0.05, 0.30], ["0vh", "-200vh"]);
-  const img2Y = useTransform(scrollYProgress, [0.38, 0.63], ["0vh", "-200vh"]);
-  const img3Y = useTransform(scrollYProgress, [0.70, 0.95], ["0vh", "-200vh"]);
-
-  // Calculate opacities for the descriptions
-  const text1Opacity = useTransform(scrollYProgress, [0.05, 0.25], [1, 0]);
-  const text2Opacity = useTransform(scrollYProgress, [0.10, 0.30, 0.38, 0.58], [0, 1, 1, 0]);
-  const text3Opacity = useTransform(scrollYProgress, [0.43, 0.63, 0.70, 0.90], [0, 1, 1, 0]);
-  const text4Opacity = useTransform(scrollYProgress, [0.75, 0.95, 1], [0, 1, 1]);
-
-  const images = [
-    "/dopews-my/DOPEWS-heatmap.png",
-    "/dopews-my/dopews-admin%20dashaboard.png",
-    "/dopews-my/dopews-api.png",
-    "/dopews-my/DOPEWS-education.png",
-  ];
-
   // Find next project for the footer link
   const currentIndex = PROJECTS.findIndex((p) => p.id === project.id);
   const nextProject = PROJECTS[(currentIndex + 1) % PROJECTS.length];
@@ -338,6 +312,30 @@ export default function CaseStudy() {
                   </div>
                 </div>
               </div>
+            ) : project.id === "twinkle" ? (
+              <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-start w-full">
+                <div className="md:w-[250px] shrink-0">
+                  <h3 className="text-2xl md:text-4xl font-serif font-black italic tracking-tighter leading-[1.1] text-[#111111]">
+                    Identifying
+                    <br />
+                    the Opportunity
+                  </h3>
+                </div>
+                <div className="md:flex-1 flex flex-col gap-6 text-[#111111]/70 font-medium text-base md:text-lg leading-relaxed">
+                  <p>
+                    Traditional learning environments often struggle to support children with different cognitive needs, particularly neurodiverse learners such as children with ADHD.
+                  </p>
+                  <p>
+                    Many educational platforms rely on static content or repetitive exercises that fail to maintain attention or provide meaningful engagement. As a result, students quickly lose focus, and learning becomes frustrating rather than motivating.
+                  </p>
+                  <p>
+                    The opportunity was to design a playful, interactive learning experience that combines storytelling, visual feedback, and game mechanics to make learning engaging and accessible.
+                  </p>
+                  <p>
+                    The premise was simple: create a 3D interactive environment where children can learn through exploration, curiosity, and playful interaction rather than passive instruction.
+                  </p>
+                </div>
+              </div>
             ) : (
               <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-start w-full">
                 <div className="md:w-[250px] shrink-0">
@@ -442,6 +440,49 @@ export default function CaseStudy() {
                     "Reactive surveillance detects dengue outbreaks only after
                     cases escalate, leaving minimal lead time for preventive
                     intervention."
+                  </p>
+                </div>
+              </div>
+            ) : project.id === "twinkle" ? (
+              <div className="flex flex-col gap-12">
+                <p className="text-xl md:text-3xl font-medium leading-tight tracking-tight text-[#111111] max-w-4xl">
+                  Research focused on understanding how <span className="italic font-serif">neurodiverse children</span> engage with educational content and identifying the factors that influence their motivation.
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-l border-[#111111]/10">
+                  <div className="border-r border-b border-[#111111]/10 p-6 md:p-8 flex flex-col items-center justify-center text-center group hover:bg-[#111111] transition-colors h-48">
+                    <div className="text-3xl font-serif font-black text-[#111111] group-hover:text-[#f9f6f1] transition-colors mb-4">
+                      Instant Feedback
+                    </div>
+                    <div className="text-xs tracking-wide font-medium text-[#111111]/70 group-hover:text-[#f9f6f1]/70 transition-colors">
+                      Children remain engaged longer when activities provide immediate visual cues.
+                    </div>
+                  </div>
+                  <div className="border-r border-b border-[#111111]/10 p-6 md:p-8 flex flex-col items-center justify-center text-center group hover:bg-[#111111] transition-colors h-48">
+                    <div className="text-3xl font-serif font-black text-[#111111] group-hover:text-[#f9f6f1] transition-colors mb-4">
+                      Active Exploration
+                    </div>
+                    <div className="text-xs tracking-wide font-medium text-[#111111]/70 group-hover:text-[#f9f6f1]/70 transition-colors">
+                      Interactive environments help sustain attention by turning learning into play.
+                    </div>
+                  </div>
+                  <div className="border-r border-b border-[#111111]/10 p-6 md:p-8 flex flex-col items-center justify-center text-center group hover:bg-[#111111] transition-colors h-48">
+                    <div className="text-3xl font-serif font-black text-[#111111] group-hover:text-[#f9f6f1] transition-colors mb-4">
+                      Gradual Progress
+                    </div>
+                    <div className="text-xs tracking-wide font-medium text-[#111111]/70 group-hover:text-[#f9f6f1]/70 transition-colors">
+                      Task motivation is sustained by breaking challenges into manageable visual blocks.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-8 md:p-12 bg-[#111111] text-[#f9f6f1] relative shadow-xl">
+                  <div className="absolute top-0 left-0 w-2 h-full bg-[#f9f6f1]/20" />
+                  <p className="font-bold mb-6 uppercase tracking-widest text-[#f9f6f1]/50 text-xs font-mono">
+                    Recorded Insight_
+                  </p>
+                  <p className="text-2xl md:text-3xl font-serif italic leading-relaxed text-[#f9f6f1]/90">
+                    "Learning environments should adapt to how children naturally engage with the world — through curiosity, play, and interaction."
                   </p>
                 </div>
               </div>
@@ -645,6 +686,138 @@ export default function CaseStudy() {
                   </div>
                 </div>
               </div>
+            ) : project.id === "twinkle" ? (
+              <div className="flex flex-col relative w-full pt-4 group/timeline">
+                {/* Timeline Line */}
+                <div className="absolute left-[27px] md:left-[39px] top-6 bottom-6 w-px bg-[#111111]/20"></div>
+                {/* Timeline Progress Transition */}
+                <div className="absolute left-[27px] md:left-[39px] top-6 bottom-6 w-px bg-[#111111] origin-top scale-y-0 group-hover/timeline:scale-y-100 transition-transform duration-[1500ms] ease-in-out"></div>
+                
+                {/* Phase 1 */}
+                <div className="flex gap-8 md:gap-12 relative group mb-12 transform transition-all duration-700">
+                  <div className="w-14 md:w-20 flex-shrink-0 flex justify-center z-10 relative">
+                    <div className="w-10 h-10 md:w-14 md:h-14 rounded-full bg-[#f9f6f1] border-2 border-[#111111] flex items-center justify-center group-hover:bg-[#111111] group-hover:text-[#f9f6f1] transition-colors shadow-sm">
+                      <span className="font-mono font-bold text-sm md:text-base">
+                        P1
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex-1 pb-8 pr-2 md:pr-4">
+                    <h3 className="text-xl md:text-2xl font-black mb-4 uppercase tracking-tight text-[#111111] group-hover:tracking-widest transition-all duration-500">
+                      Learning Mechanics
+                    </h3>
+                    <div className="bg-[#f9f6f1] border-2 border-[#111111] p-6 md:p-8 shadow-[8px_8px_0px_0px_rgba(17,17,17,1)] transition-transform duration-500 group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:shadow-[12px_12px_0px_0px_rgba(17,17,17,1)]">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                          <p className="text-[#111111]/80 font-bold text-sm leading-relaxed mb-6">
+                            Structuring the activities for immediate feedback and progressive disclosure, ensuring interactions sustain attention without cognitive overload.
+                          </p>
+                        </div>
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="border border-[#111111]/20 p-3 flex flex-col justify-center items-center text-center gap-2 hover:bg-[#111111] hover:text-[#f9f6f1] transition-colors">
+                            <Layers size={18} />
+                            <span className="text-[10px] uppercase font-bold tracking-wider">
+                              Instant
+                              <br />
+                              Feedback
+                            </span>
+                          </div>
+                          <div className="border border-[#111111]/20 p-3 flex flex-col justify-center items-center text-center gap-2 hover:bg-[#111111] hover:text-[#f9f6f1] transition-colors">
+                            <TrendingUp size={18} />
+                            <span className="text-[10px] uppercase font-bold tracking-wider">
+                              Active
+                              <br />
+                              Explore
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Phase 2 */}
+                <div className="flex gap-8 md:gap-12 relative group mb-12 transform transition-all duration-700 delay-100">
+                  <div className="w-14 md:w-20 flex-shrink-0 flex justify-center z-10 relative">
+                    <div className="w-10 h-10 md:w-14 md:h-14 rounded-full bg-[#f9f6f1] border-2 border-[#111111] flex items-center justify-center group-hover:bg-[#111111] group-hover:text-[#f9f6f1] transition-colors shadow-sm">
+                      <span className="font-mono font-bold text-sm md:text-base">
+                        P2
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex-1 pb-8 pr-2 md:pr-4">
+                    <h3 className="text-xl md:text-2xl font-black mb-4 uppercase tracking-tight text-[#111111] group-hover:tracking-widest transition-all duration-500">
+                      Environment Design
+                    </h3>
+                    <div className="bg-[#f9f6f1] border-2 border-[#111111] p-6 md:p-8 shadow-[8px_8px_0px_0px_rgba(17,17,17,1)] transition-transform duration-500 group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:shadow-[12px_12px_0px_0px_rgba(17,17,17,1)]">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+                        <div>
+                          <p className="text-[#111111]/80 font-bold text-sm leading-relaxed mb-6">
+                            Designing immersive 3D safe spaces. Using Figma to block out environments emphasizing cozy, consistent layouts with minimal visual noise.
+                          </p>
+                        </div>
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="border border-[#111111]/20 p-3 flex flex-col justify-center items-center text-center gap-2 hover:bg-[#111111] hover:text-[#f9f6f1] transition-colors">
+                            <Layers size={18} />
+                            <span className="text-[10px] uppercase font-bold tracking-wider">
+                              3D Content
+                            </span>
+                          </div>
+                          <div className="border border-[#111111]/20 p-3 flex flex-col justify-center items-center text-center gap-2 hover:bg-[#111111] hover:text-[#f9f6f1] transition-colors">
+                            <TrendingUp size={18} />
+                            <span className="text-[10px] uppercase font-bold tracking-wider">
+                              Typography
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Phase 3 */}
+                <div className="flex gap-8 md:gap-12 relative group mb-4 transform transition-all duration-700 delay-200">
+                  <div className="w-14 md:w-20 flex-shrink-0 flex justify-center z-10 relative">
+                    <div className="w-10 h-10 md:w-14 md:h-14 bg-[#111111] flex items-center justify-center shadow-sm group-hover:rotate-6 transition-transform">
+                      <span className="font-mono font-bold text-sm md:text-base text-[#f9f6f1]">
+                        P3
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex-1 pb-8 pr-2 md:pr-4">
+                    <h3 className="text-xl md:text-2xl font-black mb-4 uppercase tracking-tight text-[#111111] group-hover:tracking-widest transition-all duration-500">
+                      WebGL Rendering
+                    </h3>
+                    <div className="bg-[#f9f6f1] border-2 border-[#111111] p-6 md:p-8 shadow-[8px_8px_0px_0px_rgba(17,17,17,1)] transition-transform duration-500 group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:shadow-[12px_12px_0px_0px_rgba(17,17,17,1)]">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                          <p className="text-[#111111]/80 font-bold text-sm leading-relaxed mb-6">
+                            Translating 3D environments into responsive React components seamlessly integrated with Three.js rendering loops for high performance.
+                          </p>
+                        </div>
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="border border-[#111111]/20 p-3 flex flex-col justify-center items-center text-center gap-2 hover:bg-[#111111] hover:text-[#f9f6f1] transition-colors">
+                            <Layers size={18} />
+                            <span className="text-[10px] uppercase font-bold tracking-wider">
+                              Three.js
+                              <br />
+                              Shaders
+                            </span>
+                          </div>
+                          <div className="border border-[#111111]/20 p-3 flex flex-col justify-center items-center text-center gap-2 hover:bg-[#111111] hover:text-[#f9f6f1] transition-colors">
+                            <TrendingUp size={18} />
+                            <span className="text-[10px] uppercase font-bold tracking-wider">
+                              Game
+                              <br />
+                              Hooks
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             ) : (
               <div className="flex flex-col gap-16">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
@@ -736,132 +909,12 @@ export default function CaseStudy() {
             isFullWidth={true}
           >
             {project.id === "dopews" ? (
-              <div className="flex flex-col relative w-full pt-0">
-                <style>{`
-                  .font-serif-custom {
-                    font-family: 'Cormorant Garamond', serif;
-                  }
-                `}</style>
-                <div className="relative w-full text-[#111111] bg-transparent">
-                  <section ref={containerRef} className="relative h-[250vh] w-full max-w-7xl mx-auto flex justify-center">
-                    <div className="sticky top-[5vh] h-[95vh] w-full overflow-hidden flex flex-col items-center justify-start pt-2 px-[5vw] md:px-[8vw]">
-                      {/* Image Stack */}
-                      <div className="relative w-[90vw] md:w-[80vw] xl:w-[70vw] z-10 flex flex-col items-center">
-                        {/* Base image - dictates size of the stack */}
-                        <div className="relative w-full rounded-2xl bg-[#f9f6f1] p-2 md:p-3 border border-[#111111]/20 shadow-sm">
-                          <div className="relative w-full overflow-hidden rounded-xl border border-[#111111]/10 bg-white aspect-[2880/1554]">
-                            <img
-                              src={images[3]}
-                              alt="DOPEWS App 4"
-                              className="w-full h-full object-cover object-top"
-                            />
-                          </div>
-                        </div>
-
-                        <motion.div
-                          style={{ y: img3Y }}
-                          className="absolute top-0 left-0 w-full"
-                        >
-                          <div className="w-full rounded-2xl bg-[#f9f6f1] p-2 md:p-3 border border-[#111111]/20 shadow-sm">
-                            <div className="w-full overflow-hidden rounded-xl border border-[#111111]/10 bg-white aspect-[2880/1554]">
-                              <img
-                                src={images[2]}
-                                alt="DOPEWS App 3"
-                                className="w-full h-full object-cover object-top"
-                              />
-                            </div>
-                          </div>
-                        </motion.div>
-
-                        <motion.div
-                          style={{ y: img2Y }}
-                          className="absolute top-0 left-0 w-full"
-                        >
-                          <div className="w-full rounded-2xl bg-[#f9f6f1] p-2 md:p-3 border border-[#111111]/20 shadow-sm">
-                            <div className="w-full overflow-hidden rounded-xl border border-[#111111]/10 bg-white aspect-[2880/1554]">
-                              <img
-                                src={images[1]}
-                                alt="DOPEWS App 2"
-                                className="w-full h-full object-cover object-top"
-                              />
-                            </div>
-                          </div>
-                        </motion.div>
-
-                        <motion.div
-                          style={{ y: img1Y }}
-                          className="absolute top-0 left-0 w-full"
-                        >
-                          <div className="w-full rounded-2xl bg-[#f9f6f1] p-2 md:p-3 border border-[#111111]/20 shadow-sm">
-                            <div className="w-full overflow-hidden rounded-xl border border-[#111111]/10 bg-white aspect-[2880/1554]">
-                              <img
-                                src={images[0]}
-                                alt="DOPEWS App 1"
-                                className="w-full h-full object-cover object-top"
-                              />
-                            </div>
-                          </div>
-                        </motion.div>
-                      </div>
-
-                      {/* Image Descriptions (Crossfading) */}
-                      <div className="relative w-[90vw] md:w-[80vw] xl:w-[70vw] mt-6 md:mt-8 h-[20vh] max-h-[160px] flex justify-center items-start text-center z-10 font-sans">
-                        <motion.div
-                          style={{ opacity: text1Opacity }}
-                          className="absolute top-0 left-0 w-full"
-                        >
-                          <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
-                            1. Dengue Risk Heatmap
-                          </h4>
-                          <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
-                            The Dengue Risk Heatmap uses a map-centered interface with color-coded risk levels to visualize predicted outbreak areas. Supporting analytics, forecast controls, and driver insights help users quickly understand spatial risk patterns and make informed public health decisions.
-                          </p>
-                        </motion.div>
-
-                        <motion.div
-                          style={{ opacity: text2Opacity }}
-                          className="absolute top-0 left-0 w-full pointer-events-none"
-                        >
-                          <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
-                            2. Admin Dashboard
-                          </h4>
-                          <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
-                            The Admin Dashboard adopts a structured table-based layout to efficiently manage system users and roles. Features such as search, filtering, and role actions allow administrators to monitor activity, maintain security, and control platform access effectively.
-                          </p>
-                        </motion.div>
-
-                        <motion.div
-                          style={{ opacity: text3Opacity }}
-                          className="absolute top-0 left-0 w-full pointer-events-none"
-                        >
-                          <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
-                            3. API Key Management / API Playground
-                          </h4>
-                          <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
-                            The API Playground provides developers with an interactive interface to test endpoints and access dengue data programmatically. Integrated documentation, authentication guidance, and JSON examples simplify integration and encourage external application development.
-                          </p>
-                        </motion.div>
-
-                        <motion.div
-                          style={{ opacity: text4Opacity }}
-                          className="absolute top-0 left-0 w-full pointer-events-none"
-                        >
-                          <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
-                            4. Dengue Education Hub
-                          </h4>
-                          <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
-                            The Dengue Education Hub presents educational articles in a searchable, content-focused layout to improve public awareness. Filtering, sorting, and visual materials help users easily access reliable dengue prevention knowledge and health information.
-                          </p>
-                        </motion.div>
-                      </div>
-
-                    </div>
-                  </section>
-                </div>
-              </div>
+              <DopewsFinalInterface />
+            ) : project.id === "twinkle" ? (
+              <TwinkleFinalInterface />
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-12 gap-6 pb-2">
-                <div className="md:col-span-8 bg-stone-100 rounded-xl overflow-hidden relative group aspect-square md:aspect-auto border border-stone-200">
+                <div className="md:col-span-8 bg-stone-100 rounded-xl overflow-hidden relative group flex-1 border border-stone-200">
                   <img
                     src={project.image}
                     alt="App UI Hero"
@@ -950,6 +1003,37 @@ export default function CaseStudy() {
                   </span>
                 </li>
               </ul>
+            ) : project.id === "twinkle" ? (
+              <ul className="space-y-4 font-mono text-base text-[#111111]">
+                <li className="flex flex-col md:flex-row md:items-center justify-between border-b border-[#111111]/10 pb-3 gap-2 group hover:border-[#111111]/30 transition-colors">
+                  <span className="font-bold text-[#111111]/50 uppercase tracking-widest text-sm">
+                    Frontend
+                  </span>
+                  <span className="text-lg font-bold">React Application</span>
+                </li>
+                <li className="flex flex-col md:flex-row md:items-center justify-between border-b border-[#111111]/10 pb-3 gap-2 group hover:border-[#111111]/30 transition-colors">
+                  <span className="font-bold text-[#111111]/50 uppercase tracking-widest text-sm">
+                    3D Rendering
+                  </span>
+                  <span className="text-lg font-bold">
+                    Three.js
+                  </span>
+                </li>
+                <li className="flex flex-col md:flex-row md:items-center justify-between border-b border-[#111111]/10 pb-3 gap-2 group hover:border-[#111111]/30 transition-colors">
+                  <span className="font-bold text-[#111111]/50 uppercase tracking-widest text-sm">
+                    WebGL Layer
+                  </span>
+                  <span className="text-lg font-bold">WebGL</span>
+                </li>
+                <li className="flex flex-col md:flex-row md:items-center justify-between border-b border-[#111111]/10 pb-3 gap-2 group hover:border-[#111111]/30 transition-colors">
+                  <span className="font-bold text-[#111111]/50 uppercase tracking-widest text-sm">
+                    Game Logic
+                  </span>
+                  <span className="text-lg font-bold">
+                    React Hooks & Three.js utilities
+                  </span>
+                </li>
+              </ul>
             ) : (
               <ul className="space-y-4 font-mono text-base text-stone-600">
                 <li className="flex flex-col md:flex-row md:items-center justify-between border-b border-stone-200 pb-3 gap-2">
@@ -1006,6 +1090,10 @@ export default function CaseStudy() {
                     AI-driven dengue outbreak forecasting using integrated
                     environmental and epidemiological data.
                   </>
+                ) : project.id === "twinkle" ? (
+                  <span className="text-[#111111]">
+                    Selected as Top 15 Finalist in Cursor × Anthropic Hackathon under the 3D Experience track. Built entirely using 3D web technologies, the project demonstrated high performance and engagement during the public presentation.
+                  </span>
                 ) : (
                   <>
                     {project.caseStudy.impact} The product significantly
@@ -1051,6 +1139,24 @@ export default function CaseStudy() {
                     </div>
                     <div className="bg-white shadow-sm border border-stone-200 p-5 rounded text-sm text-stone-700 font-medium">
                       Integrated public education and early warning capabilities
+                    </div>
+                  </div>
+                </>
+              ) : project.id === "twinkle" ? (
+                <>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div className="bg-[#f9f6f1] border-2 border-[#111111] p-6 shadow-[4px_4px_0px_0px_rgba(17,17,17,1)] text-center">
+                      <div className="text-4xl font-black text-[#111111] mb-1">
+                        Top 15
+                      </div>
+                      <div className="text-xs text-[#111111]/60 uppercase tracking-widest font-bold">
+                        Finalist in Cursor × Anthropic Hackathon
+                      </div>
+                    </div>
+                    <div className="bg-[#f9f6f1] border-2 border-[#111111] p-6 shadow-[4px_4px_0px_0px_rgba(17,17,17,1)] flex items-center justify-center text-center">
+                      <p className="text-base text-[#111111]/80 font-bold">
+                        Built entirely using 3D web technologies, demonstrating high performance and engagement.
+                      </p>
                     </div>
                   </div>
                 </>
@@ -1199,3 +1305,373 @@ function DecisionItem({ title, desc }: { title: string; desc: string }) {
     </li>
   );
 }
+
+function DopewsFinalInterface() {
+  const containerRef = useRef<HTMLElement>(null);
+
+  // Setup scroll tracking for the hero section
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  // Calculate transforms for the images
+  const img1Y = useTransform(scrollYProgress, [0.05, 0.30], ["0vh", "-200vh"]);
+  const img2Y = useTransform(scrollYProgress, [0.38, 0.63], ["0vh", "-200vh"]);
+  const img3Y = useTransform(scrollYProgress, [0.70, 0.95], ["0vh", "-200vh"]);
+
+  // Calculate opacities for the descriptions
+  const text1Opacity = useTransform(scrollYProgress, [0.05, 0.25], [1, 0]);
+  const text2Opacity = useTransform(scrollYProgress, [0.10, 0.30, 0.38, 0.58], [0, 1, 1, 0]);
+  const text3Opacity = useTransform(scrollYProgress, [0.43, 0.63, 0.70, 0.90], [0, 1, 1, 0]);
+  const text4Opacity = useTransform(scrollYProgress, [0.75, 0.95, 1], [0, 1, 1]);
+
+  const images = [
+    "/dopews-my/DOPEWS-heatmap.png",
+    "/dopews-my/dopews-admin%20dashaboard.png",
+    "/dopews-my/dopews-api.png",
+    "/dopews-my/DOPEWS-education.png",
+  ];
+
+  return (
+    <div className="flex flex-col relative w-full pt-0">
+      <style>{`
+        .font-serif-custom {
+          font-family: 'Cormorant Garamond', serif;
+        }
+      `}</style>
+      <div className="relative w-full text-[#111111] bg-transparent">
+        <section ref={containerRef as any} className="relative h-[250vh] w-full max-w-7xl mx-auto flex justify-center">
+          <div className="sticky top-[5vh] h-[95vh] w-full overflow-hidden flex flex-col items-center justify-start pt-2 px-[5vw] md:px-[8vw]">
+            {/* Image Stack */}
+            <div className="relative w-[90vw] sm:w-[85vw] md:w-[70vw] lg:w-[55vw] xl:w-[50vw] max-w-4xl z-10 flex flex-col items-center">
+              {/* Base image - dictates size of the stack */}
+              <div className="relative w-full rounded-2xl bg-[#f9f6f1] p-2 md:p-3 border border-[#111111]/20 shadow-sm">
+                <div className="relative w-full overflow-hidden rounded-xl border border-[#111111]/10 bg-white aspect-[2880/1554]">
+                  <img
+                    src={images[3]}
+                    alt="DOPEWS App 4"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+              </div>
+
+              <motion.div
+                style={{ y: img3Y }}
+                className="absolute top-0 left-0 w-full"
+              >
+                <div className="w-full rounded-2xl bg-[#f9f6f1] p-2 md:p-3 border border-[#111111]/20 shadow-sm">
+                  <div className="w-full overflow-hidden rounded-xl border border-[#111111]/10 bg-white aspect-[2880/1554]">
+                    <img
+                      src={images[2]}
+                      alt="DOPEWS App 3"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                style={{ y: img2Y }}
+                className="absolute top-0 left-0 w-full"
+              >
+                <div className="w-full rounded-2xl bg-[#f9f6f1] p-2 md:p-3 border border-[#111111]/20 shadow-sm">
+                  <div className="w-full overflow-hidden rounded-xl border border-[#111111]/10 bg-white aspect-[2880/1554]">
+                    <img
+                      src={images[1]}
+                      alt="DOPEWS App 2"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                style={{ y: img1Y }}
+                className="absolute top-0 left-0 w-full"
+              >
+                <div className="w-full rounded-2xl bg-[#f9f6f1] p-2 md:p-3 border border-[#111111]/20 shadow-sm">
+                  <div className="w-full overflow-hidden rounded-xl border border-[#111111]/10 bg-white aspect-[2880/1554]">
+                    <img
+                      src={images[0]}
+                      alt="DOPEWS App 1"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Image Descriptions (Crossfading) */}
+            <div className="relative w-[90vw] sm:w-[85vw] md:w-[70vw] lg:w-[55vw] xl:w-[50vw] max-w-4xl mt-6 md:mt-8 h-[20vh] max-h-[160px] flex justify-center items-start text-center z-10 font-sans">
+              <motion.div
+                style={{ opacity: text1Opacity }}
+                className="absolute top-0 left-0 w-full"
+              >
+                <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
+                  1. Dengue Risk Heatmap
+                </h4>
+                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
+                  The Dengue Risk Heatmap uses a map-centered interface with color-coded risk levels to visualize predicted outbreak areas. Supporting analytics, forecast controls, and driver insights help users quickly understand spatial risk patterns and make informed public health decisions.
+                </p>
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: text2Opacity }}
+                className="absolute top-0 left-0 w-full pointer-events-none"
+              >
+                <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
+                  2. Admin Dashboard
+                </h4>
+                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
+                  The Admin Dashboard adopts a structured table-based layout to efficiently manage system users and roles. Features such as search, filtering, and role actions allow administrators to monitor activity, maintain security, and control platform access effectively.
+                </p>
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: text3Opacity }}
+                className="absolute top-0 left-0 w-full pointer-events-none"
+              >
+                <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
+                  3. API Key Management / API Playground
+                </h4>
+                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
+                  The API Playground provides developers with an interactive interface to test endpoints and access dengue data programmatically. Integrated documentation, authentication guidance, and JSON examples simplify integration and encourage external application development.
+                </p>
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: text4Opacity }}
+                className="absolute top-0 left-0 w-full pointer-events-none"
+              >
+                <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
+                  4. Dengue Education Hub
+                </h4>
+                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
+                  The Dengue Education Hub presents educational articles in a searchable, content-focused layout to improve public awareness. Filtering, sorting, and visual materials help users easily access reliable dengue prevention knowledge and health information.
+                </p>
+              </motion.div>
+            </div>
+
+          </div>
+        </section>
+      </div>
+    </div>
+  );
+}
+
+
+function TwinkleFinalInterface() {
+  const containerRef = useRef<HTMLElement>(null);
+
+  // Setup scroll tracking for the hero section
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  // Calculate transforms for the images
+  const img1Y = useTransform(scrollYProgress, [0.05, 0.20], ["0vh", "-200vh"]);
+  const img2Y = useTransform(scrollYProgress, [0.24, 0.39], ["0vh", "-200vh"]);
+  const img3Y = useTransform(scrollYProgress, [0.43, 0.58], ["0vh", "-200vh"]);
+  const img4Y = useTransform(scrollYProgress, [0.62, 0.77], ["0vh", "-200vh"]);
+  const img5Y = useTransform(scrollYProgress, [0.81, 0.96], ["0vh", "-200vh"]);
+
+  // Calculate opacities for the descriptions
+  const text1Opacity = useTransform(scrollYProgress, [0.05, 0.15], [1, 0]);
+  const text2Opacity = useTransform(scrollYProgress, [0.10, 0.20, 0.24, 0.34], [0, 1, 1, 0]);
+  const text3Opacity = useTransform(scrollYProgress, [0.29, 0.39, 0.43, 0.53], [0, 1, 1, 0]);
+  const text4Opacity = useTransform(scrollYProgress, [0.48, 0.58, 0.62, 0.72], [0, 1, 1, 0]);
+  const text5Opacity = useTransform(scrollYProgress, [0.67, 0.77, 0.81, 0.91], [0, 1, 1, 0]);
+  const text6Opacity = useTransform(scrollYProgress, [0.86, 0.96, 1], [0, 1, 1]);
+                                                                                
+  const images = [
+    "/twinkle/twinkle-prompt.png",
+    "/twinkle/twinkle-room.png",
+    "/twinkle/twinkle-book.png",
+    "/twinkle/twinkle-math.png",
+    "/twinkle/twinkle-dylexia.png",
+    "/twinkle/twinkle-talking.png",
+  ];
+
+  return (
+    <div className="flex flex-col relative w-full pt-0">
+      <style>{`
+        .font-serif-custom {
+          font-family: 'Cormorant Garamond', serif;
+        }
+      `}</style>
+      <div className="relative w-full text-[#111111] bg-transparent">
+        <section ref={containerRef as any} className="relative h-[350vh] w-full max-w-7xl mx-auto flex justify-center">
+          <div className="sticky top-[5vh] h-[95vh] w-full overflow-hidden flex flex-col items-center justify-start pt-2 px-[5vw] md:px-[8vw]">
+            {/* Image Stack */}
+            <div className="relative w-[90vw] sm:w-[85vw] md:w-[70vw] lg:w-[55vw] xl:w-[50vw] max-w-4xl z-10 flex flex-col items-center">
+              {/* Base image - dictates size of the stack */}
+              <div className="relative w-full rounded-2xl bg-[#f9f6f1] p-2 md:p-3 border border-[#111111]/20 shadow-sm">
+                <div className="relative w-full overflow-hidden rounded-xl border border-[#111111]/10 bg-white aspect-[2880/1554]">
+                  <img
+                    src={images[5]}
+                    alt="Twinkle App 6"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+              </div>
+
+              <motion.div
+                style={{ y: img5Y }}
+                className="absolute top-0 left-0 w-full"
+              >
+                <div className="w-full rounded-2xl bg-[#f9f6f1] p-2 md:p-3 border border-[#111111]/20 shadow-sm">
+                  <div className="w-full overflow-hidden rounded-xl border border-[#111111]/10 bg-white aspect-[2880/1554]">
+                    <img
+                      src={images[4]}
+                      alt="Twinkle App 5"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                style={{ y: img4Y }}
+                className="absolute top-0 left-0 w-full"
+              >
+                <div className="w-full rounded-2xl bg-[#f9f6f1] p-2 md:p-3 border border-[#111111]/20 shadow-sm">
+                  <div className="w-full overflow-hidden rounded-xl border border-[#111111]/10 bg-white aspect-[2880/1554]">
+                    <img
+                      src={images[3]}
+                      alt="Twinkle App 4"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                style={{ y: img3Y }}
+                className="absolute top-0 left-0 w-full"
+              >
+                <div className="w-full rounded-2xl bg-[#f9f6f1] p-2 md:p-3 border border-[#111111]/20 shadow-sm">
+                  <div className="w-full overflow-hidden rounded-xl border border-[#111111]/10 bg-white aspect-[2880/1554]">
+                    <img
+                      src={images[2]}
+                      alt="Twinkle App 3"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                style={{ y: img2Y }}
+                className="absolute top-0 left-0 w-full"
+              >
+                <div className="w-full rounded-2xl bg-[#f9f6f1] p-2 md:p-3 border border-[#111111]/20 shadow-sm">
+                  <div className="w-full overflow-hidden rounded-xl border border-[#111111]/10 bg-white aspect-[2880/1554]">
+                    <img
+                      src={images[1]}
+                      alt="Twinkle App 2"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                style={{ y: img1Y }}
+                className="absolute top-0 left-0 w-full"
+              >
+                <div className="w-full rounded-2xl bg-[#f9f6f1] p-2 md:p-3 border border-[#111111]/20 shadow-sm">
+                  <div className="w-full overflow-hidden rounded-xl border border-[#111111]/10 bg-white aspect-[2880/1554]">
+                    <img
+                      src={images[0]}
+                      alt="Twinkle App 1"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Image Descriptions (Crossfading) */}
+            <div className="relative w-[90vw] sm:w-[85vw] md:w-[70vw] lg:w-[55vw] xl:w-[50vw] max-w-4xl mt-6 md:mt-8 h-[20vh] max-h-[160px] flex justify-center items-start text-center z-10 font-sans">
+              <motion.div
+                style={{ opacity: text1Opacity }}
+                className="absolute top-0 left-0 w-full"
+              >
+                <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
+                  1. Prompt Interface
+                </h4>
+                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
+                  The initial prompt interface sets the stage for the customized educational experience, tailoring the interactions to each child's specific learning needs before they enter the game world.
+                </p>
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: text2Opacity }}
+                className="absolute top-0 left-0 w-full pointer-events-none"
+              >
+                <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
+                  2. Room Interface
+                </h4>
+                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
+                  The room interface simulates a cozy learning environment with interactive objects and characters. This familiar setting helps children feel comfortable, promotes exploration, and visually organizes learning activities within a playful game-like space.
+                </p>
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: text3Opacity }}
+                className="absolute top-0 left-0 w-full pointer-events-none"
+              >
+                <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
+                  3. Vocal Book (Listening & Pronunciation)
+                </h4>
+                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
+                  The vocal book focuses on auditory learning by allowing children to listen to words and repeat them. Large typography, audio playback, and simple interactions support pronunciation practice and early language development.
+                </p>
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: text4Opacity }}
+                className="absolute top-0 left-0 w-full pointer-events-none"
+              >
+                <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
+                  4. Math Game
+                </h4>
+                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
+                  The math activity uses a running game mechanic where children select the correct answer while progressing through a 3D environment. This gamified approach improves engagement, motivation, and learning retention.
+                </p>
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: text5Opacity }}
+                className="absolute top-0 left-0 w-full pointer-events-none"
+              >
+                <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
+                  5. Dyslexia Book
+                </h4>
+                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
+                  The dyslexia reading book incorporates specialized typography, color highlights, and structured sentence presentation to support children with reading difficulties. The design improves readability and helps learners process words more comfortably.
+                </p>
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: text6Opacity }}
+                className="absolute top-0 left-0 w-full pointer-events-none"
+              >
+                <h4 className="text-xl md:text-2xl font-bold text-[#111111] mb-2 font-serif-custom">
+                  6. Talking to the Avatar
+                </h4>
+                <p className="text-sm md:text-base text-[#111111]/70 leading-relaxed max-w-4xl mx-auto">
+                  The avatar interaction feature enables conversational learning through a friendly animated character. This design encourages engagement, builds emotional connection, and allows children to practice communication in a supportive environment.
+                </p>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  );
+}
+
+
