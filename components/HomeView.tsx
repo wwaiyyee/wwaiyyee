@@ -289,9 +289,10 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                                 transition={{ duration: 0.6, delay: 0.4 }}
                             >
                                 <p className="uppercase font-bold tracking-widest text-xs text-gray-500 mb-2">[ 01. EXPOSURE ]</p>
-                                <p className="text-black font-medium">
-                                    I treat every project like a carefully composed photograph. From framing the architecture (wireframing) to the final exposure (deployment), I obsess over the lighting, the focus, and the user's perspective.
-                                </p>
+                                <div className="text-black font-medium space-y-3">
+                                    <p>I approach software like composing a photograph — understanding the environment before capturing the frame.</p>
+                                    <p>My work focuses on building meaningful systems, from AI-driven prediction tools to full-stack web platforms that solve real-world problems.</p>
+                                </div>
                             </motion.div>
 
                             <motion.div
@@ -302,7 +303,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                             >
                                 <p className="uppercase font-bold tracking-widest text-xs text-gray-500 mb-2">[ 02. DEVELOPMENT ]</p>
                                 <p className="text-black font-medium">
-                                    My tools aren't physical lenses and chemicals. They are React, TypeScript, and Node.js. With a background forged in late-night coding sessions and rigorous algorithms, I blend technical precision with analog aesthetics.
+                                    Through academic projects and hackathons, I explore how software engineering, data, and machine learning can work together to turn complex ideas into practical solutions.
                                 </p>
                             </motion.div>
 
@@ -313,20 +314,27 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                                 transition={{ duration: 0.6, delay: 0.7 }}
                             >
                                 <p className="uppercase font-bold tracking-widest text-xs text-gray-500 mb-4">[ 03. EQUIPMENT ]</p>
-                                <ul className="space-y-4 text-black font-medium">
-                                    <li className="flex flex-col md:flex-row md:gap-4">
-                                        <span className="font-bold min-w-[120px]">FRONTEND:</span>
-                                        <span className="text-gray-700">React, Next.js, Tailwind <span className="italic text-gray-500">...capturing the visual composition.</span></span>
-                                    </li>
-                                    <li className="flex flex-col md:flex-row md:gap-4">
-                                        <span className="font-bold min-w-[120px]">BACKEND:</span>
-                                        <span className="text-gray-700">Node.js, Express <span className="italic text-gray-500">...handling the raw data processing.</span></span>
-                                    </li>
-                                    <li className="flex flex-col md:flex-row md:gap-4">
-                                        <span className="font-bold min-w-[120px]">DATABASE:</span>
-                                        <span className="text-gray-700">PostgreSQL, MongoDB <span className="italic text-gray-500">...archiving the negatives.</span></span>
-                                    </li>
-                                </ul>
+                                <div className="grid grid-cols-[100px_auto_1fr] md:grid-cols-[max-content_auto_1fr] gap-x-2 md:gap-x-6 gap-y-4 md:gap-y-5 text-black font-medium items-center md:items-baseline">
+                                    <div className="font-bold uppercase leading-tight">Languages</div>
+                                    <div className="font-bold">:</div>
+                                    <div className="text-gray-700 leading-snug">Python · Java · JavaScript</div>
+
+                                    <div className="font-bold uppercase leading-tight">Web</div>
+                                    <div className="font-bold">:</div>
+                                    <div className="text-gray-700 leading-snug">React · Next.js · HTML · CSS</div>
+
+                                    <div className="font-bold uppercase leading-tight">Data & AI</div>
+                                    <div className="font-bold">:</div>
+                                    <div className="text-gray-700 leading-snug">TensorFlow · Random Forest · KNN</div>
+
+                                    <div className="font-bold uppercase leading-tight">Database</div>
+                                    <div className="font-bold">:</div>
+                                    <div className="text-gray-700 leading-snug">MongoDB · MySQL</div>
+
+                                    <div className="font-bold uppercase leading-tight">Design &<br className="md:hidden" /> Creative Tools</div>
+                                    <div className="font-bold">:</div>
+                                    <div className="text-gray-700 leading-snug">Figma · Canva · Spline</div>
+                                </div>
                             </motion.div>
                         </div>
                     </motion.div>
