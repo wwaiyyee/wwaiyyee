@@ -217,17 +217,15 @@ const WorkPage = () => {
 						</div>
 					</div>
 
-					{/* CTA */}
-									{['01', '02'].includes(activeProject.id) && (
-										<Link href={`/case-studies/${activeProject.id}`} className={`group flex w-fit items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] hover:opacity-70 transition-opacity ${isDark ? "text-[#f9f6f1]" : "text-[#111111]"}`}>
-											View Case Study
-											<ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-										</Link>
-									)}
-								</div>
-							</aside>
-
-							{/* Footer Decoration */}
+                                        {/* CTA */}
+                                        {['01', '02'].includes(activeProject.id) && (
+                                                <Link href={`/case-studies/${activeProject.id === '01' ? 'dopews' : 'twinkle'}`} className={`group flex w-fit items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] hover:opacity-70 transition-opacity ${isDark ? "text-[#f9f6f1]" : "text-[#111111]"}`}>
+                                                        View Case Study
+                                                        <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                                </Link>
+                                        )}
+                                </div>
+                        </aside>							{/* Footer Decoration */}
 							<div className="fixed bottom-12 right-12 z-50 text-[8px] uppercase tracking-[0.4em] text-zinc-300 flex items-center gap-4 pointer-events-none">
 				<span>Y. 2025</span>
 				<div className="w-1 h-1 bg-zinc-200 rounded-full"></div>
