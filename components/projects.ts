@@ -34,18 +34,6 @@ export const PROJECTS = [
             overview: 'An interactive generative art piece exploring the relationship between sound frequencies and visual particles.',
             impact: 'Featured in digital art galleries and used as a relaxing visualizer by users worldwide.'
         }
-    },
-    {
-        id: 'intellibox',
-        number: '04',
-        title: 'IntelliBox',
-        tagline: 'AI automation chatbot',
-        roles: 'UI/UX • IoT',
-        image: '/intellibox/intellibox-landing.png',
-        caseStudy: {
-            overview: 'A smart locker system integrated with a tracking dashboard for seamless package delivery and retrieval.',
-            impact: 'Improved package retrieval efficiency and reduced misplaced packages significantly.'
-        }
     }
 ];
 

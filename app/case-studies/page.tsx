@@ -10,25 +10,54 @@ import { Clock, ArrowRight, Search, ChevronDown, Check } from 'lucide-react';
 import { PROJECTS } from '@/components/projects';
 
 // Add some extra metadata just for the case studies page so it works with the filter/sort
-const ARTICLES = PROJECTS.map((project, index) => {
+const ARTICLES_RAW = PROJECTS.map((project, index) => {
     // Generate some stable metadata for sorting and filtering if it's not present
     const categories = ['Data Vis', 'Fintech', 'AI Interface', 'Creative Tech'];
     const assignedCategory = categories[index % categories.length];
     
+    let dateStr = '';
+    let sortDate = '';
+    let projectTags: string[] = [];
+    const titleLower = project.title.toLowerCase();
+    
+    if (titleLower.includes('dopews')) {
+        dateStr = 'Mar 2026';
+        sortDate = '2026-03-01';
+        projectTags = ['AI / Machine Learning', 'Data Visualization'];
+    } else if (titleLower.includes('twinkle')) {
+        dateStr = 'Dec 2025';
+        sortDate = '2025-12-01';
+        projectTags = ['EdTech', 'Game-Based Learning', 'Neurodiversity'];
+    } else if (titleLower.includes('intellitrade')) {
+        dateStr = 'Nov 2025';
+        sortDate = '2025-11-01';
+        projectTags = ['AI Agents', 'Web3', 'UI/UX Design'];
+    } else {
+        dateStr = 'Oct 2025';
+        sortDate = '2025-10-01';
+        projectTags = [project.tagline];
+    }
+
     return {
         id: project.id,
         number: project.number,
         title: project.title,
         excerpt: project.caseStudy.overview,
-        date: `202${5 - index}-0${(index % 9) + 1}-15`,
-        readTime: `${(index * 2) + 4}`,
+        date: dateStr,
+        sortDate: sortDate,
         category: assignedCategory,
-        featured: index === 0,
         image: project.image,
         tagline: project.tagline,
-        roles: project.roles
+        roles: project.roles,
+        tags: projectTags
     };
 });
+
+// Arrange in descending order based on the new dates
+const ARTICLES = ARTICLES_RAW.sort((a, b) => new Date(b.sortDate).getTime() - new Date(a.sortDate).getTime()).map((article, index) => ({
+    ...article,
+    featured: index === 0
+}));
 
 const CATEGORIES = ["All", 'Data Vis', 'Fintech', 'AI Interface', 'Creative Tech'];
 const SORT_OPTIONS = [
@@ -49,9 +78,9 @@ export default function CaseStudiesPage() {
         return matchesSearch && matchesCategory;
     }).sort((a, b) => {
         if (sortBy === 'newest') {
-            return new Date(b.date).getTime() - new Date(a.date).getTime();
+            return new Date(b.sortDate).getTime() - new Date(a.sortDate).getTime();
         } else if (sortBy === 'oldest') {
-            return new Date(a.date).getTime() - new Date(b.date).getTime();
+            return new Date(a.sortDate).getTime() - new Date(b.sortDate).getTime();
         }
         return 0;
     });
@@ -63,7 +92,7 @@ export default function CaseStudiesPage() {
         <div className="min-h-screen bg-[#f9f6f1] text-[#111111] font-sans selection:bg-[#111111] selection:text-[#F2F2ED]">
             <NavBar />
 
-            <main className="max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-20">
+            <main className="max-w-6xl mx-auto px-6 pt-32 pb-20">
 
                 {/* Header Section */}
                 <section className="mb-20 text-left max-w-4xl">
@@ -149,9 +178,12 @@ export default function CaseStudiesPage() {
                             <div className="grid md:grid-cols-2 gap-12 items-center">
                                 {/* Left Content */}
                                 <div className="space-y-8 group-hover:opacity-80 transition-opacity order-2 md:order-1">
-                                    <div className="text-[10px] font-mono text-zinc-500 tracking-widest uppercase flex items-center gap-4">
-                                        <div className="w-2 h-2 bg-black rounded-full animate-pulse"></div>
-                                        Featured Study
+                                    <div className="flex flex-wrap gap-2">
+                                        {featuredArticle.tags.map((tag: string) => (
+                                            <span key={tag} className="px-3 py-1 rounded-full border border-zinc-300 text-[10px] font-bold uppercase tracking-widest text-[#111111] group-hover:bg-[#111111] group-hover:text-[#F2F2ED] transition-colors">
+                                                {tag}
+                                            </span>
+                                        ))}
                                     </div>
                                     <h2 className="text-4xl md:text-6xl font-black italic tracking-tighter uppercase leading-[0.9] max-w-2xl pr-8">
                                         {featuredArticle.title}
@@ -163,11 +195,6 @@ export default function CaseStudiesPage() {
                                     <div className="space-y-6 pt-4">
                                         <div className="text-zinc-400 font-mono text-[10px]">
                                             {featuredArticle.date}
-                                        </div>
-                                        <div className="flex flex-wrap gap-3">
-                                            <span className="px-4 py-1.5 rounded-full border border-zinc-300 text-[10px] font-bold uppercase tracking-widest text-[#111111] group-hover:bg-[#111111] group-hover:text-[#F2F2ED] transition-colors">
-                                                {featuredArticle.category}
-                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -239,9 +266,11 @@ export default function CaseStudiesPage() {
                                             </p>
 
                                             <div className="flex flex-wrap gap-2 mt-4">
-                                                <span className="px-3 py-1 rounded-full border border-zinc-200 text-[8px] font-bold uppercase tracking-widest text-[#111111]">
-                                                    {article.category}
-                                                </span>
+                                                {article.tags.map((tag: string) => (
+                                                    <span key={tag} className="px-3 py-1 rounded-full border border-zinc-200 text-[8px] font-bold uppercase tracking-widest text-[#111111]">
+                                                        {tag}
+                                                    </span>
+                                                ))}
                                             </div>
                                         </div>
                                     </motion.div>
