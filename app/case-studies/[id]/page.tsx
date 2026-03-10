@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { ArrowRight, ArrowUpRight, Camera, Film, Layers, Layout, Maximize2 } from 'lucide-react';
 import { PROJECTS } from '@/components/projects';
 import { NavBar } from '@/components/NavBar';
+import { NextProjectMarquee } from '@/components/NextProjectMarquee';
 
 export default function CaseStudy() {
   const params = useParams();
@@ -38,6 +39,15 @@ export default function CaseStudy() {
 
   return (
     <div className="min-h-screen bg-[#F2F2ED] text-[#111111] font-sans selection:bg-[#111111] selection:text-[#F2F2ED]">
+      <style dangerouslySetInnerHTML={{__html: `
+        .no-scrollbar::-webkit-scrollbar {
+          display: none !important;
+        }
+        .no-scrollbar {
+          -ms-overflow-style: none !important;
+          scrollbar-width: none !important;
+        }
+      `}} />
       <NavBar />
       
       {/* Scroll Progress Line */}
@@ -48,7 +58,7 @@ export default function CaseStudy() {
         />
       </div>
 
-      <div className="max-w-[1400px] mx-auto pb-24 pt-20">
+      <div className="max-w-[1400px] mx-auto pb-0 pt-20">
         
         {/* Hero Section (Scrolls normally) */}
         <section className="px-6 md:px-10 pt-16 pb-24 relative z-0">
@@ -319,25 +329,8 @@ export default function CaseStudy() {
 
         </div>
 
-        {/* Next Project Nav & Footer */}
-        <div className="px-2 md:px-6 relative z-10 mt-32">
-          <Link href={`/case-studies/${nextProject.id}`} className="block px-8 py-24 bg-[#111111] text-white rounded-xl shadow-2xl group cursor-pointer transition-colors border border-white/20 relative overflow-hidden">
-            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop')] bg-cover bg-center opacity-10 group-hover:opacity-20 transition-opacity duration-700"></div>
-            <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16">
-              <div>
-                <p className="font-mono text-sm text-zinc-400 mb-4 uppercase tracking-widest">Next Project // {nextProject.number}</p>
-                <h2 className="text-5xl md:text-7xl lg:text-8xl font-black italic tracking-tighter group-hover:text-zinc-300 transition-colors uppercase">{nextProject.title}</h2>
-              </div>
-              <div className="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-[#111111] transition-all duration-300 shrink-0">
-                <ArrowRight size={28} />
-              </div>
-            </div>
-            <div className="relative z-10 border-t border-white/20 pt-8 flex justify-between items-center text-xs font-mono text-zinc-500">
-              <span>&copy; 2026 // END OF ARCHIVE</span>
-              <span>PLEASE REWIND</span>
-            </div>
-          </Link>
-        </div>
+        {/* Next Project Marquee Replacement */}
+        <NextProjectMarquee />
 
       </div>
     </div>
@@ -372,7 +365,7 @@ function FolderSection({ tabId, title, bgClass, textClass, index, children }: { 
 
       {/* Folder Body */}
       <div 
-        className={`${bgClass} ${textClass} w-full rounded-2xl rounded-tl-none border top-border-enhance border-[#111111]/20 shadow-[0_-20px_60px_rgba(0,0,0,0.3)] pb-32 pt-16 px-6 md:px-12 relative -mt-[1px] overflow-y-auto`}
+        className={`${bgClass} ${textClass} w-full rounded-2xl rounded-tl-none border top-border-enhance border-[#111111]/20 shadow-[0_-20px_60px_rgba(0,0,0,0.3)] pb-32 pt-16 px-6 md:px-12 relative -mt-[1px] overflow-y-auto no-scrollbar`}
         style={{ height: `calc(100vh - ${topOffset}px)` }}
       >
         {children}
