@@ -41,7 +41,7 @@ export const NextProjectMarquee = () => {
             <section className="relative w-full overflow-hidden pt-12 pb-0 bg-[#f9f6f1] text-[#111111] selection:bg-[#111111] selection:text-[#F2F2ED] z-10">
                 {/* Header Section (Constrained) */}
                 <div className="max-w-[1400px] mx-auto px-6 md:px-12 mb-20 relative z-10 w-full">
-                    <h2 className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter leading-none" style={{ fontFamily: "'Playfair Display', serif" }}>
+                    <h2 className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter leading-none text-center" style={{ fontFamily: "'Playfair Display', serif" }}>
                         <span className="not-italic uppercase">More</span> <span className="text-zinc-400 italic lowercase">projects</span>
                     </h2>
                     <div className="w-full h-[1px] bg-gradient-to-r from-[#111111]/10 to-transparent mt-8"></div>
