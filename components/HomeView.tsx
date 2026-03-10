@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { ArrowRight, ArrowUpRight, Aperture, X } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { PROJECTS, ACHIEVEMENTS } from './projects';
 import { Marquee } from './Marquee';
 
@@ -29,6 +30,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
     const [isSnapping, setIsSnapping] = useState(false);
     const [photoPrinted, setPhotoPrinted] = useState(false);
     const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
+    const [isRewinding, setIsRewinding] = useState(false);
 
     const handleSnapPhoto = () => {
         if (photoPrinted) return;
@@ -103,14 +105,19 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             <section id="top" className="relative min-h-[100vh] bg-[#F2F2ED] overflow-hidden flex flex-col items-center justify-center">
 
                 {/* Massive Center Text */}
-                <div className="relative z-30 w-full flex flex-col items-center justify-center pointer-events-none select-none mt-30 mb-64">
+                <motion.div
+                    className="relative z-30 w-full flex flex-col items-center justify-center pointer-events-none select-none mt-30 mb-32 md:mb-48"
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
+                >
                     <h1 className="text-[18vw] md:text-[14vw] font-serif text-[#111111] leading-[0.8] tracking-tighter opacity-10">
                         Wai Yee
                     </h1>
                     <p className="text-[#111111] tracking-[0.5em] uppercase text-xs md:text-sm mt-8 font-mono z-30 opacity-80">
                         SOFTWARE DEVELOPER / UI/UX DESIGNER
                     </p>
-                </div>
+                </motion.div>
 
                 {/* --- SCATTERED COLLAGE ELEMENTS --- */}
                 <div className="absolute inset-0 z-20 pointer-events-none overflow-hidden">
@@ -139,24 +146,40 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             </section>
 
             {/* --- ABOUT SECTION (FIELD NOTES FORMAT) --- */}
-            <section id="about" className="py-32 px-6 relative overflow-hidden bg-[#F2F2ED]">
+            <section id="about" className="py-16 md:py-24 px-6 relative overflow-hidden bg-[#F2F2ED]">
                 <div className="max-w-4xl mx-auto relative z-10">
-                    <div className="flex flex-col items-center justify-center gap-6 mb-16 text-center">
+                    <motion.div
+                        className="flex flex-col items-center justify-center gap-6 mb-8 text-center"
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.5 }}
+                        transition={{ duration: 0.7, ease: 'easeOut' }}
+                    >
                         <h3 className="text-xl md:text-2xl font-serif text-[#111] max-w-2xl px-6">
                             "Coding with a cinematic lens."
                         </h3>
-                    </div>
+                    </motion.div>
 
                     {/* Field Notes Paper Container */}
-                    <div
+                    <motion.div
                         className="bg-white text-black p-8 md:p-16 shadow-[20px_20px_60px_rgba(0,0,0,0.1)] mx-auto max-w-3xl relative rounded-sm border-l-8 border-[#d73a3a] border-y border-r border-black"
                         style={{ fontFamily: '"Courier New", Courier, monospace' }}
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
                     >
                         {/* Subtle paper texture */}
                         <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cream-paper.png')] pointer-events-none"></div>
 
                         {/* Log Header */}
-                        <div className="flex justify-between items-end mb-12 border-b-2 border-black pb-4">
+                        <motion.div
+                            className="flex justify-between items-end mb-12 border-b-2 border-black pb-4"
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: 0.3 }}
+                        >
                             <div>
                                 <h3 className="text-2xl font-bold uppercase tracking-widest">Developer's Log</h3>
                                 <p className="text-gray-500 text-xs mt-1">BATCH NO. 2026-X</p>
@@ -165,25 +188,40 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                                 <p>ISO: 400</p>
                                 <p>PROCESS: C-41</p>
                             </div>
-                        </div>
+                        </motion.div>
 
                         <div className="space-y-8 text-sm md:text-base leading-relaxed">
 
-                            <div>
+                            <motion.div
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: 0.4 }}
+                            >
                                 <p className="uppercase font-bold tracking-widest text-xs text-gray-500 mb-2">[ 01. EXPOSURE ]</p>
                                 <p className="text-black font-medium">
                                     I treat every project like a carefully composed photograph. From framing the architecture (wireframing) to the final exposure (deployment), I obsess over the lighting, the focus, and the user's perspective.
                                 </p>
-                            </div>
+                            </motion.div>
 
-                            <div>
+                            <motion.div
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: 0.55 }}
+                            >
                                 <p className="uppercase font-bold tracking-widest text-xs text-gray-500 mb-2">[ 02. DEVELOPMENT ]</p>
                                 <p className="text-black font-medium">
                                     My tools aren't physical lenses and chemicals. They are React, TypeScript, and Node.js. With a background forged in late-night coding sessions and rigorous algorithms, I blend technical precision with analog aesthetics.
                                 </p>
-                            </div>
+                            </motion.div>
 
-                            <div>
+                            <motion.div
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: 0.7 }}
+                            >
                                 <p className="uppercase font-bold tracking-widest text-xs text-gray-500 mb-4">[ 03. EQUIPMENT ]</p>
                                 <ul className="space-y-4 text-black font-medium">
                                     <li className="flex flex-col md:flex-row md:gap-4">
@@ -199,9 +237,9 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                                         <span className="text-gray-700">PostgreSQL, MongoDB <span className="italic text-gray-500">...archiving the negatives.</span></span>
                                     </li>
                                 </ul>
-                            </div>
+                            </motion.div>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </section>
 
@@ -410,13 +448,19 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             </section>
 
             {/* --- ACHIEVEMENTS (Full Width Table with Hover Image Effect) --- */}
-            <section id="achievements" className="py-32 bg-[#F2F2ED] relative cursor-default">
-                <div className="px-6 md:px-12 mb-20 flex flex-col md:flex-row justify-between items-end">
+            <section id="achievements" className="py-16 md:py-24 bg-[#F2F2ED] relative cursor-default">
+                <motion.div
+                    className="px-6 md:px-12 mb-12 flex flex-col md:flex-row justify-between items-end"
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ duration: 0.8, ease: 'easeOut' }}
+                >
                     <div>
                         <h2 className="text-4xl md:text-6xl font-serif text-[#111] mb-4">Exposure Log</h2>
                         <p className="text-gray-500 tracking-[0.3em] uppercase text-xs font-mono">Archive Index & Milestones</p>
                     </div>
-                </div>
+                </motion.div>
 
                 {/* Full Width Table Container */}
                 <div
@@ -433,11 +477,15 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
 
                     {/* Table Rows */}
                     {ACHIEVEMENTS.map((achieve: any, idx) => (
-                        <div
+                        <motion.div
                             key={idx}
                             onMouseEnter={() => setHoveredAchieve(idx)}
                             onMouseLeave={() => setHoveredAchieve(null)}
                             className="w-full px-6 md:px-12 py-8 border-b border-black hover:bg-[#111] transition-colors group flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-0 relative z-10"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.1 }}
+                            transition={{ duration: 0.5, ease: 'easeOut', delay: idx * 0.07 }}
                         >
 
                             {/* FRAME & YEAR */}
@@ -470,7 +518,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                                 <ArrowUpRight size={16} className="text-[#111] group-hover:text-gray-400 transition-colors duration-300 hidden md:block" />
                             </div>
 
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
 
@@ -517,72 +565,98 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             <div className={`fixed inset-0 bg-white z-[999] pointer-events-none transition-opacity duration-500 ease-out ${isSnapping ? 'opacity-100' : 'opacity-0'}`}></div>
 
             {/* 6. THE FINAL EXPOSURE (Footer) */}
-            <footer id="connect" className="border-t border-black bg-[#111] text-[#F2F2ED] py-32 flex flex-col items-center justify-center relative overflow-hidden">
-                <div className="text-center mb-16 px-6 relative z-20">
-                    <h2 className="text-4xl md:text-6xl font-serif mb-6 text-white">The Final Exposure</h2>
+            <footer id="connect" className={`bg-[#F2F2ED] text-[#111] pt-8 md:pt-12 flex flex-col items-center justify-center relative overflow-hidden transition-all duration-[1200ms] ease-in-out ${photoPrinted ? 'pb-4 md:pb-8' : 'pb-2 md:pb-4'}`}>
+                <motion.div
+                    className="text-center mb-8 md:mb-12 px-6 relative z-20"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ duration: 0.8, ease: 'easeOut' }}
+                >
+                    <h2 className="text-4xl md:text-6xl font-serif mb-2 md:mb-4 text-[#111]">The Final Exposure</h2>
                     <p className="text-gray-400 font-mono text-sm tracking-widest uppercase">Capture the moment • Print Resume</p>
-                </div>
+                </motion.div>
 
                 {/* Interactive Camera */}
-                <div className="relative w-[280px] h-[200px] md:w-[320px] md:h-[220px] mt-8 mb-32 z-20">
+                <div className="relative w-[500px] h-[350px] md:w-[600px] md:h-[400px] max-w-[95vw] md:max-w-[90vw] mt-4 mb-4 z-20">
 
                     {/* The Printed Polaroid (Resume) */}
                     <div
-                        className={`absolute left-1/2 w-[220px] md:w-[240px] bg-[#F2F2ED] p-3 shadow-2xl flex flex-col items-center transition-all duration-[1200ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] z-0 pointer-events-auto ${photoPrinted ? 'translate-y-[150px] md:translate-y-[170px] -translate-x-1/2 opacity-100 rotate-[-2deg]' : 'translate-y-0 -translate-x-1/2 opacity-0'}`}
+                        className={`absolute left-1/2 w-[220px] md:w-[280px] flex flex-col items-center transition-all duration-[1200ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] z-0 pointer-events-auto ${photoPrinted ? 'translate-y-[180px] md:translate-y-[220px] -translate-x-1/2 opacity-100' : 'translate-y-0 -translate-x-1/2 opacity-0'}`}
                         style={{ bottom: '20px' }}
                     >
-                        {/* Polaroid Image Area (Resume Preview) */}
-                        <div className="w-full h-[180px] bg-[#ddd] border border-black/10 flex flex-col items-center justify-center mb-4 relative overflow-hidden">
-                            <span className="font-serif text-black text-2xl font-bold italic mb-2">Resume</span>
-                            <span className="font-mono text-gray-500 text-[10px] tracking-widest uppercase border-t border-gray-400 pt-2">Chloe Lee</span>
-                        </div>
-                        {/* Action Buttons */}
-                        <div className="flex gap-2 w-full">
-                            <button onClick={() => setIsResumeModalOpen(true)} className="flex-1 text-center bg-[#111] text-white text-[10px] py-3 font-mono font-bold tracking-widest hover:bg-gray-800 transition-colors">REVIEW</button>
-                            <a href="/Resume.pdf" download className="flex-1 text-center border-2 border-[#111] text-[#111] text-[10px] py-3 font-mono font-bold tracking-widest hover:bg-[#e0e0e0] transition-colors">DOWNLOAD</a>
-                        </div>
+                        <motion.div
+                            drag={photoPrinted}
+                            dragMomentum={false}
+                            whileDrag={{ scale: 1.05, cursor: 'grabbing', zIndex: 50, rotate: 0 }}
+                            className="w-full bg-[#F2F2ED] p-3 shadow-2xl flex flex-col items-center origin-center rounded-sm border border-black/10"
+                            style={{ rotate: '-2deg', cursor: photoPrinted ? 'grab' : 'default' }}
+                        >
+                            {/* Polaroid Image Area (Resume Preview) */}
+                            <div className="w-full h-[180px] md:h-[220px] bg-[#ddd] border border-black/10 flex flex-col items-center justify-center mb-4 relative overflow-hidden pointer-events-none">
+                                <img
+                                    src="/resume.jpeg"
+                                    alt="Resume Preview"
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+                            {/* Action Buttons */}
+                            <div className="flex gap-2 md:gap-4 w-full">
+                                <button onPointerDown={(e) => e.stopPropagation()} onClick={() => setIsResumeModalOpen(true)} className="flex-1 text-center bg-[#111] text-white text-[10px] md:text-xs py-3 font-mono font-bold tracking-widest hover:bg-gray-800 transition-colors">REVIEW</button>
+                                <a onPointerDown={(e) => e.stopPropagation()} href="/Resume.pdf" download className="flex-1 text-center border-2 border-[#111] text-[#111] text-[10px] md:text-xs py-3 font-mono font-bold tracking-widest hover:bg-[#e0e0e0] transition-colors">DOWNLOAD</a>
+                            </div>
+                        </motion.div>
                     </div>
 
                     {/* The Camera Body */}
-                    <div className="absolute inset-0 bg-[#222] border-t-4 border-[#333] rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-10 flex flex-col items-center justify-center">
-                        {/* Top Viewfinder bump */}
-                        <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-32 h-6 bg-[#2a2a2a] rounded-t-lg border-t-2 border-[#333]"></div>
+                    <div className="absolute inset-0 z-10 flex flex-col items-center justify-center drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                        <img
+                            src="/camera.png"
+                            alt="Film Camera"
+                            className="w-full h-full object-contain pointer-events-none"
+                        />
 
-                        {/* Shutter Button */}
-                        <button
-                            onClick={handleSnapPhoto}
-                            disabled={photoPrinted || isSnapping}
-                            className={`absolute -top-4 right-8 md:right-10 w-12 h-6 rounded-t-full transition-all duration-150 ${isSnapping || photoPrinted ? 'bg-red-900 translate-y-2' : 'bg-[#d73a3a] hover:bg-red-500 hover:-translate-y-1 cursor-pointer'} border-b-4 border-red-950`}
-                            aria-label="Snap Photo"
-                        ></button>
+                        {/* Transparent Shutter Boundary & Hint */}
+                        <div className="absolute top-[24%] left-[23%] md:top-[24%] md:left-[24%] z-20 flex flex-col items-center gap-2">
+                            <button
+                                onClick={handleSnapPhoto}
+                                disabled={photoPrinted || isSnapping}
+                                className={`w-14 h-14 md:w-16 md:h-16 rounded-full transition-all duration-300 ${isSnapping || photoPrinted ? 'scale-95' : 'hover:scale-110 cursor-pointer'} bg-transparent flex items-center justify-center`}
+                                aria-label="Snap Photo"
+                            ></button>
 
-                        {/* Flash Component */}
-                        <div className="absolute top-6 left-6 w-12 h-6 bg-gradient-to-br from-gray-300 to-gray-500 rounded-sm border border-gray-600 flex items-center justify-center">
-                            <div className="w-10 h-4 bg-yellow-100/40 rounded-sm"></div>
+                            {!photoPrinted && (
+                                <div className="flex flex-col items-center text-[#111]/90 pointer-events-none drop-shadow-md absolute -top-24 md:-top-28 -left-20 md:-left-24 -translate-y-2">
+                                    <span className="font-mono text-sm tracking-[0.2em] font-bold uppercase whitespace-nowrap px-2 py-1.5 mb-2 origin-bottom rotate-[-2deg]">Expose to Reveal!</span>
+                                    {/* Hand-drawn style arrow pointing down towards the button */}
+                                    <svg className="w-8 h-12 text-[#111]/80 -translate-x-2" viewBox="0 0 40 60" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M20 5 C15 30, 25 45, 18 55 M10 40 L18 55 L30 46" />
+                                    </svg>
+                                </div>
+                            )}
                         </div>
-
-                        {/* Branding / Details */}
-                        <div className="absolute top-6 right-6 text-[8px] font-mono text-gray-500 tracking-widest uppercase">
-                            TYPE-01
-                        </div>
-
-                        {/* Main Lens */}
-                        <div className="w-32 h-32 md:w-36 md:h-36 rounded-full border-[10px] border-[#111] bg-gradient-to-br from-gray-700 to-black shadow-[inset_0_10px_20px_rgba(0,0,0,0.8)] flex items-center justify-center relative mt-4">
-                            {/* Inner Lens Rings */}
-                            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-gray-600/30 bg-black flex items-center justify-center relative overflow-hidden">
-                                {/* Aperture Blades Simulation */}
-                                <Aperture className="w-10 h-10 text-gray-800 opacity-50 absolute" />
-                                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#0a0a0a] z-10"></div>
-                                {/* Glass Reflection */}
-                                <div className="absolute top-2 right-4 w-8 h-8 bg-white/10 rounded-full blur-[2px] z-20"></div>
-                            </div>
-                        </div>
-
-                        {/* Bottom Output Slot */}
-                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-48 h-3 bg-black rounded-full shadow-[inset_0_4px_8px_rgba(0,0,0,0.8)] border-b border-gray-700/30"></div>
                     </div>
                 </div>
+
+                {/* Back to Top */}
+                <div className={`w-full flex justify-center z-20 transition-all duration-[1200ms] ${photoPrinted ? 'mt-52 md:mt-64' : 'mt-6'}`}>
+                    <button
+                        onClick={() => {
+                            if (isRewinding) return;
+                            setIsRewinding(true);
+                            setTimeout(() => {
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                                setIsRewinding(false);
+                            }, 900);
+                        }}
+                        className="relative z-20 mb-4 font-serif italic text-[#111]/40 hover:text-[#111]/70 transition-all duration-300 cursor-pointer"
+                    >
+                        <span className={`transition-all duration-500 ${isRewinding ? 'opacity-0 text-lg md:text-xl pointer-events-none absolute inset-0 flex items-center justify-center' : 'opacity-100 text-lg md:text-xl flex items-center justify-center'}`}>watching the film rewind</span>
+                        <span className={`transition-all duration-500 ${isRewinding ? 'opacity-100 text-xl md:text-2xl text-[#111]/70 flex items-center justify-center whitespace-nowrap' : 'opacity-0 text-xl pointer-events-none absolute inset-0 flex items-center justify-center'}`}>let&apos;s go back to the first frame!</span>
+                    </button>
+                </div>
             </footer>
+
 
             {/* Resume Modal Overlay */}
             {isResumeModalOpen && (
@@ -593,7 +667,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                         aria-label="Close modal background"
                     ></div>
 
-                    <div className="relative z-10 w-full h-full max-w-6xl max-h-[90vh] bg-[#F2F2ED] rounded-xl shadow-2xl flex flex-col overflow-hidden border border-gray-700">
+                    <div className="relative z-10 w-full max-w-[800px] h-full max-h-[90vh] md:max-h-[1130px] bg-[#F2F2ED] rounded-xl shadow-2xl flex flex-col overflow-hidden border border-gray-700 aspect-[1/1.414] mx-auto">
                         {/* Modal Header */}
                         <div className="flex justify-between items-center px-6 py-4 border-b border-gray-300 bg-[#E8E8E2]">
                             <div className="font-mono text-sm tracking-widest uppercase font-bold text-[#111]">
