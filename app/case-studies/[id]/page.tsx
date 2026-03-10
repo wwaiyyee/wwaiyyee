@@ -1245,7 +1245,7 @@ function DopewsFinalInterface() {
       `}</style>
       <div className="relative w-full text-[#111111] bg-transparent">
         <section ref={containerRef as any} className="relative h-[250vh] w-full max-w-7xl mx-auto flex justify-center">
-          <div className="sticky top-[5vh] h-[95vh] w-full overflow-hidden flex flex-col items-center justify-start pt-2 px-[5vw] md:px-[8vw]">
+          <div className="sticky top-[12vh] h-[88vh] w-full overflow-hidden flex flex-col items-center justify-start pt-6 px-[5vw] md:px-[8vw]">
             {/* Image Stack */}
             <div className="relative w-[90vw] sm:w-[85vw] md:w-[70vw] lg:w-[55vw] xl:w-[50vw] max-w-4xl z-10 flex flex-col items-center">
               {/* Base image - dictates size of the stack */}
@@ -1406,7 +1406,7 @@ function TwinkleFinalInterface() {
       `}</style>
       <div className="relative w-full text-[#111111] bg-transparent">
         <section ref={containerRef as any} className="relative h-[350vh] w-full max-w-7xl mx-auto flex justify-center">
-          <div className="sticky top-[5vh] h-[95vh] w-full overflow-hidden flex flex-col items-center justify-start pt-2 px-[5vw] md:px-[8vw]">
+          <div className="sticky top-[12vh] h-[88vh] w-full overflow-hidden flex flex-col items-center justify-start pt-6 px-[5vw] md:px-[8vw]">
             {/* Image Stack */}
             <div className="relative w-[90vw] sm:w-[85vw] md:w-[70vw] lg:w-[55vw] xl:w-[50vw] max-w-4xl z-10 flex flex-col items-center">
               {/* Base image - dictates size of the stack */}
