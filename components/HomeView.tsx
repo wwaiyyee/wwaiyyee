@@ -508,7 +508,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                                                 <img
                                                     src={project.image}
                                                     alt={project.title}
-                                                    className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
+                                                    className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
                                                 />
                                             </div>
                                             <p className="text-gray-400 text-center text-[10px] md:text-xs uppercase tracking-[0.1em] mt-4 font-mono truncate px-4">
