@@ -81,14 +81,21 @@ export default function CaseStudy() {
               </div>
               <div className="col-span-2 md:col-span-1">
                 <p className="text-[#111111] mb-1 font-bold">TOOLS</p>
-                <p>Figma, Framer, React</p>
+                <p>{(project as any).tools || 'Figma, Framer, React'}</p>
               </div>
-              {(project as any).achievements && (
+              
+              {/* Backwards compatibility for DOPEWS-MY custom fields if achievements aren't strictly specified */}
+              {project.id === 'dopews' && !(project as any).achievements ? (
+                <div className="col-span-2 mt-2 pt-4 border-t border-[#111111]/10">
+                  <p className="text-xs">FILE: ARCHIVE_LOG_01</p>
+                  <p className="text-xs">STATUS: <span className="font-bold">DECLASSIFIED</span></p>
+                </div>
+              ) : (project as any).achievements ? (
                 <div className="col-span-2 mt-2 pt-4 border-t border-[#111111]/10">
                   <p className="text-[#111111] mb-1 font-bold">ACHIEVEMENTS</p>
                   <p className="opacity-80 leading-relaxed font-sans text-sm">{(project as any).achievements}</p>
                 </div>
-              )}
+              ) : null}
             </div>
           </div>
 
@@ -124,7 +131,15 @@ export default function CaseStudy() {
                     <span className="w-2 h-2 bg-current rounded-full"></span> The Problem
                   </h3>
                   <p className="opacity-80 leading-relaxed font-medium">
-                    {project.caseStudy.overview} Modern operations have become overly complex. We needed to identify core bottlenecks and redesign the conceptual framework to achieve better performance outcomes constraints.
+                    {project.id === 'dopews' ? (
+                      <>
+                        Dengue outbreaks in Malaysia are often detected only after case numbers have already surged, leaving little time for preventive action. Existing surveillance systems mainly focus on reporting confirmed cases rather than predicting future outbreaks.<br/><br/>
+                        This reactive approach means authorities only respond once transmission is already widespread, limiting the effectiveness of mosquito control and public awareness measures.<br/><br/>
+                        Malaysia has experienced significant dengue fluctuations in recent years, with cases increasing from 26,301 in 2021 to over 120,000 cases in 2023, highlighting the urgent need for predictive outbreak monitoring tools.
+                      </>
+                    ) : (
+                      <>{project.caseStudy.overview} Modern operations have become overly complex. We needed to identify core bottlenecks and redesign the conceptual framework to achieve better performance outcomes constraints.</>
+                    )}
                   </p>
                 </div>
                 <div>
@@ -132,7 +147,15 @@ export default function CaseStudy() {
                     <span className="w-2 h-2 bg-current rounded-full"></span> The Goal
                   </h3>
                   <p className="opacity-80 leading-relaxed font-medium">
-                    Design a system that reduces friction and encourages proper workflow management, integrating seamlessly with existing tools to maximize productivity while remaining intuitive.
+                    {project.id === 'dopews' ? (
+                      <>
+                        Design an AI-driven early warning system capable of forecasting dengue outbreak risks before case escalation occurs.<br/><br/>
+                        The system integrates epidemiological, environmental, and demographic data to produce 7-, 14-, and 28-day outbreak predictions, enabling authorities to respond earlier and allocate resources more effectively.<br/><br/>
+                        The objective was to build a platform that shifts dengue surveillance from reactive monitoring to proactive prevention.
+                      </>
+                    ) : (
+                      <>Design a system that reduces friction and encourages proper workflow management, integrating seamlessly with existing tools to maximize productivity while remaining intuitive.</>
+                    )}
                   </p>
                 </div>
               </div>
@@ -148,18 +171,42 @@ export default function CaseStudy() {
               </div>
               <div className="md:col-span-8">
                 <p className="text-xl leading-relaxed mb-8 opacity-90 font-medium">
-                  We conducted qualitative interviews with targeted stakeholders across different operational fields to gather data on primary pain points.
+                  {project.id === 'dopews' ? (
+                    <>
+                      Research focused on understanding the limitations of existing dengue monitoring platforms and identifying gaps in decision-making workflows.<br/><br/>
+                      Current surveillance tools such as iDengue primarily focus on case reporting and hotspot visualization, but lack predictive modeling and integrated environmental data. As a result, outbreak signals are typically detected only after transmission has already spread.
+                    </>
+                  ) : (
+                    <>We conducted qualitative interviews with targeted stakeholders across different operational fields to gather data on primary pain points.</>
+                  )}
                 </p>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10 text-[#F2F2ED]">
-                  <StatCard value="82%" label="Reported Friction" className="bg-white/10 border-white/20 hover:border-white/50" />
-                  <StatCard value="65%" label="Felt Overwhelmed" className="bg-white/10 border-white/20 hover:border-white/50" />
-                  <StatCard value="90%" label="Preferred Simplicity" className="bg-white/10 border-white/20 hover:border-white/50" />
-                </div>
+
+                {project.id === 'dopews' ? (
+                  <div className="mb-10 space-y-6">
+                    <h3 className="text-xl font-bold border-b border-white/20 pb-2">Key Observations</h3>
+                    <ul className="space-y-4 opacity-90 font-medium leading-relaxed list-disc pl-5">
+                      <li>Existing dengue monitoring platforms focus primarily on historical case reporting rather than predictive forecasting.</li>
+                      <li>Environmental factors such as rainfall patterns, urban density, and historical case trends play a significant role in dengue transmission but are rarely integrated into surveillance dashboards.</li>
+                      <li>Public health authorities require clear geographic risk visualization and automated alerts to support faster decision-making.</li>
+                    </ul>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10 text-[#F2F2ED]">
+                    <StatCard value="82%" label="Reported Friction" className="bg-white/10 border-white/20 hover:border-white/50" />
+                    <StatCard value="65%" label="Felt Overwhelmed" className="bg-white/10 border-white/20 hover:border-white/50" />
+                    <StatCard value="90%" label="Preferred Simplicity" className="bg-white/10 border-white/20 hover:border-white/50" />
+                  </div>
+                )}
 
                 <div className="p-6 bg-white/5 rounded-lg border border-white/10 font-mono text-sm opacity-90">
                   <p className="font-bold mb-2 uppercase tracking-widest text-[#F2F2ED]">Recorded Insight_</p>
-                  <p className="italic">"It's not just about speed. It's about clarity of information when taking crucial decisions. The current setups are just too noisy." — Stakeholder #14</p>
+                  <p className="italic">
+                    {project.id === 'dopews' ? (
+                      `"Reactive surveillance detects dengue outbreaks only after cases escalate, leaving minimal lead time for preventive intervention."`
+                    ) : (
+                      `"It's not just about speed. It's about clarity of information when taking crucial decisions. The current setups are just too noisy." — Stakeholder #14`
+                    )}
+                  </p>
                 </div>
               </div>
             </div>
@@ -172,53 +219,101 @@ export default function CaseStudy() {
               <p className="opacity-60 font-mono text-sm uppercase tracking-widest">Development & Iteration</p>
             </div>
 
-            <div className="mb-20">
-              <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                <Layout className="opacity-60" /> Wireframing the Interface
-              </h3>
-              <p className="opacity-80 max-w-3xl mb-8 leading-relaxed font-medium">
-                Initial sketches focused on stripping away complex UI elements. We wanted the dashboard to be the sole focus, hiding secondary tools to prevent cognitive overload.
-              </p>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="aspect-[9/16] bg-[#111111]/5 border border-[#111111]/10 rounded-lg flex items-center justify-center relative overflow-hidden group hover:bg-[#111111]/10 transition-colors">
-                    <div className="absolute inset-0 border-[8px] border-white/50 m-2 rounded-md"></div>
-                    <Film className="opacity-30 w-8 h-8" />
-                    <div className="absolute bottom-4 left-4 text-xs font-mono opacity-50 font-bold">V{i}.0</div>
+            {project.id === 'dopews' ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start mb-20">
+                <div className="space-y-12">
+                  <div>
+                    <h3 className="text-2xl font-bold mb-4 flex items-center gap-3">
+                      <Layout className="opacity-60" /> Phase 1 — Information Architecture
+                    </h3>
+                    <p className="opacity-80 max-w-3xl mb-4 leading-relaxed font-medium">The system architecture was first designed to support multiple stakeholders including public users, health authorities, and system administrators.</p>
+                    <ul className="list-disc pl-5 opacity-80 space-y-2 font-medium">
+                      <li>Viewing dengue outbreak risk by location</li>
+                      <li>Monitoring historical and predicted case trends</li>
+                      <li>Managing system access and API integration</li>
+                      <li>Providing public education on dengue prevention</li>
+                    </ul>
                   </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div>
-                <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                  <Layers className="opacity-60" /> Key UX Decisions
-                </h3>
-                <ul className="space-y-6">
-                  <DecisionItem 
-                    title="Progressive Disclosure" 
-                    desc="Users are only shown tools as they become relevant. Reducing the initial toolbar elements completely altered the onboarding success rate."
-                  />
-                  <DecisionItem 
-                    title="Component Library Scaling" 
-                    desc="Mapped out a global design system strictly adhering to our geometric aesthetic constraints to enforce brutalist but clean interface usage."
-                  />
-                </ul>
-              </div>
-              <div className="bg-[#111111]/5 p-8 rounded-xl h-full flex items-center justify-center border border-[#111111]/10 relative overflow-hidden">
-                <div className="w-48 h-72 bg-[#f9f6f1]/90 shadow-2xl rounded-3xl border-4 border-[#111111]/80 flex flex-col relative z-10 p-2">
-                    <div className="flex-1 bg-[#111111]/90 rounded-2xl relative flex items-center justify-center">
-                      <div className="w-12 h-12 border border-white/30 rounded-full flex items-center justify-center">
-                        <div className="w-1 h-1 bg-white rounded-full"></div>
-                      </div>
-                    </div>
-                    <div className="h-16 flex items-center justify-center">
-                      <div className="w-10 h-10 bg-[#111111]/10 rounded-full"></div>
-                    </div>
+                  <div>
+                    <h3 className="text-2xl font-bold mb-4 flex items-center gap-3">
+                      <Layers className="opacity-60" /> Phase 2 — Dashboard Design
+                    </h3>
+                    <p className="opacity-80 max-w-3xl mb-4 leading-relaxed font-medium">The UI design focused on creating data-driven dashboards that prioritize clarity and actionable insights. Wireframes were developed in Figma to organize complex outbreak data into structured visual layers including heatmaps, charts, and alert indicators.</p>
+                    <ul className="list-disc pl-5 opacity-80 space-y-2 font-medium">
+                      <li>Geographic risk visualization</li>
+                      <li>Clear outbreak trend analysis</li>
+                      <li>Minimal interface complexity</li>
+                      <li>Decision-support focused layouts</li>
+                    </ul>
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold mb-4 flex items-center gap-3">
+                    <Film className="opacity-60" /> Phase 3 — Frontend Implementation
+                  </h3>
+                  <div className="bg-[#111111]/5 p-8 rounded-xl border border-[#111111]/10">
+                    <p className="opacity-80 leading-relaxed font-medium mb-4">The frontend interface was implemented using React, translating design prototypes into responsive dashboard components.</p>
+                    <ul className="list-disc pl-5 opacity-80 space-y-2 font-medium mb-6">
+                      <li>Dynamic dengue heatmaps</li>
+                      <li>Time-series outbreak predictions</li>
+                      <li>Alert notifications and reports</li>
+                      <li>Administrative control panels</li>
+                    </ul>
+                    <p className="opacity-80 leading-relaxed font-medium">The frontend communicates with backend APIs that generate predictions using the machine learning model.</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              <>
+                <div className="mb-20">
+                  <h3 className="text-xl font-bold mb-6 flex items-center gap-3">
+                    <Layout className="opacity-60" /> Wireframing the Interface
+                  </h3>
+                  <p className="opacity-80 max-w-3xl mb-8 leading-relaxed font-medium">
+                    Initial sketches focused on stripping away complex UI elements. We wanted the dashboard to be the sole focus, hiding secondary tools to prevent cognitive overload.
+                  </p>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {[1, 2, 3, 4].map((i) => (
+                      <div key={i} className="aspect-[9/16] bg-[#111111]/5 border border-[#111111]/10 rounded-lg flex items-center justify-center relative overflow-hidden group hover:bg-[#111111]/10 transition-colors">
+                        <div className="absolute inset-0 border-[8px] border-white/50 m-2 rounded-md"></div>
+                        <Film className="opacity-30 w-8 h-8" />
+                        <div className="absolute bottom-4 left-4 text-xs font-mono opacity-50 font-bold">V{i}.0</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                  <div>
+                    <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                      <Layers className="opacity-60" /> Key UX Decisions
+                    </h3>
+                    <ul className="space-y-6">
+                      <DecisionItem 
+                        title="Progressive Disclosure" 
+                        desc="Users are only shown tools as they become relevant. Reducing the initial toolbar elements completely altered the onboarding success rate."
+                      />
+                      <DecisionItem 
+                        title="Component Library Scaling" 
+                        desc="Mapped out a global design system strictly adhering to our geometric aesthetic constraints to enforce brutalist but clean interface usage."
+                      />
+                    </ul>
+                  </div>
+                  <div className="bg-[#111111]/5 p-8 rounded-xl h-full flex items-center justify-center border border-[#111111]/10 relative overflow-hidden">
+                    <div className="w-48 h-72 bg-[#f9f6f1]/90 shadow-2xl rounded-3xl border-4 border-[#111111]/80 flex flex-col relative z-10 p-2">
+                        <div className="flex-1 bg-[#111111]/90 rounded-2xl relative flex items-center justify-center">
+                          <div className="w-12 h-12 border border-white/30 rounded-full flex items-center justify-center">
+                            <div className="w-1 h-1 bg-white rounded-full"></div>
+                          </div>
+                        </div>
+                        <div className="h-16 flex items-center justify-center">
+                          <div className="w-10 h-10 bg-[#111111]/10 rounded-full"></div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
           </FolderSection>
 
           {/* Folder 4: Final UI */}
@@ -230,65 +325,146 @@ export default function CaseStudy() {
                </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-              <div className="md:col-span-8 bg-white/5 rounded-xl overflow-hidden relative group aspect-square md:aspect-auto border border-white/10">
-                <img 
-                  src={project.image} 
-                  alt="App UI Hero" 
-                  className="w-full h-full object-cover grayscale-[30%] opacity-80 transition-transform duration-1000 group-hover:scale-105 group-hover:grayscale-0"
-                />
-                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent text-white">
-                  <p className="font-mono text-sm mb-1 text-white/50">FIG. 1</p>
-                  <p className="text-lg font-bold">Core Application Interface</p>
-                </div>
-              </div>
-              <div className="md:col-span-4 flex flex-col gap-6">
-                <div className="bg-white/5 rounded-xl overflow-hidden relative group flex-1 border border-white/10">
-                  <img 
-                    src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop" 
-                    alt="App UI Detail 1" 
-                    className="w-full h-full object-cover grayscale-[50%] opacity-80 transition-transform duration-1000 group-hover:scale-105"
-                  />
-                  <div className="absolute bottom-4 left-4 bg-black/80 px-3 py-1 border border-white/20 text-xs font-mono tracking-widest text-white backdrop-blur-md">DATA VIEW</div>
-                </div>
-                <div className="bg-white/10 border border-white/10 text-white rounded-xl p-8 flex-1 flex flex-col justify-between">
-                  <div>
-                    <Camera className="w-8 h-8 mb-6 opacity-50" />
-                    <h4 className="text-xl font-bold mb-2">Minimalist Approach</h4>
-                    <p className="opacity-70 text-sm leading-relaxed">
-                      UI chrome was reduced by 80% compared to native apps, putting full emphasis on functionality and data blocks.
-                    </p>
+            {project.id === 'dopews' ? (
+              <div className="space-y-12">
+                <p className="text-xl leading-relaxed opacity-90 font-medium">The final system consists of four main application modules designed for different user roles.</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="bg-white/5 border border-white/10 rounded-xl p-8">
+                    <h3 className="text-xl font-bold mb-4 text-[#F2F2ED]">Dengue Heatmap Dashboard</h3>
+                    <p className="opacity-80 mb-4">Interactive visualization showing predicted dengue outbreak risks across geographic areas.</p>
+                    <ul className="list-disc pl-5 opacity-80 space-y-2 text-sm">
+                      <li>Historical dengue case trends</li>
+                      <li>Predicted outbreak risk levels</li>
+                      <li>Geographic hotspot maps</li>
+                      <li>Time-series outbreak forecasts</li>
+                    </ul>
                   </div>
-                  <button className="flex items-center gap-2 text-sm font-mono hover:text-white/60 transition-colors mt-6 uppercase tracking-widest">
-                    View Prototype <Maximize2 size={14} />
-                  </button>
+                  <div className="bg-white/5 border border-white/10 rounded-xl p-8">
+                    <h3 className="text-xl font-bold mb-4 text-[#F2F2ED]">API Key Management</h3>
+                    <p className="opacity-80 mb-4">Allows developers and organizations to securely access dengue forecast data.</p>
+                    <ul className="list-disc pl-5 opacity-80 space-y-2 text-sm">
+                      <li>API key generation and management</li>
+                      <li>Usage tracking</li>
+                      <li>Secure API authentication</li>
+                    </ul>
+                  </div>
+                  <div className="bg-white/5 border border-white/10 rounded-xl p-8">
+                    <h3 className="text-xl font-bold mb-4 text-[#F2F2ED]">Admin Dashboard</h3>
+                    <p className="opacity-80 mb-4">Administrative panel used to manage the platform and system configurations.</p>
+                    <ul className="list-disc pl-5 opacity-80 space-y-2 text-sm">
+                      <li>User management</li>
+                      <li>Risk threshold configuration</li>
+                      <li>Alert rule management</li>
+                      <li>System monitoring</li>
+                    </ul>
+                  </div>
+                  <div className="bg-white/5 border border-white/10 rounded-xl p-8">
+                    <h3 className="text-xl font-bold mb-4 text-[#F2F2ED]">Education Hub</h3>
+                    <p className="opacity-80 mb-4">Public information portal designed to improve awareness and prevention.</p>
+                    <ul className="list-disc pl-5 opacity-80 space-y-2 text-sm">
+                      <li>Dengue prevention guidelines</li>
+                      <li>Educational articles</li>
+                      <li>Awareness resources</li>
+                      <li>Public health information</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+                <div className="md:col-span-8 bg-white/5 rounded-xl overflow-hidden relative group aspect-square md:aspect-auto border border-white/10">
+                  <img 
+                    src={project.image} 
+                    alt="App UI Hero" 
+                    className="w-full h-full object-cover grayscale-[30%] opacity-80 transition-transform duration-1000 group-hover:scale-105 group-hover:grayscale-0"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent text-white">
+                    <p className="font-mono text-sm mb-1 text-white/50">FIG. 1</p>
+                    <p className="text-lg font-bold">Core Application Interface</p>
+                  </div>
+                </div>
+                <div className="md:col-span-4 flex flex-col gap-6">
+                  <div className="bg-white/5 rounded-xl overflow-hidden relative group flex-1 border border-white/10">
+                    <img 
+                      src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop" 
+                      alt="App UI Detail 1" 
+                      className="w-full h-full object-cover grayscale-[50%] opacity-80 transition-transform duration-1000 group-hover:scale-105"
+                    />
+                    <div className="absolute bottom-4 left-4 bg-black/80 px-3 py-1 border border-white/20 text-xs font-mono tracking-widest text-white backdrop-blur-md">DATA VIEW</div>
+                  </div>
+                  <div className="bg-white/10 border border-white/10 text-white rounded-xl p-8 flex-1 flex flex-col justify-between">
+                    <div>
+                      <Camera className="w-8 h-8 mb-6 opacity-50" />
+                      <h4 className="text-xl font-bold mb-2">Minimalist Approach</h4>
+                      <p className="opacity-70 text-sm leading-relaxed">
+                        UI chrome was reduced by 80% compared to native apps, putting full emphasis on functionality and data blocks.
+                      </p>
+                    </div>
+                    <button className="flex items-center gap-2 text-sm font-mono hover:text-white/60 transition-colors mt-6 uppercase tracking-widest">
+                      View Prototype <Maximize2 size={14} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </FolderSection>
 
           {/* Folder 5: Architecture */}
           <FolderSection index={4} tabId="FILE_05" title="Architecture" bgClass="bg-[#DDDDDD]" textClass="text-[#111111]">
             <div className="max-w-4xl">
               <h2 className="text-4xl font-bold tracking-tight mb-8 border-b border-[#111111]/20 pb-4 uppercase italic font-black">System Architecture</h2>
-              <ul className="space-y-6 font-mono text-lg opacity-90">
-                <li className="flex flex-col md:flex-row md:items-center justify-between border-b border-[#111111]/10 pb-4 gap-2">
-                  <span className="font-bold text-[#111111]/60">Frontend</span>
-                  <span className="text-xl">Next.js Framework</span>
-                </li>
-                <li className="flex flex-col md:flex-row md:items-center justify-between border-b border-[#111111]/10 pb-4 gap-2">
-                  <span className="font-bold text-[#111111]/60">Styling Structure</span>
-                  <span className="text-xl">Tailwind CSS (Brutalist Rules)</span>
-                </li>
-                <li className="flex flex-col md:flex-row md:items-center justify-between border-b border-[#111111]/10 pb-4 gap-2">
-                  <span className="font-bold text-[#111111]/60">Backend / Logic</span>
-                  <span className="text-xl">Node Environments</span>
-                </li>
-                <li className="flex flex-col md:flex-row md:items-center justify-between border-b border-[#111111]/10 pb-4 gap-2">
-                  <span className="font-bold text-[#111111]/60">State Management</span>
-                  <span className="text-xl">React Hooks Context</span>
-                </li>
-              </ul>
+              
+              {project.id === 'dopews' ? (
+                <>
+                  <ul className="space-y-6 font-mono text-lg opacity-90 mb-10">
+                    <li className="flex flex-col md:flex-row md:items-center justify-between border-b border-[#111111]/10 pb-4 gap-2">
+                      <span className="font-bold text-[#111111]/60">Frontend</span>
+                      <span className="text-xl">React Application</span>
+                    </li>
+                    <li className="flex flex-col md:flex-row md:items-center justify-between border-b border-[#111111]/10 pb-4 gap-2">
+                      <span className="font-bold text-[#111111]/60">Backend</span>
+                      <span className="text-xl">Node.js API Services</span>
+                    </li>
+                    <li className="flex flex-col md:flex-row md:items-center justify-between border-b border-[#111111]/10 pb-4 gap-2">
+                      <span className="font-bold text-[#111111]/60">Database</span>
+                      <span className="text-xl">MongoDB</span>
+                    </li>
+                    <li className="flex flex-col md:flex-row md:items-center justify-between border-b border-[#111111]/10 pb-4 gap-2">
+                      <span className="font-bold text-[#111111]/60">Machine Learning Layer</span>
+                      <span className="text-xl">Python • Scikit-learn</span>
+                    </li>
+                  </ul>
+                  <div className="bg-white/50 p-8 rounded-xl border border-[#111111]/10">
+                    <p className="opacity-90 leading-relaxed font-medium mb-6">The predictive model is based on Gradient Boosting Regressor, which captures nonlinear relationships between environmental conditions and dengue outbreaks.</p>
+                    <h3 className="font-bold mb-3 uppercase tracking-wider text-sm">Key predictive features include:</h3>
+                    <ul className="list-disc pl-5 opacity-90 space-y-2 font-medium mb-4">
+                      <li>Rainfall index</li>
+                      <li>Urban population density</li>
+                      <li>Historical dengue case trends</li>
+                    </ul>
+                    <p className="text-sm font-mono opacity-60">These variables were identified as the most significant drivers of outbreak risk.</p>
+                  </div>
+                </>
+              ) : (
+                <ul className="space-y-6 font-mono text-lg opacity-90">
+                  <li className="flex flex-col md:flex-row md:items-center justify-between border-b border-[#111111]/10 pb-4 gap-2">
+                    <span className="font-bold text-[#111111]/60">Frontend</span>
+                    <span className="text-xl">Next.js Framework</span>
+                  </li>
+                  <li className="flex flex-col md:flex-row md:items-center justify-between border-b border-[#111111]/10 pb-4 gap-2">
+                    <span className="font-bold text-[#111111]/60">Styling Structure</span>
+                    <span className="text-xl">Tailwind CSS (Brutalist Rules)</span>
+                  </li>
+                  <li className="flex flex-col md:flex-row md:items-center justify-between border-b border-[#111111]/10 pb-4 gap-2">
+                    <span className="font-bold text-[#111111]/60">Backend / Logic</span>
+                    <span className="text-xl">Node Environments</span>
+                  </li>
+                  <li className="flex flex-col md:flex-row md:items-center justify-between border-b border-[#111111]/10 pb-4 gap-2">
+                    <span className="font-bold text-[#111111]/60">State Management</span>
+                    <span className="text-xl">React Hooks Context</span>
+                  </li>
+                </ul>
+              )}
             </div>
           </FolderSection>
 
@@ -298,25 +474,53 @@ export default function CaseStudy() {
               <h2 className="text-4xl font-bold tracking-tight mb-8 border-b border-white/20 pb-4 uppercase italic font-black">Results</h2>
               <div className="space-y-10">
                 <p className="opacity-90 leading-relaxed text-xl font-medium max-w-3xl">
-                  {project.caseStudy.impact} The product significantly improved user engagement and drastically cut down the time spent looking for core features.
+                  {project.id === 'dopews' ? (
+                    <>The system successfully demonstrates the feasibility of AI-driven dengue outbreak forecasting using integrated environmental and epidemiological data.</>
+                  ) : (
+                    <>{project.caseStudy.impact} The product significantly improved user engagement and drastically cut down the time spent looking for core features.</>
+                  )}
                 </p>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                   <div className="bg-white/5 border border-white/10 p-8 rounded-lg">
-                      <p className="text-5xl font-bold mb-2">40%</p>
-                      <p className="text-sm font-mono opacity-60 uppercase tracking-wider">Time Saved</p>
-                   </div>
-                   <div className="bg-white/5 border border-white/10 p-8 rounded-lg">
-                      <p className="text-5xl font-bold mb-2">98%</p>
-                      <p className="text-sm font-mono opacity-60 uppercase tracking-wider">Usability Score</p>
-                   </div>
-                   <div className="bg-white/5 border border-white/10 p-8 rounded-lg flex flex-col justify-center relative overflow-hidden group">
-                      <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                        <StarIcon size={120} />
-                      </div>
-                      <p className="text-2xl font-bold mb-2">Industry Standard</p>
-                      <p className="text-sm font-mono opacity-60 uppercase tracking-wider">Adopted widely</p>
-                   </div>
-                </div>
+
+                {project.id === 'dopews' ? (
+                  <>
+                    <h3 className="text-2xl font-bold border-b border-white/20 pb-2">Model Performance</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                       <div className="bg-white/5 border border-white/10 p-8 rounded-lg md:col-span-1">
+                          <p className="text-5xl font-bold mb-2">82.04%</p>
+                          <p className="text-sm font-mono opacity-60 uppercase tracking-wider">Tolerance Accuracy</p>
+                       </div>
+                       <div className="bg-white/5 border border-white/10 p-8 rounded-lg md:col-span-2 flex items-center">
+                          <p className="text-lg opacity-80">The prediction model achieved 82.04% tolerance accuracy, indicating strong predictive reliability within real-world outbreak prediction scenarios.</p>
+                       </div>
+                    </div>
+                    
+                    <h3 className="text-2xl font-bold border-b border-white/20 pb-2 mt-12">System Impact</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="bg-white/5 border border-white/10 p-6 rounded-lg text-lg">Earlier detection of potential dengue outbreak risks</div>
+                      <div className="bg-white/5 border border-white/10 p-6 rounded-lg text-lg">Improved situational awareness through geographic risk visualization</div>
+                      <div className="bg-white/5 border border-white/10 p-6 rounded-lg text-lg">Data-driven decision support for public health authorities</div>
+                      <div className="bg-white/5 border border-white/10 p-6 rounded-lg text-lg">Integrated public education and early warning capabilities</div>
+                    </div>
+                  </>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                     <div className="bg-white/5 border border-white/10 p-8 rounded-lg">
+                        <p className="text-5xl font-bold mb-2">40%</p>
+                        <p className="text-sm font-mono opacity-60 uppercase tracking-wider">Time Saved</p>
+                     </div>
+                     <div className="bg-white/5 border border-white/10 p-8 rounded-lg">
+                        <p className="text-5xl font-bold mb-2">98%</p>
+                        <p className="text-sm font-mono opacity-60 uppercase tracking-wider">Usability Score</p>
+                     </div>
+                     <div className="bg-white/5 border border-white/10 p-8 rounded-lg flex flex-col justify-center relative overflow-hidden group">
+                        <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                          <StarIcon size={120} />
+                        </div>
+                        <p className="text-2xl font-bold mb-2">Industry Standard</p>
+                        <p className="text-sm font-mono opacity-60 uppercase tracking-wider">Adopted widely</p>
+                     </div>
+                  </div>
+                )}
               </div>
             </div>
           </FolderSection>

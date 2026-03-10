@@ -4,7 +4,8 @@ export const PROJECTS = [
         number: '01',
         title: 'DOPEWS-MY',
         tagline: 'Dengue prediction system',
-        roles: 'UI/UX • Data Vis',
+        roles: 'UI/UX Designer • Frontend Developer',
+        tools: 'Figma • React • Python • Scikit-learn • Node.js • MongoDB',
         image: '/dopews-my/DOPEWS-landing.png',
         caseStudy: {
             overview: 'A predictive dashboard leveraging epidemiological data to forecast dengue outbreaks in Malaysia, allowing authorities to take preemptive action.',

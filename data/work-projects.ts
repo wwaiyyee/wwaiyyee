@@ -79,6 +79,26 @@ export const WORK_PROJECTS = [
     },
     {
         id: '04',
+        title: 'INTELLIBOX',
+        summary: 'AI agent orchestration platform to discover, deploy, and coordinate multiple agents. Simplifies complex workflows via automated task prompting and features a built-in developer marketplace.\n\nIntelliBox',
+        year: '2025',
+        tags: ['AI Agents', 'Workflow Automation', 'Marketplace'],
+        descriptions: [
+            '',
+            'Chat interface to prompt AI models for complex task execution. The system coordinates multiple agents simultaneously to handle file uploads and trigger automated workflows.',
+            'App marketplace to discover and deploy developer-built AI agents. Users can filter by category and integrate them, while creators publish and monetize their solutions.'
+        ],
+        images: [
+            '/intellibox/intellibox-landing.png',
+            '/intellibox/intellibox-chat.png',
+            '/intellibox/intellibox-marketplace.png',
+        ],
+        links: [
+            { label: 'GitHub', url: 'https://github.com/Jay-366/techtrove2.0' }
+        ]
+    },
+    {
+        id: '05',
         title: 'ETHCLBET',
         summary: 'Prediction market aggregator and optimizer allowing users to discover, compare, and participate in prediction markets across multiple platforms. Analyzes market data to provide optimized allocation strategies while maintaining privacy.\n\nEthclbet',
         year: '2025',
