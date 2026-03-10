@@ -88,9 +88,9 @@ export default function AboutPage() {
   const initImgHeight = isMobile ? 85 : 85;
   const initImgTop = isMobile ? 92 : 92;
   
-  // Overlap bounds (cover the whole screen to hide name)
-  const midImgWidth = 100;
-  const midImgHeight = 100;
+  // Overlap bounds (moves up to cover name, keeps same size)
+  const midImgWidth = initImgWidth;
+  const midImgHeight = initImgHeight;
   const midImgTop = 50;
 
   // Final gap dimensions to fit inside the text hole
@@ -102,11 +102,12 @@ export default function AboutPage() {
   const currentImgWidth = pShrink > 0 ? lerp(midImgWidth, finalImgWidth, pShrink) : lerp(initImgWidth, midImgWidth, pOverlap);
   const currentImgHeight = pShrink > 0 ? lerp(midImgHeight, finalImgHeight, pShrink) : lerp(initImgHeight, midImgHeight, pOverlap);
   const currentImgTop = pShrink > 0 ? lerp(midImgTop, finalImgTop, pShrink) : lerp(initImgTop, midImgTop, pOverlap);
-  const currentImgRadius = pShrink > 0 ? lerp(0, 2, pShrink) : lerp(0.5, 0, pOverlap);
+  const currentImgRadius = pShrink > 0 ? lerp(0.5, 2, pShrink) : 0.5; // Keeps rounded corner consistently
 
   // Opacity & Movement Calculations
-  // Name stays fixed in place so the image can physically overlap it. We fade it out late in Phase 1 once covered.
-  const nameOpacity = 1 - clamp((pOverlap - 0.5) * 2, 0, 1);
+  // Name stays completely solid and fixed in place, waiting for the image to physically cover it.
+  // It instantly hides right as the image starts shrinking so it doesn't show up again behind the quote.
+  const nameOpacity = pShrink > 0 ? 0 : 1;
   const nameTranslateY = 0; // Stays pinned!
 
   const quoteOpacity = pShrink > 0 ? clamp(pShrink * 1.5, 0, 1) : 0;
@@ -161,7 +162,7 @@ export default function AboutPage() {
           </div>
 
           {/* 3. The Hero Image (Starts below the name, shrinks and moves up into the quote gap) */}
-          <div className="absolute z-10 overflow-hidden transition-all duration-75"
+          <div className="absolute z-10 overflow-hidden"
                style={{
                  width: `${currentImgWidth}vw`,
                  height: `${currentImgHeight}vh`,
@@ -185,7 +186,7 @@ export default function AboutPage() {
       </div>
 
       {/* --- BRIEF INTRODUCTION SECTION --- */}
-      <div className="relative z-20 bg-[#E5E5E5] px-6 pb-32 md:pb-48 pt-10 md:pt-20" id="about">
+      <div className="relative z-20 bg-[#E5E5E5] px-6 pb-16 md:pb-24 pt-10 md:pt-20" id="about">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-16 md:gap-24 items-start">
            <div className="md:w-5/12">
               <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9]">
@@ -208,7 +209,7 @@ export default function AboutPage() {
       </div>
 
       {/* --- SKILLS / CLIENTS LOGO GRID --- */}
-      <div className="relative z-20 bg-gradient-to-b from-[#E5E5E5] to-[#dce4f0] px-6 py-24 md:py-40" id="skills">
+      <div className="relative z-20 bg-gradient-to-b from-[#E5E5E5] to-[#dce4f0] px-6 pt-12 md:pt-16 pb-24 md:pb-40" id="skills">
         <div className="max-w-7xl mx-auto flex items-center justify-center relative">
             
             <div className="grid grid-cols-2 md:grid-cols-5 gap-y-16 gap-x-12 w-full items-center justify-items-center text-neutral-800 mix-blend-multiply">
