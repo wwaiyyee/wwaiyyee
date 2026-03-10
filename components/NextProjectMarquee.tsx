@@ -25,6 +25,8 @@ export const NextProjectMarquee = () => {
         <>
             <style>
                 {`
+          @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
           @keyframes infinite-scroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
@@ -37,32 +39,30 @@ export const NextProjectMarquee = () => {
             </style>
 
             <section className="relative w-full overflow-hidden pt-12 pb-0 bg-[#f9f6f1] text-[#111111] selection:bg-[#111111] selection:text-[#F2F2ED] z-10">
-
                 {/* Header Section (Constrained) */}
                 <div className="max-w-[1400px] mx-auto px-6 md:px-12 mb-20 relative z-10 w-full">
-                    <h2 className="text-4xl md:text-5xl lg:text-7xl font-black italic uppercase tracking-tighter leading-none">
-                        More <br/><span className="text-zinc-400">Projects</span>
+                    <h2 className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter leading-none" style={{ fontFamily: "'Playfair Display', serif" }}>
+                        <span className="not-italic uppercase">More</span> <span className="text-zinc-400 italic lowercase">projects</span>
                     </h2>
                     <div className="w-full h-[1px] bg-gradient-to-r from-[#111111]/10 to-transparent mt-8"></div>
                 </div>
 
                 {/* Marquee Track Container (Full Width) */}
                 <div className="relative w-full overflow-hidden flex items-start pb-4">
-
                     {/* Scrolling Track */}
                     <div className="flex animate-marquee gap-8 px-6">
                         {duplicatedStudies.map((study, index) => (
                             <Link href={`/case-studies/${study.id}`} key={`${study.id}-${index}`}>
                                 <div
-                                    className={`group relative flex flex-col w-[200px] md:w-[260px] flex-shrink-0 cursor-pointer ${study.offsetY}`}
+                                    className={`group relative flex flex-col w-[280px] md:w-[380px] flex-shrink-0 cursor-pointer ${study.offsetY}`}
                                 >
                                     {/* Image Container with Hover Effect */}
-                                    <div className="relative overflow-hidden w-full aspect-[4/5] mb-4 border border-[#111111]/10">
+                                    <div className="relative overflow-hidden w-full aspect-video mb-4 border border-[#111111]/10">
                                         <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-700 z-10" />
                                         <img
                                             src={study.image}
                                             alt={study.title}
-                                            className="w-full h-full object-cover grayscale-[0.8] group-hover:grayscale-0 transform group-hover:scale-105 transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
+                                            className="w-full h-full object-cover transform group-hover:scale-105 transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
                                             loading="lazy"
                                         />
                                     </div>
