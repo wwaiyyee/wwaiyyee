@@ -38,7 +38,7 @@ export default function CaseStudy() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#F2F2ED] text-[#111111] font-sans selection:bg-[#111111] selection:text-[#F2F2ED]">
+    <div className="min-h-screen bg-[#f9f6f1] text-[#111111] font-sans selection:bg-[#111111] selection:text-[#F2F2ED]">
       <style dangerouslySetInnerHTML={{__html: `
         .no-scrollbar::-webkit-scrollbar {
           display: none !important;
@@ -209,7 +209,7 @@ export default function CaseStudy() {
                 </ul>
               </div>
               <div className="bg-[#111111]/5 p-8 rounded-xl h-full flex items-center justify-center border border-[#111111]/10 relative overflow-hidden">
-                <div className="w-48 h-72 bg-[#F2F2ED]/90 shadow-2xl rounded-3xl border-4 border-[#111111]/80 flex flex-col relative z-10 p-2">
+                <div className="w-48 h-72 bg-[#f9f6f1]/90 shadow-2xl rounded-3xl border-4 border-[#111111]/80 flex flex-col relative z-10 p-2">
                     <div className="flex-1 bg-[#111111]/90 rounded-2xl relative flex items-center justify-center">
                       <div className="w-12 h-12 border border-white/30 rounded-full flex items-center justify-center">
                         <div className="w-1 h-1 bg-white rounded-full"></div>

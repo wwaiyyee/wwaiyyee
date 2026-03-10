@@ -36,7 +36,7 @@ export const NextProjectMarquee = () => {
         `}
             </style>
 
-            <section className="relative w-full overflow-hidden pt-12 pb-0 bg-[#F2F2ED] text-[#111111] selection:bg-[#111111] selection:text-[#F2F2ED] z-10">
+            <section className="relative w-full overflow-hidden pt-12 pb-0 bg-[#f9f6f1] text-[#111111] selection:bg-[#111111] selection:text-[#F2F2ED] z-10">
 
                 {/* Header Section (Constrained) */}
                 <div className="max-w-[1400px] mx-auto px-6 md:px-12 mb-20 relative z-10 w-full">

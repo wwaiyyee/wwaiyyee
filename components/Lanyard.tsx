@@ -260,7 +260,7 @@ function PhysicsLanyard({ userData, onClose }: any) {
                 <div
                     onMouseMove={handleCardMouseMove}
                     onMouseLeave={() => setGlare(prev => ({ ...prev, opacity: 0 }))}
-                    className="relative w-full bg-[#FAFAFA] rounded-[1.5rem] overflow-hidden flex flex-col shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border border-slate-200 cursor-grab active:cursor-grabbing group select-none pb-8"
+                    className="relative w-full bg-[#f9f6f1] rounded-[1.5rem] overflow-hidden flex flex-col shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border border-slate-200 cursor-grab active:cursor-grabbing group select-none pb-8"
                     style={{ transformStyle: 'preserve-3d' }}
                 >
                     {/* Card Hole Punch */}

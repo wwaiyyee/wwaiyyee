@@ -151,7 +151,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
     const perfSVG = `url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='8' y='8' width='16' height='16' rx='2' fill='%23F2F2ED'/%3E%3C/svg%3E")`;
 
     return (
-        <div className="animate-in fade-in duration-700 bg-[#FAFAFA]">
+        <div className="animate-in fade-in duration-700 bg-[#f9f6f1]">
 
             {/* --- FILM GRAIN & VIGNETTE OVERLAY --- */}
             <div className="fixed inset-0 pointer-events-none z-50 mix-blend-multiply opacity-[0.08]">
@@ -167,7 +167,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             <section 
               id="top" 
               ref={containerRef}
-              className="relative w-full h-screen overflow-hidden flex items-center justify-center cursor-default bg-[#FAFAFA]"
+              className="relative w-full h-screen overflow-hidden flex items-center justify-center cursor-default bg-[#f9f6f1]"
             >
               <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
                 <defs>
@@ -197,7 +197,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                 </defs>
               </svg>
 
-              <div className="absolute inset-0 bg-[#FAFAFA]" />
+              <div className="absolute inset-0 bg-[#f9f6f1]" />
 
               <div 
                 className={`absolute inset-0 z-0 pointer-events-none transition-opacity duration-500 ${hasMoved ? 'opacity-100' : 'opacity-0'}`}
@@ -236,7 +236,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             <Marquee text="ROLL CAMERA • NEXT FRAME • " />
 
             {/* --- ABOUT SECTION (FIELD NOTES FORMAT) --- */}
-            <section id="about" className="py-16 md:py-24 px-6 relative overflow-hidden bg-[#FAFAFA]">
+            <section id="about" className="py-16 md:py-24 px-6 relative overflow-hidden bg-[#f9f6f1]">
                 <div className="max-w-4xl mx-auto relative z-10">
                     <motion.div
                         className="flex flex-col items-center justify-center gap-6 mb-8 text-center"
@@ -344,7 +344,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
 
 
             {/* --- CASE STUDY PROJECTS (Sticky Horizontal Scroll) --- */}
-            <section id="projects" ref={projectsRef} className="relative bg-[#FAFAFA]" style={{ height: sectionHeight }}>
+            <section id="projects" ref={projectsRef} className="relative bg-[#f9f6f1]" style={{ height: sectionHeight }}>
 
                 {/* Section Title */}
                 <motion.div 
@@ -542,11 +542,11 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                                             style={{ backgroundImage: perfSVG, backgroundRepeat: 'repeat-x', backgroundSize: '32px 32px' }}
                                         ></div>
                                         {/* Curved cutout */}
-                                        <div className="absolute bottom-0 right-0 w-full h-[58%] bg-[#FAFAFA] rounded-tl-[4rem] md:rounded-tl-[6rem]"></div>
+                                        <div className="absolute bottom-0 right-0 w-full h-[58%] bg-[#f9f6f1] rounded-tl-[4rem] md:rounded-tl-[6rem]"></div>
                                     </div>
 
                                     {/* CTA — immediately after leader, no gap */}
-                                    <div className="flex flex-col items-start justify-center shrink-0 w-[320px] md:w-[420px] h-full pl-12 pr-8 bg-[#FAFAFA]">
+                                    <div className="flex flex-col items-start justify-center shrink-0 w-[320px] md:w-[420px] h-full pl-12 pr-8 bg-[#f9f6f1]">
                                         <h3 className="text-[#111] font-black tracking-tighter text-2xl md:text-4xl leading-[0.9] text-center">
                                             WANT TO KNOW MORE?<br />
                                             <a href="/work" className="underline-offset-4 decoration-[3px] hover:underline transition-all cursor-pointer">
@@ -565,7 +565,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             </section>
 
             {/* --- ACHIEVEMENTS (Full Width Table with Hover Image Effect) --- */}
-            <section id="achievements" className="py-16 md:py-24 bg-[#FAFAFA] relative cursor-default">
+            <section id="achievements" className="py-16 md:py-24 bg-[#f9f6f1] relative cursor-default">
                 <motion.div
                     className="flex flex-col items-center justify-center gap-6 mb-12 text-center"
                     initial={{ opacity: 0, y: 30 }}
@@ -646,7 +646,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
 
                 {/* Floating Cursor Image Effect */}
                 <div
-                    className="fixed pointer-events-none z-[100] overflow-hidden border border-black shadow-[0_20px_50px_rgba(0,0,0,0.3)] bg-[#FAFAFA]"
+                    className="fixed pointer-events-none z-[100] overflow-hidden border border-black shadow-[0_20px_50px_rgba(0,0,0,0.3)] bg-[#f9f6f1]"
                     style={{
                         left: mousePos.x,
                         top: mousePos.y,
@@ -687,7 +687,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
             <div className={`fixed inset-0 bg-white z-[999] pointer-events-none transition-opacity duration-500 ease-out ${isSnapping ? 'opacity-100' : 'opacity-0'}`}></div>
 
             {/* 6. THE FINAL EXPOSURE (Footer) */}
-            <footer id="connect" className={`bg-[#FAFAFA] text-[#111] pt-8 md:pt-12 flex flex-col items-center justify-center relative overflow-hidden transition-all duration-[1200ms] ease-in-out ${photoPrinted ? 'pb-4 md:pb-8' : 'pb-2 md:pb-4'}`}>
+            <footer id="connect" className={`bg-[#f9f6f1] text-[#111] pt-8 md:pt-12 flex flex-col items-center justify-center relative overflow-hidden transition-all duration-[1200ms] ease-in-out ${photoPrinted ? 'pb-4 md:pb-8' : 'pb-2 md:pb-4'}`}>
                 <motion.div
                     className="flex flex-col items-center justify-center gap-6 mb-8 md:mb-12 text-center relative z-20"
                     initial={{ opacity: 0, y: 30 }}
@@ -722,7 +722,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                             drag={photoPrinted}
                             dragMomentum={false}
                             whileDrag={{ scale: 1.05, cursor: 'grabbing', zIndex: 50, rotate: 0 }}
-                            className="w-full bg-[#FAFAFA] p-3 shadow-2xl flex flex-col items-center origin-center rounded-sm border border-black/10"
+                            className="w-full bg-[#f9f6f1] p-3 shadow-2xl flex flex-col items-center origin-center rounded-sm border border-black/10"
                             style={{ rotate: '-2deg', cursor: photoPrinted ? 'grab' : 'default' }}
                         >
                             {/* Polaroid Image Area (Resume Preview) */}
@@ -806,7 +806,7 @@ export function HomeView({ onSelectProject }: { onSelectProject: (p: any) => voi
                         aria-label="Close modal background"
                     ></div>
 
-                    <div className="relative z-10 w-full max-w-[800px] h-full max-h-[90vh] md:max-h-[1130px] bg-[#FAFAFA] rounded-xl shadow-2xl flex flex-col overflow-hidden border border-gray-700 aspect-[1/1.414] mx-auto">
+                    <div className="relative z-10 w-full max-w-[800px] h-full max-h-[90vh] md:max-h-[1130px] bg-[#f9f6f1] rounded-xl shadow-2xl flex flex-col overflow-hidden border border-gray-700 aspect-[1/1.414] mx-auto">
                         {/* Modal Header */}
                         <div className="flex justify-between items-center px-6 py-4 border-b border-gray-300 bg-[#E8E8E2]">
                             <div className="font-mono text-sm tracking-widest uppercase font-bold text-[#111]">

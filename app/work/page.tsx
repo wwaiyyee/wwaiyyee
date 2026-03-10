@@ -100,7 +100,7 @@ const WorkPage = () => {
 	}, [activeSlideIndex, allSlides.length]);
 
 	return (
-		<div className="bg-[#F2F2ED] text-[#111111] min-h-screen font-sans overflow-hidden flex flex-col selection:bg-[#111111] selection:text-[#F2F2ED]">
+		<div className="bg-[#f9f6f1] text-[#111111] min-h-screen font-sans overflow-hidden flex flex-col selection:bg-[#111111] selection:text-[#F2F2ED]">
 			<NavBar />
 
 			{/* --- TOP LEFT: MAIN TITLE --- */}

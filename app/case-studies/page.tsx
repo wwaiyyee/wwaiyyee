@@ -60,7 +60,7 @@ export default function CaseStudiesPage() {
     const otherArticles = filteredArticles.filter(a => a.id !== featuredArticle?.id);
 
     return (
-        <div className="min-h-screen bg-[#F2F2ED] text-[#111111] font-sans selection:bg-[#111111] selection:text-[#F2F2ED]">
+        <div className="min-h-screen bg-[#f9f6f1] text-[#111111] font-sans selection:bg-[#111111] selection:text-[#F2F2ED]">
             <NavBar />
 
             <main className="max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-20">
@@ -110,7 +110,7 @@ export default function CaseStudiesPage() {
                                         aria-label="Sort articles"
                                     >
                                         {SORT_OPTIONS.map(option => (
-                                            <option key={option.value} value={option.value} className="text-[#111111] bg-[#F2F2ED]">
+                                            <option key={option.value} value={option.value} className="text-[#111111] bg-[#f9f6f1]">
                                                 {option.label}
                                             </option>
                                         ))}
@@ -130,7 +130,7 @@ export default function CaseStudiesPage() {
                                         aria-label="Filter articles"
                                     >
                                         {CATEGORIES.map(cat => (
-                                            <option key={cat} value={cat} className="text-[#111111] bg-[#F2F2ED]">
+                                            <option key={cat} value={cat} className="text-[#111111] bg-[#f9f6f1]">
                                                 {cat}
                                             </option>
                                         ))}

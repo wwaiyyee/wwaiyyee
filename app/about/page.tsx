@@ -114,7 +114,7 @@ export default function AboutPage() {
   const quoteScale = pShrink;
 
   return (
-    <div className="bg-[#E5E5E5] text-[#111] font-sans selection:bg-black selection:text-white relative" style={{ overflowX: 'clip' }}>
+    <div className="bg-[#f9f6f1] text-[#111] font-sans selection:bg-black selection:text-white relative" style={{ overflowX: 'clip' }}>
       
       {/* --- Navigation --- */}
       <NavBar />
@@ -150,15 +150,10 @@ export default function AboutPage() {
                  opacity: quoteOpacity,
                  transform: `scale(${0.95 + (quoteScale * 0.05)})`
                }}>
-            <div className="text-center w-full">I BELIEVE IN</div>
-            <div className="text-center w-full flex items-center justify-center gap-2 md:gap-6 whitespace-nowrap">
-              <span>THE POWER</span>
-              {/* This empty span acts as the exact "hole" for the image */}
-              <span style={{ width: `${finalImgWidth}vw` }}></span>
-              <span>OF</span>
-            </div>
-            <div className="text-center w-full">TURNING IDEAS</div>
-            <div className="text-center w-full">INTO IMPACT</div>
+            <div className="text-center w-full">IDEAS ARE JUST</div>
+            <div className="text-center w-full">THE BEGINNING</div>
+            <div className="text-center w-full">BUILDING THEM</div>
+            <div className="text-center w-full">IS THE STORY</div>
           </div>
 
           {/* 3. The Hero Image (Starts below the name, shrinks and moves up into the quote gap) */}
@@ -172,7 +167,7 @@ export default function AboutPage() {
                  borderRadius: `${currentImgRadius}rem`,
                }}>
             <img 
-              src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=2000&auto=format&fit=crop"
+              src="/grp-photo/1-wy1.JPG"
               alt="My Profile"
               className="w-full h-full object-cover"
               style={{
@@ -186,7 +181,7 @@ export default function AboutPage() {
       </div>
 
       {/* --- BRIEF INTRODUCTION SECTION --- */}
-      <div className="relative z-20 bg-[#E5E5E5] px-6 pb-16 md:pb-24 pt-10 md:pt-20" id="about">
+      <div className="relative z-20 bg-[#f9f6f1] px-6 pb-16 md:pb-24 pt-10 md:pt-20" id="about">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-16 md:gap-24 items-start">
            <div className="md:w-5/12">
               <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9]">
@@ -209,7 +204,7 @@ export default function AboutPage() {
       </div>
 
       {/* --- SKILLS / CLIENTS LOGO GRID --- */}
-      <div className="relative z-20 bg-gradient-to-b from-[#E5E5E5] to-[#dce4f0] px-6 pt-12 md:pt-16 pb-24 md:pb-40" id="skills">
+      <div className="relative z-20 bg-gradient-to-b from-[#f9f6f1] to-[#dce4f0] px-6 pt-12 md:pt-16 pb-24 md:pb-40" id="skills">
         <div className="max-w-7xl mx-auto flex items-center justify-center relative">
             
             <div className="grid grid-cols-2 md:grid-cols-5 gap-y-16 gap-x-12 w-full items-center justify-items-center text-neutral-800 mix-blend-multiply">

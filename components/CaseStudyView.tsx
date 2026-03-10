@@ -3,7 +3,7 @@ import { ArrowLeft } from 'lucide-react';
 
 export function CaseStudyView({ project, onBack }: { project: any, onBack: () => void }) {
     return (
-        <div className="animate-in slide-in-from-bottom-12 duration-700 bg-[#111] text-[#FAFAFA] min-h-screen">
+        <div className="animate-in slide-in-from-bottom-12 duration-700 bg-[#111] text-[#f9f6f1] min-h-screen">
 
             {/* Brutalist Sticky Header */}
             <div className="sticky top-0 z-50 flex justify-between items-center p-6 border-b border-[#333] bg-[#111] font-mono text-sm uppercase tracking-widest">
