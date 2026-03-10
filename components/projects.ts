@@ -57,7 +57,7 @@ export const ACHIEVEMENTS = [
         title: 'Twinkle',
         desc: 'A 3D educational game designed to improve attention and learning engagement for children with ADHD through task-based gameplay and visual feedback.',
         highlight: true,
-        img: '/twinkle/twinkle-landing.png',
+        img: '/grp-photo/1-twinkle.jpg',
         prize: 'Top 15 Finalist'
     },
     {
@@ -67,7 +67,7 @@ export const ACHIEVEMENTS = [
         title: 'IntelliBox',
         desc: 'An AI agent marketplace where creators can publish and monetize agents, coordinated by AIBox to orchestrate multi-agent workflows through chat-based interaction.',
         highlight: true,
-        img: '/intellibox/intellibox-landing.png',
+        img: '/grp-photo/1-grptt.JPG',
         prize: '1st Place Winner'
     },
     {
@@ -77,7 +77,7 @@ export const ACHIEVEMENTS = [
         title: 'IntelliTrade',
         desc: 'A decentralized AI agent marketplace that encrypts agents on IPFS and verifies ownership on-chain, enabling secure distribution and cross-chain payments.',
         highlight: true,
-        img: '/intellitrade/intellitrade-landing.jpeg',
+        img: '/grp-photo/1-ethonline.JPG',
         prize: 'Lighthouse Best Data Agent'
     },
     {
@@ -87,7 +87,7 @@ export const ACHIEVEMENTS = [
         title: 'ETHclbet',
         desc: 'A privacy-preserving prediction market optimizer that aggregates markets across platforms and computes optimal betting allocations.',
         highlight: true,
-        img: '/ethclbet/ethclbet-landing.png',
+        img: '/grp-photo/1-devmatch.jpeg',
         prize: '2nd Place & Best Tooling'
     }
 ];
