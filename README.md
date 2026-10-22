@@ -18,7 +18,7 @@ I'm **Lee Wai Yee**, a **Computer Science (Artificial Intelligence)** graduate f
 class WaiYee:
     focus = ["Applied AI", "Agentic Systems", "Computer Vision", "Full-Stack"]
     experience = "AI Engineering · TNG Digital"
-    education = "Taylor's University · First Class Honours · CGPA 3.76"
+    education = "Taylor's University · First Class Honours · CGPA 3.78"
     philosophy = "Build thoughtfully. Validate with evidence. Ship something useful."
 ```
 
@@ -50,21 +50,18 @@ class WaiYee:
 
 ## 03 / Hackathon Achievements & Winning Projects
 
-<div align="center"><img src="./assets/awards-animated.svg" width="100%" alt="Animated hackathon achievement showcase" /></div>
-
 | Project | Recognition | What it does | Code |
 |:--|:--|:--|:--|
-| **IntelliTrade** | 🏆 ETHOnline 2025 · Lighthouse Prize | AI data agent for decentralized discovery and analytics, with verifiable access and token gating. | [Repository](https://github.com/wwaiyyee/ethonline) |
-| **EthCLBet** | 🏆 DEVMatch 2025 · Ethereum Foundation Best Tooling; 2nd Place, The Graph | Prediction-market aggregator and allocation optimizer powered by decentralized data and smart contracts. | *Link pending* |
-| **IntelliBox** | 🥇 Tech Trove 2.0 · 1st Prize | Multi-agent automation platform for proposals, presentations, and emails. | *Link pending* |
+| **IntelliTrade** | 🏆 ETHOnline 2025 · Lighthouse Prize | AI data agent for decentralized discovery and analytics, with verifiable access and token gating. | [Repository](https://github.com/Jay-366/ethonline) |
+| **EthCLBet** | 🏆 DEVMatch 2025 · Ethereum Foundation Best Tooling; 2nd Place, The Graph | Prediction-market aggregator and allocation optimizer powered by decentralized data and smart contracts. | [Repository](https://github.com/Cedctf/ethclbet) |
+| **IntelliBox** | 🥇 Tech Trove 2.0 · 1st Prize | Multi-agent automation platform for proposals, presentations, and emails. | [Repository](https://github.com/Jay-366/techtrove2.0) |
 | **Realytic** | 🏅 VHack 2026 · 5th Place | Multimodal deepfake and fraud detection using video, image, audio, and risk assessment. | [Repository](https://github.com/wwaiyyee/vhack) |
-| **Twinkle** | ✨ Recognition to confirm | Project details to confirm. | [Repository](https://github.com/wwaiyyee/twinkle) |
 
 <details>
 <summary><b>✦ More hackathon milestones</b></summary>
 
+- **Cursor x Anthropic Hackathon 2025:** Top 15 finalist — *Twinkle*.
 - **ImagineHack 2025:** Top 14 finalist — *CutiCuti Malaysia*.
-- **PayHack 2025:** Semi-finalist — identity-first MSME onboarding.
 
 </details>
 
