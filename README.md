@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
 
-## Getting Started
+<img src="./assets/hero-animated.svg" width="100%" alt="Animated Lee Wai Yee Klein Blue banner" />
 
-First, run the development server:
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&duration=2800&pause=900&color=002FA7&center=true&vCenter=true&width=850&height=65&lines=AI+Engineer+%7C+Computer+Vision+%7C+Agentic+AI;Full-Stack+Developer+%7C+Creative+Builder;From+hackathon+ideas+to+real-world+systems;Build.+Experiment.+Validate.+Ship." alt="Animated typing introduction" />
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+[![Portfolio](https://img.shields.io/badge/PORTFOLIO-002FA7?style=for-the-badge&logo=vercel&logoColor=white)](https://wwaiyyee.vercel.app/) [![LinkedIn](https://img.shields.io/badge/LINKEDIN-002FA7?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/lee-wai-yee) [![Email](https://img.shields.io/badge/EMAIL-002FA7?style=for-the-badge&logo=gmail&logoColor=white)](mailto:wwaiyyee@gmail.com)
+
+![Animated divider](./assets/divider-animated.svg)
+
+</div>
+
+## 01 / About Me
+
+I'm **Lee Wai Yee**, a **Computer Science (Artificial Intelligence)** graduate from **Taylor's University**, passionate about bringing intelligent ideas to life. I work across **computer vision, AI agents, model evaluation, and full-stack applications**, with industry experience in eKYC and secure customer onboarding at **TNG Digital**.
+
+```python
+class WaiYee:
+    focus = ["Applied AI", "Agentic Systems", "Computer Vision", "Full-Stack"]
+    experience = "AI Engineering · TNG Digital"
+    education = "Taylor's University · First Class Honours · CGPA 3.76"
+    philosophy = "Build thoughtfully. Validate with evidence. Ship something useful."
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> I enjoy turning experimental prototypes into useful, working products — especially when there is an interesting technical problem to solve.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<div align="center"><img src="./assets/divider-animated.svg" width="100%" alt="Animated blue divider" /></div>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 02 / Tech Stack & Skills
 
-## Learn More
+<div align="center">
 
-To learn more about Next.js, take a look at the following resources:
+**LANGUAGES**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<img src="https://skillicons.dev/icons?i=python,typescript,javascript,java,cpp,html,css,solidity&theme=light&perline=8" alt="Programming languages" />
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**AI / MACHINE LEARNING / DATA**
 
-## Deploy on Vercel
+<img src="https://skillicons.dev/icons?i=pytorch,tensorflow,opencv,sklearn&theme=light&perline=8" alt="AI and ML technologies" />
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`Computer Vision` · `YOLO` · `LLMs / VLMs` · `AI Agents` · `Model Evaluation` · `Pandas` · `DuckDB`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**FRAMEWORKS / CLOUD / TOOLS**
+
+<img src="https://skillicons.dev/icons?i=react,nextjs,fastapi,nodejs,tailwind,mongodb,firebase,docker,git,github,linux,figma&theme=light&perline=8" alt="Developer tools" />
+
+</div>
+
+<div align="center"><img src="./assets/divider-animated.svg" width="100%" alt="Animated blue divider" /></div>
+
+## 03 / Hackathon Achievements & Winning Projects
+
+<div align="center"><img src="./assets/awards-animated.svg" width="100%" alt="Animated hackathon achievement showcase" /></div>
+
+| Project | Recognition | What it does | Code |
+|:--|:--|:--|:--|
+| **IntelliTrade** | 🏆 ETHOnline 2025 · Lighthouse Prize | AI data agent for decentralized discovery and analytics, with verifiable access and token gating. | [Repository](https://github.com/wwaiyyee/ethonline) |
+| **EthCLBet** | 🏆 DEVMatch 2025 · Ethereum Foundation Best Tooling; 2nd Place, The Graph | Prediction-market aggregator and allocation optimizer powered by decentralized data and smart contracts. | *Link pending* |
+| **IntelliBox** | 🥇 Tech Trove 2.0 · 1st Prize | Multi-agent automation platform for proposals, presentations, and emails. | *Link pending* |
+| **Realytic** | 🏅 VHack 2026 · 5th Place | Multimodal deepfake and fraud detection using video, image, audio, and risk assessment. | [Repository](https://github.com/wwaiyyee/vhack) |
+| **Twinkle** | ✨ Recognition to confirm | Project details to confirm. | [Repository](https://github.com/wwaiyyee/twinkle) |
+
+<details>
+<summary><b>✦ More hackathon milestones</b></summary>
+
+- **ImagineHack 2025:** Top 14 finalist — *CutiCuti Malaysia*.
+- **PayHack 2025:** Semi-finalist — identity-first MSME onboarding.
+
+</details>
+
+<div align="center"><img src="./assets/divider-animated.svg" width="100%" alt="Animated blue divider" /></div>
+
+## 04 / GitHub Stats & Contribution Art
+
+<div align="center">
+
+<img src="https://github-readme-stats.vercel.app/api?username=wwaiyyee&show_icons=true&hide_border=true&bg_color=FFFFFF&title_color=002FA7&icon_color=002FA7&text_color=1E293B&ring_color=002FA7" height="170" alt="GitHub statistics" />
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=wwaiyyee&layout=compact&hide_border=true&bg_color=FFFFFF&title_color=002FA7&text_color=1E293B" height="170" alt="Top languages" />
+
+<img src="https://streak-stats.demolab.com?user=wwaiyyee&hide_border=true&background=FFFFFF&ring=002FA7&fire=002FA7&currStreakLabel=002FA7&sideLabels=002FA7&dates=64748B" alt="GitHub streak statistics" />
+
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=wwaiyyee&bg_color=ffffff&color=002fa7&line=002fa7&point=002fa7&area=true&area_color=bbcdfc&hide_border=true" width="100%" alt="Contribution activity graph" />
+
+**THE CONTRIBUTION SNAKE**
+
+<img src="https://raw.githubusercontent.com/wwaiyyee/wwaiyyee/output/github-contribution-grid-snake.svg" width="100%" alt="Animated GitHub contribution snake; available after workflow first runs" />
+
+<sub>The snake animation appears after the included GitHub Actions workflow has successfully published its first output.</sub>
+
+</div>
+
+<div align="center"><img src="./assets/divider-animated.svg" width="100%" alt="Animated blue divider" /></div>
+
+## 05 / Let's Connect
+
+<div align="center">
+
+Interested in applied AI, hackathons, or building something ambitious together? **Let's connect.**
+
+[![LinkedIn](https://img.shields.io/badge/Connect_on_LinkedIn-002FA7?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/lee-wai-yee) [![Portfolio](https://img.shields.io/badge/Explore_my_Portfolio-002FA7?style=for-the-badge&logo=vercel&logoColor=white)](https://wwaiyyee.vercel.app/) [![Email](https://img.shields.io/badge/Say_Hello-FFFFFF?style=for-the-badge&logo=gmail&logoColor=002FA7&labelColor=FFFFFF)](mailto:wwaiyyee@gmail.com)
+
+<img src="./assets/footer-animated.svg" width="100%" alt="Animated Klein Blue wave footer" />
+
+<sub>Designed in white + Klein Blue · Built with curiosity and code.</sub>
+
+</div>
