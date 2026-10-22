@@ -78,13 +78,29 @@ class WaiYee:
 
 <img src="https://streak-stats.demolab.com?user=wwaiyyee&hide_border=true&background=FFFFFF&ring=002FA7&fire=002FA7&currStreakLabel=002FA7&sideLabels=002FA7&dates=64748B" alt="GitHub contribution streak" />
 
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=wwaiyyee&bg_color=ffffff&color=002fa7&line=002fa7&point=002fa7&area=true&area_color=bbcdfc&hide_border=true" width="100%" alt="GitHub contribution activity graph" />
+
+<img
+  src="https://github-readme-activity-graph.vercel.app/graph?username=wwaiyyee&bg_color=ffffff&color=002fa7&line=002fa7&point=002fa7&area=true&area_color=bbcdfc&hide_border=true"
+  width="100%"
+  alt="GitHub contribution activity graph"
+/>
+
 
 ### The Contribution Snake
 
-<img src="https://raw.githubusercontent.com/wwaiyyee/wwaiyyee/output/github-contribution-grid-snake.svg" width="100%" alt="Animated GitHub contribution snake" />
 
-<sub>Generated from my contribution history via GitHub Actions. The snake appears after the workflow publishes the `output` branch.</sub>
+<h3 align="center">The Contribution Snake</h3>
+
+<div align="center">
+  <img
+    src="https://raw.githubusercontent.com/wwaiyyee/wwaiyyee/output/github-contribution-grid-snake.svg"
+    width="100%"
+    alt="Animated GitHub contribution snake"
+  />
+</div>
+
+
+<sub>Generated from my contribution history via GitHub Actions.</sub>
 
 </div>
 
