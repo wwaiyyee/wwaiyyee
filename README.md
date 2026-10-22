@@ -24,7 +24,7 @@ class WaiYee:
     philosophy = "Build thoughtfully. Validate with evidence. Ship something useful."
 ```
 
-> I enjoy transforming experimental prototypes into useful products — from hackathon builds to systems designed for real-world problems.
+> I enjoy transforming experimental prototypes into useful products, from hackathon builds to systems designed for real-world problems.
 
 <div align="center"><img src="./assets/divider-animated.svg" width="100%" alt="Animated Klein Blue divider" /></div>
 
@@ -89,8 +89,6 @@ class WaiYee:
   />
 </div>
 
-
-<sub>Generated from my contribution history via GitHub Actions.</sub>
 
 </div>
 
