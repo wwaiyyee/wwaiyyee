@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="290" viewBox="0 0 1200 290">
+<rect width="1200" height="290" fill="#FFFFFF"/>
+<rect x="12" y="12" width="1176" height="266" rx="20" fill="#002FA7"/>
+<g opacity=".16" stroke="#FFFFFF" fill="none"><circle cx="1090" cy="135" r="150"/><circle cx="1090" cy="135" r="110"/><circle cx="1090" cy="135" r="70"/><path d="M880 0V290M920 0V290M960 0V290"/></g>
+<text x="64" y="70" fill="#D7E3FF" font-size="19" font-family="Arial,sans-serif" letter-spacing="5">HELLO, WORLD  /  WELCOME TO MY GITHUB</text>
+<text x="60" y="155" fill="#FFFFFF" font-size="67" font-family="Arial,sans-serif" font-weight="bold" letter-spacing="2">LEE WAI YEE</text>
+<text x="64" y="207" fill="#FFFFFF" font-size="25" font-family="Arial,sans-serif">AI Engineer  ·  Full-Stack Developer  ·  Hackathon Builder</text>
+<rect x="64" y="231" width="135" height="5" rx="2" fill="#FFFFFF"/>
+</svg>
