@@ -98,6 +98,5 @@ Interested in applied AI, hackathons, or building something ambitious together? 
 
 <img src="./assets/footer-animated.svg" width="100%" alt="Animated Klein Blue wave footer" />
 
-<sub>Designed in white + Klein Blue · Built with curiosity and code.</sub>
 
 </div>
