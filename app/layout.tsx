@@ -1,20 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import "@fontsource-variable/manrope";
+import "@fontsource/ibm-plex-mono/400.css";
+import "./portfolio.css";
 
 export const metadata: Metadata = {
-  title: "Wai Yee's Portfolio",
-  description: "Wai Yee's Personal Portfolio",
+  title: "Wai Yee — AI, software & a little intuition",
+  description: "Lee Wai Yee — First Class AI graduate from Taylor’s University, building intelligent systems and thoughtful software. Explore projects in computer vision, AI agents, and interactive experiences.",
+  openGraph: {
+    title: "Wai Yee — AI, software & a little intuition",
+    description: "An AI graduate’s collection of intelligent systems, software, and new perspectives. Open to full-time engineering opportunities.",
+    type: "website",
+  },
+  icons: { icon: "/icon.svg" },
 };
 
 export default function RootLayout({
@@ -25,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className="antialiased"
         suppressHydrationWarning
       >
         {children}
